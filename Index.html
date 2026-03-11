@@ -8,433 +8,671 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MůjOS">
 <title>MůjOS</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+
 :root {
-  --bg:        #0c0d0f;
-  --surface:   #141618;
-  --surface2:  #1c1e23;
-  --surface3:  #22252c;
-  --border:    #272b34;
-  --border2:   #323742;
-  --text:      #eceae6;
-  --text2:     #9a9da8;
-  --text3:     #5c6070;
-  --green:     #6ec97a;
-  --green-dim: rgba(110,201,122,.12);
-  --red:       #e07060;
-  --red-dim:   rgba(224,112,96,.12);
-  --amber:     #e8c86a;
-  --need:      #6a9e6a;
-  --want:      #c87848;
-  --culture:   #5888aa;
-  --unexp:     #a05888;
-  --salary:    #6ec97a;
-  --bonus:     #a8d86a;
-  --passive:   #68b8a8;
-  --need-dim:  rgba(106,158,106,.14);
-  --want-dim:  rgba(200,120,72,.14);
-  --cult-dim:  rgba(88,136,170,.14);
-  --unexp-dim: rgba(160,88,136,.14);
-  --sal-dim:   rgba(110,201,122,.14);
-  --bon-dim:   rgba(168,216,106,.14);
-  --pas-dim:   rgba(104,184,168,.14);
-  --mod-ucet:    #88ddb0;
-  --mod-invest:  #e8d5a3;
-  --mod-auto:    #88b8e8;
-  --mod-elektr:  #e888b8;
-  --mod-kondice: #b888e8;
-  --r-sm: 10px; --r-md: 14px; --r-lg: 18px;
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bot: env(safe-area-inset-bottom, 0px);
+/* George-inspired dark navy palette */
+–bg:        #0b1120;
+–bg2:       #0f1829;
+–card:      #152035;
+–card2:     #1c2d47;
+–card3:     #243657;
+–border:    rgba(255,255,255,.07);
+–border2:   rgba(255,255,255,.12);
+
+–text:      #f0f4ff;
+–text2:     #8fa3c8;
+–text3:     #4d6080;
+
+/* Accent — George uses bright teal/blue */
+–accent:    #4da8ff;
+–accent2:   #2684ff;
+–accent-bg: rgba(77,168,255,.1);
+
+/* Semantic */
+–green:     #34c97a;
+–green-bg:  rgba(52,201,122,.12);
+–red:       #ff6b6b;
+–red-bg:    rgba(255,107,107,.12);
+–amber:     #ffcf5c;
+–purple:    #a78bfa;
+
+/* Kakeibo cats */
+–need:      #34c97a;
+–want:      #ff9f43;
+–culture:   #4da8ff;
+–unexp:     #ff6b6b;
+–salary:    #34c97a;
+–bonus:     #a8e063;
+–passive:   #63d4c4;
+–need-bg:   rgba(52,201,122,.13);
+–want-bg:   rgba(255,159,67,.13);
+–cult-bg:   rgba(77,168,255,.13);
+–unexp-bg:  rgba(255,107,107,.13);
+–sal-bg:    rgba(52,201,122,.13);
+–bon-bg:    rgba(168,224,99,.13);
+–pas-bg:    rgba(99,212,196,.13);
+
+–r-sm: 12px;
+–r-md: 16px;
+–r-lg: 20px;
+–r-xl: 24px;
+
+–shadow-sm: 0 2px 12px rgba(0,0,0,.25);
+–shadow-md: 0 4px 24px rgba(0,0,0,.35);
+–shadow-lg: 0 8px 40px rgba(0,0,0,.5);
+
+–safe-top: env(safe-area-inset-top,0px);
+–safe-bot: env(safe-area-inset-bottom,0px);
 }
-html, body { height:100%; width:100%; background:var(--bg); color:var(--text);
-  font-family:'DM Sans',sans-serif; font-size:15px; overscroll-behavior:none; line-height:1.4; }
 
-/* SHELL */
-#app { display:flex; flex-direction:column; height:100dvh; padding-top:var(–safe-top); }
-#shell-header { display:flex; align-items:center; justify-content:space-between;
-padding:12px 18px 10px; border-bottom:1px solid var(–border); flex-shrink:0; }
-.logo { font-family:‘DM Serif Display’,serif; font-size:21px; letter-spacing:-.4px; color:var(–amber); }
-.logo em { font-style:italic; color:var(–text3); }
-.date-chip { font-size:11px; color:var(–text2); background:var(–surface2);
-padding:4px 10px; border-radius:20px; border:1px solid var(–border); }
-#nav { display:flex; overflow-x:auto; gap:5px; padding:9px 14px;
-border-bottom:1px solid var(–border); flex-shrink:0; scrollbar-width:none; }
-#nav::-webkit-scrollbar { display:none; }
-.nav-tab { flex-shrink:0; display:flex; align-items:center; gap:5px; padding:6px 13px;
-border-radius:20px; border:1px solid var(–border); background:var(–surface);
-color:var(–text3); font-size:12px; font-weight:500; cursor:pointer; transition:all .18s; user-select:none; }
-.nav-tab .dot { width:6px; height:6px; border-radius:50%; opacity:.5; flex-shrink:0; }
-.nav-tab.active { color:var(–bg); border-color:transparent; }
-.nav-tab.active .dot { opacity:1; }
-.nav-tab[data-mod=“dashboard”].active { background:var(–text); }
-.nav-tab[data-mod=“ucetnictvi”].active { background:var(–mod-ucet); }
-.nav-tab[data-mod=“investice”].active  { background:var(–mod-invest); }
-.nav-tab[data-mod=“auto”].active       { background:var(–mod-auto); }
-.nav-tab[data-mod=“elektrina”].active  { background:var(–mod-elektr); }
-.nav-tab[data-mod=“kondice”].active    { background:var(–mod-kondice); }
-#content { flex:1; overflow-y:auto; scrollbar-width:none; }
-#content::-webkit-scrollbar { display:none; }
-.module { display:none; }
-.module.active { display:block; animation:fadeUp .2s ease both; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)} }
+html,body{height:100%;width:100%;background:var(–bg);color:var(–text);
+font-family:‘DM Sans’,sans-serif;font-size:15px;overscroll-behavior:none;line-height:1.45;}
 
-/* DASHBOARD */
-.dash-wrap { padding:18px 14px calc(28px + var(–safe-bot)); }
-.dash-greeting { font-family:‘DM Serif Display’,serif; font-size:26px; line-height:1.2; margin-bottom:4px; }
-.dash-greeting em { font-style:italic; color:var(–text3); }
-.dash-sub { font-size:12px; color:var(–text2); margin-bottom:22px; }
-.dash-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:22px; }
-.dash-card { background:var(–surface); border:1px solid var(–border); border-radius:var(–r-lg);
-padding:14px; cursor:pointer; transition:transform .14s,background .14s; position:relative; overflow:hidden; }
-.dash-card:active { transform:scale(.96); background:var(–surface2); }
-.dash-card::before { content:’’; position:absolute; top:0; left:0; right:0; height:2px; }
-.dash-card[data-mod=“ucetnictvi”]::before { background:var(–mod-ucet); }
-.dash-card[data-mod=“investice”]::before  { background:var(–mod-invest); }
-.dash-card[data-mod=“auto”]::before       { background:var(–mod-auto); }
-.dash-card[data-mod=“elektrina”]::before  { background:var(–mod-elektr); }
-.dash-card[data-mod=“kondice”]::before    { background:var(–mod-kondice); }
-.card-icon  { font-size:22px; margin-bottom:8px; }
-.card-title { font-size:12px; font-weight:600; color:var(–text2); margin-bottom:2px; }
-.card-stat  { font-size:10px; color:var(–text3); }
-.card-value { font-size:16px; font-weight:600; margin-top:6px; }
-.dash-sec { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-color:var(–text3); margin-bottom:9px; }
-.act-list { display:flex; flex-direction:column; gap:6px; }
-.act-item { display:flex; align-items:center; gap:10px; background:var(–surface);
-border:1px solid var(–border); border-radius:var(–r-md); padding:11px 13px; }
-.act-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
-.act-info { flex:1; font-size:13px; }
-.act-title { font-weight:500; }
-.act-sub   { font-size:11px; color:var(–text2); margin-top:1px; }
-.act-time  { font-size:11px; color:var(–text3); }
-.version-bar { text-align:center; padding:18px 0 4px; font-size:10px; color:var(–text3); letter-spacing:.05em; }
+/* ══════════════════════════
+SHELL
+══════════════════════════ */
+#app{display:flex;flex-direction:column;height:100dvh;padding-top:var(–safe-top);}
 
-/* PLACEHOLDERS */
-.mod-wrap { padding:18px 14px calc(28px + var(–safe-bot)); }
-.mod-header { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
-.mod-badge { width:42px; height:42px; border-radius:var(–r-md); display:flex;
-align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
-.mod-title { font-family:‘DM Serif Display’,serif; font-size:22px; }
-.mod-sub { font-size:12px; color:var(–text2); margin-top:2px; }
-.ph-box { background:var(–surface); border:1px dashed var(–border2); border-radius:var(–r-lg);
-padding:30px 22px; text-align:center; }
-.ph-icon  { font-size:32px; margin-bottom:10px; }
-.ph-title { font-size:14px; font-weight:600; margin-bottom:5px; }
-.ph-text  { font-size:12px; color:var(–text2); line-height:1.7; }
+/* Header */
+#shell-header{
+background:var(–bg);
+display:flex;align-items:center;justify-content:space-between;
+padding:14px 20px 12px;
+border-bottom:1px solid var(–border);
+flex-shrink:0;
+}
+.logo{font-size:20px;font-weight:700;letter-spacing:-.5px;color:var(–text);}
+.logo span{color:var(–accent);}
+.header-right{display:flex;align-items:center;gap:8px;}
+.date-pill{font-size:11px;color:var(–text2);background:var(–card);
+padding:5px 11px;border-radius:20px;border:1px solid var(–border2);}
 
-/* KAKEIBO */
-#mod-ucetnictvi { display:none; flex-direction:column; }
-#mod-ucetnictvi.active { display:flex; height:100%; }
-.kk-subheader { background:var(–surface); border-bottom:1px solid var(–border);
-padding:11px 14px; flex-shrink:0; }
-.kk-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:9px; }
-.kk-logo { font-family:‘Noto Serif JP’,serif; font-size:16px; color:var(–mod-ucet); letter-spacing:.02em; }
-.kk-logo small { font-family:‘DM Sans’,sans-serif; font-size:10px; color:var(–text3);
-margin-left:6px; text-transform:uppercase; letter-spacing:.07em; }
-.kk-period-nav { display:flex; align-items:center; gap:5px; }
-.kk-nav-btn { background:none; border:1px solid var(–border); border-radius:7px;
-padding:4px 10px; font-size:14px; color:var(–text2); cursor:pointer;
-font-family:‘DM Sans’,sans-serif; line-height:1; }
-.kk-period-lbl { font-size:12px; font-weight:500; min-width:115px; text-align:center; color:var(–text); }
-.kk-tabs { display:flex; gap:3px; }
-.kk-tab { flex:1; padding:6px 0; text-align:center; font-size:11px; font-weight:500;
-color:var(–text3); border-radius:7px; cursor:pointer; border:1px solid transparent; transition:all .14s; }
-.kk-tab.active { background:var(–surface3); color:var(–text); border-color:var(–border2); }
-.kk-scroll { flex:1; overflow-y:auto; padding-bottom:calc(76px + var(–safe-bot)); scrollbar-width:none; }
-.kk-scroll::-webkit-scrollbar { display:none; }
-.kk-view { display:none; }
-.kk-view.active { display:block; }
+/* Bottom nav — George style tab bar */
+#bottom-nav{
+display:flex;align-items:center;
+background:var(–card);
+border-top:1px solid var(–border2);
+padding:8px 0 calc(8px + var(–safe-bot));
+flex-shrink:0;
+}
+.bnav-tab{
+flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+padding:4px 0;cursor:pointer;transition:color .15s;color:var(–text3);
+font-size:10px;font-weight:500;letter-spacing:.01em;user-select:none;
+border:none;background:none;
+}
+.bnav-tab .bicon{font-size:20px;line-height:1;}
+.bnav-tab.active{color:var(–accent);}
+.bnav-tab.active .bicon{filter:drop-shadow(0 0 6px rgba(77,168,255,.5));}
 
-/* Summary card */
-.kk-card { background:var(–surface); margin:12px 12px 0; border-radius:var(–r-lg);
-border:1px solid var(–border); overflow:hidden; }
-.kk-row { display:flex; justify-content:space-between; align-items:center;
-padding:11px 15px; border-bottom:1px solid var(–border); }
-.kk-row:last-child { border-bottom:none; }
-.kk-rl { font-size:12px; color:var(–text2); }
-.kk-rv { font-size:15px; font-weight:600; }
-.kk-rv.inc { color:var(–green); }
-.kk-rv.exp { color:var(–red); }
-.kk-rv.pos { color:var(–green); }
-.kk-rv.neg { color:var(–unexp); }
-.kk-prog-wrap { padding:11px 15px; }
-.kk-prog-labels { display:flex; justify-content:space-between; font-size:10px; color:var(–text3); margin-bottom:6px; }
-.kk-prog-track { height:5px; background:var(–surface3); border-radius:3px; overflow:hidden; }
-.kk-prog-bar { height:100%; border-radius:3px; transition:width .4s ease; }
-.kk-prog-bar.ok   { background:var(–need); }
-.kk-prog-bar.warn { background:var(–want); }
-.kk-prog-bar.over { background:var(–unexp); }
+/* Content */
+#content{flex:1;overflow-y:auto;scrollbar-width:none;background:var(–bg);}
+#content::-webkit-scrollbar{display:none;}
+.module{display:none;}
+.module.active{display:block;animation:fadeUp .22s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* Cat grid */
-.kk-cats { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 12px 0; }
-.kk-cat { background:var(–surface); border:1px solid var(–border); border-radius:var(–r-md);
-padding:12px; position:relative; overflow:hidden; }
-.kk-cat::after { content:’’; position:absolute; top:0; left:0; right:0; height:2px; }
-.kk-cat.need::after    { background:var(–need); }
-.kk-cat.want::after    { background:var(–want); }
-.kk-cat.culture::after { background:var(–culture); }
-.kk-cat.unexp::after   { background:var(–unexp); }
-.kk-cat-icon { font-size:17px; margin-bottom:5px; }
-.kk-cat-name { font-size:9px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:var(–text3); margin-bottom:3px; }
-.kk-cat-amt  { font-size:17px; font-weight:600; }
-.kk-cat-amt.need    { color:var(–need); }
-.kk-cat-amt.want    { color:var(–want); }
-.kk-cat-amt.culture { color:var(–culture); }
-.kk-cat-amt.unexp   { color:var(–unexp); }
-.kk-cat-cnt { font-size:10px; color:var(–text3); margin-top:2px; }
+/* ══════════════════════════
+DASHBOARD
+══════════════════════════ */
+.dash-wrap{padding:0 0 calc(20px + var(–safe-bot));}
 
-/* Section header */
-.kk-sec { display:flex; justify-content:space-between; align-items:center; padding:14px 12px 7px; }
-.kk-sec-lbl { font-size:10px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(–text3); }
-.kk-chips { display:flex; gap:4px; }
-.kk-chip { font-size:10px; padding:3px 9px; border-radius:12px; border:1px solid var(–border);
-background:none; color:var(–text3); cursor:pointer; font-family:‘DM Sans’,sans-serif; }
-.kk-chip.active { background:var(–text); color:var(–bg); border-color:var(–text); }
+/* Hero banner */
+.dash-hero{
+background:linear-gradient(145deg,#152d55 0%,#0f1e3a 60%,#0b1120 100%);
+padding:24px 20px 28px;
+position:relative;overflow:hidden;
+}
+.dash-hero::after{
+content:’’;position:absolute;top:-40px;right:-40px;
+width:180px;height:180px;border-radius:50%;
+background:radial-gradient(circle,rgba(77,168,255,.12) 0%,transparent 70%);
+}
+.dash-greeting-sm{font-size:12px;color:var(–text2);font-weight:400;margin-bottom:4px;}
+.dash-greeting{font-size:26px;font-weight:700;letter-spacing:-.4px;color:var(–text);margin-bottom:2px;}
+.dash-period{font-size:12px;color:var(–accent);font-weight:500;margin-top:6px;}
 
-/* Tx list */
-.kk-txs { padding:0 12px; display:flex; flex-direction:column; gap:5px; }
-.kk-tx { background:var(–surface); border:1px solid var(–border); border-radius:var(–r-md);
-padding:10px 12px; display:flex; align-items:center; gap:10px; cursor:pointer; transition:background .12s; }
-.kk-tx:active { background:var(–surface2); }
-.kk-tx-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-.kk-tx-dot.need    { background:var(–need); }
-.kk-tx-dot.want    { background:var(–want); }
-.kk-tx-dot.culture { background:var(–culture); }
-.kk-tx-dot.unexp   { background:var(–unexp); }
-.kk-tx-dot.salary  { background:var(–salary); }
-.kk-tx-dot.bonus   { background:var(–bonus); }
-.kk-tx-dot.passive { background:var(–passive); }
-.kk-tx-info { flex:1; min-width:0; }
-.kk-tx-desc { font-size:13px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.kk-tx-meta { font-size:10px; color:var(–text3); margin-top:1px; }
-.kk-tx-amt  { font-size:14px; font-weight:600; flex-shrink:0; }
-.kk-tx-amt.exp { color:var(–text); }
-.kk-tx-amt.inc { color:var(–green); }
-.kk-wk-div { font-size:10px; color:var(–text3); text-transform:uppercase;
-letter-spacing:.07em; padding:12px 3px 4px; font-weight:700; }
+/* Section label */
+.dash-section{padding:20px 20px 10px;}
+.dash-section-lbl{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(–text3);}
 
-/* Year */
-.kk-yr-totals { margin:12px 12px 0; background:var(–surface); border:1px solid var(–border);
-border-radius:var(–r-lg); overflow:hidden; }
-.kk-yt-row { display:flex; justify-content:space-between; align-items:center;
-padding:11px 15px; border-bottom:1px solid var(–border); }
-.kk-yt-row:last-child { border-bottom:none; }
-.kk-yt-l { font-size:12px; color:var(–text2); }
-.kk-yt-v { font-size:14px; font-weight:600; }
-.kk-months { padding:10px 12px 0; display:flex; flex-direction:column; gap:6px; }
-.kk-month { background:var(–surface); border:1px solid var(–border); border-radius:var(–r-md);
-padding:12px 14px; cursor:pointer; transition:background .12s; }
-.kk-month:active { background:var(–surface2); }
-.kk-month-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
-.kk-month-name { font-size:13px; font-weight:500; }
-.kk-month-bal  { font-size:13px; font-weight:600; }
-.kk-month-bal.pos { color:var(–green); }
-.kk-month-bal.neg { color:var(–unexp); }
-.kk-month-bars { display:flex; gap:2px; height:4px; border-radius:2px; overflow:hidden; }
-.kk-bar { height:100%; min-width:3px; }
+/* Module tiles — velké, pod sebou */
+.dash-tiles{display:flex;flex-direction:column;gap:10px;padding:0 16px;}
+.dash-tile{
+background:var(–card);
+border:1px solid var(–border2);
+border-radius:var(–r-xl);
+padding:20px;
+cursor:pointer;
+display:flex;align-items:center;gap:16px;
+transition:background .15s,transform .12s;
+box-shadow:var(–shadow-sm);
+position:relative;overflow:hidden;
+}
+.dash-tile:active{transform:scale(.98);background:var(–card2);}
+.dash-tile-left{flex:1;min-width:0;}
+.dash-tile-icon{
+width:48px;height:48px;border-radius:14px;
+display:flex;align-items:center;justify-content:center;
+font-size:22px;flex-shrink:0;
+}
+.dash-tile-name{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+color:var(–text3);margin-bottom:4px;}
+.dash-tile-val{font-size:24px;font-weight:700;color:var(–text);letter-spacing:-.4px;line-height:1.1;}
+.dash-tile-sub{font-size:11px;color:var(–text2);margin-top:3px;}
+.dash-tile-arrow{font-size:16px;color:var(–text3);flex-shrink:0;}
 
-/* Settings */
-.kk-settings { padding:12px; display:flex; flex-direction:column; gap:10px; }
-.kk-scard { background:var(–surface); border:1px solid var(–border); border-radius:var(–r-lg); overflow:hidden; }
-.kk-scard-head { padding:13px 15px; border-bottom:1px solid var(–border); }
-.kk-scard-title { font-size:13px; font-weight:600; margin-bottom:3px; }
-.kk-scard-desc  { font-size:11px; color:var(–text2); line-height:1.6; }
-.kk-scard-body  { padding:12px 15px; }
-.recur-list { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
-.recur-item { display:flex; align-items:center; gap:8px; background:var(–surface2);
-border:1px solid var(–border); border-radius:var(–r-sm); padding:9px 11px; }
-.recur-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
-.recur-info { flex:1; min-width:0; }
-.recur-name { font-size:12px; font-weight:500; }
-.recur-meta { font-size:10px; color:var(–text3); margin-top:1px; }
-.recur-amt  { font-size:13px; font-weight:600; color:var(–text2); flex-shrink:0; }
-.recur-del  { background:none; border:none; color:var(–text3); font-size:18px; cursor:pointer;
-padding:0 4px; line-height:1; flex-shrink:0; }
+/* Tile accent lines */
+.dash-tile[data-mod=“ucetnictvi”] .dash-tile-icon{background:var(–green-bg);}
+.dash-tile[data-mod=“investice”]  .dash-tile-icon{background:rgba(255,207,92,.1);}
+.dash-tile[data-mod=“auto”]       .dash-tile-icon{background:var(–cult-bg);}
+.dash-tile[data-mod=“elektrina”]  .dash-tile-icon{background:rgba(167,139,250,.1);}
+.dash-tile[data-mod=“kondice”]    .dash-tile-icon{background:rgba(99,212,196,.1);}
 
-/* FAB */
-#kk-fab { position:fixed; bottom:calc(20px + var(–safe-bot)); right:16px;
-width:52px; height:52px; border-radius:50%; background:var(–mod-ucet); color:#0c0d0f;
-border:none; font-size:24px; display:flex; align-items:center; justify-content:center;
-cursor:pointer; box-shadow:0 3px 16px rgba(136,221,176,.25); z-index:50;
-transition:transform .13s, box-shadow .13s; }
-#kk-fab:active { transform:scale(.91); }
-#kk-fab.hidden { display:none !important; }
+/* Activity */
+.dash-activity{display:flex;flex-direction:column;gap:8px;padding:0 16px;}
+.act-tile{
+background:var(–card);border:1px solid var(–border);border-radius:var(–r-lg);
+padding:14px 16px;display:flex;align-items:center;gap:12px;
+}
+.act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.act-info{flex:1;}
+.act-title{font-size:13px;font-weight:500;}
+.act-sub{font-size:11px;color:var(–text2);margin-top:2px;}
+.act-time{font-size:11px;color:var(–text3);}
 
-/* MODALS */
-.modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:100;
-display:none; align-items:flex-end; }
-.modal-bg.open { display:flex; }
-.modal-sheet { background:var(–surface); border-radius:20px 20px 0 0; width:100%;
-padding-bottom:calc(14px + var(–safe-bot));
-animation:sheetUp .22s cubic-bezier(.22,.68,0,1.2) both; max-height:92dvh; overflow-y:auto; }
-@keyframes sheetUp { from{transform:translateY(110%)}to{transform:translateY(0)} }
-.modal-handle { width:36px; height:3px; background:var(–border2); border-radius:2px; margin:11px auto 13px; }
-.modal-title { font-family:‘DM Serif Display’,serif; font-size:19px;
-padding:0 18px 13px; border-bottom:1px solid var(–border); }
+/* Version */
+.ver-bar{text-align:center;padding:24px 0 4px;font-size:10px;color:var(–text3);letter-spacing:.06em;}
 
-/* Form */
-.f-sec { padding:12px 18px 0; }
-.f-label { font-size:10px; text-transform:uppercase; letter-spacing:.08em; font-weight:700;
-color:var(–text3); margin-bottom:5px; display:block; }
-.f-input { width:100%; background:var(–surface2); border:1px solid var(–border);
-border-radius:var(–r-sm); padding:10px 12px; font-size:14px;
-font-family:‘DM Sans’,sans-serif; color:var(–text); outline:none; }
-.f-input:focus { border-color:var(–mod-ucet); }
-.f-input.xl { font-size:22px; font-weight:600; text-align:right; padding:11px 13px; }
-.f-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:12px 18px 0; }
+/* ══════════════════════════
+KAKEIBO MODULE
+══════════════════════════ */
+#mod-ucetnictvi{display:none;flex-direction:column;}
+#mod-ucetnictvi.active{display:flex;height:100%;}
 
-/* Type grid */
-.f-type-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; padding:12px 18px 0; }
-.f-type-btn { padding:9px 8px; border-radius:var(–r-sm); border:1.5px solid var(–border);
-background:var(–surface2); font-size:12px; font-weight:500; cursor:pointer;
-text-align:center; transition:all .13s; font-family:‘DM Sans’,sans-serif; color:var(–text2); }
-.f-type-btn small { display:block; font-size:9px; color:var(–text3); margin-top:1px; }
-.f-type-btn.active { border-color:var(–mod-ucet); background:rgba(136,221,176,.1); color:var(–mod-ucet); }
-.f-type-btn.active.t-salary  { border-color:var(–salary);  background:var(–sal-dim);  color:var(–salary); }
-.f-type-btn.active.t-bonus   { border-color:var(–bonus);   background:var(–bon-dim);  color:var(–bonus); }
-.f-type-btn.active.t-passive { border-color:var(–passive); background:var(–pas-dim);  color:var(–passive); }
-.f-type-btn.active.t-expense { border-color:var(–text2);   background:var(–surface3); color:var(–text); }
+/* Kakeibo header */
+.kk-header{
+background:var(–bg);
+border-bottom:1px solid var(–border);
+padding:14px 16px 10px;
+flex-shrink:0;
+}
+.kk-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.kk-title{font-size:18px;font-weight:700;letter-spacing:-.3px;}
+.kk-title span{color:var(–accent);}
+.kk-period-nav{display:flex;align-items:center;gap:6px;}
+.kk-nav-btn{
+background:var(–card2);border:1px solid var(–border2);border-radius:9px;
+padding:5px 12px;font-size:16px;color:var(–text2);cursor:pointer;
+font-family:‘DM Sans’,sans-serif;line-height:1;
+}
+.kk-period-lbl{font-size:12px;font-weight:600;min-width:118px;text-align:center;color:var(–text);}
 
-/* Cat buttons */
-.f-cat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:5px; padding:10px 18px 0; }
-.f-cat-btn { padding:8px 3px; border-radius:var(–r-sm); border:1.5px solid var(–border);
-background:var(–surface2); font-size:9px; font-weight:600; cursor:pointer; text-align:center;
-transition:all .13s; font-family:‘DM Sans’,sans-serif; color:var(–text3); line-height:1.4;
-text-transform:uppercase; letter-spacing:.03em; }
-.f-cat-btn span { font-size:16px; display:block; margin-bottom:3px; }
-.f-cat-btn.active.c-need    { border-color:var(–need);    background:var(–need-dim);  color:var(–need); }
-.f-cat-btn.active.c-want    { border-color:var(–want);    background:var(–want-dim);  color:var(–want); }
-.f-cat-btn.active.c-culture { border-color:var(–culture); background:var(–cult-dim);  color:var(–culture); }
-.f-cat-btn.active.c-unexp   { border-color:var(–unexp);   background:var(–unexp-dim); color:var(–unexp); }
+/* Kakeibo tab bar */
+.kk-tabs{display:flex;gap:4px;background:var(–card);border-radius:var(–r-sm);padding:3px;}
+.kk-tab{
+flex:1;padding:7px 0;text-align:center;font-size:11px;font-weight:600;
+color:var(–text3);border-radius:9px;cursor:pointer;transition:all .15s;letter-spacing:.01em;
+}
+.kk-tab.active{background:var(–card2);color:var(–text);box-shadow:var(–shadow-sm);}
 
-/* Buttons */
-.btn-primary { display:block; width:calc(100% - 36px); margin:14px 18px 0;
-background:var(–mod-ucet); color:#0c0d0f; border:none; border-radius:var(–r-md);
-padding:13px; font-size:14px; font-weight:600; cursor:pointer; font-family:‘DM Sans’,sans-serif; }
-.btn-secondary { display:block; width:100%; background:var(–surface2); color:var(–text2);
-border:1px solid var(–border); border-radius:var(–r-md);
-padding:12px; font-size:13px; font-weight:500; cursor:pointer; font-family:‘DM Sans’,sans-serif; }
-.btn-danger  { flex:1; padding:12px; border-radius:var(–r-sm); border:1px solid var(–border);
-background:var(–red-dim); color:var(–red); font-size:13px; font-weight:600;
-cursor:pointer; font-family:‘DM Sans’,sans-serif; }
-.btn-neutral { flex:1; padding:12px; border-radius:var(–r-sm); border:1px solid var(–border);
-background:var(–surface2); color:var(–text2); font-size:13px; font-weight:500;
-cursor:pointer; font-family:‘DM Sans’,sans-serif; }
-.btn-row { display:flex; gap:7px; padding:14px 18px 0; }
-.detail-info { padding:13px 18px 0; font-size:13px; color:var(–text2); line-height:2.1; }
+/* Scroll area */
+.kk-scroll{flex:1;overflow-y:auto;padding-bottom:calc(80px + var(–safe-bot));scrollbar-width:none;}
+.kk-scroll::-webkit-scrollbar{display:none;}
+.kk-view{display:none;}
+.kk-view.active{display:block;}
 
-/* Toast & DB chip */
-#toast { position:fixed; bottom:calc(82px + var(–safe-bot)); left:50%; transform:translateX(-50%);
-background:var(–surface3); color:var(–text); border:1px solid var(–border2);
-padding:8px 18px; border-radius:20px; font-size:12px; font-weight:500; z-index:200;
-opacity:0; transition:opacity .2s; pointer-events:none; white-space:nowrap;
-box-shadow:0 4px 20px rgba(0,0,0,.4); }
-#toast.show { opacity:1; }
-#db-chip { position:fixed; bottom:calc(14px + var(–safe-bot)); left:16px;
-background:var(–surface2); border:1px solid var(–border); border-radius:16px;
-padding:5px 10px; font-size:10px; color:var(–text3); display:flex; align-items:center;
-gap:5px; z-index:80; transition:opacity .3s; pointer-events:none; }
-#db-chip .dot { width:5px; height:5px; border-radius:50%; background:var(–green); }
-#db-chip.err .dot { background:var(–red); }
-#db-chip.hidden { opacity:0; }
+/* ── Summary card (George-style hero card) ── */
+.kk-hero-card{
+background:linear-gradient(135deg,var(–card2) 0%,var(–card) 100%);
+border:1px solid var(–border2);
+border-radius:var(–r-xl);
+margin:14px 14px 0;
+padding:20px;
+box-shadow:var(–shadow-md);
+}
+.kk-hero-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(–text3);margin-bottom:6px;}
+.kk-hero-bal{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1;}
+.kk-hero-bal.pos{color:var(–green);}
+.kk-hero-bal.neg{color:var(–red);}
+.kk-hero-bal.zero{color:var(–text2);}
+.kk-hero-sub{font-size:12px;color:var(–text2);margin-top:5px;}
+.kk-hero-row{display:flex;gap:12px;margin-top:16px;}
+.kk-hero-pill{
+flex:1;background:rgba(255,255,255,.05);border:1px solid var(–border2);
+border-radius:var(–r-md);padding:12px 14px;
+}
+.kk-hero-pill-lbl{font-size:10px;color:var(–text3);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;}
+.kk-hero-pill-val{font-size:18px;font-weight:700;}
+.kk-hero-pill-val.inc{color:var(–green);}
+.kk-hero-pill-val.exp{color:var(–red);}
+
+/* Progress bar */
+.kk-prog-wrap{margin-top:14px;}
+.kk-prog-labels{display:flex;justify-content:space-between;font-size:10px;color:var(–text3);margin-bottom:5px;}
+.kk-prog-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.kk-prog-bar{height:100%;border-radius:3px;transition:width .5s ease;}
+.kk-prog-bar.ok{background:var(–green);}
+.kk-prog-bar.warn{background:var(–amber);}
+.kk-prog-bar.over{background:var(–red);}
+
+/* ── Cat tiles ── */
+.kk-cats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 14px 0;}
+.kk-cat{
+background:var(–card);border:1px solid var(–border2);border-radius:var(–r-lg);
+padding:14px;cursor:pointer;transition:background .12s;
+}
+.kk-cat:active{background:var(–card2);}
+.kk-cat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.kk-cat-icon{font-size:18px;}
+.kk-cat-badge{
+font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:.04em;
+}
+.kk-cat-badge.need   {background:var(–need-bg);color:var(–need);}
+.kk-cat-badge.want   {background:var(–want-bg);color:var(–want);}
+.kk-cat-badge.culture{background:var(–cult-bg);color:var(–culture);}
+.kk-cat-badge.unexp  {background:var(–unexp-bg);color:var(–unexp);}
+.kk-cat-name{font-size:10px;color:var(–text3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;}
+.kk-cat-amt{font-size:20px;font-weight:700;}
+.kk-cat-amt.need   {color:var(–need);}
+.kk-cat-amt.want   {color:var(–want);}
+.kk-cat-amt.culture{color:var(–culture);}
+.kk-cat-amt.unexp  {color:var(–unexp);}
+.kk-cat-cnt{font-size:10px;color:var(–text3);margin-top:2px;}
+
+/* ── Section header ── */
+.kk-sec{display:flex;justify-content:space-between;align-items:center;padding:18px 14px 8px;}
+.kk-sec-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(–text3);}
+.kk-chips{display:flex;gap:4px;}
+.kk-chip{
+font-size:10px;font-weight:600;padding:4px 10px;border-radius:12px;
+border:1px solid var(–border2);background:none;color:var(–text3);
+cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:all .13s;
+}
+.kk-chip.active{background:var(–accent);color:#fff;border-color:var(–accent);}
+
+/* ── Transaction list ── */
+.kk-txs{padding:0 14px;display:flex;flex-direction:column;gap:6px;}
+.kk-tx{
+background:var(–card);border:1px solid var(–border);border-radius:var(–r-lg);
+padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;
+transition:background .12s;box-shadow:var(–shadow-sm);
+}
+.kk-tx:active{background:var(–card2);}
+.kk-tx-icon{
+width:40px;height:40px;border-radius:12px;display:flex;align-items:center;
+justify-content:center;font-size:17px;flex-shrink:0;
+}
+.kk-tx-icon.need   {background:var(–need-bg);}
+.kk-tx-icon.want   {background:var(–want-bg);}
+.kk-tx-icon.culture{background:var(–cult-bg);}
+.kk-tx-icon.unexp  {background:var(–unexp-bg);}
+.kk-tx-icon.salary {background:var(–sal-bg);}
+.kk-tx-icon.bonus  {background:var(–bon-bg);}
+.kk-tx-icon.passive{background:var(–pas-bg);}
+.kk-tx-info{flex:1;min-width:0;}
+.kk-tx-desc{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.kk-tx-meta{font-size:11px;color:var(–text3);margin-top:2px;}
+.kk-tx-right{text-align:right;flex-shrink:0;}
+.kk-tx-amt{font-size:16px;font-weight:700;}
+.kk-tx-amt.exp{color:var(–text);}
+.kk-tx-amt.inc{color:var(–green);}
+.kk-tx-date{font-size:10px;color:var(–text3);margin-top:2px;}
+
+/* Week divider */
+.kk-wk-div{
+font-size:10px;color:var(–text3);text-transform:uppercase;
+letter-spacing:.07em;padding:14px 4px 4px;font-weight:700;
+}
 
 /* Empty */
-.empty { text-align:center; padding:36px 24px; }
-.empty-i { font-size:32px; margin-bottom:9px; }
-.empty-t { font-size:13px; font-weight:600; margin-bottom:4px; }
-.empty-s { font-size:11px; color:var(–text2); line-height:1.7; }
+.kk-empty{text-align:center;padding:48px 24px;}
+.kk-empty-icon{font-size:40px;margin-bottom:12px;}
+.kk-empty-title{font-size:15px;font-weight:600;margin-bottom:6px;}
+.kk-empty-sub{font-size:12px;color:var(–text2);line-height:1.7;}
+
+/* ── Year view ── */
+.kk-yr-card{
+background:var(–card);border:1px solid var(–border2);border-radius:var(–r-xl);
+margin:14px 14px 0;overflow:hidden;box-shadow:var(–shadow-sm);
+}
+.kk-yt-row{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;}
+.kk-yt-row+.kk-yt-row{border-top:1px solid var(–border);}
+.kk-yt-l{font-size:13px;color:var(–text2);}
+.kk-yt-v{font-size:16px;font-weight:700;}
+.kk-months{padding:10px 14px 0;display:flex;flex-direction:column;gap:8px;}
+.kk-month{
+background:var(–card);border:1px solid var(–border);border-radius:var(–r-lg);
+padding:14px 16px;cursor:pointer;transition:background .12s;
+}
+.kk-month:active{background:var(–card2);}
+.kk-month-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.kk-month-name{font-size:14px;font-weight:500;}
+.kk-month-bal{font-size:14px;font-weight:700;}
+.kk-month-bal.pos{color:var(–green);}
+.kk-month-bal.neg{color:var(–red);}
+.kk-month-bars{display:flex;gap:2px;height:5px;border-radius:3px;overflow:hidden;}
+.kk-bar{height:100%;min-width:4px;}
+
+/* ── Settings view ── */
+.kk-settings{padding:14px;display:flex;flex-direction:column;gap:12px;}
+.kk-scard{
+background:var(–card);border:1px solid var(–border2);border-radius:var(–r-xl);
+overflow:hidden;box-shadow:var(–shadow-sm);
+}
+.kk-scard-head{padding:16px 18px;border-bottom:1px solid var(–border);}
+.kk-scard-title{font-size:14px;font-weight:700;margin-bottom:3px;}
+.kk-scard-desc{font-size:12px;color:var(–text2);line-height:1.6;}
+.kk-scard-body{padding:14px 18px;}
+
+/* Recurring list */
+.recur-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+.recur-item{
+display:flex;align-items:center;gap:10px;background:var(–card2);
+border:1px solid var(–border);border-radius:var(–r-md);padding:12px 14px;
+}
+.recur-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.recur-info{flex:1;min-width:0;}
+.recur-name{font-size:13px;font-weight:500;}
+.recur-meta{font-size:11px;color:var(–text3);margin-top:1px;}
+.recur-amt{font-size:14px;font-weight:700;color:var(–text2);flex-shrink:0;}
+.recur-del{background:none;border:none;color:var(–text3);font-size:20px;
+cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;}
+
+/* ── Statistics view ── */
+.st-wrap{padding:14px;display:flex;flex-direction:column;gap:12px;}
+.st-card{background:var(–card);border:1px solid var(–border2);border-radius:var(–r-xl);overflow:hidden;box-shadow:var(–shadow-sm);}
+.st-card-title{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(–text3);padding:15px 18px 0;}
+.st-big{padding:8px 18px 16px;}
+.st-big-val{font-size:30px;font-weight:700;letter-spacing:-.5px;line-height:1.1;}
+.st-big-sub{font-size:11px;color:var(–text2);margin-top:4px;}
+.st-2col{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(–border);}
+.st-half{padding:14px 18px;}
+.st-half+.st-half{border-left:1px solid var(–border);}
+.st-half-lbl{font-size:10px;color:var(–text3);text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-bottom:5px;}
+.st-half-val{font-size:22px;font-weight:700;}
+.st-bars{padding:10px 18px 16px;display:flex;flex-direction:column;gap:11px;}
+.st-bar-row{display:flex;flex-direction:column;gap:4px;}
+.st-bar-top{display:flex;justify-content:space-between;font-size:12px;}
+.st-bar-lbl{color:var(–text2);}
+.st-bar-val{font-weight:600;}
+.st-bar-track{height:7px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;}
+.st-bar-fill{height:100%;border-radius:4px;transition:width .5s ease;}
+.st-mom-grid{padding:10px 18px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.st-mom-cell{background:var(–card2);border-radius:var(–r-md);padding:10px 12px;}
+.st-mom-name{font-size:9px;color:var(–text3);text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:5px;}
+.st-mom-exp{font-size:14px;font-weight:700;}
+.st-mom-delta{font-size:10px;margin-top:3px;}
+.st-mom-delta.up{color:var(–red);}
+.st-mom-delta.down{color:var(–green);}
+.st-mom-delta.flat{color:var(–text3);}
+.st-top5{padding:10px 18px 16px;display:flex;flex-direction:column;gap:10px;}
+.st-top5-item{display:flex;align-items:center;gap:10px;}
+.st-top5-rank{font-size:11px;color:var(–text3);font-weight:700;width:16px;text-align:right;flex-shrink:0;}
+.st-top5-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.st-top5-info{flex:1;min-width:0;}
+.st-top5-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.st-top5-cat{font-size:10px;color:var(–text3);margin-top:1px;}
+.st-top5-amt{font-size:13px;font-weight:700;flex-shrink:0;}
+.st-ratio-wrap{padding:10px 18px 16px;display:flex;align-items:center;gap:20px;}
+.st-donut{position:relative;width:76px;height:76px;flex-shrink:0;}
+.st-donut svg{width:76px;height:76px;transform:rotate(-90deg);}
+.st-donut-track{fill:none;stroke:rgba(255,255,255,.07);stroke-width:10;}
+.st-donut-fill{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .6s ease;}
+.st-donut-lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;}
+.st-ratio-legend{display:flex;flex-direction:column;gap:8px;}
+.st-ratio-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(–text2);}
+.st-ratio-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+
+/* ══════════════════════════
+FAB
+══════════════════════════ */
+#kk-fab{
+position:fixed;
+bottom:calc(74px + var(–safe-bot));
+right:16px;
+height:54px;
+padding:0 24px;
+border-radius:27px;
+background:#ffffff;
+color:#0b1120;
+border:none;
+font-size:15px;
+font-weight:700;
+font-family:‘DM Sans’,sans-serif;
+display:flex;align-items:center;gap:8px;
+cursor:pointer;
+box-shadow:0 4px 28px rgba(0,0,0,.6),0 1px 6px rgba(0,0,0,.35);
+z-index:50;
+transition:transform .12s,box-shadow .12s;
+white-space:nowrap;
+}
+#kk-fab .fab-plus{font-size:22px;font-weight:300;line-height:1;}
+#kk-fab:active{transform:scale(.95);box-shadow:0 2px 12px rgba(0,0,0,.4);}
+#kk-fab.hidden{display:none!important;}
+
+/* ══════════════════════════
+MODALS
+══════════════════════════ */
+.modal-bg{
+position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;
+display:none;align-items:flex-end;backdrop-filter:blur(4px);
+}
+.modal-bg.open{display:flex;}
+.modal-sheet{
+background:var(–card);border-radius:24px 24px 0 0;width:100%;
+padding-bottom:calc(16px + var(–safe-bot));
+animation:sheetUp .24s cubic-bezier(.22,.68,0,1.2) both;
+max-height:92dvh;overflow-y:auto;
+}
+@keyframes sheetUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
+.modal-handle{width:38px;height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin:12px auto 14px;}
+.modal-title{font-size:20px;font-weight:700;letter-spacing:-.3px;padding:0 20px 14px;border-bottom:1px solid var(–border);}
+
+/* Form */
+.f-sec{padding:14px 20px 0;}
+.f-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;
+color:var(–text3);margin-bottom:6px;display:block;}
+.f-input{
+width:100%;background:var(–card2);border:1px solid var(–border2);
+border-radius:var(–r-md);padding:12px 14px;font-size:15px;
+font-family:‘DM Sans’,sans-serif;color:var(–text);outline:none;
+}
+.f-input:focus{border-color:var(–accent);}
+.f-input.xl{font-size:26px;font-weight:700;text-align:right;padding:12px 15px;letter-spacing:-.4px;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 20px 0;}
+
+/* Type toggles */
+.f-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px 20px 0;}
+.f-type-btn{
+padding:11px 10px;border-radius:var(–r-md);border:1.5px solid var(–border2);
+background:var(–card2);font-size:13px;font-weight:600;cursor:pointer;
+text-align:center;transition:all .14s;font-family:‘DM Sans’,sans-serif;color:var(–text2);
+}
+.f-type-btn small{display:block;font-size:9px;color:var(–text3);margin-top:2px;font-weight:400;}
+.f-type-btn.active.t-expense{border-color:var(–red);background:var(–red-bg);color:var(–red);}
+.f-type-btn.active.t-income {border-color:var(–accent);background:var(–accent-bg);color:var(–accent);}
+.f-type-btn.active.t-salary {border-color:var(–green);background:var(–green-bg);color:var(–green);}
+.f-type-btn.active.t-bonus  {border-color:var(–bonus);background:var(–bon-bg);color:var(–bonus);}
+.f-type-btn.active.t-passive{border-color:var(–passive);background:var(–pas-bg);color:var(–passive);}
+
+/* Cat buttons */
+.f-cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:12px 20px 0;}
+.f-cat-btn{
+padding:10px 4px;border-radius:var(–r-md);border:1.5px solid var(–border2);
+background:var(–card2);font-size:9px;font-weight:700;cursor:pointer;text-align:center;
+transition:all .14s;font-family:‘DM Sans’,sans-serif;color:var(–text3);line-height:1.4;
+text-transform:uppercase;letter-spacing:.03em;
+}
+.f-cat-btn span{font-size:18px;display:block;margin-bottom:4px;}
+.f-cat-btn.active.c-need   {border-color:var(–need);   background:var(–need-bg); color:var(–need);}
+.f-cat-btn.active.c-want   {border-color:var(–want);   background:var(–want-bg); color:var(–want);}
+.f-cat-btn.active.c-culture{border-color:var(–culture);background:var(–cult-bg); color:var(–culture);}
+.f-cat-btn.active.c-unexp  {border-color:var(–unexp);  background:var(–unexp-bg);color:var(–unexp);}
+
+/* Buttons */
+.btn-primary{
+display:block;width:calc(100% - 40px);margin:16px 20px 0;
+background:var(–accent2);color:#fff;border:none;border-radius:var(–r-md);
+padding:15px;font-size:15px;font-weight:700;cursor:pointer;
+font-family:‘DM Sans’,sans-serif;box-shadow:0 2px 16px rgba(38,132,255,.3);
+}
+.btn-secondary{
+display:block;width:100%;background:var(–card2);color:var(–text2);
+border:1px solid var(–border2);border-radius:var(–r-md);
+padding:13px;font-size:13px;font-weight:600;cursor:pointer;font-family:‘DM Sans’,sans-serif;
+}
+.btn-danger{
+flex:1;padding:13px;border-radius:var(–r-md);border:1px solid var(–border);
+background:var(–red-bg);color:var(–red);font-size:14px;font-weight:700;
+cursor:pointer;font-family:‘DM Sans’,sans-serif;
+}
+.btn-neutral{
+flex:1;padding:13px;border-radius:var(–r-md);border:1px solid var(–border);
+background:var(–card2);color:var(–text2);font-size:14px;font-weight:500;
+cursor:pointer;font-family:‘DM Sans’,sans-serif;
+}
+.btn-row{display:flex;gap:8px;padding:16px 20px 0;}
+.detail-info{padding:14px 20px 0;font-size:13px;color:var(–text2);line-height:2.2;}
+
+/* ══════════════════════════
+PLACEHOLDERS
+══════════════════════════ */
+.mod-wrap{padding:20px 16px calc(32px + var(–safe-bot));}
+.mod-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.mod-badge{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.mod-title{font-size:22px;font-weight:700;letter-spacing:-.3px;}
+.mod-sub{font-size:12px;color:var(–text2);margin-top:3px;}
+.ph-box{background:var(–card);border:1.5px dashed var(–border2);border-radius:var(–r-xl);padding:36px 24px;text-align:center;}
+.ph-icon{font-size:36px;margin-bottom:12px;}
+.ph-title{font-size:15px;font-weight:700;margin-bottom:6px;}
+.ph-text{font-size:12px;color:var(–text2);line-height:1.7;}
+
+/* ══════════════════════════
+TOAST & DB
+══════════════════════════ */
+#toast{
+position:fixed;bottom:calc(90px + var(–safe-bot));left:50%;transform:translateX(-50%);
+background:var(–card3);color:var(–text);border:1px solid var(–border2);
+padding:10px 20px;border-radius:22px;font-size:13px;font-weight:600;z-index:200;
+opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap;
+box-shadow:0 6px 24px rgba(0,0,0,.5);
+}
+#toast.show{opacity:1;}
+#db-chip{
+position:fixed;bottom:calc(14px + var(–safe-bot));left:16px;
+background:var(–card2);border:1px solid var(–border);border-radius:18px;
+padding:5px 11px;font-size:10px;color:var(–text3);display:flex;align-items:center;
+gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
+}
+#db-chip .dot{width:5px;height:5px;border-radius:50%;background:var(–green);}
+#db-chip.err .dot{background:var(–red);}
+#db-chip.hidden{opacity:0;}
 </style>
 
 </head>
 <body>
 <div id="app">
 
+  <!-- HEADER -->
+
   <header id="shell-header">
-    <div class="logo">Můj<em>OS</em></div>
-    <div class="date-chip" id="date-chip"></div>
+    <div class="logo">Můj<span>OS</span></div>
+    <div class="header-right">
+      <div class="date-pill" id="date-chip"></div>
+    </div>
   </header>
 
-  <nav id="nav">
-    <div class="nav-tab active" data-mod="dashboard">
-      <span class="dot" style="background:var(--text)"></span>Přehled
-    </div>
-    <div class="nav-tab" data-mod="ucetnictvi">
-      <span class="dot" style="background:var(--mod-ucet)"></span>Kakeibo
-    </div>
-    <div class="nav-tab" data-mod="investice">
-      <span class="dot" style="background:var(--mod-invest)"></span>Investice
-    </div>
-    <div class="nav-tab" data-mod="auto">
-      <span class="dot" style="background:var(--mod-auto)"></span>Auto
-    </div>
-    <div class="nav-tab" data-mod="elektrina">
-      <span class="dot" style="background:var(--mod-elektr)"></span>Elektřina
-    </div>
-    <div class="nav-tab" data-mod="kondice">
-      <span class="dot" style="background:var(--mod-kondice)"></span>Kondice
-    </div>
-  </nav>
+  <!-- CONTENT -->
 
   <div id="content">
 
 ```
-<!-- DASHBOARD -->
+<!-- ═══ DASHBOARD ═══ -->
 <div class="module active" id="mod-dashboard">
   <div class="dash-wrap">
-    <div class="dash-greeting" id="greeting">Dobrý den <em>—</em></div>
-    <div class="dash-sub" id="dash-sub"></div>
-    <div class="dash-grid">
-      <div class="dash-card" data-mod="ucetnictvi">
-        <div class="card-icon">🏦</div>
-        <div class="card-title">Kakeibo</div>
-        <div class="card-stat">Výdaje tento týden</div>
-        <div class="card-value" style="color:var(--mod-ucet)" id="stat-ucet">—</div>
+
+    <div class="dash-hero">
+      <div class="dash-greeting-sm" id="greet-sm">Přehled</div>
+      <div class="dash-greeting" id="greeting">Dobrý den</div>
+      <div class="dash-period" id="dash-period">—</div>
+    </div>
+
+    <div class="dash-section">
+      <div class="dash-section-lbl">Moduly</div>
+    </div>
+    <div class="dash-tiles">
+      <div class="dash-tile" data-mod="ucetnictvi">
+        <div class="dash-tile-icon">🏦</div>
+        <div class="dash-tile-left">
+          <div class="dash-tile-name">Kakeibo</div>
+          <div class="dash-tile-val" id="stat-ucet">—</div>
+          <div class="dash-tile-sub">výdaje tento týden</div>
+        </div>
+        <div class="dash-tile-arrow">›</div>
       </div>
-      <div class="dash-card" data-mod="investice">
-        <div class="card-icon">💰</div>
-        <div class="card-title">Investice</div>
-        <div class="card-stat">Tento kvartál</div>
-        <div class="card-value" style="color:var(--mod-invest)" id="stat-investice">—</div>
+      <div class="dash-tile" data-mod="investice">
+        <div class="dash-tile-icon">💰</div>
+        <div class="dash-tile-left">
+          <div class="dash-tile-name">Investice</div>
+          <div class="dash-tile-val" id="stat-investice">—</div>
+          <div class="dash-tile-sub">tento kvartál</div>
+        </div>
+        <div class="dash-tile-arrow">›</div>
       </div>
-      <div class="dash-card" data-mod="auto">
-        <div class="card-icon">🚗</div>
-        <div class="card-title">Auto</div>
-        <div class="card-stat">Tento měsíc</div>
-        <div class="card-value" style="color:var(--mod-auto)" id="stat-auto">—</div>
+      <div class="dash-tile" data-mod="auto">
+        <div class="dash-tile-icon">🚗</div>
+        <div class="dash-tile-left">
+          <div class="dash-tile-name">Auto</div>
+          <div class="dash-tile-val" id="stat-auto">—</div>
+          <div class="dash-tile-sub">náklady tento měsíc</div>
+        </div>
+        <div class="dash-tile-arrow">›</div>
       </div>
-      <div class="dash-card" data-mod="elektrina">
-        <div class="card-icon">⚡</div>
-        <div class="card-title">Elektřina</div>
-        <div class="card-stat">Poslední odečet</div>
-        <div class="card-value" style="color:var(--mod-elektr)" id="stat-elektr">—</div>
+      <div class="dash-tile" data-mod="elektrina">
+        <div class="dash-tile-icon">⚡</div>
+        <div class="dash-tile-left">
+          <div class="dash-tile-name">Elektřina</div>
+          <div class="dash-tile-val" id="stat-elektr">—</div>
+          <div class="dash-tile-sub">poslední odečet</div>
+        </div>
+        <div class="dash-tile-arrow">›</div>
       </div>
-      <div class="dash-card" data-mod="kondice" style="grid-column:span 2">
-        <div class="card-icon">🧠</div>
-        <div class="card-title">Kondice</div>
-        <div class="card-stat">Poslední záznam</div>
-        <div class="card-value" style="color:var(--mod-kondice)" id="stat-kondice">—</div>
+      <div class="dash-tile" data-mod="kondice">
+        <div class="dash-tile-icon">🧠</div>
+        <div class="dash-tile-left">
+          <div class="dash-tile-name">Kondice</div>
+          <div class="dash-tile-val" id="stat-kondice">—</div>
+          <div class="dash-tile-sub">poslední záznam</div>
+        </div>
+        <div class="dash-tile-arrow">›</div>
       </div>
     </div>
-    <div class="dash-sec">Poslední aktivita</div>
-    <div class="act-list" id="act-list">
-      <div class="act-item">
+
+    <div class="dash-section" style="margin-top:8px;">
+      <div class="dash-section-lbl">Poslední aktivita</div>
+    </div>
+    <div class="dash-activity" id="act-list">
+      <div class="act-tile">
         <div class="act-dot" style="background:var(--text3)"></div>
-        <div class="act-info"><div class="act-title">Žádná aktivita</div>
-          <div class="act-sub">Začni přidávat záznamy</div></div>
+        <div class="act-info">
+          <div class="act-title">Žádná aktivita</div>
+          <div class="act-sub">Začni přidávat záznamy v modulech</div>
+        </div>
       </div>
     </div>
-    <div class="version-bar">MůjOS v3.0 · Kakeibo v1.2 · 2025</div>
+    <div class="ver-bar">MůjOS v4.0 · Kakeibo v1.2</div>
   </div>
 </div>
 
-<!-- KAKEIBO -->
+<!-- ═══ KAKEIBO ═══ -->
 <div class="module" id="mod-ucetnictvi">
-  <div class="kk-subheader">
-    <div class="kk-top">
-      <div class="kk-logo">家計簿 <small>Kakeibo</small></div>
+  <div class="kk-header">
+    <div class="kk-header-top">
+      <div class="kk-title">家計簿 <span>Kakeibo</span></div>
       <div class="kk-period-nav">
         <button class="kk-nav-btn" id="kk-prev">‹</button>
         <div class="kk-period-lbl" id="kk-period">—</div>
@@ -445,14 +683,16 @@ gap:5px; z-index:80; transition:opacity .3s; pointer-events:none; }
       <div class="kk-tab active" data-kv="tyden">Týden</div>
       <div class="kk-tab" data-kv="mesic">Měsíc</div>
       <div class="kk-tab" data-kv="rok">Rok</div>
-      <div class="kk-tab" data-kv="nastaveni">⚙ Platby</div>
+      <div class="kk-tab" data-kv="statistiky">📊</div>
+      <div class="kk-tab" data-kv="nastaveni">⚙</div>
     </div>
   </div>
+
   <div class="kk-scroll">
 
     <!-- TÝDEN -->
     <div class="kk-view active" id="kkv-tyden">
-      <div class="kk-card" id="kk-sum-week"></div>
+      <div class="kk-hero-card" id="kk-sum-week"></div>
       <div class="kk-cats" id="kk-cats-week"></div>
       <div class="kk-sec">
         <span class="kk-sec-lbl">Záznamy</span>
@@ -467,7 +707,7 @@ gap:5px; z-index:80; transition:opacity .3s; pointer-events:none; }
 
     <!-- MĚSÍC -->
     <div class="kk-view" id="kkv-mesic">
-      <div class="kk-card" id="kk-sum-month"></div>
+      <div class="kk-hero-card" id="kk-sum-month"></div>
       <div class="kk-cats" id="kk-cats-month"></div>
       <div class="kk-sec"><span class="kk-sec-lbl">Záznamy měsíce</span></div>
       <div class="kk-txs" id="kk-txs-month"></div>
@@ -475,10 +715,17 @@ gap:5px; z-index:80; transition:opacity .3s; pointer-events:none; }
 
     <!-- ROK -->
     <div class="kk-view" id="kkv-rok">
-      <div class="kk-yr-totals" id="kk-yr-totals"></div>
+      <div class="kk-yr-card" id="kk-yr-totals"></div>
       <div class="kk-sec"><span class="kk-sec-lbl">Přehled po měsících</span></div>
       <div class="kk-months" id="kk-months"></div>
-      <div class="version-bar">MůjOS v3.0 · Kakeibo v1.2</div>
+      <div class="ver-bar">MůjOS v4.0 · Kakeibo v1.2</div>
+    </div>
+
+    <!-- STATISTIKY -->
+    <div class="kk-view" id="kkv-statistiky">
+      <div class="st-wrap" id="st-content">
+        <div style="text-align:center;padding:48px 0;color:var(--text3);font-size:13px">Načítám…</div>
+      </div>
     </div>
 
     <!-- NASTAVENÍ -->
@@ -487,11 +734,11 @@ gap:5px; z-index:80; transition:opacity .3s; pointer-events:none; }
         <div class="kk-scard">
           <div class="kk-scard-head">
             <div class="kk-scard-title">Týdenní výdajový limit</div>
-            <div class="kk-scard-desc">Progress bar v přehledu ukazuje využití limitu.</div>
+            <div class="kk-scard-desc">Progress bar v přehledu ukazuje, kolik z limitu jsi využil/a.</div>
           </div>
           <div class="kk-scard-body">
             <label class="f-label">Limit výdajů / týden (Kč)</label>
-            <input class="f-input xl" id="budget-input" type="number" inputmode="numeric" placeholder="5 000" style="margin-bottom:10px">
+            <input class="f-input xl" id="budget-input" type="number" inputmode="numeric" placeholder="5 000" style="margin-bottom:12px">
             <button class="btn-primary" id="budget-save" style="margin:0;width:100%">Uložit limit</button>
           </div>
         </div>
@@ -514,80 +761,101 @@ gap:5px; z-index:80; transition:opacity .3s; pointer-events:none; }
             <button class="btn-secondary" id="kk-export-btn">📊 Exportovat do Excelu</button>
           </div>
         </div>
-        <div class="version-bar">MůjOS v3.0 · Kakeibo v1.2 · 2025</div>
+        <div class="ver-bar">MůjOS v4.0 · Kakeibo v1.2</div>
       </div>
     </div>
 
-  </div>
-</div>
+  </div><!-- /kk-scroll -->
+</div><!-- /mod-ucetnictvi -->
 
-<!-- INVESTICE -->
+<!-- ═══ INVESTICE ═══ -->
 <div class="module" id="mod-investice">
   <div class="mod-wrap">
     <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(232,213,163,.1)">💰</div>
+      <div class="mod-badge" style="background:rgba(255,207,92,.1)">💰</div>
       <div><div class="mod-title">Investice</div><div class="mod-sub">Sledování investičních objemů</div></div>
     </div>
     <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul připraven</div>
+      <div class="ph-title">Modul se připravuje</div>
       <div class="ph-text">Sem přijde kód investiční appky.<br>DB store <code>investice</code> je připraven.</div>
     </div>
-    <div class="version-bar">MůjOS v3.0</div>
+    <div class="ver-bar">MůjOS v4.0</div>
   </div>
 </div>
 
-<!-- AUTO -->
+<!-- ═══ AUTO ═══ -->
 <div class="module" id="mod-auto">
   <div class="mod-wrap">
     <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(136,184,232,.1)">🚗</div>
+      <div class="mod-badge" style="background:rgba(77,168,255,.1)">🚗</div>
       <div><div class="mod-title">Auto</div><div class="mod-sub">Tankování, náklady, STK</div></div>
     </div>
     <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul připraven</div>
-      <div class="ph-text">Evidence nákladů, spotřeba, servisní záznamy.</div>
+      <div class="ph-title">Modul se připravuje</div>
+      <div class="ph-text">Evidence nákladů na auto, spotřeba, servisní záznamy.</div>
     </div>
-    <div class="version-bar">MůjOS v3.0</div>
+    <div class="ver-bar">MůjOS v4.0</div>
   </div>
 </div>
 
-<!-- ELEKTŘINA -->
+<!-- ═══ ELEKTŘINA ═══ -->
 <div class="module" id="mod-elektrina">
   <div class="mod-wrap">
     <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(232,136,184,.1)">⚡</div>
+      <div class="mod-badge" style="background:rgba(167,139,250,.1)">⚡</div>
       <div><div class="mod-title">Elektřina</div><div class="mod-sub">Odečty, spotřeba, tarify</div></div>
     </div>
     <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul připraven</div>
-      <div class="ph-text">Odečty elektroměru a sledování spotřeby.</div>
+      <div class="ph-title">Modul se připravuje</div>
+      <div class="ph-text">Odečty elektroměru, sledování spotřeby a fakturace.</div>
     </div>
-    <div class="version-bar">MůjOS v3.0</div>
+    <div class="ver-bar">MůjOS v4.0</div>
   </div>
 </div>
 
-<!-- KONDICE -->
+<!-- ═══ KONDICE ═══ -->
 <div class="module" id="mod-kondice">
   <div class="mod-wrap">
     <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(184,136,232,.1)">🧠</div>
+      <div class="mod-badge" style="background:rgba(99,212,196,.1)">🧠</div>
       <div><div class="mod-title">Kondice</div><div class="mod-sub">Sledování psychické pohody</div></div>
     </div>
     <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul připraven</div>
+      <div class="ph-title">Modul se připravuje</div>
       <div class="ph-text">Denní záznamy nálady, kondice a trend v čase.</div>
     </div>
-    <div class="version-bar">MůjOS v3.0</div>
+    <div class="ver-bar">MůjOS v4.0</div>
   </div>
 </div>
 ```
 
-  </div>
-</div>
+  </div><!-- /content -->
 
-<!-- FAB — vždy v DOM, viditelnost řízena JS -->
+  <!-- BOTTOM NAV — George style -->
 
-<button id="kk-fab" class="hidden">＋</button>
+  <nav id="bottom-nav">
+    <button class="bnav-tab active" data-mod="dashboard">
+      <span class="bicon">🏠</span>Přehled
+    </button>
+    <button class="bnav-tab" data-mod="ucetnictvi">
+      <span class="bicon">🏦</span>Kakeibo
+    </button>
+    <button class="bnav-tab" data-mod="investice">
+      <span class="bicon">💰</span>Investice
+    </button>
+    <button class="bnav-tab" data-mod="auto">
+      <span class="bicon">🚗</span>Auto
+    </button>
+    <button class="bnav-tab" data-mod="kondice">
+      <span class="bicon">🧠</span>Kondice
+    </button>
+  </nav>
+
+</div><!-- /app -->
+
+<!-- FAB -->
+
+<button id="kk-fab" class="hidden"><span class="fab-plus">＋</span>Přidat záznam</button>
 
 <!-- MODAL: PŘIDAT ZÁZNAM -->
 
@@ -595,12 +863,10 @@ gap:5px; z-index:80; transition:opacity .3s; pointer-events:none; }
   <div class="modal-sheet">
     <div class="modal-handle"></div>
     <div class="modal-title">Nový záznam</div>
-    <!-- Hlavní typ -->
     <div class="f-type-grid" id="main-type-grid">
       <div class="f-type-btn t-expense active" data-mt="expense">💸 Výdaj</div>
       <div class="f-type-btn t-income" data-mt="income">💚 Příjem</div>
     </div>
-    <!-- Kategorie výdajů -->
     <div id="expense-cats">
       <div class="f-cat-grid">
         <div class="f-cat-btn c-need active" data-cat="need"><span>🏠</span>Potřeby</div>
@@ -609,7 +875,6 @@ gap:5px; z-index:80; transition:opacity .3s; pointer-events:none; }
         <div class="f-cat-btn c-unexp" data-cat="unexp"><span>⚡</span>Nečekané</div>
       </div>
     </div>
-    <!-- Typy příjmů -->
     <div id="income-types" style="display:none">
       <div class="f-type-grid" style="grid-template-columns:1fr 1fr 1fr">
         <div class="f-type-btn t-salary active" data-it="salary">💼 Výplata</div>
@@ -667,14 +932,17 @@ gap:5px; z-index:80; transition:opacity .3s; pointer-events:none; }
       <label class="f-label">Částka (Kč)</label>
       <input class="f-input xl" id="recur-amount" type="number" inputmode="numeric" placeholder="0">
     </div>
-    <div class="f-cat-grid" style="padding:10px 18px 0">
+    <div class="f-cat-grid" style="padding:12px 20px 0">
       <div class="f-cat-btn c-need active" data-rcat="need"><span>🏠</span>Potřeby</div>
       <div class="f-cat-btn c-want" data-rcat="want"><span>✨</span>Přání</div>
       <div class="f-cat-btn c-culture" data-rcat="culture"><span>📚</span>Kultura</div>
       <div class="f-cat-btn c-unexp" data-rcat="unexp"><span>⚡</span>Nečekané</div>
     </div>
     <button class="btn-primary" id="recur-save-btn">Uložit platbu</button>
-    <button class="btn-neutral" id="recur-cancel-btn" style="display:block;width:calc(100% - 36px);margin:7px 18px 0">Zrušit</button>
+    <button class="btn-neutral" id="recur-cancel-btn"
+      style="display:block;width:calc(100% - 40px);margin:8px 20px 0;padding:13px;border-radius:var(--r-md);border:1px solid var(--border);background:none;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer">
+      Zrušit
+    </button>
   </div>
 </div>
 
@@ -683,7 +951,7 @@ gap:5px; z-index:80; transition:opacity .3s; pointer-events:none; }
 
 <script>
 // ═══════════════════════════════════════════════════════
-//  MůjOS v3.0 + Kakeibo v1.2
+//  MůjOS v4.0 + Kakeibo v1.2
 // ═══════════════════════════════════════════════════════
 
 // ── INDEXED DB ────────────────────────────────────────
@@ -720,14 +988,12 @@ const closeModal=id=>document.getElementById(id).classList.remove('open');
 let toastT;
 function showToast(msg){
   const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('show'),2400);
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2400);
 }
-
-// ── DB STATUS ─────────────────────────────────────────
 function dbChip(ok,txt){
   const el=document.getElementById('db-chip');
-  el.classList.toggle('err',!ok); el.classList.remove('hidden');
+  el.classList.toggle('err',!ok);el.classList.remove('hidden');
   document.getElementById('db-txt').textContent=txt;
   setTimeout(()=>el.classList.add('hidden'),2800);
 }
@@ -737,26 +1003,27 @@ let curMod='dashboard';
 
 function navTo(mod){
   curMod=mod;
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.toggle('active',t.dataset.mod===mod));
+  document.querySelectorAll('.bnav-tab').forEach(t=>t.classList.toggle('active',t.dataset.mod===mod));
   document.querySelectorAll('.module').forEach(m=>m.classList.toggle('active',m.id==='mod-'+mod));
   updateFAB();
   if(mod==='dashboard') refreshDash();
-  if(mod==='ucetnictvi'){ kkRecs=null; kkRenderAll(); }
+  if(mod==='ucetnictvi'){kkRecs=null;kkRenderAll();}
 }
 
 function updateFAB(){
-  const show = curMod==='ucetnictvi' && kkView!=='nastaveni' && kkView!=='rok';
+  const show=curMod==='ucetnictvi'&&kkView!=='nastaveni'&&kkView!=='rok'&&kkView!=='statistiky';
   document.getElementById('kk-fab').classList.toggle('hidden',!show);
 }
 
-document.querySelectorAll('.nav-tab').forEach(t=>t.addEventListener('click',()=>navTo(t.dataset.mod)));
-document.querySelectorAll('.dash-card').forEach(c=>c.addEventListener('click',()=>navTo(c.dataset.mod)));
+document.querySelectorAll('.bnav-tab').forEach(t=>t.addEventListener('click',()=>navTo(t.dataset.mod)));
+document.querySelectorAll('.dash-tile').forEach(c=>c.addEventListener('click',()=>navTo(c.dataset.mod)));
 
 function initShell(){
   document.getElementById('date-chip').textContent=new Date().toLocaleDateString('cs-CZ',{day:'numeric',month:'long',year:'numeric'});
   const q=curQ();
-  document.getElementById('greeting').innerHTML=`${greet()} <em>—</em>`;
-  document.getElementById('dash-sub').textContent=`${q.label} · ${new Date().toLocaleDateString('cs-CZ',{weekday:'long'})}`;
+  document.getElementById('greet-sm').textContent=new Date().toLocaleDateString('cs-CZ',{weekday:'long'});
+  document.getElementById('greeting').textContent=greet();
+  document.getElementById('dash-period').textContent=q.label;
 }
 
 async function refreshDash(){
@@ -772,17 +1039,17 @@ async function refreshDash(){
     const n=inv.filter(r=>r._ts&&r._ts.startsWith(q.year+'-')).length;
     document.getElementById('stat-investice').textContent=n?`${n} záznamů`:'—';
   }catch(e){}
-  ['auto','elektr','kondice'].forEach(k=>{ try{document.getElementById('stat-'+k).textContent='—';}catch(e){} });
+  ['auto','elektr','kondice'].forEach(k=>{try{document.getElementById('stat-'+k).textContent='—';}catch(e){}});
   await refreshActList();
 }
 
 async function refreshActList(){
   const all=await dbGetAll('activity_log');
-  const sorted=all.sort((a,b)=>b._ts.localeCompare(a._ts)).slice(0,8);
-  if(!sorted.length) return;
-  const colors={ucetnictvi:'var(--mod-ucet)',investice:'var(--mod-invest)',auto:'var(--mod-auto)',elektrina:'var(--mod-elektr)',kondice:'var(--mod-kondice)'};
+  const sorted=all.sort((a,b)=>b._ts.localeCompare(a._ts)).slice(0,6);
+  if(!sorted.length)return;
+  const colors={ucetnictvi:'var(--green)',investice:'var(--amber)',auto:'var(--accent)',elektrina:'var(--purple)',kondice:'var(--passive)'};
   document.getElementById('act-list').innerHTML=sorted.map(a=>`
-    <div class="act-item">
+    <div class="act-tile">
       <div class="act-dot" style="background:${colors[a.modul]||'var(--text3)'}"></div>
       <div class="act-info"><div class="act-title">${a.title}</div>${a.sub?`<div class="act-sub">${a.sub}</div>`:''}</div>
       <div class="act-time">${relTime(a._ts)}</div>
@@ -811,10 +1078,9 @@ const CATS={
 const INC_TYPES=['salary','bonus','passive'];
 const EXP_CATS=['need','want','culture','unexp'];
 
-let kkRecs=null, kkView='tyden', kkFilter='vse', kkDate=new Date(), kkDetailId=null, kkRCat='need';
-let fMainType='expense', fIncType='salary', fExpCat='need';
+let kkRecs=null,kkView='tyden',kkFilter='vse',kkDate=new Date(),kkDetailId=null,kkRCat='need';
+let fMainType='expense',fIncType='salary',fExpCat='need';
 
-// Date helpers
 const kkWeekStart=d=>{const dt=new Date(d),day=dt.getDay()||7;dt.setDate(dt.getDate()-day+1);dt.setHours(0,0,0,0);return dt;};
 const kkWeekEnd=d=>{const we=new Date(kkWeekStart(d));we.setDate(we.getDate()+6);we.setHours(23,59,59,999);return we;};
 const kkWkLbl=d=>{const ws=kkWeekStart(d),we=kkWeekEnd(d);return`${ws.getDate()}.${ws.getMonth()+1}. – ${we.getDate()}.${we.getMonth()+1}.`;};
@@ -825,10 +1091,9 @@ const inYear=(s,r)=>new Date(s).getFullYear()===r.getFullYear();
 const getBudget=()=>parseInt(localStorage.getItem('mojos_budget')||'0');
 const setBudget=v=>localStorage.setItem('mojos_budget',v);
 
-// Recurring — auto-apply on first open each month
 async function processRecurring(){
   const key=`mojos_recur_${new Date().getFullYear()}_${new Date().getMonth()}`;
-  if(localStorage.getItem(key)) return;
+  if(localStorage.getItem(key))return;
   const recurs=await dbGetAll('recurring');
   if(!recurs.length){localStorage.setItem(key,'1');return;}
   const today=new Date().toISOString().slice(0,10);
@@ -840,31 +1105,31 @@ async function processRecurring(){
   showToast(`${recurs.length} pravidelných plateb přidáno ✓`);
 }
 
-// Period nav
 function kkNav(dir){
-  if(kkView==='tyden') kkDate=new Date(kkDate.getTime()+dir*7*86400000);
-  else if(kkView==='mesic') kkDate=new Date(kkDate.getFullYear(),kkDate.getMonth()+dir,1);
-  else if(kkView==='rok')   kkDate=new Date(kkDate.getFullYear()+dir,0,1);
+  if(kkView==='tyden')kkDate=new Date(kkDate.getTime()+dir*7*86400000);
+  else if(kkView==='mesic')kkDate=new Date(kkDate.getFullYear(),kkDate.getMonth()+dir,1);
+  else if(kkView==='rok')kkDate=new Date(kkDate.getFullYear()+dir,0,1);
   kkRenderAll();
 }
 function kkUpdatePeriod(){
   const el=document.getElementById('kk-period');
-  if(kkView==='tyden')  el.textContent=kkWkLbl(kkDate);
-  else if(kkView==='mesic') el.textContent=kkMoLbl(kkDate);
-  else if(kkView==='rok')   el.textContent=kkDate.getFullYear().toString();
-  else el.textContent='Nastavení';
-  const nav=kkView!=='nastaveni';
+  if(kkView==='tyden')el.textContent=kkWkLbl(kkDate);
+  else if(kkView==='mesic')el.textContent=kkMoLbl(kkDate);
+  else if(kkView==='rok')el.textContent=kkDate.getFullYear().toString();
+  else el.textContent='—';
+  const nav=kkView!=='nastaveni'&&kkView!=='statistiky';
   document.getElementById('kk-prev').style.visibility=nav?'visible':'hidden';
   document.getElementById('kk-next').style.visibility=nav?'visible':'hidden';
 }
 
 async function kkRenderAll(){
-  if(!kkRecs) kkRecs=await dbGetAll('ucetnictvi');
-  kkUpdatePeriod(); updateFAB();
-  if(kkView==='tyden')      kkRenderWeek();
-  else if(kkView==='mesic') kkRenderMonth();
-  else if(kkView==='rok')   kkRenderYear();
-  else                      kkRenderSettings();
+  if(!kkRecs)kkRecs=await dbGetAll('ucetnictvi');
+  kkUpdatePeriod();updateFAB();
+  if(kkView==='tyden')kkRenderWeek();
+  else if(kkView==='mesic')kkRenderMonth();
+  else if(kkView==='rok')kkRenderYear();
+  else if(kkView==='statistiky')kkRenderStats();
+  else kkRenderSettings();
 }
 
 function kkRenderWeek(){
@@ -880,19 +1145,19 @@ function kkRenderMonth(){
   kkRenderTxByWeek('kk-txs-month',recs);
 }
 function kkRenderYear(){
-  const recs=kkRecs.filter(r=>inYear(r.date,kkDate)), yr=kkDate.getFullYear();
+  const recs=kkRecs.filter(r=>inYear(r.date,kkDate)),yr=kkDate.getFullYear();
   const inc=recs.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
   const exp=recs.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
   const saved=inc-exp;
   document.getElementById('kk-yr-totals').innerHTML=
     `<div class="kk-yt-row"><span class="kk-yt-l">Příjmy ${yr}</span><span class="kk-yt-v" style="color:var(--green)">${fmt(inc)}</span></div>
      <div class="kk-yt-row"><span class="kk-yt-l">Výdaje ${yr}</span><span class="kk-yt-v" style="color:var(--red)">${fmt(exp)}</span></div>
-     <div class="kk-yt-row"><span class="kk-yt-l">Uspořeno ${yr}</span><span class="kk-yt-v" style="color:${saved>=0?'var(--green)':'var(--unexp)'}">${fmt(saved)}</span></div>`;
+     <div class="kk-yt-row"><span class="kk-yt-l">Uspořeno ${yr}</span><span class="kk-yt-v" style="color:${saved>=0?'var(--green)':'var(--red)'}">${fmt(saved)}</span></div>`;
   const months=['Leden','Únor','Březen','Duben','Květen','Červen','Červenec','Srpen','Září','Říjen','Listopad','Prosinec'];
   const bc={need:'var(--need)',want:'var(--want)',culture:'var(--culture)',unexp:'var(--unexp)'};
   document.getElementById('kk-months').innerHTML=months.map((n,mi)=>{
     const mr=recs.filter(r=>new Date(r.date).getMonth()===mi);
-    if(!mr.length) return`<div class="kk-month"><div class="kk-month-top"><span class="kk-month-name">${n}</span><span class="kk-month-bal" style="color:var(--text3)">—</span></div></div>`;
+    if(!mr.length)return`<div class="kk-month"><div class="kk-month-top"><span class="kk-month-name">${n}</span><span class="kk-month-bal" style="color:var(--text3)">—</span></div></div>`;
     const mi2=mr.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
     const me=mr.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
     const bal=mi2-me;
@@ -900,6 +1165,195 @@ function kkRenderYear(){
     return`<div class="kk-month" data-mi="${mi}"><div class="kk-month-top"><span class="kk-month-name">${n}</span><span class="kk-month-bal ${bal>=0?'pos':'neg'}">${fmt(bal)}</span></div><div class="kk-month-bars">${bars}</div></div>`;
   }).join('');
   document.querySelectorAll('.kk-month[data-mi]').forEach(el=>el.addEventListener('click',()=>{kkDate=new Date(yr,parseInt(el.dataset.mi),1);kkSwitchView('mesic');}));
+}
+
+function kkRenderSummary(elId,recs,word,showBudget){
+  const inc=recs.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+  const exp=recs.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+  const saved=inc-exp;
+  const budget=showBudget?getBudget():0;
+  const pct=budget>0?Math.min(Math.round(exp/budget*100),100):0;
+  const cls=pct<70?'ok':pct<90?'warn':'over';
+  const balCls=saved>0?'pos':saved<0?'neg':'zero';
+  document.getElementById(elId).innerHTML=`
+    <div class="kk-hero-label">Bilance ${word}</div>
+    <div class="kk-hero-bal ${balCls}">${fmt(saved)}</div>
+    <div class="kk-hero-sub">${saved>=0?'jsi v plusu 👍':'pozor, výdaje převyšují příjmy'}</div>
+    <div class="kk-hero-row">
+      <div class="kk-hero-pill">
+        <div class="kk-hero-pill-lbl">Příjmy</div>
+        <div class="kk-hero-pill-val inc">${fmt(inc)}</div>
+      </div>
+      <div class="kk-hero-pill">
+        <div class="kk-hero-pill-lbl">Výdaje</div>
+        <div class="kk-hero-pill-val exp">${fmt(exp)}</div>
+      </div>
+    </div>
+    ${budget>0?`<div class="kk-prog-wrap"><div class="kk-prog-labels"><span>Výdaje z limitu</span><span>${pct}% z ${fmt(budget)}</span></div><div class="kk-prog-track"><div class="kk-prog-bar ${cls}" style="width:${pct}%"></div></div></div>`:''}`;
+}
+
+function kkRenderCats(elId,recs){
+  const catBg={need:'var(--need-bg)',want:'var(--want-bg)',culture:'var(--cult-bg)',unexp:'var(--unexp-bg)'};
+  document.getElementById(elId).innerHTML=EXP_CATS.map(cat=>{
+    const cr=recs.filter(r=>r.category===cat),sum=cr.reduce((s,r)=>s+r.amount,0),c=CATS[cat];
+    return`<div class="kk-cat">
+      <div class="kk-cat-top">
+        <div class="kk-cat-icon">${c.icon}</div>
+        <div class="kk-cat-badge ${cat}">${cr.length} pol.</div>
+      </div>
+      <div class="kk-cat-name">${c.label}</div>
+      <div class="kk-cat-amt ${cat}">${fmt(sum)}</div>
+    </div>`;
+  }).join('');
+}
+
+function kkRenderTxFlat(elId,recs){
+  let f=[...recs];
+  if(kkFilter==='vydaje')f=f.filter(r=>EXP_CATS.includes(r.category));
+  if(kkFilter==='prijmy')f=f.filter(r=>INC_TYPES.includes(r.category));
+  f.sort((a,b)=>b.date.localeCompare(a.date));
+  const el=document.getElementById(elId);
+  if(!f.length){el.innerHTML=`<div class="kk-empty"><div class="kk-empty-icon">📝</div><div class="kk-empty-title">Žádné záznamy</div><div class="kk-empty-sub">Klepni na bílé tlačítko<br>a přidej první záznam.</div></div>`;return;}
+  el.innerHTML=f.map(r=>kkTxHTML(r)).join('');
+  el.querySelectorAll('.kk-tx').forEach(i=>i.addEventListener('click',()=>kkOpenDetail(parseInt(i.dataset.id))));
+}
+
+function kkRenderTxByWeek(elId,recs){
+  const el=document.getElementById(elId);
+  if(!recs.length){el.innerHTML=`<div class="kk-empty"><div class="kk-empty-icon">📝</div><div class="kk-empty-title">Žádné záznamy</div></div>`;return;}
+  const sorted=[...recs].sort((a,b)=>b.date.localeCompare(a.date));
+  const weeks={};
+  sorted.forEach(r=>{const ws=kkWeekStart(new Date(r.date)).toISOString().slice(0,10);if(!weeks[ws])weeks[ws]=[];weeks[ws].push(r);});
+  let html='';
+  Object.entries(weeks).sort((a,b)=>b[0].localeCompare(a[0])).forEach(([ws,wr])=>{
+    const sum=wr.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+    html+=`<div class="kk-wk-div">${kkWkLbl(new Date(ws))} · výdaje ${fmt(sum)}</div>`;
+    wr.forEach(r=>html+=kkTxHTML(r));
+  });
+  el.innerHTML=html;
+  el.querySelectorAll('.kk-tx').forEach(i=>i.addEventListener('click',()=>kkOpenDetail(parseInt(i.dataset.id))));
+}
+
+function kkTxHTML(r){
+  const isInc=INC_TYPES.includes(r.category),c=CATS[r.category]||CATS.need;
+  return`<div class="kk-tx" data-id="${r.id}">
+    <div class="kk-tx-icon ${c.dot}">${c.icon}</div>
+    <div class="kk-tx-info">
+      <div class="kk-tx-desc">${r.description||c.label}</div>
+      <div class="kk-tx-meta">${c.label}${r.note?' · '+r.note:''}</div>
+    </div>
+    <div class="kk-tx-right">
+      <div class="kk-tx-amt ${isInc?'inc':'exp'}">${isInc?'+':'−'}${fmt(r.amount)}</div>
+      <div class="kk-tx-date">${fmtD(r.date)}</div>
+    </div>
+  </div>`;
+}
+
+// Stats
+function kkRenderStats(){
+  const recs=kkRecs||[];
+  const now=new Date();
+  const expRecs=recs.filter(r=>EXP_CATS.includes(r.category));
+  const incRecs=recs.filter(r=>INC_TYPES.includes(r.category));
+  const weeks12=[];
+  for(let i=0;i<12;i++){
+    const ref=new Date(now.getTime()-i*7*86400000);
+    const ws=kkWeekStart(ref),we=kkWeekEnd(ref);
+    weeks12.push(expRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;}).reduce((a,r)=>a+r.amount,0));
+  }
+  const nonZero=weeks12.filter(v=>v>0);
+  const avgWeek=nonZero.length?Math.round(nonZero.reduce((a,v)=>a+v,0)/nonZero.length):0;
+  let wPlus=0,wMinus=0;
+  for(let i=0;i<12;i++){
+    const ref=new Date(now.getTime()-i*7*86400000);
+    const ws=kkWeekStart(ref),we=kkWeekEnd(ref);
+    const exp=expRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;}).reduce((a,r)=>a+r.amount,0);
+    const inc=incRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;}).reduce((a,r)=>a+r.amount,0);
+    if(inc>0||exp>0){if(inc>=exp)wPlus++;else wMinus++;}
+  }
+  const catTotals=EXP_CATS.map(c=>({cat:c,sum:expRecs.filter(r=>r.category===c).reduce((a,r)=>a+r.amount,0)}));
+  catTotals.sort((a,b)=>b.sum-a.sum);
+  const totalExp=expRecs.reduce((a,r)=>a+r.amount,0);
+  const totalInc=incRecs.reduce((a,r)=>a+r.amount,0);
+  const top5=[...expRecs].sort((a,b)=>b.amount-a.amount).slice(0,5);
+  const MN=['Led','Úno','Bře','Dub','Kvě','Čvn','Čvc','Srp','Zář','Říj','Lis','Pro'];
+  const mom6=[];
+  for(let i=5;i>=0;i--){
+    const d=new Date(now.getFullYear(),now.getMonth()-i,1);
+    mom6.push({name:MN[d.getMonth()],exp:expRecs.filter(r=>inMonth(r.date,d)).reduce((a,r)=>a+r.amount,0)});
+  }
+  const ratio=totalInc>0?Math.round(totalExp/totalInc*100):0;
+  const R=33,circ=2*Math.PI*R,dashOff=circ-circ*Math.min(ratio,100)/100;
+  const catColor={need:'var(--need)',want:'var(--want)',culture:'var(--culture)',unexp:'var(--unexp)'};
+  const catBg={need:'var(--need-bg)',want:'var(--want-bg)',culture:'var(--cult-bg)',unexp:'var(--unexp-bg)'};
+
+  document.getElementById('st-content').innerHTML=`
+    <div class="st-card">
+      <div class="st-card-title">Průměr za týden (posl. 12 týdnů)</div>
+      <div class="st-big"><div class="st-big-val" style="color:var(--red)">${fmt(avgWeek)}</div><div class="st-big-sub">průměrné výdaje za týden</div></div>
+      <div class="st-2col">
+        <div class="st-half"><div class="st-half-lbl">✅ Týdny v plusu</div><div class="st-half-val" style="color:var(--green)">${wPlus}</div></div>
+        <div class="st-half"><div class="st-half-lbl">❌ Týdny v minusu</div><div class="st-half-val" style="color:var(--red)">${wMinus}</div></div>
+      </div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">Výdaje podle kategorie (celkem)</div>
+      <div class="st-bars">
+        ${catTotals.map(({cat,sum})=>{
+          const pct=totalExp>0?Math.round(sum/totalExp*100):0,c=CATS[cat];
+          return`<div class="st-bar-row">
+            <div class="st-bar-top"><span class="st-bar-lbl">${c.icon} ${c.label}</span>
+              <span class="st-bar-val" style="color:${catColor[cat]}">${fmt(sum)} <span style="color:var(--text3);font-weight:400">${pct}%</span></span></div>
+            <div class="st-bar-track"><div class="st-bar-fill" style="width:${pct}%;background:${catColor[cat]}"></div></div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">Poměr příjmy vs. výdaje (celkem)</div>
+      <div class="st-ratio-wrap">
+        <div class="st-donut">
+          <svg viewBox="0 0 76 76"><circle class="st-donut-track" cx="38" cy="38" r="${R}"/>
+          <circle class="st-donut-fill" cx="38" cy="38" r="${R}" stroke="${ratio<=100?'var(--red)':'var(--unexp)'}" stroke-dasharray="${circ}" stroke-dashoffset="${dashOff}"/></svg>
+          <div class="st-donut-lbl">${ratio}%</div>
+        </div>
+        <div class="st-ratio-legend">
+          <div class="st-ratio-item"><div class="st-ratio-dot" style="background:var(--green)"></div>Příjmy ${fmt(totalInc)}</div>
+          <div class="st-ratio-item"><div class="st-ratio-dot" style="background:var(--red)"></div>Výdaje ${fmt(totalExp)}</div>
+          <div class="st-ratio-item"><div class="st-ratio-dot" style="background:var(--accent)"></div><span style="color:${totalInc-totalExp>=0?'var(--green)':'var(--red)'}">Bilance ${fmt(totalInc-totalExp)}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">Výdaje měsíc/měsíc</div>
+      <div class="st-mom-grid">
+        ${mom6.map((m,i)=>{
+          const prev=i>0?mom6[i-1].exp:null;
+          const delta=prev!==null&&prev>0?Math.round((m.exp-prev)/prev*100):null;
+          const cls=delta===null?'flat':delta>0?'up':'down';
+          return`<div class="st-mom-cell"><div class="st-mom-name">${m.name}</div>
+            <div class="st-mom-exp">${m.exp>0?fmt(m.exp):'—'}</div>
+            ${delta!==null?`<div class="st-mom-delta ${cls}">${delta>0?'+':''}${delta}%</div>`:''}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">Top 5 nejdražších položek</div>
+      <div class="st-top5">
+        ${top5.length===0?'<div style="color:var(--text3);font-size:12px;padding:4px 0">Žádné záznamy</div>':
+          top5.map((r,i)=>{
+            const c=CATS[r.category]||CATS.need;
+            return`<div class="st-top5-item">
+              <div class="st-top5-rank">${i+1}</div>
+              <div class="st-top5-icon" style="background:${catBg[r.category]||'rgba(255,255,255,.05)'}">${c.icon}</div>
+              <div class="st-top5-info"><div class="st-top5-name">${r.description||c.label}</div><div class="st-top5-cat">${c.label} · ${fmtD(r.date)}</div></div>
+              <div class="st-top5-amt">${fmt(r.amount)}</div>
+            </div>`;
+          }).join('')}
+      </div>
+    </div>
+    <div class="ver-bar">MůjOS v4.0 · Kakeibo v1.2</div>`;
 }
 
 function kkRenderSettings(){
@@ -919,65 +1373,8 @@ async function kkRenderRecurList(){
       <button class="recur-del" data-rid="${r.id}">×</button>
     </div>`).join('');
   el.querySelectorAll('.recur-del').forEach(b=>b.addEventListener('click',async()=>{
-    await dbDel('recurring',parseInt(b.dataset.rid));
-    kkRenderRecurList(); showToast('Odebráno');
+    await dbDel('recurring',parseInt(b.dataset.rid));kkRenderRecurList();showToast('Odebráno');
   }));
-}
-
-function kkRenderSummary(elId,recs,word,showBudget){
-  const inc=recs.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
-  const exp=recs.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
-  const saved=inc-exp;
-  const budget=showBudget?getBudget():0;
-  const pct=budget>0?Math.min(Math.round(exp/budget*100),100):0;
-  const cls=pct<70?'ok':pct<90?'warn':'over';
-  document.getElementById(elId).innerHTML=
-    `<div class="kk-row"><span class="kk-rl">Příjmy</span><span class="kk-rv inc">${fmt(inc)}</span></div>
-     <div class="kk-row"><span class="kk-rl">Výdaje</span><span class="kk-rv exp">${fmt(exp)}</span></div>
-     <div class="kk-row" style="border-bottom:none"><span class="kk-rl">Bilance ${word}</span><span class="kk-rv ${saved>=0?'pos':'neg'}">${fmt(saved)}</span></div>
-     ${budget>0?`<div class="kk-prog-wrap"><div class="kk-prog-labels"><span>Výdaje z limitu</span><span>${pct} % z ${fmt(budget)}</span></div><div class="kk-prog-track"><div class="kk-prog-bar ${cls}" style="width:${pct}%"></div></div></div>`:''}`;
-}
-function kkRenderCats(elId,recs){
-  document.getElementById(elId).innerHTML=EXP_CATS.map(cat=>{
-    const cr=recs.filter(r=>r.category===cat),sum=cr.reduce((s,r)=>s+r.amount,0),c=CATS[cat];
-    return`<div class="kk-cat ${cat}"><div class="kk-cat-icon">${c.icon}</div><div class="kk-cat-name">${c.label}</div><div class="kk-cat-amt ${cat}">${fmt(sum)}</div><div class="kk-cat-cnt">${cr.length} pol.</div></div>`;
-  }).join('');
-}
-function kkRenderTxFlat(elId,recs){
-  let f=[...recs];
-  if(kkFilter==='vydaje') f=f.filter(r=>EXP_CATS.includes(r.category));
-  if(kkFilter==='prijmy') f=f.filter(r=>INC_TYPES.includes(r.category));
-  f.sort((a,b)=>b.date.localeCompare(a.date));
-  const el=document.getElementById(elId);
-  if(!f.length){el.innerHTML=`<div class="empty"><div class="empty-i">📝</div><div class="empty-t">Žádné záznamy</div><div class="empty-s">Přidej záznam tlačítkem ＋</div></div>`;return;}
-  el.innerHTML=f.map(r=>kkTxHTML(r)).join('');
-  el.querySelectorAll('.kk-tx').forEach(i=>i.addEventListener('click',()=>kkOpenDetail(parseInt(i.dataset.id))));
-}
-function kkRenderTxByWeek(elId,recs){
-  const el=document.getElementById(elId);
-  if(!recs.length){el.innerHTML=`<div class="empty"><div class="empty-i">📝</div><div class="empty-t">Žádné záznamy</div></div>`;return;}
-  const sorted=[...recs].sort((a,b)=>b.date.localeCompare(a.date));
-  const weeks={};
-  sorted.forEach(r=>{const ws=kkWeekStart(new Date(r.date)).toISOString().slice(0,10);if(!weeks[ws])weeks[ws]=[];weeks[ws].push(r);});
-  let html='';
-  Object.entries(weeks).sort((a,b)=>b[0].localeCompare(a[0])).forEach(([ws,wr])=>{
-    const sum=wr.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
-    html+=`<div class="kk-wk-div">${kkWkLbl(new Date(ws))} · výdaje ${fmt(sum)}</div>`;
-    wr.forEach(r=>html+=kkTxHTML(r));
-  });
-  el.innerHTML=html;
-  el.querySelectorAll('.kk-tx').forEach(i=>i.addEventListener('click',()=>kkOpenDetail(parseInt(i.dataset.id))));
-}
-function kkTxHTML(r){
-  const isInc=INC_TYPES.includes(r.category),c=CATS[r.category]||CATS.need;
-  return`<div class="kk-tx" data-id="${r.id}">
-    <div class="kk-tx-dot ${c.dot}"></div>
-    <div class="kk-tx-info">
-      <div class="kk-tx-desc">${r.description||c.label}</div>
-      <div class="kk-tx-meta">${c.label}${r.note?' · '+r.note:''} · ${fmtD(r.date)}</div>
-    </div>
-    <div class="kk-tx-amt ${isInc?'inc':'exp'}">${isInc?'+':'−'}${fmt(r.amount)}</div>
-  </div>`;
 }
 
 // View switching
@@ -991,20 +1388,17 @@ document.querySelectorAll('.kk-tab').forEach(t=>t.addEventListener('click',()=>k
 document.getElementById('kk-prev').addEventListener('click',()=>kkNav(-1));
 document.getElementById('kk-next').addEventListener('click',()=>kkNav(1));
 
-// Filter
 document.getElementById('kk-chips').addEventListener('click',e=>{
   const c=e.target.closest('.kk-chip');if(!c)return;
   kkFilter=c.dataset.f;
   document.querySelectorAll('.kk-chip').forEach(x=>x.classList.toggle('active',x.dataset.f===kkFilter));
-  if(kkRecs) kkRenderTxFlat('kk-txs-week',kkRecs.filter(r=>inWeek(r.date,kkDate)));
+  if(kkRecs)kkRenderTxFlat('kk-txs-week',kkRecs.filter(r=>inWeek(r.date,kkDate)));
 });
 
-// FAB — click listener
 document.getElementById('kk-fab').addEventListener('click',openAddModal);
 
-// ── MODAL ADD ─────────────────────────────────────────
 function openAddModal(){
-  fMainType='expense'; fIncType='salary'; fExpCat='need';
+  fMainType='expense';fIncType='salary';fExpCat='need';
   document.getElementById('f-amount').value='';
   document.getElementById('f-desc').value='';
   document.getElementById('f-note').value='';
@@ -1038,16 +1432,12 @@ document.getElementById('save-btn').addEventListener('click',async()=>{
     title:rec.description||CATS[cat]?.label||'Záznam',
     sub:`${fMainType==='income'?'+':'−'}${fmt(amount)}`,
     _ts:new Date().toISOString()});
-  kkRecs=null;
-  closeModal('modal-add');
-  kkRenderAll();
-  showToast('Uloženo ✓');
+  kkRecs=null;closeModal('modal-add');kkRenderAll();showToast('Uloženo ✓');
 });
 
-// ── MODAL DETAIL ──────────────────────────────────────
 function kkOpenDetail(id){
   const r=kkRecs.find(x=>x.id===id);if(!r)return;
-  const c=CATS[r.category]||CATS.need, isInc=INC_TYPES.includes(r.category);
+  const c=CATS[r.category]||CATS.need,isInc=INC_TYPES.includes(r.category);
   document.getElementById('detail-title').textContent=`${c.icon} ${r.description||c.label}`;
   document.getElementById('detail-body').innerHTML=
     `<b>Částka:</b> ${fmt(r.amount)}<br>
@@ -1062,10 +1452,9 @@ document.getElementById('modal-detail').addEventListener('click',e=>{if(e.target
 document.getElementById('btn-delete').addEventListener('click',async()=>{
   if(!kkDetailId)return;
   await dbDel('ucetnictvi',kkDetailId);
-  kkRecs=null; closeModal('modal-detail'); kkRenderAll(); showToast('Smazáno');
+  kkRecs=null;closeModal('modal-detail');kkRenderAll();showToast('Smazáno');
 });
 
-// ── MODAL RECURRING ───────────────────────────────────
 document.getElementById('recur-add-btn').addEventListener('click',()=>{
   kkRCat='need';
   document.getElementById('recur-name').value='';
@@ -1084,30 +1473,26 @@ document.getElementById('recur-save-btn').addEventListener('click',async()=>{
   const amount=parseFloat(document.getElementById('recur-amount').value);
   if(!name||!amount||amount<=0){showToast('Vyplň název a částku');return;}
   await dbAdd('recurring',{name,amount,category:kkRCat});
-  closeModal('modal-recur'); kkRenderRecurList(); showToast('Platba přidána ✓');
+  closeModal('modal-recur');kkRenderRecurList();showToast('Platba přidána ✓');
 });
 
-// ── BUDGET & EXPORT ───────────────────────────────────
 document.getElementById('budget-save').addEventListener('click',()=>{
   const v=parseInt(document.getElementById('budget-input').value);
-  setBudget(isNaN(v)?0:v); showToast('Limit uložen ✓');
+  setBudget(isNaN(v)?0:v);showToast('Limit uložen ✓');
 });
 document.getElementById('kk-export-btn').addEventListener('click',async()=>{
   const recs=await dbGetAll('ucetnictvi');
-  await exportXLSX({'Kakeibo':recs},'Kakeibo'); showToast('Excel se stahuje…');
+  await exportXLSX({'Kakeibo':recs},'Kakeibo');showToast('Excel se stahuje…');
 });
 
-// ── INIT ─────────────────────────────────────────────
 async function init(){
   initShell();
   try{
-    db=await openDB();
-    dbChip(true,'DB OK');
+    db=await openDB();dbChip(true,'DB OK');
     await processRecurring();
     await refreshDash();
   }catch(e){
-    dbChip(false,'Chyba DB');
-    console.error(e);
+    dbChip(false,'Chyba DB');console.error(e);
   }
 }
 
