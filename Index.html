@@ -8,458 +8,353 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MůjOS">
 <title>MůjOS</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0e0f11;
-    --surface: #16181c;
-    --surface2: #1e2128;
-    --border: #2a2d35;
-    --text: #f0f0ee;
-    --muted: #7a7d87;
-    --accent: #e8d5a3;
-    --accent2: #a3c4e8;
+/* ═══════════════════════════════════════════
+   MOJOS — GLOBAL SHELL
+═══════════════════════════════════════════ */
+:root {
+  /* Shell — dark theme */
+  --bg:       #0e0f11;
+  --surface:  #16181c;
+  --surface2: #1e2128;
+  --border:   #2a2d35;
+  --text:     #f0f0ee;
+  --muted:    #7a7d87;
 
-```
---mod-invest: #e8d5a3;
---mod-ucet:   #a3e8c4;
---mod-auto:   #a3c4e8;
---mod-elektr: #e8a3c4;
---mod-kondice:#c4a3e8;
+/* Module accent colors */
+–mod-invest:  #e8d5a3;
+–mod-ucet:    #a3e8c4;
+–mod-auto:    #a3c4e8;
+–mod-elektr:  #e8a3c4;
+–mod-kondice: #c4a3e8;
 
---safe-top: env(safe-area-inset-top, 0px);
---safe-bot: env(safe-area-inset-bottom, 0px);
-```
+/* Kakeibo category colors */
+–need:        #5c7a5c;
+–want:        #c4703a;
+–culture:     #4a6a8a;
+–unexpected:  #8a4a6a;
+–income-clr:  #3a7a3a;
+–need-bg:     rgba(92,122,92,.15);
+–want-bg:     rgba(196,112,58,.15);
+–culture-bg:  rgba(74,106,138,.15);
+–unexp-bg:    rgba(138,74,106,.15);
+–income-bg:   rgba(58,122,58,.15);
 
+–safe-top: env(safe-area-inset-top, 0px);
+–safe-bot: env(safe-area-inset-bottom, 0px);
 }
 
 - { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; width: 100%; background: var(–bg); color: var(–text);
+  font-family: ‘DM Sans’, sans-serif; font-size: 15px; overscroll-behavior: none; }
 
-html, body {
-height: 100%; width: 100%;
-background: var(–bg);
-color: var(–text);
-font-family: ‘DM Sans’, sans-serif;
-font-size: 15px;
-overscroll-behavior: none;
-}
+/* ── SHELL LAYOUT ── */
+#app { display: flex; flex-direction: column; height: 100dvh; padding-top: var(–safe-top); }
 
-/* ── LAYOUT ── */
-#app {
-display: flex;
-flex-direction: column;
-height: 100dvh;
-padding-top: var(–safe-top);
-}
-
-/* ── HEADER ── */
-#header {
-display: flex;
-align-items: center;
-justify-content: space-between;
+/* ── SHELL HEADER ── */
+#shell-header {
+display: flex; align-items: center; justify-content: space-between;
 padding: 14px 20px 10px;
 border-bottom: 1px solid var(–border);
 flex-shrink: 0;
 }
-#header .logo {
-font-family: ‘DM Serif Display’, serif;
-font-size: 22px;
-letter-spacing: -0.5px;
-color: var(–accent);
-}
-#header .logo span { font-style: italic; color: var(–muted); }
-#header .date-chip {
-font-size: 12px;
-color: var(–muted);
-background: var(–surface2);
-padding: 4px 10px;
-border-radius: 20px;
-border: 1px solid var(–border);
-}
+#shell-header .logo { font-family: ‘DM Serif Display’, serif; font-size: 22px;
+letter-spacing: -0.5px; color: #e8d5a3; }
+#shell-header .logo span { font-style: italic; color: var(–muted); }
+#shell-header .date-chip { font-size: 12px; color: var(–muted); background: var(–surface2);
+padding: 4px 10px; border-radius: 20px; border: 1px solid var(–border); }
 
-/* ── NAV TABS ── */
-#nav {
-display: flex;
-overflow-x: auto;
-gap: 6px;
-padding: 10px 16px;
-border-bottom: 1px solid var(–border);
-flex-shrink: 0;
-scrollbar-width: none;
-}
+/* ── SHELL NAV ── */
+#nav { display: flex; overflow-x: auto; gap: 6px; padding: 10px 16px;
+border-bottom: 1px solid var(–border); flex-shrink: 0; scrollbar-width: none; }
 #nav::-webkit-scrollbar { display: none; }
-.nav-tab {
-flex-shrink: 0;
-display: flex;
-align-items: center;
-gap: 6px;
-padding: 7px 14px;
-border-radius: 20px;
-border: 1px solid var(–border);
-background: var(–surface);
-color: var(–muted);
-font-size: 13px;
-font-weight: 500;
-cursor: pointer;
-transition: all .2s;
-user-select: none;
-}
-.nav-tab .dot {
-width: 7px; height: 7px;
-border-radius: 50%;
-background: currentColor;
-opacity: .5;
-}
-.nav-tab.active {
-color: var(–bg);
-border-color: transparent;
-}
+.nav-tab { flex-shrink: 0; display: flex; align-items: center; gap: 6px;
+padding: 7px 14px; border-radius: 20px; border: 1px solid var(–border);
+background: var(–surface); color: var(–muted); font-size: 13px; font-weight: 500;
+cursor: pointer; transition: all .2s; user-select: none; }
+.nav-tab .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .5; }
+.nav-tab.active { color: var(–bg); border-color: transparent; }
 .nav-tab.active .dot { opacity: 1; }
-
 .nav-tab[data-mod=“dashboard”].active { background: var(–text); }
-.nav-tab[data-mod=“investice”].active  { background: var(–mod-invest); }
 .nav-tab[data-mod=“ucetnictvi”].active { background: var(–mod-ucet); }
+.nav-tab[data-mod=“investice”].active  { background: var(–mod-invest); }
 .nav-tab[data-mod=“auto”].active       { background: var(–mod-auto); }
 .nav-tab[data-mod=“elektrina”].active  { background: var(–mod-elektr); }
 .nav-tab[data-mod=“kondice”].active    { background: var(–mod-kondice); }
 
-/* ── CONTENT ── */
-#content {
-flex: 1;
-overflow-y: auto;
-padding: 20px 16px calc(20px + var(–safe-bot));
-}
-
-.module { display: none; animation: fadeIn .25s ease; }
-.module.active { display: block; }
-@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+/* ── SHELL CONTENT ── */
+#content { flex: 1; overflow-y: auto; scrollbar-width: none; }
+#content::-webkit-scrollbar { display: none; }
+.module { display: none; }
+.module.active { display: block; animation: fadeIn .2s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
 
 /* ── DASHBOARD ── */
-.dash-greeting {
-font-family: ‘DM Serif Display’, serif;
-font-size: 28px;
-line-height: 1.2;
-margin-bottom: 6px;
-}
+.dash-wrap { padding: 20px 16px calc(24px + var(–safe-bot)); }
+.dash-greeting { font-family: ‘DM Serif Display’, serif; font-size: 28px; line-height: 1.2; margin-bottom: 6px; }
 .dash-greeting em { font-style: italic; color: var(–muted); }
 .dash-sub { font-size: 13px; color: var(–muted); margin-bottom: 24px; }
-
-.dash-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 12px;
-margin-bottom: 24px;
-}
-.dash-card {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 16px;
-padding: 16px;
-cursor: pointer;
-transition: transform .15s, border-color .15s;
-position: relative;
-overflow: hidden;
-}
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.dash-card { background: var(–surface); border: 1px solid var(–border); border-radius: 16px;
+padding: 16px; cursor: pointer; transition: transform .15s; position: relative; overflow: hidden; }
 .dash-card:active { transform: scale(.97); }
-.dash-card::before {
-content: ‘’;
-position: absolute;
-top: 0; left: 0; right: 0;
-height: 3px;
-border-radius: 16px 16px 0 0;
-}
-.dash-card[data-mod=“investice”]::before  { background: var(–mod-invest); }
+.dash-card::before { content:’’; position:absolute; top:0; left:0; right:0; height:3px; border-radius:16px 16px 0 0; }
 .dash-card[data-mod=“ucetnictvi”]::before { background: var(–mod-ucet); }
+.dash-card[data-mod=“investice”]::before  { background: var(–mod-invest); }
 .dash-card[data-mod=“auto”]::before       { background: var(–mod-auto); }
 .dash-card[data-mod=“elektrina”]::before  { background: var(–mod-elektr); }
 .dash-card[data-mod=“kondice”]::before    { background: var(–mod-kondice); }
-
 .dash-card .card-icon { font-size: 24px; margin-bottom: 8px; }
 .dash-card .card-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-.dash-card .card-stat { font-size: 11px; color: var(–muted); }
-.dash-card .card-value { font-size: 18px; font-weight: 600; margin-top: 6px; }
-
-.dash-section-title {
-font-size: 11px;
-font-weight: 600;
-letter-spacing: .08em;
-text-transform: uppercase;
-color: var(–muted);
-margin-bottom: 10px;
-}
-
+.dash-card .card-stat  { font-size: 11px; color: var(–muted); }
+.dash-card .card-value { font-size: 17px; font-weight: 600; margin-top: 6px; }
+.dash-section-title { font-size: 11px; font-weight: 600; letter-spacing: .08em;
+text-transform: uppercase; color: var(–muted); margin-bottom: 10px; }
 .activity-list { display: flex; flex-direction: column; gap: 8px; }
-.activity-item {
-display: flex;
-align-items: center;
-gap: 12px;
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 12px 14px;
-}
-.activity-dot {
-width: 8px; height: 8px;
-border-radius: 50%;
-flex-shrink: 0;
-}
+.activity-item { display: flex; align-items: center; gap: 12px; background: var(–surface);
+border: 1px solid var(–border); border-radius: 12px; padding: 12px 14px; }
+.activity-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .activity-text { flex: 1; font-size: 13px; }
 .activity-text .a-title { font-weight: 500; }
 .activity-text .a-sub { font-size: 11px; color: var(–muted); margin-top: 1px; }
 .activity-time { font-size: 11px; color: var(–muted); }
 
-/* ── MODULE PLACEHOLDER ── */
-.mod-header {
-display: flex;
-align-items: center;
-gap: 12px;
-margin-bottom: 20px;
-}
-.mod-badge {
-width: 44px; height: 44px;
-border-radius: 12px;
-display: flex; align-items: center; justify-content: center;
-font-size: 22px;
-flex-shrink: 0;
-}
+/* ── PLACEHOLDER MODULES ── */
+.mod-wrap { padding: 20px 16px calc(24px + var(–safe-bot)); }
+.mod-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.mod-badge { width: 44px; height: 44px; border-radius: 12px; display: flex;
+align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
 .mod-title { font-family: ‘DM Serif Display’, serif; font-size: 24px; }
 .mod-sub { font-size: 12px; color: var(–muted); margin-top: 2px; }
-
-.placeholder-box {
-background: var(–surface);
-border: 1px dashed var(–border);
-border-radius: 16px;
-padding: 32px 24px;
-text-align: center;
-color: var(–muted);
-}
-.placeholder-box .ph-icon { font-size: 36px; margin-bottom: 12px; }
+.placeholder-box { background: var(–surface); border: 1px dashed var(–border);
+border-radius: 16px; padding: 32px 24px; text-align: center; color: var(–muted); }
+.placeholder-box .ph-icon  { font-size: 36px; margin-bottom: 12px; }
 .placeholder-box .ph-title { font-size: 15px; font-weight: 600; color: var(–text); margin-bottom: 6px; }
-.placeholder-box .ph-text { font-size: 13px; line-height: 1.6; }
+.placeholder-box .ph-text  { font-size: 13px; line-height: 1.6; }
 
 /* ── DB STATUS ── */
-#db-status {
-position: fixed;
-bottom: calc(16px + var(–safe-bot));
-right: 16px;
-background: var(–surface2);
-border: 1px solid var(–border);
-border-radius: 20px;
-padding: 6px 12px;
-font-size: 11px;
-color: var(–muted);
-display: flex;
-align-items: center;
-gap: 6px;
-z-index: 100;
-transition: opacity .3s;
-pointer-events: none;
-}
-#db-status .status-dot {
-width: 6px; height: 6px;
-border-radius: 50%;
-background: #4ade80;
-}
-#db-status.error .status-dot { background: #f87171; }
+#db-status { position: fixed; bottom: calc(16px + var(–safe-bot)); right: 16px;
+background: var(–surface2); border: 1px solid var(–border); border-radius: 20px;
+padding: 6px 12px; font-size: 11px; color: var(–muted); display: flex; align-items: center;
+gap: 6px; z-index: 90; transition: opacity .3s; pointer-events: none; }
+#db-status .sdot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; }
+#db-status.error .sdot { background: #f87171; }
 #db-status.hidden { opacity: 0; }
 
-/* ── SETTINGS CHIP ── */
-.settings-row {
-display: flex;
-justify-content: flex-end;
-margin-bottom: 20px;
-}
-.settings-btn {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 20px;
-padding: 6px 14px;
-font-size: 12px;
-color: var(–muted);
-cursor: pointer;
-display: flex; align-items: center; gap: 6px;
-}
+/* ═══════════════════════════════════════════
+KAKEIBO MODULE STYLES
+═══════════════════════════════════════════ */
+#mod-ucetnictvi { display: none; flex-direction: column; height: 100%; }
+#mod-ucetnictvi.active { display: flex; }
 
-/* ── NASTAVENÍ / IMPORT-EXPORT ── */
-.settings-section { margin-bottom: 28px; }
-.settings-section-title {
-font-size: 11px;
-font-weight: 600;
-letter-spacing: .08em;
-text-transform: uppercase;
-color: var(–muted);
-margin-bottom: 12px;
-}
-.settings-card {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 16px;
-overflow: hidden;
-}
-.settings-row-item {
-display: flex;
-align-items: center;
-gap: 14px;
-padding: 14px 16px;
-border-bottom: 1px solid var(–border);
-cursor: pointer;
-transition: background .15s;
-}
-.settings-row-item:last-child { border-bottom: none; }
-.settings-row-item:active { background: var(–surface2); }
-.settings-row-icon {
-width: 36px; height: 36px;
-border-radius: 10px;
-display: flex; align-items: center; justify-content: center;
-font-size: 18px;
-flex-shrink: 0;
-}
-.settings-row-text { flex: 1; }
-.settings-row-text .sr-title { font-size: 14px; font-weight: 500; }
-.settings-row-text .sr-sub { font-size: 12px; color: var(–muted); margin-top: 2px; }
-.settings-row-arrow { color: var(–muted); font-size: 18px; }
+/* Kakeibo sub-header */
+.kk-header { background: var(–surface); border-bottom: 1px solid var(–border);
+padding: 12px 16px; flex-shrink: 0; }
+.kk-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.kk-logo { font-family: ‘Noto Serif JP’, serif; font-size: 17px; font-weight: 400;
+letter-spacing: .03em; color: var(–mod-ucet); }
+.kk-logo small { font-family: ‘DM Sans’, sans-serif; font-size: 11px; font-weight: 300;
+color: var(–muted); margin-left: 6px; text-transform: uppercase; letter-spacing: .06em; }
+.period-nav { display: flex; align-items: center; gap: 6px; }
+.period-btn { background: none; border: 1px solid var(–border); border-radius: 8px;
+padding: 5px 10px; font-size: 13px; color: var(–muted); cursor: pointer;
+font-family: ‘DM Sans’, sans-serif; }
+.period-label { font-size: 13px; font-weight: 500; min-width: 120px; text-align: center; color: var(–text); }
+.kk-view-tabs { display: flex; gap: 4px; }
+.kk-vtab { flex: 1; padding: 7px 0; text-align: center; font-size: 12px; font-weight: 500;
+color: var(–muted); border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: all .15s; }
+.kk-vtab.active { background: var(–surface2); color: var(–text); border-color: var(–border); }
 
-.toast {
-position: fixed;
-top: calc(70px + var(–safe-top));
-left: 50%; transform: translateX(-50%);
-background: var(–text);
-color: var(–bg);
-font-size: 13px;
-font-weight: 600;
-padding: 10px 20px;
-border-radius: 20px;
-z-index: 200;
-pointer-events: none;
-opacity: 0;
-transition: opacity .2s;
-white-space: nowrap;
-}
-.toast.show { opacity: 1; }
+/* Kakeibo scrollable body */
+.kk-body { flex: 1; overflow-y: auto; padding: 0 0 calc(80px + var(–safe-bot)); scrollbar-width: none; }
+.kk-body::-webkit-scrollbar { display: none; }
+.kk-view { display: none; }
+.kk-view.active { display: block; }
 
-.modal-overlay {
-position: fixed; inset: 0;
-background: rgba(0,0,0,.7);
-z-index: 300;
-display: flex; align-items: flex-end;
-opacity: 0; pointer-events: none;
-transition: opacity .25s;
-}
-.modal-overlay.show { opacity: 1; pointer-events: all; }
-.modal-sheet {
-width: 100%;
-background: var(–surface);
-border-radius: 24px 24px 0 0;
-padding: 16px 20px calc(24px + var(–safe-bot));
-transform: translateY(100%);
-transition: transform .3s cubic-bezier(.32,1,.23,1);
-}
-.modal-overlay.show .modal-sheet { transform: translateY(0); }
-.modal-handle {
-width: 36px; height: 4px;
-background: var(–border);
-border-radius: 2px;
-margin: 0 auto 20px;
-}
-.modal-title {
-font-family: ‘DM Serif Display’, serif;
-font-size: 22px;
-margin-bottom: 6px;
-}
-.modal-sub { font-size: 13px; color: var(–muted); margin-bottom: 20px; line-height: 1.5; }
-.modal-btn {
-width: 100%;
-padding: 14px;
-border-radius: 14px;
-border: none;
-font-size: 15px;
-font-weight: 600;
-cursor: pointer;
-margin-bottom: 10px;
-font-family: ‘DM Sans’, sans-serif;
-transition: opacity .15s;
-}
-.modal-btn:active { opacity: .7; }
-.modal-btn.primary { background: var(–accent); color: var(–bg); }
-.modal-btn.danger  { background: #f87171; color: #fff; }
-.modal-btn.ghost   { background: var(–surface2); color: var(–text); border: 1px solid var(–border); }
+/* Summary card */
+.kk-summary { background: var(–surface); margin: 14px 14px 0; border-radius: 14px;
+border: 1px solid var(–border); overflow: hidden; }
+.kk-sum-row { display: flex; justify-content: space-between; align-items: center;
+padding: 12px 16px; border-bottom: 1px solid var(–border); }
+.kk-sum-row:last-child { border-bottom: none; }
+.kk-sum-label { font-size: 13px; color: var(–muted); }
+.kk-sum-val { font-size: 16px; font-weight: 600; }
+.kk-sum-val.inc { color: #6dbf6d; }
+.kk-sum-val.exp { color: #e07050; }
+.kk-sum-val.pos { color: #6dbf6d; }
+.kk-sum-val.neg { color: #c45a8a; }
+.kk-progress-wrap { padding: 12px 16px; }
+.kk-prog-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(–muted); margin-bottom: 7px; }
+.kk-prog-bar { height: 6px; background: var(–surface2); border-radius: 3px; overflow: hidden; }
+.kk-prog-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
+.kk-prog-fill.ok   { background: var(–need); }
+.kk-prog-fill.warn { background: var(–want); }
+.kk-prog-fill.over { background: var(–unexpected); }
 
-.import-drop {
-border: 2px dashed var(–border);
-border-radius: 14px;
-padding: 28px;
-text-align: center;
-color: var(–muted);
-font-size: 13px;
-margin-bottom: 12px;
-cursor: pointer;
-transition: border-color .2s;
-}
-.import-drop:hover { border-color: var(–accent); }
-.import-drop .drop-icon { font-size: 32px; margin-bottom: 8px; }
-.import-drop .drop-title { font-weight: 600; color: var(–text); margin-bottom: 4px; }
+/* Category grid */
+.kk-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 14px 0; }
+.kk-cat-card { background: var(–surface); border: 1px solid var(–border); border-radius: 12px;
+padding: 13px; position: relative; overflow: hidden; }
+.kk-cat-card::before { content:’’; position:absolute; top:0; left:0; right:0; height:3px; }
+.kk-cat-card.need::before    { background: var(–need); }
+.kk-cat-card.want::before    { background: var(–want); }
+.kk-cat-card.culture::before { background: var(–culture); }
+.kk-cat-card.unexpected::before { background: var(–unexpected); }
+.kk-cat-icon  { font-size: 18px; margin-bottom: 5px; }
+.kk-cat-name  { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; color: var(–muted); margin-bottom: 3px; }
+.kk-cat-amt   { font-size: 18px; font-weight: 600; }
+.kk-cat-amt.need    { color: var(–need); }
+.kk-cat-amt.want    { color: var(–want); }
+.kk-cat-amt.culture { color: var(–culture); }
+.kk-cat-amt.unexpected { color: var(–unexpected); }
+.kk-cat-count { font-size: 11px; color: var(–muted); margin-top: 2px; }
 
-.guide-steps { display: flex; flex-direction: column; gap: 12px; }
-.guide-step {
-display: flex; gap: 12px; align-items: flex-start;
-}
-.step-num {
-width: 26px; height: 26px;
-border-radius: 50%;
-background: var(–surface2);
-border: 1px solid var(–border);
-display: flex; align-items: center; justify-content: center;
-font-size: 12px; font-weight: 700;
-flex-shrink: 0;
-color: var(–accent);
-}
-.step-text { font-size: 13px; line-height: 1.6; padding-top: 3px; }
-.step-text strong { color: var(–text); }
-.step-text code {
-background: var(–surface2);
-border: 1px solid var(–border);
-border-radius: 6px;
-padding: 1px 6px;
-font-size: 12px;
-color: var(–accent2);
-}
+/* Transactions */
+.kk-sec-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 14px 8px; }
+.kk-sec-title { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; color: var(–muted); }
+.kk-filter-chips { display: flex; gap: 5px; }
+.kk-chip { font-size: 11px; padding: 3px 9px; border-radius: 12px; border: 1px solid var(–border);
+background: var(–surface); color: var(–muted); cursor: pointer; font-family: ‘DM Sans’, sans-serif; }
+.kk-chip.active { background: var(–text); color: var(–bg); border-color: var(–text); }
 
-/* ── UTILS ── */
-.color-invest  { color: var(–mod-invest); }
-.color-ucet    { color: var(–mod-ucet); }
-.color-auto    { color: var(–mod-auto); }
-.color-elektr  { color: var(–mod-elektr); }
-.color-kondice { color: var(–mod-kondice); }
+.kk-tx-list { padding: 0 14px; display: flex; flex-direction: column; gap: 6px; }
+.kk-tx-item { background: var(–surface); border: 1px solid var(–border); border-radius: 11px;
+padding: 11px 13px; display: flex; align-items: center; gap: 11px; cursor: pointer; transition: opacity .1s; }
+.kk-tx-item:active { opacity: .7; }
+.kk-tx-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.kk-tx-dot.need        { background: var(–need); }
+.kk-tx-dot.want        { background: var(–want); }
+.kk-tx-dot.culture     { background: var(–culture); }
+.kk-tx-dot.unexpected  { background: var(–unexpected); }
+.kk-tx-dot.income      { background: var(–income-clr); }
+.kk-tx-info { flex: 1; min-width: 0; }
+.kk-tx-desc { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kk-tx-meta { font-size: 11px; color: var(–muted); margin-top: 1px; }
+.kk-tx-amt  { font-size: 14px; font-weight: 600; flex-shrink: 0; }
+.kk-tx-amt.expense { color: var(–text); }
+.kk-tx-amt.income  { color: #6dbf6d; }
+.kk-week-div { font-size: 11px; color: var(–muted); text-transform: uppercase;
+letter-spacing: .07em; padding: 12px 4px 4px; font-weight: 600; }
 
-.bg-invest  { background: var(–mod-invest); }
-.bg-ucet    { background: var(–mod-ucet); }
-.bg-auto    { background: var(–mod-auto); }
-.bg-elektr  { background: var(–mod-elektr); }
-.bg-kondice { background: var(–mod-kondice); }
+/* Year view */
+.kk-year-totals { margin: 14px 14px 0; background: var(–surface); border: 1px solid var(–border);
+border-radius: 14px; overflow: hidden; }
+.kk-yt-row { display: flex; justify-content: space-between; align-items: center;
+padding: 12px 16px; border-bottom: 1px solid var(–border); }
+.kk-yt-row:last-child { border-bottom: none; }
+.kk-yt-label { font-size: 13px; color: var(–muted); }
+.kk-yt-val   { font-size: 15px; font-weight: 600; }
+.kk-month-list { padding: 14px 14px 0; display: flex; flex-direction: column; gap: 8px; }
+.kk-month-row { background: var(–surface); border: 1px solid var(–border); border-radius: 11px;
+padding: 13px 15px; cursor: pointer; }
+.kk-month-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; }
+.kk-month-name { font-size: 14px; font-weight: 500; }
+.kk-month-bal  { font-size: 14px; font-weight: 600; }
+.kk-month-bal.pos { color: #6dbf6d; }
+.kk-month-bal.neg { color: #c45a8a; }
+.kk-month-bars { display: flex; gap: 3px; height: 4px; }
+.kk-bar-seg { border-radius: 2px; height: 100%; min-width: 3px; }
+
+/* FAB */
+#kk-fab { position: fixed; bottom: calc(22px + var(–safe-bot)); right: 18px;
+width: 54px; height: 54px; border-radius: 50%; background: var(–mod-ucet); color: #0e0f11;
+border: none; font-size: 26px; display: flex; align-items: center; justify-content: center;
+cursor: pointer; box-shadow: 0 4px 20px rgba(163,232,196,.3); z-index: 50;
+transition: transform .15s; }
+#kk-fab:active { transform: scale(.92); }
+#kk-fab.hidden { display: none; }
+
+/* Modals */
+.kk-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 100;
+display: none; align-items: flex-end; }
+.kk-backdrop.open { display: flex; }
+.kk-modal { background: var(–surface); border-radius: 20px 20px 0 0; width: 100%;
+padding: 0 0 calc(16px + var(–safe-bot)); animation: slideUp .22s ease; max-height: 92dvh; overflow-y: auto; }
+@keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
+.kk-handle { width: 38px; height: 4px; background: var(–border); border-radius: 2px; margin: 12px auto 14px; }
+.kk-modal-title { font-family: ‘DM Serif Display’, serif; font-size: 20px;
+padding: 0 20px 14px; border-bottom: 1px solid var(–border); color: var(–text); }
+
+/* Form */
+.kk-type-sel { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 14px 18px 6px; }
+.kk-type-btn { padding: 10px; border-radius: 10px; border: 2px solid var(–border); background: var(–surface2);
+font-size: 13px; font-weight: 500; cursor: pointer; text-align: center; transition: all .15s;
+font-family: ‘DM Sans’, sans-serif; color: var(–muted); }
+.kk-type-btn.active.exp-btn { border-color: var(–text); background: var(–surface); color: var(–text); }
+.kk-type-btn.active.inc-btn { border-color: var(–income-clr); background: var(–income-bg); color: #6dbf6d; }
+
+.kk-cat-sel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 6px 18px 2px; }
+.kk-cat-btn { padding: 9px 3px; border-radius: 10px; border: 2px solid var(–border); background: var(–surface2);
+font-size: 10px; font-weight: 500; cursor: pointer; text-align: center; transition: all .15s;
+font-family: ‘DM Sans’, sans-serif; color: var(–muted); line-height: 1.4; }
+.kk-cat-btn .cb-icon { font-size: 17px; display: block; margin-bottom: 2px; }
+.kk-cat-btn.active.need-btn        { border-color: var(–need);        background: var(–need-bg);     color: var(–need); }
+.kk-cat-btn.active.want-btn        { border-color: var(–want);        background: var(–want-bg);     color: var(–want); }
+.kk-cat-btn.active.culture-btn     { border-color: var(–culture);     background: var(–culture-bg);  color: var(–culture); }
+.kk-cat-btn.active.unexpected-btn  { border-color: var(–unexpected);  background: var(–unexp-bg);    color: var(–unexpected); }
+
+.kk-fg { padding: 8px 18px 2px; }
+.kk-label { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; font-weight: 600;
+color: var(–muted); margin-bottom: 5px; display: block; }
+.kk-input { width: 100%; background: var(–surface2); border: 1px solid var(–border); border-radius: 10px;
+padding: 11px 13px; font-size: 15px; font-family: ‘DM Sans’, sans-serif; color: var(–text); outline: none; }
+.kk-input:focus { border-color: var(–mod-ucet); }
+.kk-input.big   { font-size: 22px; font-weight: 600; text-align: right; }
+.kk-form-row    { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 18px 2px; }
+.kk-save-btn { margin: 14px 18px 0; width: calc(100% - 36px); background: var(–mod-ucet); color: #0e0f11;
+border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 600;
+cursor: pointer; font-family: ‘DM Sans’, sans-serif; }
+.kk-save-btn:disabled { opacity: .4; }
+
+/* Detail modal */
+.kk-detail-info { padding: 14px 20px 0; font-size: 13px; color: var(–muted); line-height: 2; }
+.kk-detail-actions { display: flex; gap: 8px; padding: 14px 18px 0; }
+.kk-del-btn { flex:1; padding:13px; border-radius:12px; border:1px solid var(–border);
+background:#3a1a1a; color:#f87171; font-size:14px; font-weight:600; cursor:pointer; font-family:‘DM Sans’,sans-serif; }
+.kk-cls-btn { flex:1; padding:13px; border-radius:12px; border:1px solid var(–border);
+background:var(–surface2); color:var(–muted); font-size:14px; font-weight:500; cursor:pointer; font-family:‘DM Sans’,sans-serif; }
+
+/* Budget modal */
+.kk-budget-section { padding: 14px 18px 0; }
+.kk-budget-info { font-size: 13px; color: var(–muted); line-height: 1.6; margin-bottom: 12px; }
+
+/* Empty state */
+.kk-empty { text-align: center; padding: 40px 28px; color: var(–muted); }
+.kk-empty .ei { font-size: 36px; margin-bottom: 10px; }
+.kk-empty .et { font-size: 14px; font-weight: 600; color: var(–text); margin-bottom: 5px; }
+.kk-empty .es { font-size: 12px; line-height: 1.6; }
+
+/* Toast */
+#toast { position: fixed; bottom: calc(88px + var(–safe-bot)); left: 50%; transform: translateX(-50%);
+background: var(–text); color: var(–bg); padding: 9px 18px; border-radius: 20px;
+font-size: 13px; font-weight: 500; z-index: 200; opacity: 0; transition: opacity .2s;
+pointer-events: none; white-space: nowrap; }
+#toast.show { opacity: 1; }
 </style>
 
 </head>
 <body>
 <div id="app">
 
-  <!-- HEADER -->
+  <!-- SHELL HEADER -->
 
-  <div id="header">
+  <div id="shell-header">
     <div class="logo">Můj<span>OS</span></div>
     <div class="date-chip" id="date-chip">—</div>
   </div>
 
-  <!-- NAV -->
+  <!-- SHELL NAV -->
 
   <nav id="nav">
     <div class="nav-tab active" data-mod="dashboard">
       <span class="dot"></span> Přehled
     </div>
+    <div class="nav-tab" data-mod="ucetnictvi">
+      <span class="dot" style="background:var(--mod-ucet)"></span> Kakeibo
+    </div>
     <div class="nav-tab" data-mod="investice">
       <span class="dot" style="background:var(--mod-invest)"></span> Investice
-    </div>
-    <div class="nav-tab" data-mod="ucetnictvi">
-      <span class="dot" style="background:var(--mod-ucet)"></span> Účetnictví
     </div>
     <div class="nav-tab" data-mod="auto">
       <span class="dot" style="background:var(--mod-auto)"></span> Auto
@@ -470,143 +365,206 @@ color: var(–accent2);
     <div class="nav-tab" data-mod="kondice">
       <span class="dot" style="background:var(--mod-kondice)"></span> Kondice
     </div>
-    <div class="nav-tab" data-mod="nastaveni">
-      <span class="dot" style="background:var(--muted)"></span> Nastavení
-    </div>
   </nav>
 
-  <!-- CONTENT -->
+  <!-- SHELL CONTENT -->
 
   <div id="content">
 
 ```
-<!-- DASHBOARD -->
+<!-- ── DASHBOARD ── -->
 <div class="module active" id="mod-dashboard">
-  <div class="dash-greeting" id="greeting">Dobrý den <em>—</em></div>
-  <div class="dash-sub" id="dash-sub">Načítám přehled...</div>
-
-  <div class="dash-grid">
-    <div class="dash-card" data-mod="investice">
-      <div class="card-icon">💰</div>
-      <div class="card-title">Investice</div>
-      <div class="card-stat">Tento kvartál</div>
-      <div class="card-value color-invest" id="stat-investice">—</div>
+  <div class="dash-wrap">
+    <div class="dash-greeting" id="greeting">Dobrý den <em>—</em></div>
+    <div class="dash-sub" id="dash-sub">načítám...</div>
+    <div class="dash-grid">
+      <div class="dash-card" data-mod="ucetnictvi">
+        <div class="card-icon">🏦</div>
+        <div class="card-title">Kakeibo</div>
+        <div class="card-stat">Tento týden výdaje</div>
+        <div class="card-value" style="color:var(--mod-ucet)" id="stat-ucet">—</div>
+      </div>
+      <div class="dash-card" data-mod="investice">
+        <div class="card-icon">💰</div>
+        <div class="card-title">Investice</div>
+        <div class="card-stat">Tento kvartál</div>
+        <div class="card-value" style="color:var(--mod-invest)" id="stat-investice">—</div>
+      </div>
+      <div class="dash-card" data-mod="auto">
+        <div class="card-icon">🚗</div>
+        <div class="card-title">Auto</div>
+        <div class="card-stat">Tento měsíc</div>
+        <div class="card-value" style="color:var(--mod-auto)" id="stat-auto">—</div>
+      </div>
+      <div class="dash-card" data-mod="elektrina">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Elektřina</div>
+        <div class="card-stat">Aktuální odečet</div>
+        <div class="card-value" style="color:var(--mod-elektr)" id="stat-elektr">—</div>
+      </div>
+      <div class="dash-card" data-mod="kondice" style="grid-column:span 2">
+        <div class="card-icon">🧠</div>
+        <div class="card-title">Kondice</div>
+        <div class="card-stat">Poslední záznam</div>
+        <div class="card-value" style="color:var(--mod-kondice)" id="stat-kondice">—</div>
+      </div>
     </div>
-    <div class="dash-card" data-mod="ucetnictvi">
-      <div class="card-icon">🏦</div>
-      <div class="card-title">Účetnictví</div>
-      <div class="card-stat">Tento měsíc</div>
-      <div class="card-value color-ucet" id="stat-ucet">—</div>
-    </div>
-    <div class="dash-card" data-mod="auto">
-      <div class="card-icon">🚗</div>
-      <div class="card-title">Auto</div>
-      <div class="card-stat">Tento měsíc</div>
-      <div class="card-value color-auto" id="stat-auto">—</div>
-    </div>
-    <div class="dash-card" data-mod="elektrina">
-      <div class="card-icon">⚡</div>
-      <div class="card-title">Elektřina</div>
-      <div class="card-stat">Aktuální odečet</div>
-      <div class="card-value color-elektr" id="stat-elektr">—</div>
-    </div>
-    <div class="dash-card" data-mod="kondice" style="grid-column: span 2;">
-      <div class="card-icon">🧠</div>
-      <div class="card-title">Kondice partnerky</div>
-      <div class="card-stat">Poslední záznam</div>
-      <div class="card-value color-kondice" id="stat-kondice">—</div>
-    </div>
-  </div>
-
-  <div class="dash-section-title">Poslední aktivita</div>
-  <div class="activity-list" id="activity-list">
-    <div class="activity-item">
-      <div class="activity-dot" style="background:var(--muted)"></div>
-      <div class="activity-text">
-        <div class="a-title">Žádná aktivita</div>
-        <div class="a-sub">Začni zadávat data v modulech</div>
+    <div class="dash-section-title">Poslední aktivita</div>
+    <div class="activity-list" id="activity-list">
+      <div class="activity-item">
+        <div class="activity-dot" style="background:var(--muted)"></div>
+        <div class="activity-text"><div class="a-title">Žádná aktivita</div>
+          <div class="a-sub">Začni přidávat záznamy</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- INVESTICE -->
-<div class="module" id="mod-investice">
-  <div class="mod-header">
-    <div class="mod-badge bg-invest">💰</div>
-    <div>
-      <div class="mod-title">Investice</div>
-      <div class="mod-sub">Sledování investičních objemů</div>
-    </div>
-  </div>
-  <div class="placeholder-box">
-    <div class="ph-icon">🔧</div>
-    <div class="ph-title">Modul připraven k propojení</div>
-    <div class="ph-text">Sem přijde kód ze stávající investiční appky.<br>Sdílená DB je připravena pod klíčem <code>investice</code>.</div>
-  </div>
-</div>
-
-<!-- ÚČETNICTVÍ -->
+<!-- ── KAKEIBO MODULE ── -->
 <div class="module" id="mod-ucetnictvi">
-  <div class="mod-header">
-    <div class="mod-badge bg-ucet">🏦</div>
-    <div>
-      <div class="mod-title">Domácí účetnictví</div>
-      <div class="mod-sub">Příjmy, výdaje, kategorie</div>
+
+  <!-- Kakeibo sub-header -->
+  <div class="kk-header">
+    <div class="kk-header-top">
+      <div class="kk-logo">家計簿 <small>Kakeibo</small></div>
+      <div class="period-nav">
+        <button class="period-btn" id="kk-prev">‹</button>
+        <div class="period-label" id="kk-period">—</div>
+        <button class="period-btn" id="kk-next">›</button>
+      </div>
+    </div>
+    <div class="kk-view-tabs">
+      <div class="kk-vtab active" data-kv="tyden">Týden</div>
+      <div class="kk-vtab" data-kv="mesic">Měsíc</div>
+      <div class="kk-vtab" data-kv="rok">Rok</div>
+      <div class="kk-vtab" data-kv="nastaveni">⚙ Rozpočet</div>
     </div>
   </div>
-  <div class="placeholder-box">
-    <div class="ph-icon">🔧</div>
-    <div class="ph-title">Modul připraven k vývoji</div>
-    <div class="ph-text">Evidence příjmů a výdajů domácnosti.<br>Sdílená DB připravena pod klíčem <code>ucetnictvi</code>.</div>
+
+  <!-- Kakeibo scrollable body -->
+  <div class="kk-body">
+
+    <!-- TÝDEN -->
+    <div class="kk-view active" id="kkv-tyden">
+      <div class="kk-summary" id="kk-week-sum"></div>
+      <div class="kk-cat-grid" id="kk-week-cats"></div>
+      <div class="kk-sec-header">
+        <span class="kk-sec-title">Záznamy</span>
+        <div class="kk-filter-chips" id="kk-chips">
+          <div class="kk-chip active" data-f="vse">Vše</div>
+          <div class="kk-chip" data-f="vydaje">Výdaje</div>
+          <div class="kk-chip" data-f="prijmy">Příjmy</div>
+        </div>
+      </div>
+      <div class="kk-tx-list" id="kk-week-txlist"></div>
+    </div>
+
+    <!-- MĚSÍC -->
+    <div class="kk-view" id="kkv-mesic">
+      <div class="kk-summary" id="kk-month-sum"></div>
+      <div class="kk-cat-grid" id="kk-month-cats"></div>
+      <div class="kk-sec-header">
+        <span class="kk-sec-title">Záznamy měsíce</span>
+      </div>
+      <div class="kk-tx-list" id="kk-month-txlist"></div>
+    </div>
+
+    <!-- ROK -->
+    <div class="kk-view" id="kkv-rok">
+      <div class="kk-year-totals" id="kk-year-totals"></div>
+      <div class="kk-sec-header"><span class="kk-sec-title">Přehled měsíců</span></div>
+      <div class="kk-month-list" id="kk-month-list"></div>
+    </div>
+
+    <!-- NASTAVENÍ / ROZPOČET -->
+    <div class="kk-view" id="kkv-nastaveni">
+      <div style="padding:16px 14px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+          <div style="padding:16px;border-bottom:1px solid var(--border)">
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px">Týdenní výdajový rozpočet</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6">Nastav cílový limit výdajů na týden. Zobrazí se progress bar v přehledu.</div>
+          </div>
+          <div style="padding:14px 16px;border-bottom:1px solid var(--border)">
+            <label class="kk-label">Limit výdajů / týden (Kč)</label>
+            <input class="kk-input big" id="budget-input" type="number" inputmode="numeric" placeholder="např. 5000">
+          </div>
+          <div style="padding:14px 16px">
+            <button class="kk-save-btn" id="budget-save-btn" style="margin:0;width:100%">Uložit rozpočet</button>
+          </div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-top:12px;">
+          <div style="padding:16px;border-bottom:1px solid var(--border)">
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px">Export dat</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6">Stáhni všechna Kakeibo data jako Excel soubor.</div>
+          </div>
+          <div style="padding:14px 16px">
+            <button class="kk-save-btn" id="kk-export-btn" style="margin:0;width:100%;background:var(--surface2);color:var(--text)">📊 Exportovat do Excelu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /kk-body -->
+</div><!-- /mod-ucetnictvi -->
+
+<!-- ── INVESTICE placeholder ── -->
+<div class="module" id="mod-investice">
+  <div class="mod-wrap">
+    <div class="mod-header">
+      <div class="mod-badge" style="background:rgba(232,213,163,.15)">💰</div>
+      <div><div class="mod-title">Investice</div><div class="mod-sub">Sledování investičních objemů</div></div>
+    </div>
+    <div class="placeholder-box">
+      <div class="ph-icon">🔧</div>
+      <div class="ph-title">Modul připraven k propojení</div>
+      <div class="ph-text">Sem přijde kód ze stávající investiční appky.<br>Sdílená DB je připravena pod klíčem <code>investice</code>.</div>
+    </div>
   </div>
 </div>
 
-<!-- AUTO -->
+<!-- ── AUTO placeholder ── -->
 <div class="module" id="mod-auto">
-  <div class="mod-header">
-    <div class="mod-badge bg-auto">🚗</div>
-    <div>
-      <div class="mod-title">Evidence auta</div>
-      <div class="mod-sub">Tankování, náklady, STK, servis</div>
+  <div class="mod-wrap">
+    <div class="mod-header">
+      <div class="mod-badge" style="background:rgba(163,196,232,.15)">🚗</div>
+      <div><div class="mod-title">Evidence auta</div><div class="mod-sub">Tankování, náklady, STK</div></div>
     </div>
-  </div>
-  <div class="placeholder-box">
-    <div class="ph-icon">🔧</div>
-    <div class="ph-title">Modul připraven k vývoji</div>
-    <div class="ph-text">Náklady na auto, spotřeba, servisní záznamy.<br>Sdílená DB připravena pod klíčem <code>auto</code>.</div>
+    <div class="placeholder-box">
+      <div class="ph-icon">🔧</div>
+      <div class="ph-title">Modul připraven k vývoji</div>
+      <div class="ph-text">Evidence nákladů, spotřeba, servisní záznamy.</div>
+    </div>
   </div>
 </div>
 
-<!-- ELEKTŘINA -->
+<!-- ── ELEKTŘINA placeholder ── -->
 <div class="module" id="mod-elektrina">
-  <div class="mod-header">
-    <div class="mod-badge bg-elektr">⚡</div>
-    <div>
-      <div class="mod-title">Elektřina</div>
-      <div class="mod-sub">Spotřeba, odečty, tarify</div>
+  <div class="mod-wrap">
+    <div class="mod-header">
+      <div class="mod-badge" style="background:rgba(232,163,196,.15)">⚡</div>
+      <div><div class="mod-title">Elektřina</div><div class="mod-sub">Odečty, spotřeba, tarify</div></div>
     </div>
-  </div>
-  <div class="placeholder-box">
-    <div class="ph-icon">🔧</div>
-    <div class="ph-title">Modul připraven k vývoji</div>
-    <div class="ph-text">Odečty elektroměru, sledování spotřeby, porovnání tarifů.<br>Sdílená DB připravena pod klíčem <code>elektrina</code>.</div>
+    <div class="placeholder-box">
+      <div class="ph-icon">🔧</div>
+      <div class="ph-title">Modul připraven k vývoji</div>
+      <div class="ph-text">Odečty elektroměru a sledování spotřeby.</div>
+    </div>
   </div>
 </div>
 
-<!-- KONDICE -->
+<!-- ── KONDICE placeholder ── -->
 <div class="module" id="mod-kondice">
-  <div class="mod-header">
-    <div class="mod-badge bg-kondice">🧠</div>
-    <div>
-      <div class="mod-title">Kondice</div>
-      <div class="mod-sub">Sledování psychické pohody</div>
+  <div class="mod-wrap">
+    <div class="mod-header">
+      <div class="mod-badge" style="background:rgba(196,163,232,.15)">🧠</div>
+      <div><div class="mod-title">Kondice</div><div class="mod-sub">Sledování psychické pohody</div></div>
     </div>
-  </div>
-  <div class="placeholder-box">
-    <div class="ph-icon">🔧</div>
-    <div class="ph-title">Modul připraven k vývoji</div>
-    <div class="ph-text">Denní záznamy nálady a kondice, trend v čase, poznámky.<br>Sdílená DB připravena pod klíčem <code>kondice</code>.</div>
+    <div class="placeholder-box">
+      <div class="ph-icon">🔧</div>
+      <div class="ph-title">Modul připraven k vývoji</div>
+      <div class="ph-text">Denní záznamy nálady a kondice, trend v čase.</div>
+    </div>
   </div>
 </div>
 ```
@@ -614,222 +572,165 @@ color: var(–accent2);
   </div><!-- /content -->
 </div><!-- /app -->
 
-<div id="db-status">
-  <div class="status-dot"></div>
-  <span id="db-status-text">DB</span>
+<!-- KAKEIBO FAB -->
+
+<button id="kk-fab" class="hidden">＋</button>
+
+<!-- MODAL: PŘIDAT ZÁZNAM -->
+
+<div class="kk-backdrop" id="modal-add">
+  <div class="kk-modal">
+    <div class="kk-handle"></div>
+    <div class="kk-modal-title">Nový záznam</div>
+    <div class="kk-type-sel">
+      <button class="kk-type-btn exp-btn active" data-type="expense">💸 Výdaj</button>
+      <button class="kk-type-btn inc-btn" data-type="income">💚 Příjem</button>
+    </div>
+    <div id="kk-cat-wrap">
+      <div class="kk-cat-sel">
+        <button class="kk-cat-btn need-btn active" data-cat="need">
+          <span class="cb-icon">🏠</span>Potřeby
+        </button>
+        <button class="kk-cat-btn want-btn" data-cat="want">
+          <span class="cb-icon">✨</span>Přání
+        </button>
+        <button class="kk-cat-btn culture-btn" data-cat="culture">
+          <span class="cb-icon">📚</span>Kultura
+        </button>
+        <button class="kk-cat-btn unexpected-btn" data-cat="unexpected">
+          <span class="cb-icon">⚡</span>Nečekané
+        </button>
+      </div>
+    </div>
+    <div class="kk-fg">
+      <label class="kk-label">Částka (Kč)</label>
+      <input class="kk-input big" id="f-amount" type="number" inputmode="numeric" placeholder="0">
+    </div>
+    <div class="kk-fg">
+      <label class="kk-label">Popis</label>
+      <input class="kk-input" id="f-desc" type="text" placeholder="Co to bylo?">
+    </div>
+    <div class="kk-form-row">
+      <div>
+        <label class="kk-label">Datum</label>
+        <input class="kk-input" id="f-date" type="date">
+      </div>
+      <div>
+        <label class="kk-label">Podkategorie</label>
+        <input class="kk-input" id="f-subcat" type="text" placeholder="volitelné">
+      </div>
+    </div>
+    <button class="kk-save-btn" id="save-btn">Uložit záznam</button>
+  </div>
 </div>
+
+<!-- MODAL: DETAIL -->
+
+<div class="kk-backdrop" id="modal-detail">
+  <div class="kk-modal">
+    <div class="kk-handle"></div>
+    <div class="kk-modal-title" id="detail-title">Detail</div>
+    <div class="kk-detail-info" id="detail-body"></div>
+    <div class="kk-detail-actions">
+      <button class="kk-del-btn" id="detail-delete">🗑 Smazat</button>
+      <button class="kk-cls-btn" id="detail-close">Zavřít</button>
+    </div>
+  </div>
+</div>
+
+<!-- DB STATUS -->
+
+<div id="db-status"><div class="sdot"></div><span id="db-status-text">DB</span></div>
+
+<!-- TOAST -->
+
+<div id="toast"></div>
 
 <script>
 // ═══════════════════════════════════════════════════════
-//  MůjOS — Sdílená databázová vrstva
-//  Verze: 1.0 — kostra platformy
+//  MůjOS — Platforma + Kakeibo modul
+//  Verze: 2.0
 // ═══════════════════════════════════════════════════════
 
+// ── SHARED DB ─────────────────────────────────────────
 const DB_NAME    = 'mojos_db';
-const DB_VERSION = 1;
-
-// Definice všech object stores (modulů) na jednom místě
-const STORES = {
-  investice:   { keyPath: 'id', autoIncrement: true },
-  ucetnictvi:  { keyPath: 'id', autoIncrement: true },
-  auto:        { keyPath: 'id', autoIncrement: true },
-  elektrina:   { keyPath: 'id', autoIncrement: true },
-  kondice:     { keyPath: 'id', autoIncrement: true },
-  activity_log:{ keyPath: 'id', autoIncrement: true },
-  settings:    { keyPath: 'key' },
-};
+const DB_VERSION = 2;
+const STORES     = ['investice','ucetnictvi','auto','elektrina','kondice','activity_log','settings'];
 
 let db = null;
 
-// ── DB INIT ────────────────────────────────────────────
 function openDB() {
-  return new Promise((resolve, reject) => {
+  return new Promise((res, rej) => {
     const req = indexedDB.open(DB_NAME, DB_VERSION);
-
-    req.onupgradeneeded = (e) => {
+    req.onupgradeneeded = e => {
       const d = e.target.result;
-      Object.entries(STORES).forEach(([name, opts]) => {
-        if (!d.objectStoreNames.contains(name)) {
-          d.createObjectStore(name, opts);
+      STORES.forEach(s => {
+        if (!d.objectStoreNames.contains(s)) {
+          const opts = s === 'settings' ? { keyPath:'key' } : { keyPath:'id', autoIncrement:true };
+          d.createObjectStore(s, opts);
         }
       });
     };
-
-    req.onsuccess  = (e) => resolve(e.target.result);
-    req.onerror    = (e) => reject(e.target.error);
+    req.onsuccess = e => res(e.target.result);
+    req.onerror   = e => rej(e.target.error);
   });
 }
-
-// ── CRUD API ───────────────────────────────────────────
-// Každý modul volá tyto funkce se svým store názvem
 
 async function dbGetAll(store) {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(store, 'readonly');
-    const req = tx.objectStore(store).getAll();
-    req.onsuccess = () => resolve(req.result);
-    req.onerror   = () => reject(req.error);
-  });
-}
-
-async function dbAdd(store, data) {
-  return new Promise((resolve, reject) => {
-    const tx  = db.transaction(store, 'readwrite');
-    const req = tx.objectStore(store).add({
-      ...data,
-      _created: new Date().toISOString(),
-      _module: store
-    });
-    req.onsuccess = () => resolve(req.result);
-    req.onerror   = () => reject(req.error);
-  });
-}
-
-async function dbPut(store, data) {
-  return new Promise((resolve, reject) => {
-    const tx  = db.transaction(store, 'readwrite');
-    const req = tx.objectStore(store).put({
-      ...data,
-      _updated: new Date().toISOString()
-    });
-    req.onsuccess = () => resolve(req.result);
-    req.onerror   = () => reject(req.error);
-  });
-}
-
-async function dbDelete(store, id) {
-  return new Promise((resolve, reject) => {
-    const tx  = db.transaction(store, 'readwrite');
-    const req = tx.objectStore(store).delete(id);
-    req.onsuccess = () => resolve();
-    req.onerror   = () => reject(req.error);
-  });
-}
-
-async function dbGet(store, key) {
-  return new Promise((resolve, reject) => {
-    const tx  = db.transaction(store, 'readonly');
-    const req = tx.objectStore(store).get(key);
-    req.onsuccess = () => resolve(req.result);
-    req.onerror   = () => reject(req.error);
-  });
-}
-
-// ── ACTIVITY LOG ───────────────────────────────────────
-async function logActivity(modul, title, sub = '') {
-  try {
-    await dbAdd('activity_log', {
-      modul, title, sub,
-      ts: new Date().toISOString()
-    });
-    await refreshActivityList();
-  } catch(e) { /* tichá chyba */ }
-}
-
-async function refreshActivityList() {
-  const all = await dbGetAll('activity_log');
-  const sorted = all.sort((a,b) => b.ts.localeCompare(a.ts)).slice(0, 8);
-
-  const list = document.getElementById('activity-list');
-  if (!sorted.length) return;
-
-  const colorMap = {
-    investice: 'var(--mod-invest)',
-    ucetnictvi:'var(--mod-ucet)',
-    auto:      'var(--mod-auto)',
-    elektrina: 'var(--mod-elektr)',
-    kondice:   'var(--mod-kondice)',
-  };
-
-  list.innerHTML = sorted.map(a => {
-    const color = colorMap[a.modul] || 'var(--muted)';
-    const time  = formatRelativeTime(a.ts);
-    return `
-      <div class="activity-item">
-        <div class="activity-dot" style="background:${color}"></div>
-        <div class="activity-text">
-          <div class="a-title">${a.title}</div>
-          ${a.sub ? `<div class="a-sub">${a.sub}</div>` : ''}
-        </div>
-        <div class="activity-time">${time}</div>
-      </div>`;
-  }).join('');
-}
-
-// ── DASHBOARD STATS ────────────────────────────────────
-async function refreshDashboard() {
-  // Každý modul si zde může vyplnit svůj stat
-  // Zatím placeholder — moduly sem doplní své agregáty
-
-  // Investice — počet záznamů tento Q
-  try {
-    const inv = await dbGetAll('investice');
-    const q = getCurrentQuarter();
-    const thisQ = inv.filter(r => r._created && r._created.startsWith(q.year + '-'));
-    document.getElementById('stat-investice').textContent =
-      thisQ.length ? `${thisQ.length} záznamů` : 'Žádná data';
-  } catch(e) {}
-
-  // Ostatní — zatím placeholder
-  ['ucet','auto','elektr','kondice'].forEach(k => {
-    const el = document.getElementById('stat-' + k);
-    if (el) el.textContent = 'Žádná data';
-  });
-
-  await refreshActivityList();
-}
-
-// ── EXPORT ─────────────────────────────────────────────
-// Sdílená exportní funkce — každý modul předá svá data
-// exportData = { nazevListu: [array of objects], ... }
-async function exportToExcel(exportData, filename = 'MůjOS_export') {
-  // SheetJS CDN — načte se jen při exportu
-  if (!window.XLSX) {
-    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');
-  }
-  const wb = XLSX.utils.book_new();
-  Object.entries(exportData).forEach(([sheetName, rows]) => {
-    if (!rows.length) return;
-    // Odstraní interní klíče
-    const clean = rows.map(r => {
-      const out = {};
-      Object.keys(r).filter(k => !k.startsWith('_')).forEach(k => out[k] = r[k]);
-      return out;
-    });
-    const ws = XLSX.utils.json_to_sheet(clean);
-    XLSX.utils.book_append_sheet(wb, ws, sheetName.substring(0, 31));
-  });
-  const ts = new Date().toISOString().slice(0,10);
-  XLSX.writeFile(wb, `${filename}_${ts}.xlsx`);
-}
-
-// ── HELPERS ────────────────────────────────────────────
-function loadScript(src) {
   return new Promise((res, rej) => {
-    const s = document.createElement('script');
-    s.src = src; s.onload = res; s.onerror = rej;
-    document.head.appendChild(s);
+    const tx = db.transaction(store, 'readonly');
+    const r  = tx.objectStore(store).getAll();
+    r.onsuccess = () => res(r.result);
+    r.onerror   = () => rej(r.error);
+  });
+}
+async function dbAdd(store, data) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(store, 'readwrite');
+    const r  = tx.objectStore(store).add({ ...data, _created: new Date().toISOString(), _module: store });
+    r.onsuccess = () => res(r.result);
+    r.onerror   = () => rej(r.error);
+  });
+}
+async function dbPut(store, data) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(store, 'readwrite');
+    const r  = tx.objectStore(store).put({ ...data, _updated: new Date().toISOString() });
+    r.onsuccess = () => res(r.result);
+    r.onerror   = () => rej(r.error);
+  });
+}
+async function dbDelete(store, id) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(store, 'readwrite');
+    const r  = tx.objectStore(store).delete(id);
+    r.onsuccess = () => res();
+    r.onerror   = () => rej(r.error);
+  });
+}
+async function dbGet(store, key) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(store, 'readonly');
+    const r  = tx.objectStore(store).get(key);
+    r.onsuccess = () => res(r.result);
+    r.onerror   = () => rej(r.error);
   });
 }
 
+// ── SHELL HELPERS ──────────────────────────────────────
 function getCurrentQuarter() {
-  const now = new Date();
-  const m = now.getMonth() + 1;
-  const q = Math.ceil(m / 3);
+  const now = new Date(), m = now.getMonth() + 1, q = Math.ceil(m/3);
   return { year: now.getFullYear(), q, label: `Q${q}/${now.getFullYear()}` };
 }
-
 function formatRelativeTime(iso) {
   const diff = Date.now() - new Date(iso).getTime();
-  const m = Math.floor(diff / 60000);
+  const m = Math.floor(diff/60000);
   if (m < 1)  return 'právě teď';
   if (m < 60) return `před ${m} min`;
-  const h = Math.floor(m / 60);
+  const h = Math.floor(m/60);
   if (h < 24) return `před ${h} h`;
-  const d = Math.floor(h / 24);
-  return `před ${d} d`;
+  return `před ${Math.floor(h/24)} d`;
 }
-
 function getGreeting() {
   const h = new Date().getHours();
   if (h < 5)  return 'Dobrou noc';
@@ -839,42 +740,415 @@ function getGreeting() {
   if (h < 22) return 'Dobrý večer';
   return 'Dobrou noc';
 }
+function fmt(n) {
+  return new Intl.NumberFormat('cs-CZ',{style:'currency',currency:'CZK',maximumFractionDigits:0}).format(n);
+}
 
-// ── UI ─────────────────────────────────────────────────
-function setDateChip() {
-  const now = new Date();
-  const opts = { day: 'numeric', month: 'long', year: 'numeric' };
+// ── SHELL NAVIGATION ───────────────────────────────────
+let currentMod = 'dashboard';
+
+function navigateMod(mod) {
+  currentMod = mod;
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.mod === mod));
+  document.querySelectorAll('.module').forEach(m => m.classList.toggle('active', m.id === 'mod-' + mod));
+  document.getElementById('kk-fab').classList.toggle('hidden', mod !== 'ucetnictvi' || kkView === 'nastaveni' || kkView === 'rok');
+
+  if (mod === 'dashboard') refreshDashboard();
+  if (mod === 'ucetnictvi') kkRenderAll();
+}
+
+document.querySelectorAll('.nav-tab').forEach(t => t.addEventListener('click', () => navigateMod(t.dataset.mod)));
+document.querySelectorAll('.dash-card').forEach(c => c.addEventListener('click', () => navigateMod(c.dataset.mod)));
+
+// ── DASHBOARD ──────────────────────────────────────────
+async function refreshDashboard() {
+  // Kakeibo — výdaje tento týden
+  try {
+    const recs = await dbGetAll('ucetnictvi');
+    const ws = kkGetWeekStart(new Date());
+    const we = kkGetWeekEnd(new Date());
+    const thisWeek = recs.filter(r => { const d = new Date(r.date); return d >= ws && d <= we && r.type === 'expense'; });
+    const sum = thisWeek.reduce((s,r) => s + r.amount, 0);
+    document.getElementById('stat-ucet').textContent = thisWeek.length ? fmt(sum) : 'Žádná data';
+  } catch(e) {}
+
+  // Investice
+  try {
+    const inv = await dbGetAll('investice');
+    const q = getCurrentQuarter();
+    const thisQ = inv.filter(r => r._created && r._created.startsWith(q.year + '-'));
+    document.getElementById('stat-investice').textContent = thisQ.length ? `${thisQ.length} záznamů` : 'Žádná data';
+  } catch(e) {}
+
+  ['auto','elektr','kondice'].forEach(k => {
+    const el = document.getElementById('stat-' + k);
+    if (el) el.textContent = 'Žádná data';
+  });
+
+  await refreshActivityList();
+}
+
+async function refreshActivityList() {
+  const all = await dbGetAll('activity_log');
+  const sorted = all.sort((a,b) => b.ts.localeCompare(a.ts)).slice(0, 8);
+  const list = document.getElementById('activity-list');
+  if (!sorted.length) return;
+  const colorMap = { investice:'var(--mod-invest)', ucetnictvi:'var(--mod-ucet)',
+    auto:'var(--mod-auto)', elektrina:'var(--mod-elektr)', kondice:'var(--mod-kondice)' };
+  list.innerHTML = sorted.map(a => `
+    <div class="activity-item">
+      <div class="activity-dot" style="background:${colorMap[a.modul]||'var(--muted)'}"></div>
+      <div class="activity-text">
+        <div class="a-title">${a.title}</div>
+        ${a.sub?`<div class="a-sub">${a.sub}</div>`:''}
+      </div>
+      <div class="activity-time">${formatRelativeTime(a.ts)}</div>
+    </div>`).join('');
+}
+
+function setShellDate() {
   document.getElementById('date-chip').textContent =
-    now.toLocaleDateString('cs-CZ', opts);
+    new Date().toLocaleDateString('cs-CZ',{day:'numeric',month:'long',year:'numeric'});
 }
-
-function setGreeting() {
+function setShellGreeting() {
   const q = getCurrentQuarter();
-  document.getElementById('greeting').innerHTML =
-    `${getGreeting()} <em>—</em>`;
+  document.getElementById('greeting').innerHTML = `${getGreeting()} <em>—</em>`;
   document.getElementById('dash-sub').textContent =
-    `${q.label} · ${new Date().toLocaleDateString('cs-CZ', {weekday:'long'})}`;
+    `${q.label} · ${new Date().toLocaleDateString('cs-CZ',{weekday:'long'})}`;
 }
 
-// ── NAVIGACE ───────────────────────────────────────────
-function navigate(modName) {
-  document.querySelectorAll('.nav-tab').forEach(t =>
-    t.classList.toggle('active', t.dataset.mod === modName));
-  document.querySelectorAll('.module').forEach(m =>
-    m.classList.toggle('active', m.id === 'mod-' + modName));
-
-  if (modName === 'dashboard') refreshDashboard();
+// ── EXPORT ─────────────────────────────────────────────
+async function exportToExcel(exportData, filename = 'MůjOS_export') {
+  if (!window.XLSX) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');
+  const wb = XLSX.utils.book_new();
+  Object.entries(exportData).forEach(([name, rows]) => {
+    if (!rows.length) return;
+    const clean = rows.map(r => { const o={}; Object.keys(r).filter(k=>!k.startsWith('_')).forEach(k=>o[k]=r[k]); return o; });
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(clean), name.substring(0,31));
+  });
+  XLSX.writeFile(wb, `${filename}_${new Date().toISOString().slice(0,10)}.xlsx`);
+}
+function loadScript(src) {
+  return new Promise((res,rej) => { const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); });
 }
 
-document.querySelectorAll('.nav-tab').forEach(tab => {
-  tab.addEventListener('click', () => navigate(tab.dataset.mod));
+// ══════════════════════════════════════════════════════
+//  KAKEIBO MODULE
+// ══════════════════════════════════════════════════════
+
+const KK_CATS = {
+  need:       { label:'Potřeby',  icon:'🏠', cls:'need' },
+  want:       { label:'Přání',    icon:'✨', cls:'want' },
+  culture:    { label:'Kultura',  icon:'📚', cls:'culture' },
+  unexpected: { label:'Nečekané',icon:'⚡', cls:'unexpected' },
+  income:     { label:'Příjem',   icon:'💚', cls:'income' },
+};
+
+let kkRecords   = [];
+let kkView      = 'tyden';
+let kkFilter    = 'vse';
+let kkDate      = new Date();
+let kkEditingId = null;
+let kkFormType  = 'expense';
+let kkFormCat   = 'need';
+
+// Date helpers
+function kkGetWeekStart(d) { const dt=new Date(d); const day=dt.getDay()||7; dt.setDate(dt.getDate()-day+1); dt.setHours(0,0,0,0); return dt; }
+function kkGetWeekEnd(d)   { const ws=kkGetWeekStart(d); const we=new Date(ws); we.setDate(ws.getDate()+6); we.setHours(23,59,59,999); return we; }
+function kkWeekLabel(d)    { const ws=kkGetWeekStart(d), we=kkGetWeekEnd(d); return `${ws.getDate()}.${ws.getMonth()+1}. – ${we.getDate()}.${we.getMonth()+1}.`; }
+function kkMonthLabel(d)   { return new Date(d).toLocaleDateString('cs-CZ',{month:'long',year:'numeric'}); }
+function kkInWeek(dateStr,ref)  { const d=new Date(dateStr); return d>=kkGetWeekStart(ref)&&d<=kkGetWeekEnd(ref); }
+function kkInMonth(dateStr,ref) { const d=new Date(dateStr); return d.getFullYear()===ref.getFullYear()&&d.getMonth()===ref.getMonth(); }
+function kkInYear(dateStr,ref)  { return new Date(dateStr).getFullYear()===ref.getFullYear(); }
+function kkFmtDate(iso)    { return new Date(iso).toLocaleDateString('cs-CZ',{day:'numeric',month:'short'}); }
+
+function kkGetBudget() { return parseInt(localStorage.getItem('mojos_kk_budget')||'0'); }
+function kkSetBudget(v) { localStorage.setItem('mojos_kk_budget', v); }
+
+// Period navigation
+function kkNavigate(dir) {
+  if (kkView==='tyden')  kkDate = new Date(kkDate.getTime() + dir*7*86400000);
+  else if (kkView==='mesic') kkDate = new Date(kkDate.getFullYear(), kkDate.getMonth()+dir, 1);
+  else if (kkView==='rok')   kkDate = new Date(kkDate.getFullYear()+dir, 0, 1);
+  kkRenderAll();
+}
+function kkUpdatePeriod() {
+  const el = document.getElementById('kk-period');
+  if (kkView==='tyden')  el.textContent = kkWeekLabel(kkDate);
+  else if (kkView==='mesic') el.textContent = kkMonthLabel(kkDate);
+  else if (kkView==='rok')   el.textContent = kkDate.getFullYear().toString();
+  else el.textContent = 'Nastavení';
+}
+
+// Render
+function kkRenderAll() {
+  kkUpdatePeriod();
+  const showNav = kkView !== 'nastaveni';
+  document.getElementById('kk-prev').style.visibility = showNav ? 'visible' : 'hidden';
+  document.getElementById('kk-next').style.visibility = showNav ? 'visible' : 'hidden';
+  document.getElementById('kk-fab').classList.toggle('hidden', kkView==='nastaveni'||kkView==='rok');
+
+  if (kkView==='tyden')      kkRenderWeek();
+  else if (kkView==='mesic') kkRenderMonth();
+  else if (kkView==='rok')   kkRenderYear();
+  else                       kkRenderSettings();
+}
+
+function kkRenderWeek() {
+  const recs = kkRecords.filter(r => kkInWeek(r.date, kkDate));
+  kkRenderSummary('kk-week-sum', recs, kkWeekLabel(kkDate), 'týden');
+  kkRenderCats('kk-week-cats', recs);
+  kkRenderTxFlat('kk-week-txlist', recs);
+}
+function kkRenderMonth() {
+  const recs = kkRecords.filter(r => kkInMonth(r.date, kkDate));
+  kkRenderSummary('kk-month-sum', recs, kkMonthLabel(kkDate), 'měsíc');
+  kkRenderCats('kk-month-cats', recs);
+  kkRenderTxByWeek('kk-month-txlist', recs);
+}
+function kkRenderYear() {
+  const recs = kkRecords.filter(r => kkInYear(r.date, kkDate));
+  const year = kkDate.getFullYear();
+  const inc = recs.filter(r=>r.type==='income').reduce((s,r)=>s+r.amount,0);
+  const exp = recs.filter(r=>r.type==='expense').reduce((s,r)=>s+r.amount,0);
+  const saved = inc - exp;
+  document.getElementById('kk-year-totals').innerHTML = `
+    <div class="kk-yt-row"><span class="kk-yt-label">Příjmy ${year}</span><span class="kk-yt-val" style="color:#6dbf6d">${fmt(inc)}</span></div>
+    <div class="kk-yt-row"><span class="kk-yt-label">Výdaje ${year}</span><span class="kk-yt-val" style="color:#e07050">${fmt(exp)}</span></div>
+    <div class="kk-yt-row"><span class="kk-yt-label">Uspořeno ${year}</span><span class="kk-yt-val" style="color:${saved>=0?'#6dbf6d':'#c45a8a'}">${fmt(saved)}</span></div>`;
+
+  const months=['Leden','Únor','Březen','Duben','Květen','Červen','Červenec','Srpen','Září','Říjen','Listopad','Prosinec'];
+  const barColors = { need:'var(--need)', want:'var(--want)', culture:'var(--culture)', unexpected:'var(--unexpected)' };
+  document.getElementById('kk-month-list').innerHTML = months.map((name,mi) => {
+    const mr = recs.filter(r=>new Date(r.date).getMonth()===mi);
+    if (!mr.length) return `<div class="kk-month-row"><div class="kk-month-top"><span class="kk-month-name">${name}</span><span class="kk-month-bal" style="color:var(--muted)">—</span></div></div>`;
+    const minc = mr.filter(r=>r.type==='income').reduce((s,r)=>s+r.amount,0);
+    const mexp = mr.filter(r=>r.type==='expense').reduce((s,r)=>s+r.amount,0);
+    const bal  = minc - mexp;
+    const bars = ['need','want','culture','unexpected'].map(cat => {
+      const s = mr.filter(r=>r.category===cat).reduce((a,r)=>a+r.amount,0);
+      const pct = mexp>0?Math.round(s/mexp*100):0;
+      return pct>0?`<div class="kk-bar-seg" style="flex:${pct};background:${barColors[cat]}"></div>`:'';
+    }).join('');
+    return `<div class="kk-month-row" data-mi="${mi}">
+      <div class="kk-month-top"><span class="kk-month-name">${name}</span>
+        <span class="kk-month-bal ${bal>=0?'pos':'neg'}">${fmt(bal)}</span></div>
+      <div class="kk-month-bars">${bars}</div></div>`;
+  }).join('');
+
+  document.querySelectorAll('.kk-month-row[data-mi]').forEach(el => {
+    el.addEventListener('click', () => {
+      kkDate = new Date(year, parseInt(el.dataset.mi), 1);
+      kkSwitchView('mesic');
+    });
+  });
+}
+
+function kkRenderSettings() {
+  const budget = kkGetBudget();
+  document.getElementById('budget-input').value = budget || '';
+}
+
+function kkRenderSummary(elId, recs, label, word) {
+  const inc = recs.filter(r=>r.type==='income').reduce((s,r)=>s+r.amount,0);
+  const exp = recs.filter(r=>r.type==='expense').reduce((s,r)=>s+r.amount,0);
+  const saved = inc - exp;
+  const budget = kkView==='tyden' ? kkGetBudget() : 0;
+  const pct = budget>0 ? Math.min(Math.round(exp/budget*100),100) : 0;
+  const fillCls = pct<70?'ok':pct<90?'warn':'over';
+  document.getElementById(elId).innerHTML = `
+    <div class="kk-sum-row"><span class="kk-sum-label">Příjmy</span><span class="kk-sum-val inc">${fmt(inc)}</span></div>
+    <div class="kk-sum-row"><span class="kk-sum-label">Výdaje</span><span class="kk-sum-val exp">${fmt(exp)}</span></div>
+    <div class="kk-sum-row" style="border-bottom:none"><span class="kk-sum-label">Bilance ${word}</span>
+      <span class="kk-sum-val ${saved>=0?'pos':'neg'}">${fmt(saved)}</span></div>
+    ${budget>0?`<div class="kk-progress-wrap">
+      <div class="kk-prog-labels"><span>Výdaje z týdenního rozpočtu</span><span>${pct} % z ${fmt(budget)}</span></div>
+      <div class="kk-prog-bar"><div class="kk-prog-fill ${fillCls}" style="width:${pct}%"></div></div>
+    </div>`:''}`;
+}
+
+function kkRenderCats(elId, recs) {
+  document.getElementById(elId).innerHTML = ['need','want','culture','unexpected'].map(cat => {
+    const cr = recs.filter(r=>r.type==='expense'&&r.category===cat);
+    const sum = cr.reduce((s,r)=>s+r.amount,0);
+    const c = KK_CATS[cat];
+    return `<div class="kk-cat-card ${cat}">
+      <div class="kk-cat-icon">${c.icon}</div>
+      <div class="kk-cat-name">${c.label}</div>
+      <div class="kk-cat-amt ${cat}">${fmt(sum)}</div>
+      <div class="kk-cat-count">${cr.length} položek</div></div>`;
+  }).join('');
+}
+
+function kkRenderTxFlat(elId, recs) {
+  let filtered = [...recs];
+  if (kkFilter==='vydaje') filtered = filtered.filter(r=>r.type==='expense');
+  if (kkFilter==='prijmy') filtered = filtered.filter(r=>r.type==='income');
+  filtered.sort((a,b)=>b.date.localeCompare(a.date));
+  const el = document.getElementById(elId);
+  if (!filtered.length) { el.innerHTML=`<div class="kk-empty"><div class="ei">📝</div><div class="et">Žádné záznamy</div><div class="es">Přidej první záznam tlačítkem ＋</div></div>`; return; }
+  el.innerHTML = filtered.map(r => kkTxHTML(r)).join('');
+  el.querySelectorAll('.kk-tx-item').forEach(i => i.addEventListener('click', () => kkOpenDetail(parseInt(i.dataset.id))));
+}
+
+function kkRenderTxByWeek(elId, recs) {
+  const el = document.getElementById(elId);
+  if (!recs.length) { el.innerHTML=`<div class="kk-empty"><div class="ei">📝</div><div class="et">Žádné záznamy</div></div>`; return; }
+  const sorted = [...recs].sort((a,b)=>b.date.localeCompare(a.date));
+  const weeks = {};
+  sorted.forEach(r => {
+    const ws = kkGetWeekStart(new Date(r.date)).toISOString().slice(0,10);
+    if (!weeks[ws]) weeks[ws] = [];
+    weeks[ws].push(r);
+  });
+  let html = '';
+  Object.entries(weeks).sort((a,b)=>b[0].localeCompare(a[0])).forEach(([ws,wr]) => {
+    const sum = wr.filter(r=>r.type==='expense').reduce((s,r)=>s+r.amount,0);
+    html += `<div class="kk-week-div">${kkWeekLabel(new Date(ws))} · ${fmt(sum)}</div>`;
+    wr.forEach(r => html += kkTxHTML(r));
+  });
+  el.innerHTML = html;
+  el.querySelectorAll('.kk-tx-item').forEach(i => i.addEventListener('click', () => kkOpenDetail(parseInt(i.dataset.id))));
+}
+
+function kkTxHTML(r) {
+  const isInc = r.type==='income';
+  const cat = isInc ? 'income' : r.category;
+  const c = KK_CATS[cat] || KK_CATS.need;
+  return `<div class="kk-tx-item" data-id="${r.id}">
+    <div class="kk-tx-dot ${cat}"></div>
+    <div class="kk-tx-info">
+      <div class="kk-tx-desc">${r.description||c.label}</div>
+      <div class="kk-tx-meta">${c.label}${r.subcategory?' · '+r.subcategory:''} · ${kkFmtDate(r.date)}</div>
+    </div>
+    <div class="kk-tx-amt ${isInc?'income':'expense'}">${isInc?'+':''}${fmt(r.amount)}</div>
+  </div>`;
+}
+
+// View switching
+function kkSwitchView(v) {
+  kkView = v;
+  document.querySelectorAll('.kk-vtab').forEach(t => t.classList.toggle('active', t.dataset.kv===v));
+  document.querySelectorAll('.kk-view').forEach(el => el.classList.toggle('active', el.id==='kkv-'+v));
+  kkRenderAll();
+}
+document.querySelectorAll('.kk-vtab').forEach(t => t.addEventListener('click', () => kkSwitchView(t.dataset.kv)));
+document.getElementById('kk-prev').addEventListener('click', () => kkNavigate(-1));
+document.getElementById('kk-next').addEventListener('click', () => kkNavigate(1));
+
+// Filter chips
+document.getElementById('kk-chips').addEventListener('click', e => {
+  const chip = e.target.closest('.kk-chip');
+  if (!chip) return;
+  kkFilter = chip.dataset.f;
+  document.querySelectorAll('.kk-chip').forEach(c => c.classList.toggle('active', c.dataset.f===kkFilter));
+  kkRenderTxFlat('kk-week-txlist', kkRecords.filter(r=>kkInWeek(r.date,kkDate)));
 });
 
-document.querySelectorAll('.dash-card').forEach(card => {
-  card.addEventListener('click', () => navigate(card.dataset.mod));
+// FAB
+document.getElementById('kk-fab').addEventListener('click', kkOpenAddModal);
+
+// Add modal
+function kkOpenAddModal() {
+  kkEditingId = null; kkFormType = 'expense'; kkFormCat = 'need';
+  document.getElementById('f-amount').value = '';
+  document.getElementById('f-desc').value   = '';
+  document.getElementById('f-subcat').value = '';
+  document.getElementById('f-date').value   = new Date().toISOString().slice(0,10);
+  kkUpdateTypeUI(); kkUpdateCatUI();
+  document.getElementById('modal-add').classList.add('open');
+  setTimeout(() => document.getElementById('f-amount').focus(), 300);
+}
+function kkUpdateTypeUI() {
+  document.querySelectorAll('.kk-type-btn').forEach(b => b.classList.toggle('active', b.dataset.type===kkFormType));
+  document.getElementById('kk-cat-wrap').style.display = kkFormType==='expense' ? 'block' : 'none';
+}
+function kkUpdateCatUI() {
+  document.querySelectorAll('.kk-cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat===kkFormCat));
+}
+document.querySelectorAll('.kk-type-btn').forEach(b => b.addEventListener('click', () => { kkFormType=b.dataset.type; kkUpdateTypeUI(); }));
+document.querySelectorAll('.kk-cat-btn').forEach(b => b.addEventListener('click', () => { kkFormCat=b.dataset.cat; kkUpdateCatUI(); }));
+
+document.getElementById('save-btn').addEventListener('click', async () => {
+  const amount = parseFloat(document.getElementById('f-amount').value);
+  const date   = document.getElementById('f-date').value;
+  if (!amount||amount<=0||!date) { showToast('Vyplň částku a datum'); return; }
+  const record = {
+    type: kkFormType,
+    category: kkFormType==='income' ? 'income' : kkFormCat,
+    amount,
+    description: document.getElementById('f-desc').value.trim(),
+    date,
+    subcategory: document.getElementById('f-subcat').value.trim(),
+  };
+  await dbAdd('ucetnictvi', record);
+  // Log activity
+  await dbAdd('activity_log', { modul:'ucetnictvi', title: record.description||KK_CATS[record.category]?.label||'Záznam',
+    sub: `${kkFormType==='income'?'+':''}${fmt(amount)}`, ts: new Date().toISOString() });
+  kkRecords = await dbGetAll('ucetnictvi');
+  document.getElementById('modal-add').classList.remove('open');
+  kkRenderAll();
+  showToast('Uloženo ✓');
 });
 
-// ── DB STATUS BADGE ────────────────────────────────────
+document.getElementById('modal-add').addEventListener('click', e => {
+  if (e.target===document.getElementById('modal-add')) document.getElementById('modal-add').classList.remove('open');
+});
+
+// Detail modal
+function kkOpenDetail(id) {
+  const r = kkRecords.find(x=>x.id===id);
+  if (!r) return;
+  const isInc = r.type==='income';
+  const cat = isInc ? 'income' : r.category;
+  const c = KK_CATS[cat]||KK_CATS.need;
+  document.getElementById('detail-title').textContent = `${c.icon} ${r.description||c.label}`;
+  document.getElementById('detail-body').innerHTML =
+    `<b>Částka:</b> ${fmt(r.amount)}<br>
+     <b>Typ:</b> ${isInc?'Příjem':'Výdaj'}<br>
+     <b>Kategorie:</b> ${c.label}<br>
+     ${r.subcategory?`<b>Podkat.:</b> ${r.subcategory}<br>`:''}
+     <b>Datum:</b> ${new Date(r.date).toLocaleDateString('cs-CZ',{day:'numeric',month:'long',year:'numeric'})}`;
+  kkEditingId = id;
+  document.getElementById('modal-detail').classList.add('open');
+}
+document.getElementById('detail-close').addEventListener('click', () => document.getElementById('modal-detail').classList.remove('open'));
+document.getElementById('modal-detail').addEventListener('click', e => {
+  if (e.target===document.getElementById('modal-detail')) document.getElementById('modal-detail').classList.remove('open');
+});
+document.getElementById('detail-delete').addEventListener('click', async () => {
+  if (!kkEditingId) return;
+  await dbDelete('ucetnictvi', kkEditingId);
+  kkRecords = await dbGetAll('ucetnictvi');
+  document.getElementById('modal-detail').classList.remove('open');
+  kkRenderAll();
+  showToast('Smazáno');
+});
+
+// Budget save
+document.getElementById('budget-save-btn').addEventListener('click', () => {
+  const val = parseInt(document.getElementById('budget-input').value);
+  kkSetBudget(isNaN(val)?0:val);
+  showToast('Rozpočet uložen ✓');
+});
+
+// Export
+document.getElementById('kk-export-btn').addEventListener('click', async () => {
+  const recs = await dbGetAll('ucetnictvi');
+  await exportToExcel({ 'Kakeibo': recs }, 'Kakeibo');
+  showToast('Excel se stahuje...');
+});
+
+// ── TOAST ──────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+// ── DB STATUS ──────────────────────────────────────────
 function showDBStatus(ok, text) {
   const el = document.getElementById('db-status');
   el.classList.toggle('error', !ok);
@@ -885,29 +1159,23 @@ function showDBStatus(ok, text) {
 
 // ── INIT ───────────────────────────────────────────────
 async function init() {
-  setDateChip();
-  setGreeting();
-
+  setShellDate();
+  setShellGreeting();
   try {
     db = await openDB();
     showDBStatus(true, 'DB připravena');
+    kkRecords = await dbGetAll('ucetnictvi');
     await refreshDashboard();
   } catch(e) {
     showDBStatus(false, 'Chyba DB');
-    console.error('MůjOS DB chyba:', e);
+    console.error('MůjOS init error:', e);
   }
 }
 
-init();
+// ── GLOBAL API ─────────────────────────────────────────
+window.MojOS = { dbGetAll, dbAdd, dbPut, dbDelete, dbGet, exportToExcel, navigateMod, formatRelativeTime, getCurrentQuarter };
 
-// ── GLOBÁLNÍ API pro moduly ────────────────────────────
-// Moduly mohou volat window.MojOS.*
-window.MojOS = {
-  dbGetAll, dbAdd, dbPut, dbDelete, dbGet,
-  exportToExcel, logActivity,
-  getCurrentQuarter, formatRelativeTime,
-  navigate,
-};
+init();
 </script>
 
 </body>
