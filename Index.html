@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
@@ -8,107 +7,109 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MůjOS">
 <title>MůjOS</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><circle cx="30" cy="30" r="19" stroke="%234da8ff" stroke-width="6" fill="none"/><circle cx="30" cy="30" r="7" fill="%234da8ff"/><path d="M49 30 L56 30" stroke="%234da8ff" stroke-width="3" stroke-linecap="round"/></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><circle cx="30" cy="30" r="19" stroke="%234da8ff" stroke-width="6" fill="none"/><circle cx="30" cy="30" r="7" fill="%234da8ff"/><path d="M49 30 L56 30" stroke="%234da8ff" stroke-width="3" stroke-linecap="round"/></svg>">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 
 :root {
-color-scheme: dark;
+  color-scheme: dark;
 
-/* George-inspired dark navy palette */
-–bg:        #0b1120;
-–bg2:       #0f1829;
-–card:      #152035;
-–card2:     #1c2d47;
-–card3:     #243657;
-–border:    rgba(255,255,255,.07);
-–border2:   rgba(255,255,255,.12);
+  /* George-inspired dark navy palette */
+  --bg:        #0b1120;
+  --bg2:       #0f1829;
+  --card:      #152035;
+  --card2:     #1c2d47;
+  --card3:     #243657;
+  --border:    rgba(255,255,255,.07);
+  --border2:   rgba(255,255,255,.12);
 
-–text:      #f0f4ff;
-–text2:     #8fa3c8;
-–text3:     #4d6080;
+  --text:      #f0f4ff;
+  --text2:     #8fa3c8;
+  --text3:     #4d6080;
 
-/* Accent — George uses bright teal/blue */
-–accent:    #4da8ff;
-–accent2:   #2684ff;
-–accent-bg: rgba(77,168,255,.1);
+  /* Accent — George uses bright teal/blue */
+  --accent:    #4da8ff;
+  --accent2:   #2684ff;
+  --accent-bg: rgba(77,168,255,.1);
 
-/* Semantic */
-–green:     #34c97a;
-–green-bg:  rgba(52,201,122,.12);
-–red:       #ff6b6b;
-–red-bg:    rgba(255,107,107,.12);
-–amber:     #ffcf5c;
-–purple:    #a78bfa;
+  /* Semantic */
+  --green:     #34c97a;
+  --green-bg:  rgba(52,201,122,.12);
+  --red:       #ff6b6b;
+  --red-bg:    rgba(255,107,107,.12);
+  --amber:     #ffcf5c;
+  --purple:    #a78bfa;
 
-/* Kakeibo cats */
-–need:      #34c97a;
-–want:      #ff9f43;
-–culture:   #4da8ff;
-–unexp:     #ff6b6b;
-–salary:    #34c97a;
-–bonus:     #a8e063;
-–passive:   #63d4c4;
-–need-bg:   rgba(52,201,122,.13);
-–want-bg:   rgba(255,159,67,.13);
-–cult-bg:   rgba(77,168,255,.13);
-–unexp-bg:  rgba(255,107,107,.13);
-–sal-bg:    rgba(52,201,122,.13);
-–bon-bg:    rgba(168,224,99,.13);
-–pas-bg:    rgba(99,212,196,.13);
+  /* Kakeibo cats */
+  --need:      #34c97a;
+  --want:      #ff9f43;
+  --culture:   #4da8ff;
+  --unexp:     #ff6b6b;
+  --salary:    #34c97a;
+  --bonus:     #a8e063;
+  --passive:   #63d4c4;
+  --need-bg:   rgba(52,201,122,.13);
+  --want-bg:   rgba(255,159,67,.13);
+  --cult-bg:   rgba(77,168,255,.13);
+  --unexp-bg:  rgba(255,107,107,.13);
+  --sal-bg:    rgba(52,201,122,.13);
+  --bon-bg:    rgba(168,224,99,.13);
+  --pas-bg:    rgba(99,212,196,.13);
 
-–r-sm: 12px;
-–r-md: 16px;
-–r-lg: 20px;
-–r-xl: 24px;
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 20px;
+  --r-xl: 24px;
 
-–shadow-sm: 0 2px 12px rgba(0,0,0,.25);
-–shadow-md: 0 4px 24px rgba(0,0,0,.35);
-–shadow-lg: 0 8px 40px rgba(0,0,0,.5);
+  --shadow-sm: 0 2px 12px rgba(0,0,0,.25);
+  --shadow-md: 0 4px 24px rgba(0,0,0,.35);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.5);
 
-–safe-top: env(safe-area-inset-top,0px);
-–safe-bot: env(safe-area-inset-bottom,0px);
+  --safe-top: env(safe-area-inset-top,0px);
+  --safe-bot: env(safe-area-inset-bottom,0px);
 }
 
 html{background:#0b1120;color:#f0f4ff;}
 html,body{height:100%;width:100%;background:#0b1120;color:#f0f4ff;
-font-family:‘DM Sans’,sans-serif;font-size:15px;overscroll-behavior:none;line-height:1.45;}
+  font-family:'DM Sans',sans-serif;font-size:15px;overscroll-behavior:none;line-height:1.45;}
 
 /* ══════════════════════════
-SHELL
+   SHELL
 ══════════════════════════ */
-#app{display:flex;flex-direction:column;height:100dvh;padding-top:var(–safe-top);}
+#app{display:flex;flex-direction:column;height:100dvh;padding-top:var(--safe-top);}
 
 /* Header */
 #shell-header{
-background:#0b1120;
-display:flex;align-items:center;justify-content:space-between;
-padding:14px 20px 12px;
-border-bottom:1px solid rgba(255,255,255,.07);
-flex-shrink:0;
+  background:#0b1120;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px 12px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  flex-shrink:0;
 }
 .logo{font-size:20px;font-weight:700;letter-spacing:-.5px;color:#f0f4ff;}
-.logo span{color:var(–accent);}
+.logo span{color:var(--accent);}
 .header-right{display:flex;align-items:center;gap:8px;}
 .date-pill{font-size:11px;color:#8fa3c8;background:#152035;
-padding:5px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.12);}
+  padding:5px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.12);}
 
 /* Bottom nav — George style tab bar */
 #bottom-nav{
-display:flex;align-items:center;
-background:#152035;
-border-top:1px solid rgba(255,255,255,.12);
-padding:8px 0 calc(8px + var(–safe-bot));
-flex-shrink:0;
+  display:flex;align-items:center;
+  background:#152035;
+  border-top:1px solid rgba(255,255,255,.12);
+  padding:8px 0 calc(8px + var(--safe-bot));
+  flex-shrink:0;
 }
 .bnav-tab{
-flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
-padding:4px 0;cursor:pointer;transition:color .15s;color:#4d6080;
-font-size:10px;font-weight:500;letter-spacing:.01em;user-select:none;
-border:none;background:none;
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:4px 0;cursor:pointer;transition:color .15s;color:#4d6080;
+  font-size:10px;font-weight:500;letter-spacing:.01em;user-select:none;
+  border:none;background:none;
 }
 .bnav-tab .bicon{font-size:20px;line-height:1;}
-.bnav-tab.active{color:var(–accent);}
+.bnav-tab.active{color:var(--accent);}
 .bnav-tab.active .bicon{filter:drop-shadow(0 0 6px rgba(77,168,255,.5));}
 
 /* Content */
@@ -119,24 +120,24 @@ border:none;background:none;
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* ══════════════════════════
-DASHBOARD
+   DASHBOARD
 ══════════════════════════ */
-.dash-wrap{padding:0 0 calc(20px + var(–safe-bot));}
+.dash-wrap{padding:0 0 calc(20px + var(--safe-bot));}
 
 /* Hero banner */
 .dash-hero{
-background:linear-gradient(145deg,#152d55 0%,#0f1e3a 60%,#0b1120 100%);
-padding:24px 20px 28px;
-position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#152d55 0%,#0f1e3a 60%,#0b1120 100%);
+  padding:24px 20px 28px;
+  position:relative;overflow:hidden;
 }
 .dash-hero::after{
-content:’’;position:absolute;top:-40px;right:-40px;
-width:180px;height:180px;border-radius:50%;
-background:radial-gradient(circle,rgba(77,168,255,.12) 0%,transparent 70%);
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(77,168,255,.12) 0%,transparent 70%);
 }
 .dash-greeting-sm{font-size:12px;color:#8fa3c8;font-weight:400;margin-bottom:4px;}
 .dash-greeting{font-size:26px;font-weight:700;letter-spacing:-.4px;color:#f0f4ff;margin-bottom:2px;}
-.dash-period{font-size:12px;color:var(–accent);font-weight:500;margin-top:6px;}
+.dash-period{font-size:12px;color:var(--accent);font-weight:500;margin-top:6px;}
 
 /* Section label */
 .dash-section{padding:20px 20px 10px;}
@@ -145,41 +146,41 @@ background:radial-gradient(circle,rgba(77,168,255,.12) 0%,transparent 70%);
 /* Module tiles — velké, pod sebou */
 .dash-tiles{display:flex;flex-direction:column;gap:10px;padding:0 16px;}
 .dash-tile{
-background:#152035;
-border:1px solid rgba(255,255,255,.12);
-border-radius:var(–r-xl);
-padding:20px;
-cursor:pointer;
-display:flex;align-items:center;gap:16px;
-transition:background .15s,transform .12s;
-box-shadow:var(–shadow-sm);
-position:relative;overflow:hidden;
+  background:#152035;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-xl);
+  padding:20px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:16px;
+  transition:background .15s,transform .12s;
+  box-shadow:var(--shadow-sm);
+  position:relative;overflow:hidden;
 }
 .dash-tile:active{transform:scale(.98);background:#1c2d47;}
 .dash-tile-left{flex:1;min-width:0;}
 .dash-tile-icon{
-width:48px;height:48px;border-radius:14px;
-display:flex;align-items:center;justify-content:center;
-font-size:22px;flex-shrink:0;
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
 }
 .dash-tile-name{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
-color:#8fa3c8;margin-bottom:4px;}
+  color:#8fa3c8;margin-bottom:4px;}
 .dash-tile-val{font-size:24px;font-weight:700;color:#f0f4ff;letter-spacing:-.4px;line-height:1.1;}
 .dash-tile-sub{font-size:11px;color:#8fa3c8;margin-top:3px;}
 .dash-tile-arrow{font-size:16px;color:#4d6080;flex-shrink:0;}
 
 /* Tile accent lines */
-.dash-tile[data-mod=“ucetnictvi”] .dash-tile-icon{background:var(–green-bg);}
-.dash-tile[data-mod=“investice”]  .dash-tile-icon{background:rgba(255,207,92,.1);}
-.dash-tile[data-mod=“auto”]       .dash-tile-icon{background:var(–cult-bg);}
-.dash-tile[data-mod=“elektrina”]  .dash-tile-icon{background:rgba(167,139,250,.1);}
-.dash-tile[data-mod=“kondice”]    .dash-tile-icon{background:rgba(99,212,196,.1);}
+.dash-tile[data-mod="ucetnictvi"] .dash-tile-icon{background:var(--green-bg);}
+.dash-tile[data-mod="investice"]  .dash-tile-icon{background:rgba(255,207,92,.1);}
+.dash-tile[data-mod="auto"]       .dash-tile-icon{background:var(--cult-bg);}
+.dash-tile[data-mod="elektrina"]  .dash-tile-icon{background:rgba(167,139,250,.1);}
+.dash-tile[data-mod="kondice"]    .dash-tile-icon{background:rgba(99,212,196,.1);}
 
 /* Activity */
 .dash-activity{display:flex;flex-direction:column;gap:8px;padding:0 16px;}
 .act-tile{
-background:#152035;border:1px solid rgba(255,255,255,.07);border-radius:var(–r-lg);
-padding:14px 16px;display:flex;align-items:center;gap:12px;
+  background:#152035;border:1px solid rgba(255,255,255,.07);border-radius:var(--r-lg);
+  padding:14px 16px;display:flex;align-items:center;gap:12px;
 }
 .act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .act-info{flex:1;}
@@ -191,99 +192,99 @@ padding:14px 16px;display:flex;align-items:center;gap:12px;
 .ver-bar{text-align:center;padding:24px 0 4px;font-size:10px;color:#4d6080;letter-spacing:.06em;}
 
 /* ══════════════════════════
-KAKEIBO MODULE
+   KAKEIBO MODULE
 ══════════════════════════ */
 #mod-ucetnictvi{display:none;flex-direction:column;}
 #mod-ucetnictvi.active{display:flex;height:100%;}
 
 /* Kakeibo header */
 .kk-header{
-background:#0b1120;
-border-bottom:1px solid rgba(255,255,255,.07);
-padding:14px 16px 10px;
-flex-shrink:0;
+  background:#0b1120;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  padding:14px 16px 10px;
+  flex-shrink:0;
 }
 .kk-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
 .kk-title{font-size:18px;font-weight:700;letter-spacing:-.3px;}
-.kk-title span{color:var(–accent);}
+.kk-title span{color:var(--accent);}
 .kk-period-nav{display:flex;align-items:center;gap:6px;}
 .kk-nav-btn{
-background:#1c2d47;border:1px solid rgba(255,255,255,.12);border-radius:9px;
-padding:5px 12px;font-size:16px;color:#8fa3c8;cursor:pointer;
-font-family:‘DM Sans’,sans-serif;line-height:1;
+  background:#1c2d47;border:1px solid rgba(255,255,255,.12);border-radius:9px;
+  padding:5px 12px;font-size:16px;color:#8fa3c8;cursor:pointer;
+  font-family:'DM Sans',sans-serif;line-height:1;
 }
 .kk-period-lbl{font-size:12px;font-weight:600;min-width:118px;text-align:center;color:#f0f4ff;}
 
 /* Kakeibo tab bar */
-.kk-tabs{display:flex;gap:4px;background:#152035;border-radius:var(–r-sm);padding:3px;}
+.kk-tabs{display:flex;gap:4px;background:#152035;border-radius:var(--r-sm);padding:3px;}
 .kk-tab{
-flex:1;padding:7px 0;text-align:center;font-size:11px;font-weight:600;
-color:#4d6080;border-radius:9px;cursor:pointer;transition:all .15s;letter-spacing:.01em;
+  flex:1;padding:7px 0;text-align:center;font-size:11px;font-weight:600;
+  color:#4d6080;border-radius:9px;cursor:pointer;transition:all .15s;letter-spacing:.01em;
 }
-.kk-tab.active{background:#1c2d47;color:#f0f4ff;box-shadow:var(–shadow-sm);}
+.kk-tab.active{background:#1c2d47;color:#f0f4ff;box-shadow:var(--shadow-sm);}
 
 /* Scroll area */
-.kk-scroll{flex:1;overflow-y:auto;padding-bottom:calc(80px + var(–safe-bot));scrollbar-width:none;}
+.kk-scroll{flex:1;overflow-y:auto;padding-bottom:calc(80px + var(--safe-bot));scrollbar-width:none;}
 .kk-scroll::-webkit-scrollbar{display:none;}
 .kk-view{display:none;}
 .kk-view.active{display:block;}
 
 /* ── Summary card (George-style hero card) ── */
 .kk-hero-card{
-background:linear-gradient(135deg,#1c2d47 0%,#152035 100%);
-border:1px solid rgba(255,255,255,.12);
-border-radius:var(–r-xl);
-margin:14px 14px 0;
-padding:20px;
-box-shadow:var(–shadow-md);
+  background:linear-gradient(135deg,#1c2d47 0%,#152035 100%);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-xl);
+  margin:14px 14px 0;
+  padding:20px;
+  box-shadow:var(--shadow-md);
 }
 .kk-hero-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4d6080;margin-bottom:6px;}
 .kk-hero-bal{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1;}
-.kk-hero-bal.pos{color:var(–green);}
-.kk-hero-bal.neg{color:var(–red);}
+.kk-hero-bal.pos{color:var(--green);}
+.kk-hero-bal.neg{color:var(--red);}
 .kk-hero-bal.zero{color:#8fa3c8;}
 .kk-hero-sub{font-size:12px;color:#8fa3c8;margin-top:5px;}
 .kk-hero-row{display:flex;gap:12px;margin-top:16px;}
 .kk-hero-pill{
-flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
-border-radius:var(–r-md);padding:12px 14px;
+  flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-md);padding:12px 14px;
 }
 .kk-hero-pill-lbl{font-size:10px;color:#4d6080;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;}
 .kk-hero-pill-val{font-size:18px;font-weight:700;}
-.kk-hero-pill-val.inc{color:var(–green);}
-.kk-hero-pill-val.exp{color:var(–red);}
+.kk-hero-pill-val.inc{color:var(--green);}
+.kk-hero-pill-val.exp{color:var(--red);}
 
 /* Progress bar */
 .kk-prog-wrap{margin-top:14px;}
 .kk-prog-labels{display:flex;justify-content:space-between;font-size:10px;color:#4d6080;margin-bottom:5px;}
 .kk-prog-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
 .kk-prog-bar{height:100%;border-radius:3px;transition:width .5s ease;}
-.kk-prog-bar.ok{background:var(–green);}
-.kk-prog-bar.warn{background:var(–amber);}
-.kk-prog-bar.over{background:var(–red);}
+.kk-prog-bar.ok{background:var(--green);}
+.kk-prog-bar.warn{background:var(--amber);}
+.kk-prog-bar.over{background:var(--red);}
 
 /* ── Cat tiles ── */
 .kk-cats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 14px 0;}
 .kk-cat{
-background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(–r-lg);
-padding:14px;cursor:pointer;transition:background .12s;
+  background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);
+  padding:14px;cursor:pointer;transition:background .12s;
 }
 .kk-cat:active{background:#1c2d47;}
 .kk-cat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
 .kk-cat-icon{font-size:18px;}
 .kk-cat-badge{
-font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:.04em;
+  font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:.04em;
 }
-.kk-cat-badge.need   {background:var(–need-bg);color:var(–need);}
-.kk-cat-badge.want   {background:var(–want-bg);color:var(–want);}
-.kk-cat-badge.culture{background:var(–cult-bg);color:var(–culture);}
-.kk-cat-badge.unexp  {background:var(–unexp-bg);color:var(–unexp);}
+.kk-cat-badge.need   {background:var(--need-bg);color:var(--need);}
+.kk-cat-badge.want   {background:var(--want-bg);color:var(--want);}
+.kk-cat-badge.culture{background:var(--cult-bg);color:var(--culture);}
+.kk-cat-badge.unexp  {background:var(--unexp-bg);color:var(--unexp);}
 .kk-cat-name{font-size:10px;color:#4d6080;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;}
 .kk-cat-amt{font-size:20px;font-weight:700;}
-.kk-cat-amt.need   {color:var(–need);}
-.kk-cat-amt.want   {color:var(–want);}
-.kk-cat-amt.culture{color:var(–culture);}
-.kk-cat-amt.unexp  {color:var(–unexp);}
+.kk-cat-amt.need   {color:var(--need);}
+.kk-cat-amt.want   {color:var(--want);}
+.kk-cat-amt.culture{color:var(--culture);}
+.kk-cat-amt.unexp  {color:var(--unexp);}
 .kk-cat-cnt{font-size:10px;color:#4d6080;margin-top:2px;}
 
 /* ── Section header ── */
@@ -291,44 +292,44 @@ font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:
 .kk-sec-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4d6080;}
 .kk-chips{display:flex;gap:4px;}
 .kk-chip{
-font-size:10px;font-weight:600;padding:4px 10px;border-radius:12px;
-border:1px solid rgba(255,255,255,.12);background:none;color:#4d6080;
-cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:all .13s;
+  font-size:10px;font-weight:600;padding:4px 10px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);background:none;color:#4d6080;
+  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .13s;
 }
-.kk-chip.active{background:var(–accent);color:#fff;border-color:var(–accent);}
+.kk-chip.active{background:var(--accent);color:#fff;border-color:var(--accent);}
 
 /* ── Transaction list ── */
 .kk-txs{padding:0 14px;display:flex;flex-direction:column;gap:6px;}
 .kk-tx{
-background:#152035;border:1px solid rgba(255,255,255,.07);border-radius:var(–r-lg);
-padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;
-transition:background .12s;box-shadow:var(–shadow-sm);
+  background:#152035;border:1px solid rgba(255,255,255,.07);border-radius:var(--r-lg);
+  padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;
+  transition:background .12s;box-shadow:var(--shadow-sm);
 }
 .kk-tx:active{background:#1c2d47;}
 .kk-tx-icon{
-width:40px;height:40px;border-radius:12px;display:flex;align-items:center;
-justify-content:center;font-size:17px;flex-shrink:0;
+  width:40px;height:40px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:17px;flex-shrink:0;
 }
-.kk-tx-icon.need   {background:var(–need-bg);}
-.kk-tx-icon.want   {background:var(–want-bg);}
-.kk-tx-icon.culture{background:var(–cult-bg);}
-.kk-tx-icon.unexp  {background:var(–unexp-bg);}
-.kk-tx-icon.salary {background:var(–sal-bg);}
-.kk-tx-icon.bonus  {background:var(–bon-bg);}
-.kk-tx-icon.passive{background:var(–pas-bg);}
+.kk-tx-icon.need   {background:var(--need-bg);}
+.kk-tx-icon.want   {background:var(--want-bg);}
+.kk-tx-icon.culture{background:var(--cult-bg);}
+.kk-tx-icon.unexp  {background:var(--unexp-bg);}
+.kk-tx-icon.salary {background:var(--sal-bg);}
+.kk-tx-icon.bonus  {background:var(--bon-bg);}
+.kk-tx-icon.passive{background:var(--pas-bg);}
 .kk-tx-info{flex:1;min-width:0;}
 .kk-tx-desc{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#f0f4ff;}
 .kk-tx-meta{font-size:11px;color:#4d6080;margin-top:2px;}
 .kk-tx-right{text-align:right;flex-shrink:0;}
 .kk-tx-amt{font-size:16px;font-weight:700;}
 .kk-tx-amt.exp{color:#f0f4ff;}
-.kk-tx-amt.inc{color:var(–green);}
+.kk-tx-amt.inc{color:var(--green);}
 .kk-tx-date{font-size:10px;color:#4d6080;margin-top:2px;}
 
 /* Week divider */
 .kk-wk-div{
-font-size:10px;color:#4d6080;text-transform:uppercase;
-letter-spacing:.07em;padding:14px 4px 4px;font-weight:700;
+  font-size:10px;color:#4d6080;text-transform:uppercase;
+  letter-spacing:.07em;padding:14px 4px 4px;font-weight:700;
 }
 
 /* Empty */
@@ -339,8 +340,8 @@ letter-spacing:.07em;padding:14px 4px 4px;font-weight:700;
 
 /* ── Year view ── */
 .kk-yr-card{
-background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(–r-xl);
-margin:14px 14px 0;overflow:hidden;box-shadow:var(–shadow-sm);
+  background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(--r-xl);
+  margin:14px 14px 0;overflow:hidden;box-shadow:var(--shadow-sm);
 }
 .kk-yt-row{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;}
 .kk-yt-row+.kk-yt-row{border-top:1px solid rgba(255,255,255,.07);}
@@ -348,23 +349,23 @@ margin:14px 14px 0;overflow:hidden;box-shadow:var(–shadow-sm);
 .kk-yt-v{font-size:16px;font-weight:700;}
 .kk-months{padding:10px 14px 0;display:flex;flex-direction:column;gap:8px;}
 .kk-month{
-background:#152035;border:1px solid rgba(255,255,255,.07);border-radius:var(–r-lg);
-padding:14px 16px;cursor:pointer;transition:background .12s;
+  background:#152035;border:1px solid rgba(255,255,255,.07);border-radius:var(--r-lg);
+  padding:14px 16px;cursor:pointer;transition:background .12s;
 }
 .kk-month:active{background:#1c2d47;}
 .kk-month-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
 .kk-month-name{font-size:14px;font-weight:500;}
 .kk-month-bal{font-size:14px;font-weight:700;}
-.kk-month-bal.pos{color:var(–green);}
-.kk-month-bal.neg{color:var(–red);}
+.kk-month-bal.pos{color:var(--green);}
+.kk-month-bal.neg{color:var(--red);}
 .kk-month-bars{display:flex;gap:2px;height:5px;border-radius:3px;overflow:hidden;}
 .kk-bar{height:100%;min-width:4px;}
 
 /* ── Settings view ── */
 .kk-settings{padding:14px;display:flex;flex-direction:column;gap:12px;}
 .kk-scard{
-background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(–r-xl);
-overflow:hidden;box-shadow:var(–shadow-sm);
+  background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(--r-xl);
+  overflow:hidden;box-shadow:var(--shadow-sm);
 }
 .kk-scard-head{padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.07);}
 .kk-scard-title{font-size:14px;font-weight:700;margin-bottom:3px;color:#f0f4ff;}
@@ -374,8 +375,8 @@ overflow:hidden;box-shadow:var(–shadow-sm);
 /* Recurring list */
 .recur-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
 .recur-item{
-display:flex;align-items:center;gap:10px;background:#1c2d47;
-border:1px solid rgba(255,255,255,.07);border-radius:var(–r-md);padding:12px 14px;
+  display:flex;align-items:center;gap:10px;background:#1c2d47;
+  border:1px solid rgba(255,255,255,.07);border-radius:var(--r-md);padding:12px 14px;
 }
 .recur-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .recur-info{flex:1;min-width:0;}
@@ -383,11 +384,11 @@ border:1px solid rgba(255,255,255,.07);border-radius:var(–r-md);padding:12px 1
 .recur-meta{font-size:11px;color:#4d6080;margin-top:1px;}
 .recur-amt{font-size:14px;font-weight:700;color:#8fa3c8;flex-shrink:0;}
 .recur-del{background:none;border:none;color:#4d6080;font-size:20px;
-cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;}
+  cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;}
 
 /* ── Statistics view ── */
 .st-wrap{padding:14px;display:flex;flex-direction:column;gap:12px;}
-.st-card{background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(–r-xl);overflow:hidden;box-shadow:var(–shadow-sm);}
+.st-card{background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-sm);}
 .st-card-title{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#4d6080;padding:15px 18px 0;}
 .st-big{padding:8px 18px 16px;}
 .st-big-val{font-size:30px;font-weight:700;letter-spacing:-.5px;line-height:1.1;}
@@ -405,12 +406,12 @@ cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;}
 .st-bar-track{height:7px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;}
 .st-bar-fill{height:100%;border-radius:4px;transition:width .5s ease;}
 .st-mom-grid{padding:10px 18px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
-.st-mom-cell{background:#1c2d47;border-radius:var(–r-md);padding:10px 12px;}
+.st-mom-cell{background:#1c2d47;border-radius:var(--r-md);padding:10px 12px;}
 .st-mom-name{font-size:9px;color:#4d6080;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:5px;}
 .st-mom-exp{font-size:14px;font-weight:700;}
 .st-mom-delta{font-size:10px;margin-top:3px;}
-.st-mom-delta.up{color:var(–red);}
-.st-mom-delta.down{color:var(–green);}
+.st-mom-delta.up{color:var(--red);}
+.st-mom-delta.down{color:var(--green);}
 .st-mom-delta.flat{color:#4d6080;}
 .st-top5{padding:10px 18px 16px;display:flex;flex-direction:column;gap:10px;}
 .st-top5-item{display:flex;align-items:center;gap:10px;}
@@ -431,53 +432,47 @@ cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;}
 .st-ratio-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
 
 /* ══════════════════════════
-FAB
+   FAB
 ══════════════════════════ */
 #kk-fab{
-position:fixed;
-bottom:calc(80px + var(–safe-bot));
-right:20px;
-height:56px;
-padding:0 26px;
-border-radius:28px;
-background:#ffffff;
-color:#0b1120;
-border:none;
-font-size:15px;
-font-weight:700;
-font-family:‘DM Sans’,sans-serif;
-display:flex;align-items:center;gap:8px;
-cursor:pointer;
-box-shadow:0 4px 28px rgba(0,0,0,.7),0 1px 6px rgba(0,0,0,.4);
-z-index:200;
-transition:transform .12s,box-shadow .12s;
-white-space:nowrap;
--webkit-tap-highlight-color:transparent;
-opacity:1;
-transition:opacity .2s,transform .2s,box-shadow .12s;
+  position:fixed;
+  bottom:calc(76px + env(safe-area-inset-bottom,0px));
+  right:20px;
+  height:56px;
+  padding:0 26px;
+  border-radius:28px;
+  background:#ffffff;
+  color:#0b1120;
+  border:none;
+  font-size:15px;
+  font-weight:700;
+  font-family:'DM Sans',sans-serif;
+  display:none;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  box-shadow:0 6px 32px rgba(0,0,0,.8),0 2px 8px rgba(0,0,0,.4);
+  z-index:9999;
+  white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
 }
+#kk-fab.fab-visible{display:flex;}
 #kk-fab .fab-plus{font-size:22px;font-weight:300;line-height:1;}
-#kk-fab:active{transform:scale(.95);box-shadow:0 2px 12px rgba(0,0,0,.4);}
-#kk-fab.hidden{
-opacity:0;
-pointer-events:none;
-transform:translateY(20px) scale(.9);
-transition:opacity .15s,transform .15s;
-}
+#kk-fab:active{opacity:.8;}
 
 /* ══════════════════════════
-MODALS
+   MODALS
 ══════════════════════════ */
 .modal-bg{
-position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;
-display:none;align-items:flex-end;backdrop-filter:blur(4px);
+  position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;
+  display:none;align-items:flex-end;backdrop-filter:blur(4px);
 }
 .modal-bg.open{display:flex;}
 .modal-sheet{
-background:#152035;border-radius:24px 24px 0 0;width:100%;
-padding-bottom:calc(16px + var(–safe-bot));
-animation:sheetUp .24s cubic-bezier(.22,.68,0,1.2) both;
-max-height:92dvh;overflow-y:auto;
+  background:#152035;border-radius:24px 24px 0 0;width:100%;
+  padding-bottom:calc(16px + var(--safe-bot));
+  animation:sheetUp .24s cubic-bezier(.22,.68,0,1.2) both;
+  max-height:92dvh;overflow-y:auto;
 }
 @keyframes sheetUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
 .modal-handle{width:38px;height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin:12px auto 14px;}
@@ -486,370 +481,371 @@ max-height:92dvh;overflow-y:auto;
 /* Form */
 .f-sec{padding:14px 20px 0;}
 .f-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;
-color:#4d6080;margin-bottom:6px;display:block;}
+  color:#4d6080;margin-bottom:6px;display:block;}
 .f-input{
-width:100%;background:#1c2d47;border:1px solid rgba(255,255,255,.12);
-border-radius:var(–r-md);padding:12px 14px;font-size:15px;
-font-family:‘DM Sans’,sans-serif;color:#f0f4ff;outline:none;
+  width:100%;background:#1c2d47;border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-md);padding:12px 14px;font-size:15px;
+  font-family:'DM Sans',sans-serif;color:#f0f4ff;outline:none;
 }
-.f-input:focus{border-color:var(–accent);}
+.f-input:focus{border-color:var(--accent);}
 .f-input.xl{font-size:26px;font-weight:700;text-align:right;padding:12px 15px;letter-spacing:-.4px;}
 .f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 20px 0;}
 
 /* Type toggles */
 .f-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px 20px 0;}
 .f-type-btn{
-padding:11px 10px;border-radius:var(–r-md);border:1.5px solid rgba(255,255,255,.12);
-background:#1c2d47;font-size:13px;font-weight:600;cursor:pointer;
-text-align:center;transition:all .14s;font-family:‘DM Sans’,sans-serif;color:#8fa3c8;
+  padding:11px 10px;border-radius:var(--r-md);border:1.5px solid rgba(255,255,255,.12);
+  background:#1c2d47;font-size:13px;font-weight:600;cursor:pointer;
+  text-align:center;transition:all .14s;font-family:'DM Sans',sans-serif;color:#8fa3c8;
 }
 .f-type-btn small{display:block;font-size:9px;color:#4d6080;margin-top:2px;font-weight:400;}
-.f-type-btn.active.t-expense{border-color:var(–red);background:var(–red-bg);color:var(–red);}
-.f-type-btn.active.t-income {border-color:var(–accent);background:var(–accent-bg);color:var(–accent);}
-.f-type-btn.active.t-salary {border-color:var(–green);background:var(–green-bg);color:var(–green);}
-.f-type-btn.active.t-bonus  {border-color:var(–bonus);background:var(–bon-bg);color:var(–bonus);}
-.f-type-btn.active.t-passive{border-color:var(–passive);background:var(–pas-bg);color:var(–passive);}
+.f-type-btn.active.t-expense{border-color:var(--red);background:var(--red-bg);color:var(--red);}
+.f-type-btn.active.t-income {border-color:var(--accent);background:var(--accent-bg);color:var(--accent);}
+.f-type-btn.active.t-salary {border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.f-type-btn.active.t-bonus  {border-color:var(--bonus);background:var(--bon-bg);color:var(--bonus);}
+.f-type-btn.active.t-passive{border-color:var(--passive);background:var(--pas-bg);color:var(--passive);}
 
 /* Cat buttons */
 .f-cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:12px 20px 0;}
 .f-cat-btn{
-padding:10px 4px;border-radius:var(–r-md);border:1.5px solid rgba(255,255,255,.12);
-background:#1c2d47;font-size:9px;font-weight:700;cursor:pointer;text-align:center;
-transition:all .14s;font-family:‘DM Sans’,sans-serif;color:#4d6080;line-height:1.4;
-text-transform:uppercase;letter-spacing:.03em;
+  padding:10px 4px;border-radius:var(--r-md);border:1.5px solid rgba(255,255,255,.12);
+  background:#1c2d47;font-size:9px;font-weight:700;cursor:pointer;text-align:center;
+  transition:all .14s;font-family:'DM Sans',sans-serif;color:#4d6080;line-height:1.4;
+  text-transform:uppercase;letter-spacing:.03em;
 }
 .f-cat-btn span{font-size:18px;display:block;margin-bottom:4px;}
-.f-cat-btn.active.c-need   {border-color:var(–need);   background:var(–need-bg); color:var(–need);}
-.f-cat-btn.active.c-want   {border-color:var(–want);   background:var(–want-bg); color:var(–want);}
-.f-cat-btn.active.c-culture{border-color:var(–culture);background:var(–cult-bg); color:var(–culture);}
-.f-cat-btn.active.c-unexp  {border-color:var(–unexp);  background:var(–unexp-bg);color:var(–unexp);}
+.f-cat-btn.active.c-need   {border-color:var(--need);   background:var(--need-bg); color:var(--need);}
+.f-cat-btn.active.c-want   {border-color:var(--want);   background:var(--want-bg); color:var(--want);}
+.f-cat-btn.active.c-culture{border-color:var(--culture);background:var(--cult-bg); color:var(--culture);}
+.f-cat-btn.active.c-unexp  {border-color:var(--unexp);  background:var(--unexp-bg);color:var(--unexp);}
 
 /* Buttons */
 .btn-primary{
-display:block;width:calc(100% - 40px);margin:16px 20px 0;
-background:var(–accent2);color:#fff;border:none;border-radius:var(–r-md);
-padding:15px;font-size:15px;font-weight:700;cursor:pointer;
-font-family:‘DM Sans’,sans-serif;box-shadow:0 2px 16px rgba(38,132,255,.3);
+  display:block;width:calc(100% - 40px);margin:16px 20px 0;
+  background:var(--accent2);color:#fff;border:none;border-radius:var(--r-md);
+  padding:15px;font-size:15px;font-weight:700;cursor:pointer;
+  font-family:'DM Sans',sans-serif;box-shadow:0 2px 16px rgba(38,132,255,.3);
 }
 .btn-secondary{
-display:block;width:100%;background:#1c2d47;color:#8fa3c8;
-border:1px solid rgba(255,255,255,.12);border-radius:var(–r-md);
-padding:13px;font-size:13px;font-weight:600;cursor:pointer;font-family:‘DM Sans’,sans-serif;
+  display:block;width:100%;background:#1c2d47;color:#8fa3c8;
+  border:1px solid rgba(255,255,255,.12);border-radius:var(--r-md);
+  padding:13px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;
 }
 .btn-danger{
-flex:1;padding:13px;border-radius:var(–r-md);border:1px solid rgba(255,255,255,.07);
-background:var(–red-bg);color:var(–red);font-size:14px;font-weight:700;
-cursor:pointer;font-family:‘DM Sans’,sans-serif;
+  flex:1;padding:13px;border-radius:var(--r-md);border:1px solid rgba(255,255,255,.07);
+  background:var(--red-bg);color:var(--red);font-size:14px;font-weight:700;
+  cursor:pointer;font-family:'DM Sans',sans-serif;
 }
 .btn-neutral{
-flex:1;padding:13px;border-radius:var(–r-md);border:1px solid rgba(255,255,255,.07);
-background:#1c2d47;color:#8fa3c8;font-size:14px;font-weight:500;
-cursor:pointer;font-family:‘DM Sans’,sans-serif;
+  flex:1;padding:13px;border-radius:var(--r-md);border:1px solid rgba(255,255,255,.07);
+  background:#1c2d47;color:#8fa3c8;font-size:14px;font-weight:500;
+  cursor:pointer;font-family:'DM Sans',sans-serif;
 }
 .btn-row{display:flex;gap:8px;padding:16px 20px 0;}
 .detail-info{padding:14px 20px 0;font-size:13px;color:#8fa3c8;line-height:2.2;}
 
 /* ══════════════════════════
-PLACEHOLDERS
+   PLACEHOLDERS
 ══════════════════════════ */
-.mod-wrap{padding:20px 16px calc(32px + var(–safe-bot));}
+.mod-wrap{padding:20px 16px calc(32px + var(--safe-bot));}
 .mod-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
 .mod-badge{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
 .mod-title{font-size:22px;font-weight:700;letter-spacing:-.3px;}
 .mod-sub{font-size:12px;color:#8fa3c8;margin-top:3px;}
-.ph-box{background:#152035;border:1.5px dashed rgba(255,255,255,.12);border-radius:var(–r-xl);padding:36px 24px;text-align:center;}
+.ph-box{background:#152035;border:1.5px dashed rgba(255,255,255,.12);border-radius:var(--r-xl);padding:36px 24px;text-align:center;}
 .ph-icon{font-size:36px;margin-bottom:12px;}
 .ph-title{font-size:15px;font-weight:700;margin-bottom:6px;}
 .ph-text{font-size:12px;color:#8fa3c8;line-height:1.7;}
 
 /* ══════════════════════════
-TOAST & DB
+   TOAST & DB
 ══════════════════════════ */
 #toast{
-position:fixed;bottom:calc(90px + var(–safe-bot));left:50%;transform:translateX(-50%);
-background:#243657;color:#f0f4ff;border:1px solid rgba(255,255,255,.12);
-padding:10px 20px;border-radius:22px;font-size:13px;font-weight:600;z-index:200;
-opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap;
-box-shadow:0 6px 24px rgba(0,0,0,.5);
+  position:fixed;bottom:calc(90px + var(--safe-bot));left:50%;transform:translateX(-50%);
+  background:#243657;color:#f0f4ff;border:1px solid rgba(255,255,255,.12);
+  padding:10px 20px;border-radius:22px;font-size:13px;font-weight:600;z-index:200;
+  opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap;
+  box-shadow:0 6px 24px rgba(0,0,0,.5);
 }
 #toast.show{opacity:1;}
 #db-chip{
-position:fixed;bottom:calc(14px + var(–safe-bot));left:16px;
-background:#1c2d47;border:1px solid rgba(255,255,255,.07);border-radius:18px;
-padding:5px 11px;font-size:10px;color:#4d6080;display:flex;align-items:center;
-gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
+  position:fixed;bottom:calc(14px + var(--safe-bot));left:16px;
+  background:#1c2d47;border:1px solid rgba(255,255,255,.07);border-radius:18px;
+  padding:5px 11px;font-size:10px;color:#4d6080;display:flex;align-items:center;
+  gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
 }
-#db-chip .dot{width:5px;height:5px;border-radius:50%;background:var(–green);}
-#db-chip.err .dot{background:var(–red);}
+#db-chip .dot{width:5px;height:5px;border-radius:50%;background:var(--green);}
+#db-chip.err .dot{background:var(--red);}
 #db-chip.hidden{opacity:0;}
 </style>
-
 </head>
 <body>
 <div id="app">
 
   <!-- HEADER -->
-
   <header id="shell-header">
-    <div class="logo">Můj<span>OS</span></div>
+    <div class="logo" style="display:flex;align-items:center;gap:8px;">
+      <svg width="32" height="32" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="30" cy="30" r="19" stroke="#4da8ff" stroke-width="6"/>
+  <circle cx="30" cy="30" r="7" fill="#4da8ff"/>
+  <path d="M49 30 L56 30" stroke="#4da8ff" stroke-width="3" stroke-linecap="round"/>
+</svg>
+      <span style="font-size:19px;font-weight:700;letter-spacing:-.4px;color:#f0f4ff;">Můj<span style="color:#4da8ff;">OS</span></span>
+    </div>
     <div class="header-right">
       <div class="date-pill" id="date-chip"></div>
     </div>
   </header>
 
   <!-- CONTENT -->
-
   <div id="content">
 
-```
-<!-- ═══ DASHBOARD ═══ -->
-<div class="module active" id="mod-dashboard">
-  <div class="dash-wrap">
+    <!-- ═══ DASHBOARD ═══ -->
+    <div class="module active" id="mod-dashboard">
+      <div class="dash-wrap">
 
-    <div class="dash-hero">
-      <div class="dash-greeting-sm" id="greet-sm">Přehled</div>
-      <div class="dash-greeting" id="greeting">Dobrý den</div>
-      <div class="dash-period" id="dash-period">—</div>
-    </div>
-
-    <div class="dash-section">
-      <div class="dash-section-lbl">Moduly</div>
-    </div>
-    <div class="dash-tiles">
-      <div class="dash-tile" data-mod="ucetnictvi">
-        <div class="dash-tile-icon">🏦</div>
-        <div class="dash-tile-left">
-          <div class="dash-tile-name">Kakeibo</div>
-          <div class="dash-tile-val" id="stat-ucet">—</div>
-          <div class="dash-tile-sub">výdaje tento týden</div>
+        <div class="dash-hero">
+          <div class="dash-greeting-sm" id="greet-sm">Přehled</div>
+          <div class="dash-greeting" id="greeting">Dobrý den</div>
+          <div class="dash-period" id="dash-period">—</div>
         </div>
-        <div class="dash-tile-arrow">›</div>
-      </div>
-      <div class="dash-tile" data-mod="investice">
-        <div class="dash-tile-icon">💰</div>
-        <div class="dash-tile-left">
-          <div class="dash-tile-name">Investice</div>
-          <div class="dash-tile-val" id="stat-investice">—</div>
-          <div class="dash-tile-sub">tento kvartál</div>
+
+        <div class="dash-section">
+          <div class="dash-section-lbl">Moduly</div>
         </div>
-        <div class="dash-tile-arrow">›</div>
-      </div>
-      <div class="dash-tile" data-mod="auto">
-        <div class="dash-tile-icon">🚗</div>
-        <div class="dash-tile-left">
-          <div class="dash-tile-name">Auto</div>
-          <div class="dash-tile-val" id="stat-auto">—</div>
-          <div class="dash-tile-sub">náklady tento měsíc</div>
-        </div>
-        <div class="dash-tile-arrow">›</div>
-      </div>
-      <div class="dash-tile" data-mod="elektrina">
-        <div class="dash-tile-icon">⚡</div>
-        <div class="dash-tile-left">
-          <div class="dash-tile-name">Elektřina</div>
-          <div class="dash-tile-val" id="stat-elektr">—</div>
-          <div class="dash-tile-sub">poslední odečet</div>
-        </div>
-        <div class="dash-tile-arrow">›</div>
-      </div>
-      <div class="dash-tile" data-mod="kondice">
-        <div class="dash-tile-icon">🧠</div>
-        <div class="dash-tile-left">
-          <div class="dash-tile-name">Kondice</div>
-          <div class="dash-tile-val" id="stat-kondice">—</div>
-          <div class="dash-tile-sub">poslední záznam</div>
-        </div>
-        <div class="dash-tile-arrow">›</div>
-      </div>
-    </div>
-
-    <div class="dash-section" style="margin-top:8px;">
-      <div class="dash-section-lbl">Poslední aktivita</div>
-    </div>
-    <div class="dash-activity" id="act-list">
-      <div class="act-tile">
-        <div class="act-dot" style="background:#4d6080"></div>
-        <div class="act-info">
-          <div class="act-title">Žádná aktivita</div>
-          <div class="act-sub">Začni přidávat záznamy v modulech</div>
-        </div>
-      </div>
-    </div>
-    <div class="ver-bar">MůjOS v4.0 · Kakeibo v1.2</div>
-  </div>
-</div>
-
-<!-- ═══ KAKEIBO ═══ -->
-<div class="module" id="mod-ucetnictvi">
-  <div class="kk-header">
-    <div class="kk-header-top">
-      <div class="kk-title">家計簿 <span>Kakeibo</span></div>
-      <div class="kk-period-nav">
-        <button class="kk-nav-btn" id="kk-prev">‹</button>
-        <div class="kk-period-lbl" id="kk-period">—</div>
-        <button class="kk-nav-btn" id="kk-next">›</button>
-      </div>
-    </div>
-    <div class="kk-tabs">
-      <div class="kk-tab active" data-kv="tyden">Týden</div>
-      <div class="kk-tab" data-kv="mesic">Měsíc</div>
-      <div class="kk-tab" data-kv="rok">Rok</div>
-      <div class="kk-tab" data-kv="statistiky">📊</div>
-      <div class="kk-tab" data-kv="nastaveni">⚙</div>
-    </div>
-  </div>
-
-  <div class="kk-scroll">
-
-    <!-- TÝDEN -->
-    <div class="kk-view active" id="kkv-tyden">
-      <div class="kk-hero-card" id="kk-sum-week"></div>
-      <div class="kk-cats" id="kk-cats-week"></div>
-      <div class="kk-sec">
-        <span class="kk-sec-lbl">Záznamy</span>
-        <div class="kk-chips" id="kk-chips">
-          <div class="kk-chip active" data-f="vse">Vše</div>
-          <div class="kk-chip" data-f="vydaje">Výdaje</div>
-          <div class="kk-chip" data-f="prijmy">Příjmy</div>
-        </div>
-      </div>
-      <div class="kk-txs" id="kk-txs-week"></div>
-    </div>
-
-    <!-- MĚSÍC -->
-    <div class="kk-view" id="kkv-mesic">
-      <div class="kk-hero-card" id="kk-sum-month"></div>
-      <div class="kk-cats" id="kk-cats-month"></div>
-      <div class="kk-sec"><span class="kk-sec-lbl">Záznamy měsíce</span></div>
-      <div class="kk-txs" id="kk-txs-month"></div>
-    </div>
-
-    <!-- ROK -->
-    <div class="kk-view" id="kkv-rok">
-      <div class="kk-yr-card" id="kk-yr-totals"></div>
-      <div class="kk-sec"><span class="kk-sec-lbl">Přehled po měsících</span></div>
-      <div class="kk-months" id="kk-months"></div>
-      <div class="ver-bar">MůjOS v4.0 · Kakeibo v1.2</div>
-    </div>
-
-    <!-- STATISTIKY -->
-    <div class="kk-view" id="kkv-statistiky">
-      <div class="st-wrap" id="st-content">
-        <div style="text-align:center;padding:48px 0;color:#4d6080;font-size:13px">Načítám…</div>
-      </div>
-    </div>
-
-    <!-- NASTAVENÍ -->
-    <div class="kk-view" id="kkv-nastaveni">
-      <div class="kk-settings">
-        <div class="kk-scard">
-          <div class="kk-scard-head">
-            <div class="kk-scard-title">Týdenní výdajový limit</div>
-            <div class="kk-scard-desc">Progress bar v přehledu ukazuje, kolik z limitu jsi využil/a.</div>
+        <div class="dash-tiles">
+          <div class="dash-tile" data-mod="ucetnictvi">
+            <div class="dash-tile-icon"><svg width="28" height="28" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="19" stroke="#34c97a" stroke-width="6"/><circle cx="30" cy="30" r="7" fill="#34c97a"/><path d="M49 30 L56 30" stroke="#34c97a" stroke-width="3" stroke-linecap="round"/></svg></div>
+            <div class="dash-tile-left">
+              <div class="dash-tile-name">Kakeibo</div>
+              <div class="dash-tile-val" id="stat-ucet">—</div>
+              <div class="dash-tile-sub">výdaje tento týden</div>
+            </div>
+            <div class="dash-tile-arrow">›</div>
           </div>
-          <div class="kk-scard-body">
-            <label class="f-label">Limit výdajů / týden (Kč)</label>
-            <input class="f-input xl" id="budget-input" type="number" inputmode="numeric" placeholder="5 000" style="margin-bottom:12px">
-            <button class="btn-primary" id="budget-save" style="margin:0;width:100%">Uložit limit</button>
+          <div class="dash-tile" data-mod="investice">
+            <div class="dash-tile-icon">💰</div>
+            <div class="dash-tile-left">
+              <div class="dash-tile-name">Investice</div>
+              <div class="dash-tile-val" id="stat-investice">—</div>
+              <div class="dash-tile-sub">tento kvartál</div>
+            </div>
+            <div class="dash-tile-arrow">›</div>
+          </div>
+          <div class="dash-tile" data-mod="auto">
+            <div class="dash-tile-icon">🚗</div>
+            <div class="dash-tile-left">
+              <div class="dash-tile-name">Auto</div>
+              <div class="dash-tile-val" id="stat-auto">—</div>
+              <div class="dash-tile-sub">náklady tento měsíc</div>
+            </div>
+            <div class="dash-tile-arrow">›</div>
+          </div>
+          <div class="dash-tile" data-mod="elektrina">
+            <div class="dash-tile-icon">⚡</div>
+            <div class="dash-tile-left">
+              <div class="dash-tile-name">Elektřina</div>
+              <div class="dash-tile-val" id="stat-elektr">—</div>
+              <div class="dash-tile-sub">poslední odečet</div>
+            </div>
+            <div class="dash-tile-arrow">›</div>
+          </div>
+          <div class="dash-tile" data-mod="kondice">
+            <div class="dash-tile-icon">🧠</div>
+            <div class="dash-tile-left">
+              <div class="dash-tile-name">Kondice</div>
+              <div class="dash-tile-val" id="stat-kondice">—</div>
+              <div class="dash-tile-sub">poslední záznam</div>
+            </div>
+            <div class="dash-tile-arrow">›</div>
           </div>
         </div>
-        <div class="kk-scard">
-          <div class="kk-scard-head">
-            <div class="kk-scard-title">Pravidelné platby</div>
-            <div class="kk-scard-desc">Nájem, předplatné aj. Přidají se automaticky 1. každého měsíce.</div>
-          </div>
-          <div class="kk-scard-body">
-            <div class="recur-list" id="recur-list"></div>
-            <button class="btn-secondary" id="recur-add-btn">＋ Přidat pravidelnou platbu</button>
+
+        <div class="dash-section" style="margin-top:8px;">
+          <div class="dash-section-lbl">Poslední aktivita</div>
+        </div>
+        <div class="dash-activity" id="act-list">
+          <div class="act-tile">
+            <div class="act-dot" style="background:#4d6080"></div>
+            <div class="act-info">
+              <div class="act-title">Žádná aktivita</div>
+              <div class="act-sub">Začni přidávat záznamy v modulech</div>
+            </div>
           </div>
         </div>
-        <div class="kk-scard">
-          <div class="kk-scard-head">
-            <div class="kk-scard-title">Export dat</div>
-            <div class="kk-scard-desc">Stáhni všechna Kakeibo data jako Excel.</div>
-          </div>
-          <div class="kk-scard-body">
-            <button class="btn-secondary" id="kk-export-btn">📊 Exportovat do Excelu</button>
-          </div>
-        </div>
-        <div class="ver-bar">MůjOS v4.0 · Kakeibo v1.2</div>
+        <div class="ver-bar">MůjOS v4.2 · Kakeibo v1.2</div>
       </div>
     </div>
 
-  </div><!-- /kk-scroll -->
-</div><!-- /mod-ucetnictvi -->
+    <!-- ═══ KAKEIBO ═══ -->
+    <div class="module" id="mod-ucetnictvi">
+      <div class="kk-header">
+        <div class="kk-header-top">
+          <div class="kk-title" style="display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="19" stroke="#4da8ff" stroke-width="6"/><circle cx="30" cy="30" r="7" fill="#4da8ff"/><path d="M49 30 L56 30" stroke="#4da8ff" stroke-width="3" stroke-linecap="round"/></svg> <span>Kakeibo</span></div>
+          <div class="kk-period-nav">
+            <button class="kk-nav-btn" id="kk-prev">‹</button>
+            <div class="kk-period-lbl" id="kk-period">—</div>
+            <button class="kk-nav-btn" id="kk-next">›</button>
+          </div>
+        </div>
+        <div class="kk-tabs">
+          <div class="kk-tab active" data-kv="tyden">Týden</div>
+          <div class="kk-tab" data-kv="mesic">Měsíc</div>
+          <div class="kk-tab" data-kv="rok">Rok</div>
+          <div class="kk-tab" data-kv="statistiky">📊</div>
+          <div class="kk-tab" data-kv="nastaveni">⚙</div>
+        </div>
+      </div>
 
-<!-- ═══ INVESTICE ═══ -->
-<div class="module" id="mod-investice">
-  <div class="mod-wrap">
-    <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(255,207,92,.1)">💰</div>
-      <div><div class="mod-title">Investice</div><div class="mod-sub">Sledování investičních objemů</div></div>
-    </div>
-    <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul se připravuje</div>
-      <div class="ph-text">Sem přijde kód investiční appky.<br>DB store <code>investice</code> je připraven.</div>
-    </div>
-    <div class="ver-bar">MůjOS v4.0</div>
-  </div>
-</div>
+      <div class="kk-scroll">
 
-<!-- ═══ AUTO ═══ -->
-<div class="module" id="mod-auto">
-  <div class="mod-wrap">
-    <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(77,168,255,.1)">🚗</div>
-      <div><div class="mod-title">Auto</div><div class="mod-sub">Tankování, náklady, STK</div></div>
-    </div>
-    <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul se připravuje</div>
-      <div class="ph-text">Evidence nákladů na auto, spotřeba, servisní záznamy.</div>
-    </div>
-    <div class="ver-bar">MůjOS v4.0</div>
-  </div>
-</div>
+        <!-- TÝDEN -->
+        <div class="kk-view active" id="kkv-tyden">
+          <div class="kk-hero-card" id="kk-sum-week"></div>
+          <div class="kk-cats" id="kk-cats-week"></div>
+          <div class="kk-sec">
+            <span class="kk-sec-lbl">Záznamy</span>
+            <div class="kk-chips" id="kk-chips">
+              <div class="kk-chip active" data-f="vse">Vše</div>
+              <div class="kk-chip" data-f="vydaje">Výdaje</div>
+              <div class="kk-chip" data-f="prijmy">Příjmy</div>
+            </div>
+          </div>
+          <div class="kk-txs" id="kk-txs-week"></div>
+        </div>
 
-<!-- ═══ ELEKTŘINA ═══ -->
-<div class="module" id="mod-elektrina">
-  <div class="mod-wrap">
-    <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(167,139,250,.1)">⚡</div>
-      <div><div class="mod-title">Elektřina</div><div class="mod-sub">Odečty, spotřeba, tarify</div></div>
-    </div>
-    <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul se připravuje</div>
-      <div class="ph-text">Odečty elektroměru, sledování spotřeby a fakturace.</div>
-    </div>
-    <div class="ver-bar">MůjOS v4.0</div>
-  </div>
-</div>
+        <!-- MĚSÍC -->
+        <div class="kk-view" id="kkv-mesic">
+          <div class="kk-hero-card" id="kk-sum-month"></div>
+          <div class="kk-cats" id="kk-cats-month"></div>
+          <div class="kk-sec"><span class="kk-sec-lbl">Záznamy měsíce</span></div>
+          <div class="kk-txs" id="kk-txs-month"></div>
+        </div>
 
-<!-- ═══ KONDICE ═══ -->
-<div class="module" id="mod-kondice">
-  <div class="mod-wrap">
-    <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(99,212,196,.1)">🧠</div>
-      <div><div class="mod-title">Kondice</div><div class="mod-sub">Sledování psychické pohody</div></div>
+        <!-- ROK -->
+        <div class="kk-view" id="kkv-rok">
+          <div class="kk-yr-card" id="kk-yr-totals"></div>
+          <div class="kk-sec"><span class="kk-sec-lbl">Přehled po měsících</span></div>
+          <div class="kk-months" id="kk-months"></div>
+          <div class="ver-bar">MůjOS v4.2 · Kakeibo v1.2</div>
+        </div>
+
+        <!-- STATISTIKY -->
+        <div class="kk-view" id="kkv-statistiky">
+          <div class="st-wrap" id="st-content">
+            <div style="text-align:center;padding:48px 0;color:#4d6080;font-size:13px">Načítám…</div>
+          </div>
+        </div>
+
+        <!-- NASTAVENÍ -->
+        <div class="kk-view" id="kkv-nastaveni">
+          <div class="kk-settings">
+            <div class="kk-scard">
+              <div class="kk-scard-head">
+                <div class="kk-scard-title">Týdenní výdajový limit</div>
+                <div class="kk-scard-desc">Progress bar v přehledu ukazuje, kolik z limitu jsi využil/a.</div>
+              </div>
+              <div class="kk-scard-body">
+                <label class="f-label">Limit výdajů / týden (Kč)</label>
+                <input class="f-input xl" id="budget-input" type="number" inputmode="numeric" placeholder="5 000" style="margin-bottom:12px">
+                <button class="btn-primary" id="budget-save" style="margin:0;width:100%">Uložit limit</button>
+              </div>
+            </div>
+            <div class="kk-scard">
+              <div class="kk-scard-head">
+                <div class="kk-scard-title">Pravidelné platby</div>
+                <div class="kk-scard-desc">Nájem, předplatné aj. Přidají se automaticky 1. každého měsíce.</div>
+              </div>
+              <div class="kk-scard-body">
+                <div class="recur-list" id="recur-list"></div>
+                <button class="btn-secondary" id="recur-add-btn">＋ Přidat pravidelnou platbu</button>
+              </div>
+            </div>
+            <div class="kk-scard">
+              <div class="kk-scard-head">
+                <div class="kk-scard-title">Export dat</div>
+                <div class="kk-scard-desc">Stáhni všechna Kakeibo data jako Excel.</div>
+              </div>
+              <div class="kk-scard-body">
+                <button class="btn-secondary" id="kk-export-btn">📊 Exportovat do Excelu</button>
+              </div>
+            </div>
+            <div class="ver-bar">MůjOS v4.2 · Kakeibo v1.2</div>
+          </div>
+        </div>
+
+      </div><!-- /kk-scroll -->
+    </div><!-- /mod-ucetnictvi -->
+
+    <!-- ═══ INVESTICE ═══ -->
+    <div class="module" id="mod-investice">
+      <div class="mod-wrap">
+        <div class="mod-header">
+          <div class="mod-badge" style="background:rgba(255,207,92,.1)">💰</div>
+          <div><div class="mod-title">Investice</div><div class="mod-sub">Sledování investičních objemů</div></div>
+        </div>
+        <div class="ph-box"><div class="ph-icon">🔧</div>
+          <div class="ph-title">Modul se připravuje</div>
+          <div class="ph-text">Sem přijde kód investiční appky.<br>DB store <code>investice</code> je připraven.</div>
+        </div>
+        <div class="ver-bar">MůjOS v4.2</div>
+      </div>
     </div>
-    <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul se připravuje</div>
-      <div class="ph-text">Denní záznamy nálady, kondice a trend v čase.</div>
+
+    <!-- ═══ AUTO ═══ -->
+    <div class="module" id="mod-auto">
+      <div class="mod-wrap">
+        <div class="mod-header">
+          <div class="mod-badge" style="background:rgba(77,168,255,.1)">🚗</div>
+          <div><div class="mod-title">Auto</div><div class="mod-sub">Tankování, náklady, STK</div></div>
+        </div>
+        <div class="ph-box"><div class="ph-icon">🔧</div>
+          <div class="ph-title">Modul se připravuje</div>
+          <div class="ph-text">Evidence nákladů na auto, spotřeba, servisní záznamy.</div>
+        </div>
+        <div class="ver-bar">MůjOS v4.2</div>
+      </div>
     </div>
-    <div class="ver-bar">MůjOS v4.0</div>
-  </div>
-</div>
-```
+
+    <!-- ═══ ELEKTŘINA ═══ -->
+    <div class="module" id="mod-elektrina">
+      <div class="mod-wrap">
+        <div class="mod-header">
+          <div class="mod-badge" style="background:rgba(167,139,250,.1)">⚡</div>
+          <div><div class="mod-title">Elektřina</div><div class="mod-sub">Odečty, spotřeba, tarify</div></div>
+        </div>
+        <div class="ph-box"><div class="ph-icon">🔧</div>
+          <div class="ph-title">Modul se připravuje</div>
+          <div class="ph-text">Odečty elektroměru, sledování spotřeby a fakturace.</div>
+        </div>
+        <div class="ver-bar">MůjOS v4.2</div>
+      </div>
+    </div>
+
+    <!-- ═══ KONDICE ═══ -->
+    <div class="module" id="mod-kondice">
+      <div class="mod-wrap">
+        <div class="mod-header">
+          <div class="mod-badge" style="background:rgba(99,212,196,.1)">🧠</div>
+          <div><div class="mod-title">Kondice</div><div class="mod-sub">Sledování psychické pohody</div></div>
+        </div>
+        <div class="ph-box"><div class="ph-icon">🔧</div>
+          <div class="ph-title">Modul se připravuje</div>
+          <div class="ph-text">Denní záznamy nálady, kondice a trend v čase.</div>
+        </div>
+        <div class="ver-bar">MůjOS v4.2</div>
+      </div>
+    </div>
 
   </div><!-- /content -->
 
   <!-- BOTTOM NAV — George style -->
-
   <nav id="bottom-nav">
     <button class="bnav-tab active" data-mod="dashboard">
       <span class="bicon">🏠</span>Přehled
     </button>
     <button class="bnav-tab" data-mod="ucetnictvi">
-      <span class="bicon">🏦</span>Kakeibo
+      <span class="bicon" style="display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="19" stroke="currentColor" stroke-width="6"/><circle cx="30" cy="30" r="7" fill="currentColor"/><path d="M49 30 L56 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span>Kakeibo
     </button>
     <button class="bnav-tab" data-mod="investice">
       <span class="bicon">💰</span>Investice
@@ -865,11 +861,9 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
 </div><!-- /app -->
 
 <!-- FAB -->
-
-<button id="kk-fab" class="hidden"><span class="fab-plus">＋</span>Přidat záznam</button>
+<button id="kk-fab"><span class="fab-plus">＋</span>Přidat záznam</button>
 
 <!-- MODAL: PŘIDAT ZÁZNAM -->
-
 <div class="modal-bg" id="modal-add">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -916,7 +910,6 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
 </div>
 
 <!-- MODAL: DETAIL -->
-
 <div class="modal-bg" id="modal-detail">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -930,7 +923,6 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
 </div>
 
 <!-- MODAL: PRAVIDELNÁ PLATBA -->
-
 <div class="modal-bg" id="modal-recur">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -962,7 +954,7 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
 
 <script>
 // ═══════════════════════════════════════════════════════
-//  MůjOS v4.0 + Kakeibo v1.2
+//  MůjOS v4.2 + Kakeibo v1.2
 // ═══════════════════════════════════════════════════════
 
 // ── INDEXED DB ────────────────────────────────────────
@@ -1023,7 +1015,8 @@ function navTo(mod){
 
 function updateFAB(){
   const show=curMod==='ucetnictvi'&&kkView!=='nastaveni'&&kkView!=='rok'&&kkView!=='statistiky';
-  document.getElementById('kk-fab').classList.toggle('hidden',!show);
+  const fab=document.getElementById('kk-fab');
+  fab.classList.toggle('fab-visible',show);
 }
 
 document.querySelectorAll('.bnav-tab').forEach(t=>t.addEventListener('click',()=>navTo(t.dataset.mod)));
@@ -1364,7 +1357,7 @@ function kkRenderStats(){
           }).join('')}
       </div>
     </div>
-    <div class="ver-bar">MůjOS v4.0 · Kakeibo v1.2</div>`;
+    <div class="ver-bar">MůjOS v4.2 · Kakeibo v1.2</div>`;
 }
 
 function kkRenderSettings(){
@@ -1510,6 +1503,5 @@ async function init(){
 window.MojOS={dbGetAll,dbAdd,dbPut,dbDel,dbGet,exportXLSX,navTo,relTime,curQ};
 init();
 </script>
-
 </body>
 </html>
