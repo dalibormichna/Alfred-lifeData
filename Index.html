@@ -435,11 +435,11 @@ FAB
 ══════════════════════════ */
 #kk-fab{
 position:fixed;
-bottom:calc(74px + var(–safe-bot));
-right:16px;
-height:54px;
-padding:0 24px;
-border-radius:27px;
+bottom:calc(80px + var(–safe-bot));
+right:20px;
+height:56px;
+padding:0 26px;
+border-radius:28px;
 background:#ffffff;
 color:#0b1120;
 border:none;
@@ -448,14 +448,22 @@ font-weight:700;
 font-family:‘DM Sans’,sans-serif;
 display:flex;align-items:center;gap:8px;
 cursor:pointer;
-box-shadow:0 4px 28px rgba(0,0,0,.6),0 1px 6px rgba(0,0,0,.35);
-z-index:50;
+box-shadow:0 4px 28px rgba(0,0,0,.7),0 1px 6px rgba(0,0,0,.4);
+z-index:200;
 transition:transform .12s,box-shadow .12s;
 white-space:nowrap;
+-webkit-tap-highlight-color:transparent;
+opacity:1;
+transition:opacity .2s,transform .2s,box-shadow .12s;
 }
 #kk-fab .fab-plus{font-size:22px;font-weight:300;line-height:1;}
 #kk-fab:active{transform:scale(.95);box-shadow:0 2px 12px rgba(0,0,0,.4);}
-#kk-fab.hidden{display:none!important;}
+#kk-fab.hidden{
+opacity:0;
+pointer-events:none;
+transform:translateY(20px) scale(.9);
+transition:opacity .15s,transform .15s;
+}
 
 /* ══════════════════════════
 MODALS
