@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MůjOS">
+<title>MůjOS</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f11;
+    --surface: #16181c;
+    --surface2: #1e2128;
+    --border: #2a2d35;
+    --text: #f0f0ee;
+    --muted: #7a7d87;
+    --accent: #e8d5a3;
+    --accent2: #a3c4e8;
+
+```
+--mod-invest: #e8d5a3;
+--mod-ucet:   #a3e8c4;
+--mod-auto:   #a3c4e8;
+--mod-elektr: #e8a3c4;
+--mod-kondice:#c4a3e8;
+
+--safe-top: env(safe-area-inset-top, 0px);
+--safe-bot: env(safe-area-inset-bottom, 0px);
+```
+
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+height: 100%; width: 100%;
+background: var(–bg);
+color: var(–text);
+font-family: ‘DM Sans’, sans-serif;
+font-size: 15px;
+overscroll-behavior: none;
+}
+
+/* ── LAYOUT ── */
+#app {
+display: flex;
+flex-direction: column;
+height: 100dvh;
+padding-top: var(–safe-top);
+}
+
+/* ── HEADER ── */
+#header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 14px 20px 10px;
+border-bottom: 1px solid var(–border);
+flex-shrink: 0;
+}
+#header .logo {
+font-family: ‘DM Serif Display’, serif;
+font-size: 22px;
+letter-spacing: -0.5px;
+color: var(–accent);
+}
+#header .logo span { font-style: italic; color: var(–muted); }
+#header .date-chip {
+font-size: 12px;
+color: var(–muted);
+background: var(–surface2);
+padding: 4px 10px;
+border-radius: 20px;
+border: 1px solid var(–border);
+}
+
+/* ── NAV TABS ── */
+#nav {
+display: flex;
+overflow-x: auto;
+gap: 6px;
+padding: 10px 16px;
+border-bottom: 1px solid var(–border);
+flex-shrink: 0;
+scrollbar-width: none;
+}
+#nav::-webkit-scrollbar { display: none; }
+.nav-tab {
+flex-shrink: 0;
+display: flex;
+align-items: center;
+gap: 6px;
+padding: 7px 14px;
+border-radius: 20px;
+border: 1px solid var(–border);
+background: var(–surface);
+color: var(–muted);
+font-size: 13px;
+font-weight: 500;
+cursor: pointer;
+transition: all .2s;
+user-select: none;
+}
+.nav-tab .dot {
+width: 7px; height: 7px;
+border-radius: 50%;
+background: currentColor;
+opacity: .5;
+}
+.nav-tab.active {
+color: var(–bg);
+border-color: transparent;
+}
+.nav-tab.active .dot { opacity: 1; }
+
+.nav-tab[data-mod=“dashboard”].active { background: var(–text); }
+.nav-tab[data-mod=“investice”].active  { background: var(–mod-invest); }
+.nav-tab[data-mod=“ucetnictvi”].active { background: var(–mod-ucet); }
+.nav-tab[data-mod=“auto”].active       { background: var(–mod-auto); }
+.nav-tab[data-mod=“elektrina”].active  { background: var(–mod-elektr); }
+.nav-tab[data-mod=“kondice”].active    { background: var(–mod-kondice); }
+
+/* ── CONTENT ── */
+#content {
+flex: 1;
+overflow-y: auto;
+padding: 20px 16px calc(20px + var(–safe-bot));
+}
+
+.module { display: none; animation: fadeIn .25s ease; }
+.module.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── DASHBOARD ── */
+.dash-greeting {
+font-family: ‘DM Serif Display’, serif;
+font-size: 28px;
+line-height: 1.2;
+margin-bottom: 6px;
+}
+.dash-greeting em { font-style: italic; color: var(–muted); }
+.dash-sub { font-size: 13px; color: var(–muted); margin-bottom: 24px; }
+
+.dash-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+margin-bottom: 24px;
+}
+.dash-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 16px;
+cursor: pointer;
+transition: transform .15s, border-color .15s;
+position: relative;
+overflow: hidden;
+}
+.dash-card:active { transform: scale(.97); }
+.dash-card::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 3px;
+border-radius: 16px 16px 0 0;
+}
+.dash-card[data-mod=“investice”]::before  { background: var(–mod-invest); }
+.dash-card[data-mod=“ucetnictvi”]::before { background: var(–mod-ucet); }
+.dash-card[data-mod=“auto”]::before       { background: var(–mod-auto); }
+.dash-card[data-mod=“elektrina”]::before  { background: var(–mod-elektr); }
+.dash-card[data-mod=“kondice”]::before    { background: var(–mod-kondice); }
+
+.dash-card .card-icon { font-size: 24px; margin-bottom: 8px; }
+.dash-card .card-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.dash-card .card-stat { font-size: 11px; color: var(–muted); }
+.dash-card .card-value { font-size: 18px; font-weight: 600; margin-top: 6px; }
+
+.dash-section-title {
+font-size: 11px;
+font-weight: 600;
+letter-spacing: .08em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 10px;
+}
+
+.activity-list { display: flex; flex-direction: column; gap: 8px; }
+.activity-item {
+display: flex;
+align-items: center;
+gap: 12px;
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 12px 14px;
+}
+.activity-dot {
+width: 8px; height: 8px;
+border-radius: 50%;
+flex-shrink: 0;
+}
+.activity-text { flex: 1; font-size: 13px; }
+.activity-text .a-title { font-weight: 500; }
+.activity-text .a-sub { font-size: 11px; color: var(–muted); margin-top: 1px; }
+.activity-time { font-size: 11px; color: var(–muted); }
+
+/* ── MODULE PLACEHOLDER ── */
+.mod-header {
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 20px;
+}
+.mod-badge {
+width: 44px; height: 44px;
+border-radius: 12px;
+display: flex; align-items: center; justify-content: center;
+font-size: 22px;
+flex-shrink: 0;
+}
+.mod-title { font-family: ‘DM Serif Display’, serif; font-size: 24px; }
+.mod-sub { font-size: 12px; color: var(–muted); margin-top: 2px; }
+
+.placeholder-box {
+background: var(–surface);
+border: 1px dashed var(–border);
+border-radius: 16px;
+padding: 32px 24px;
+text-align: center;
+color: var(–muted);
+}
+.placeholder-box .ph-icon { font-size: 36px; margin-bottom: 12px; }
+.placeholder-box .ph-title { font-size: 15px; font-weight: 600; color: var(–text); margin-bottom: 6px; }
+.placeholder-box .ph-text { font-size: 13px; line-height: 1.6; }
+
+/* ── DB STATUS ── */
+#db-status {
+position: fixed;
+bottom: calc(16px + var(–safe-bot));
+right: 16px;
+background: var(–surface2);
+border: 1px solid var(–border);
+border-radius: 20px;
+padding: 6px 12px;
+font-size: 11px;
+color: var(–muted);
+display: flex;
+align-items: center;
+gap: 6px;
+z-index: 100;
+transition: opacity .3s;
+pointer-events: none;
+}
+#db-status .status-dot {
+width: 6px; height: 6px;
+border-radius: 50%;
+background: #4ade80;
+}
+#db-status.error .status-dot { background: #f87171; }
+#db-status.hidden { opacity: 0; }
+
+/* ── SETTINGS CHIP ── */
+.settings-row {
+display: flex;
+justify-content: flex-end;
+margin-bottom: 20px;
+}
+.settings-btn {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 20px;
+padding: 6px 14px;
+font-size: 12px;
+color: var(–muted);
+cursor: pointer;
+display: flex; align-items: center; gap: 6px;
+}
+
+/* ── NASTAVENÍ / IMPORT-EXPORT ── */
+.settings-section { margin-bottom: 28px; }
+.settings-section-title {
+font-size: 11px;
+font-weight: 600;
+letter-spacing: .08em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 12px;
+}
+.settings-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 16px;
+overflow: hidden;
+}
+.settings-row-item {
+display: flex;
+align-items: center;
+gap: 14px;
+padding: 14px 16px;
+border-bottom: 1px solid var(–border);
+cursor: pointer;
+transition: background .15s;
+}
+.settings-row-item:last-child { border-bottom: none; }
+.settings-row-item:active { background: var(–surface2); }
+.settings-row-icon {
+width: 36px; height: 36px;
+border-radius: 10px;
+display: flex; align-items: center; justify-content: center;
+font-size: 18px;
+flex-shrink: 0;
+}
+.settings-row-text { flex: 1; }
+.settings-row-text .sr-title { font-size: 14px; font-weight: 500; }
+.settings-row-text .sr-sub { font-size: 12px; color: var(–muted); margin-top: 2px; }
+.settings-row-arrow { color: var(–muted); font-size: 18px; }
+
+.toast {
+position: fixed;
+top: calc(70px + var(–safe-top));
+left: 50%; transform: translateX(-50%);
+background: var(–text);
+color: var(–bg);
+font-size: 13px;
+font-weight: 600;
+padding: 10px 20px;
+border-radius: 20px;
+z-index: 200;
+pointer-events: none;
+opacity: 0;
+transition: opacity .2s;
+white-space: nowrap;
+}
+.toast.show { opacity: 1; }
+
+.modal-overlay {
+position: fixed; inset: 0;
+background: rgba(0,0,0,.7);
+z-index: 300;
+display: flex; align-items: flex-end;
+opacity: 0; pointer-events: none;
+transition: opacity .25s;
+}
+.modal-overlay.show { opacity: 1; pointer-events: all; }
+.modal-sheet {
+width: 100%;
+background: var(–surface);
+border-radius: 24px 24px 0 0;
+padding: 16px 20px calc(24px + var(–safe-bot));
+transform: translateY(100%);
+transition: transform .3s cubic-bezier(.32,1,.23,1);
+}
+.modal-overlay.show .modal-sheet { transform: translateY(0); }
+.modal-handle {
+width: 36px; height: 4px;
+background: var(–border);
+border-radius: 2px;
+margin: 0 auto 20px;
+}
+.modal-title {
+font-family: ‘DM Serif Display’, serif;
+font-size: 22px;
+margin-bottom: 6px;
+}
+.modal-sub { font-size: 13px; color: var(–muted); margin-bottom: 20px; line-height: 1.5; }
+.modal-btn {
+width: 100%;
+padding: 14px;
+border-radius: 14px;
+border: none;
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+margin-bottom: 10px;
+font-family: ‘DM Sans’, sans-serif;
+transition: opacity .15s;
+}
+.modal-btn:active { opacity: .7; }
+.modal-btn.primary { background: var(–accent); color: var(–bg); }
+.modal-btn.danger  { background: #f87171; color: #fff; }
+.modal-btn.ghost   { background: var(–surface2); color: var(–text); border: 1px solid var(–border); }
+
+.import-drop {
+border: 2px dashed var(–border);
+border-radius: 14px;
+padding: 28px;
+text-align: center;
+color: var(–muted);
+font-size: 13px;
+margin-bottom: 12px;
+cursor: pointer;
+transition: border-color .2s;
+}
+.import-drop:hover { border-color: var(–accent); }
+.import-drop .drop-icon { font-size: 32px; margin-bottom: 8px; }
+.import-drop .drop-title { font-weight: 600; color: var(–text); margin-bottom: 4px; }
+
+.guide-steps { display: flex; flex-direction: column; gap: 12px; }
+.guide-step {
+display: flex; gap: 12px; align-items: flex-start;
+}
+.step-num {
+width: 26px; height: 26px;
+border-radius: 50%;
+background: var(–surface2);
+border: 1px solid var(–border);
+display: flex; align-items: center; justify-content: center;
+font-size: 12px; font-weight: 700;
+flex-shrink: 0;
+color: var(–accent);
+}
+.step-text { font-size: 13px; line-height: 1.6; padding-top: 3px; }
+.step-text strong { color: var(–text); }
+.step-text code {
+background: var(–surface2);
+border: 1px solid var(–border);
+border-radius: 6px;
+padding: 1px 6px;
+font-size: 12px;
+color: var(–accent2);
+}
+
+/* ── UTILS ── */
+.color-invest  { color: var(–mod-invest); }
+.color-ucet    { color: var(–mod-ucet); }
+.color-auto    { color: var(–mod-auto); }
+.color-elektr  { color: var(–mod-elektr); }
+.color-kondice { color: var(–mod-kondice); }
+
+.bg-invest  { background: var(–mod-invest); }
+.bg-ucet    { background: var(–mod-ucet); }
+.bg-auto    { background: var(–mod-auto); }
+.bg-elektr  { background: var(–mod-elektr); }
+.bg-kondice { background: var(–mod-kondice); }
+</style>
+
+</head>
+<body>
+<div id="app">
+
+  <!-- HEADER -->
+
+  <div id="header">
+    <div class="logo">Můj<span>OS</span></div>
+    <div class="date-chip" id="date-chip">—</div>
+  </div>
+
+  <!-- NAV -->
+
+  <nav id="nav">
+    <div class="nav-tab active" data-mod="dashboard">
+      <span class="dot"></span> Přehled
+    </div>
+    <div class="nav-tab" data-mod="investice">
+      <span class="dot" style="background:var(--mod-invest)"></span> Investice
+    </div>
+    <div class="nav-tab" data-mod="ucetnictvi">
+      <span class="dot" style="background:var(--mod-ucet)"></span> Účetnictví
+    </div>
+    <div class="nav-tab" data-mod="auto">
+      <span class="dot" style="background:var(--mod-auto)"></span> Auto
+    </div>
+    <div class="nav-tab" data-mod="elektrina">
+      <span class="dot" style="background:var(--mod-elektr)"></span> Elektřina
+    </div>
+    <div class="nav-tab" data-mod="kondice">
+      <span class="dot" style="background:var(--mod-kondice)"></span> Kondice
+    </div>
+    <div class="nav-tab" data-mod="nastaveni">
+      <span class="dot" style="background:var(--muted)"></span> Nastavení
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+
+  <div id="content">
+
+```
+<!-- DASHBOARD -->
+<div class="module active" id="mod-dashboard">
+  <div class="dash-greeting" id="greeting">Dobrý den <em>—</em></div>
+  <div class="dash-sub" id="dash-sub">Načítám přehled...</div>
+
+  <div class="dash-grid">
+    <div class="dash-card" data-mod="investice">
+      <div class="card-icon">💰</div>
+      <div class="card-title">Investice</div>
+      <div class="card-stat">Tento kvartál</div>
+      <div class="card-value color-invest" id="stat-investice">—</div>
+    </div>
+    <div class="dash-card" data-mod="ucetnictvi">
+      <div class="card-icon">🏦</div>
+      <div class="card-title">Účetnictví</div>
+      <div class="card-stat">Tento měsíc</div>
+      <div class="card-value color-ucet" id="stat-ucet">—</div>
+    </div>
+    <div class="dash-card" data-mod="auto">
+      <div class="card-icon">🚗</div>
+      <div class="card-title">Auto</div>
+      <div class="card-stat">Tento měsíc</div>
+      <div class="card-value color-auto" id="stat-auto">—</div>
+    </div>
+    <div class="dash-card" data-mod="elektrina">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Elektřina</div>
+      <div class="card-stat">Aktuální odečet</div>
+      <div class="card-value color-elektr" id="stat-elektr">—</div>
+    </div>
+    <div class="dash-card" data-mod="kondice" style="grid-column: span 2;">
+      <div class="card-icon">🧠</div>
+      <div class="card-title">Kondice partnerky</div>
+      <div class="card-stat">Poslední záznam</div>
+      <div class="card-value color-kondice" id="stat-kondice">—</div>
+    </div>
+  </div>
+
+  <div class="dash-section-title">Poslední aktivita</div>
+  <div class="activity-list" id="activity-list">
+    <div class="activity-item">
+      <div class="activity-dot" style="background:var(--muted)"></div>
+      <div class="activity-text">
+        <div class="a-title">Žádná aktivita</div>
+        <div class="a-sub">Začni zadávat data v modulech</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INVESTICE -->
+<div class="module" id="mod-investice">
+  <div class="mod-header">
+    <div class="mod-badge bg-invest">💰</div>
+    <div>
+      <div class="mod-title">Investice</div>
+      <div class="mod-sub">Sledování investičních objemů</div>
+    </div>
+  </div>
+  <div class="placeholder-box">
+    <div class="ph-icon">🔧</div>
+    <div class="ph-title">Modul připraven k propojení</div>
+    <div class="ph-text">Sem přijde kód ze stávající investiční appky.<br>Sdílená DB je připravena pod klíčem <code>investice</code>.</div>
+  </div>
+</div>
+
+<!-- ÚČETNICTVÍ -->
+<div class="module" id="mod-ucetnictvi">
+  <div class="mod-header">
+    <div class="mod-badge bg-ucet">🏦</div>
+    <div>
+      <div class="mod-title">Domácí účetnictví</div>
+      <div class="mod-sub">Příjmy, výdaje, kategorie</div>
+    </div>
+  </div>
+  <div class="placeholder-box">
+    <div class="ph-icon">🔧</div>
+    <div class="ph-title">Modul připraven k vývoji</div>
+    <div class="ph-text">Evidence příjmů a výdajů domácnosti.<br>Sdílená DB připravena pod klíčem <code>ucetnictvi</code>.</div>
+  </div>
+</div>
+
+<!-- AUTO -->
+<div class="module" id="mod-auto">
+  <div class="mod-header">
+    <div class="mod-badge bg-auto">🚗</div>
+    <div>
+      <div class="mod-title">Evidence auta</div>
+      <div class="mod-sub">Tankování, náklady, STK, servis</div>
+    </div>
+  </div>
+  <div class="placeholder-box">
+    <div class="ph-icon">🔧</div>
+    <div class="ph-title">Modul připraven k vývoji</div>
+    <div class="ph-text">Náklady na auto, spotřeba, servisní záznamy.<br>Sdílená DB připravena pod klíčem <code>auto</code>.</div>
+  </div>
+</div>
+
+<!-- ELEKTŘINA -->
+<div class="module" id="mod-elektrina">
+  <div class="mod-header">
+    <div class="mod-badge bg-elektr">⚡</div>
+    <div>
+      <div class="mod-title">Elektřina</div>
+      <div class="mod-sub">Spotřeba, odečty, tarify</div>
+    </div>
+  </div>
+  <div class="placeholder-box">
+    <div class="ph-icon">🔧</div>
+    <div class="ph-title">Modul připraven k vývoji</div>
+    <div class="ph-text">Odečty elektroměru, sledování spotřeby, porovnání tarifů.<br>Sdílená DB připravena pod klíčem <code>elektrina</code>.</div>
+  </div>
+</div>
+
+<!-- KONDICE -->
+<div class="module" id="mod-kondice">
+  <div class="mod-header">
+    <div class="mod-badge bg-kondice">🧠</div>
+    <div>
+      <div class="mod-title">Kondice</div>
+      <div class="mod-sub">Sledování psychické pohody</div>
+    </div>
+  </div>
+  <div class="placeholder-box">
+    <div class="ph-icon">🔧</div>
+    <div class="ph-title">Modul připraven k vývoji</div>
+    <div class="ph-text">Denní záznamy nálady a kondice, trend v čase, poznámky.<br>Sdílená DB připravena pod klíčem <code>kondice</code>.</div>
+  </div>
+</div>
+```
+
+  </div><!-- /content -->
+</div><!-- /app -->
+
+<div id="db-status">
+  <div class="status-dot"></div>
+  <span id="db-status-text">DB</span>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  MůjOS — Sdílená databázová vrstva
+//  Verze: 1.0 — kostra platformy
+// ═══════════════════════════════════════════════════════
+
+const DB_NAME    = 'mojos_db';
+const DB_VERSION = 1;
+
+// Definice všech object stores (modulů) na jednom místě
+const STORES = {
+  investice:   { keyPath: 'id', autoIncrement: true },
+  ucetnictvi:  { keyPath: 'id', autoIncrement: true },
+  auto:        { keyPath: 'id', autoIncrement: true },
+  elektrina:   { keyPath: 'id', autoIncrement: true },
+  kondice:     { keyPath: 'id', autoIncrement: true },
+  activity_log:{ keyPath: 'id', autoIncrement: true },
+  settings:    { keyPath: 'key' },
+};
+
+let db = null;
+
+// ── DB INIT ────────────────────────────────────────────
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+
+    req.onupgradeneeded = (e) => {
+      const d = e.target.result;
+      Object.entries(STORES).forEach(([name, opts]) => {
+        if (!d.objectStoreNames.contains(name)) {
+          d.createObjectStore(name, opts);
+        }
+      });
+    };
+
+    req.onsuccess  = (e) => resolve(e.target.result);
+    req.onerror    = (e) => reject(e.target.error);
+  });
+}
+
+// ── CRUD API ───────────────────────────────────────────
+// Každý modul volá tyto funkce se svým store názvem
+
+async function dbGetAll(store) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readonly');
+    const req = tx.objectStore(store).getAll();
+    req.onsuccess = () => resolve(req.result);
+    req.onerror   = () => reject(req.error);
+  });
+}
+
+async function dbAdd(store, data) {
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(store, 'readwrite');
+    const req = tx.objectStore(store).add({
+      ...data,
+      _created: new Date().toISOString(),
+      _module: store
+    });
+    req.onsuccess = () => resolve(req.result);
+    req.onerror   = () => reject(req.error);
+  });
+}
+
+async function dbPut(store, data) {
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(store, 'readwrite');
+    const req = tx.objectStore(store).put({
+      ...data,
+      _updated: new Date().toISOString()
+    });
+    req.onsuccess = () => resolve(req.result);
+    req.onerror   = () => reject(req.error);
+  });
+}
+
+async function dbDelete(store, id) {
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(store, 'readwrite');
+    const req = tx.objectStore(store).delete(id);
+    req.onsuccess = () => resolve();
+    req.onerror   = () => reject(req.error);
+  });
+}
+
+async function dbGet(store, key) {
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(store, 'readonly');
+    const req = tx.objectStore(store).get(key);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror   = () => reject(req.error);
+  });
+}
+
+// ── ACTIVITY LOG ───────────────────────────────────────
+async function logActivity(modul, title, sub = '') {
+  try {
+    await dbAdd('activity_log', {
+      modul, title, sub,
+      ts: new Date().toISOString()
+    });
+    await refreshActivityList();
+  } catch(e) { /* tichá chyba */ }
+}
+
+async function refreshActivityList() {
+  const all = await dbGetAll('activity_log');
+  const sorted = all.sort((a,b) => b.ts.localeCompare(a.ts)).slice(0, 8);
+
+  const list = document.getElementById('activity-list');
+  if (!sorted.length) return;
+
+  const colorMap = {
+    investice: 'var(--mod-invest)',
+    ucetnictvi:'var(--mod-ucet)',
+    auto:      'var(--mod-auto)',
+    elektrina: 'var(--mod-elektr)',
+    kondice:   'var(--mod-kondice)',
+  };
+
+  list.innerHTML = sorted.map(a => {
+    const color = colorMap[a.modul] || 'var(--muted)';
+    const time  = formatRelativeTime(a.ts);
+    return `
+      <div class="activity-item">
+        <div class="activity-dot" style="background:${color}"></div>
+        <div class="activity-text">
+          <div class="a-title">${a.title}</div>
+          ${a.sub ? `<div class="a-sub">${a.sub}</div>` : ''}
+        </div>
+        <div class="activity-time">${time}</div>
+      </div>`;
+  }).join('');
+}
+
+// ── DASHBOARD STATS ────────────────────────────────────
+async function refreshDashboard() {
+  // Každý modul si zde může vyplnit svůj stat
+  // Zatím placeholder — moduly sem doplní své agregáty
+
+  // Investice — počet záznamů tento Q
+  try {
+    const inv = await dbGetAll('investice');
+    const q = getCurrentQuarter();
+    const thisQ = inv.filter(r => r._created && r._created.startsWith(q.year + '-'));
+    document.getElementById('stat-investice').textContent =
+      thisQ.length ? `${thisQ.length} záznamů` : 'Žádná data';
+  } catch(e) {}
+
+  // Ostatní — zatím placeholder
+  ['ucet','auto','elektr','kondice'].forEach(k => {
+    const el = document.getElementById('stat-' + k);
+    if (el) el.textContent = 'Žádná data';
+  });
+
+  await refreshActivityList();
+}
+
+// ── EXPORT ─────────────────────────────────────────────
+// Sdílená exportní funkce — každý modul předá svá data
+// exportData = { nazevListu: [array of objects], ... }
+async function exportToExcel(exportData, filename = 'MůjOS_export') {
+  // SheetJS CDN — načte se jen při exportu
+  if (!window.XLSX) {
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');
+  }
+  const wb = XLSX.utils.book_new();
+  Object.entries(exportData).forEach(([sheetName, rows]) => {
+    if (!rows.length) return;
+    // Odstraní interní klíče
+    const clean = rows.map(r => {
+      const out = {};
+      Object.keys(r).filter(k => !k.startsWith('_')).forEach(k => out[k] = r[k]);
+      return out;
+    });
+    const ws = XLSX.utils.json_to_sheet(clean);
+    XLSX.utils.book_append_sheet(wb, ws, sheetName.substring(0, 31));
+  });
+  const ts = new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb, `${filename}_${ts}.xlsx`);
+}
+
+// ── HELPERS ────────────────────────────────────────────
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+
+function getCurrentQuarter() {
+  const now = new Date();
+  const m = now.getMonth() + 1;
+  const q = Math.ceil(m / 3);
+  return { year: now.getFullYear(), q, label: `Q${q}/${now.getFullYear()}` };
+}
+
+function formatRelativeTime(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 1)  return 'právě teď';
+  if (m < 60) return `před ${m} min`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `před ${h} h`;
+  const d = Math.floor(h / 24);
+  return `před ${d} d`;
+}
+
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 5)  return 'Dobrou noc';
+  if (h < 10) return 'Dobré ráno';
+  if (h < 13) return 'Dobré dopoledne';
+  if (h < 18) return 'Dobrý den';
+  if (h < 22) return 'Dobrý večer';
+  return 'Dobrou noc';
+}
+
+// ── UI ─────────────────────────────────────────────────
+function setDateChip() {
+  const now = new Date();
+  const opts = { day: 'numeric', month: 'long', year: 'numeric' };
+  document.getElementById('date-chip').textContent =
+    now.toLocaleDateString('cs-CZ', opts);
+}
+
+function setGreeting() {
+  const q = getCurrentQuarter();
+  document.getElementById('greeting').innerHTML =
+    `${getGreeting()} <em>—</em>`;
+  document.getElementById('dash-sub').textContent =
+    `${q.label} · ${new Date().toLocaleDateString('cs-CZ', {weekday:'long'})}`;
+}
+
+// ── NAVIGACE ───────────────────────────────────────────
+function navigate(modName) {
+  document.querySelectorAll('.nav-tab').forEach(t =>
+    t.classList.toggle('active', t.dataset.mod === modName));
+  document.querySelectorAll('.module').forEach(m =>
+    m.classList.toggle('active', m.id === 'mod-' + modName));
+
+  if (modName === 'dashboard') refreshDashboard();
+}
+
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => navigate(tab.dataset.mod));
+});
+
+document.querySelectorAll('.dash-card').forEach(card => {
+  card.addEventListener('click', () => navigate(card.dataset.mod));
+});
+
+// ── DB STATUS BADGE ────────────────────────────────────
+function showDBStatus(ok, text) {
+  const el = document.getElementById('db-status');
+  el.classList.toggle('error', !ok);
+  el.classList.remove('hidden');
+  document.getElementById('db-status-text').textContent = text;
+  setTimeout(() => el.classList.add('hidden'), 3000);
+}
+
+// ── INIT ───────────────────────────────────────────────
+async function init() {
+  setDateChip();
+  setGreeting();
+
+  try {
+    db = await openDB();
+    showDBStatus(true, 'DB připravena');
+    await refreshDashboard();
+  } catch(e) {
+    showDBStatus(false, 'Chyba DB');
+    console.error('MůjOS DB chyba:', e);
+  }
+}
+
+init();
+
+// ── GLOBÁLNÍ API pro moduly ────────────────────────────
+// Moduly mohou volat window.MojOS.*
+window.MojOS = {
+  dbGetAll, dbAdd, dbPut, dbDelete, dbGet,
+  exportToExcel, logActivity,
+  getCurrentQuarter, formatRelativeTime,
+  navigate,
+};
+</script>
+
+</body>
+</html>
