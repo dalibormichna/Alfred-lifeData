@@ -524,6 +524,116 @@ text-transform:uppercase;color:#4d6080;margin-bottom:4px}
 border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:16px 18px}
 .kd-export-title{font-size:11px;font-weight:700;letter-spacing:.08em;
 text-transform:uppercase;color:#4d6080;margin-bottom:12px}
+
+/* ══ ELEKTŘINA MODULE ═══════════════════════════════ */
+.el-scroll{overflow-y:auto;scrollbar-width:none;
+padding-bottom:calc(108px + env(safe-area-inset-bottom,0px))}
+.el-scroll::-webkit-scrollbar{display:none}
+
+/* Hero karta */
+.el-hero{
+margin:14px 14px 0;border-radius:24px;padding:22px;
+background:linear-gradient(135deg,#1a1060,#0d1f4a);
+border:1px solid rgba(167,139,250,.25);box-shadow:0 4px 24px rgba(0,0,0,.4);
+}
+.el-hero-tag{font-size:10px;font-weight:700;letter-spacing:.1em;
+text-transform:uppercase;color:rgba(167,139,250,.7);margin-bottom:6px}
+.el-hero-val{font-size:36px;font-weight:700;letter-spacing:-.6px;
+color:#f0f4ff;line-height:1;margin-bottom:4px}
+.el-hero-sub{font-size:13px;color:#8fa3c8;margin-bottom:16px}
+.el-hero-pills{display:flex;gap:10px}
+.el-hero-pill{flex:1;background:rgba(0,0,0,.25);border-radius:12px;padding:10px 12px}
+.el-hero-pill-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.07em;
+font-weight:700;color:rgba(255,255,255,.45);margin-bottom:3px}
+.el-hero-pill-val{font-size:14px;font-weight:700;color:#f0f4ff}
+
+/* Sekce nadpis */
+.el-sec{padding:18px 14px 8px;display:flex;align-items:center;justify-content:space-between}
+.el-sec-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;color:#4d6080}
+
+/* Trend graf — sloupcový */
+.el-chart-wrap{margin:0 14px;background:#152035;border:1px solid rgba(255,255,255,.07);
+border-radius:20px;padding:16px;overflow:hidden}
+.el-bars{display:flex;align-items:flex-end;gap:4px;height:90px;margin-bottom:6px}
+.el-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
+.el-bar-fill{width:100%;border-radius:4px 4px 0 0;transition:height .4s ease;min-height:3px;position:relative}
+.el-bar-fill.current{box-shadow:0 0 8px rgba(167,139,250,.6)}
+.el-bar-lbl{font-size:8px;color:#4d6080;text-align:center;
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%}
+.el-bar-val{font-size:7px;color:#8fa3c8;text-align:center}
+.el-chart-legend{display:flex;gap:14px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)}
+.el-chart-legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:#4d6080}
+.el-legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+
+/* Kakeibo propojení karta */
+.el-kk-card{margin:0 14px;background:#152035;border:1px solid rgba(255,255,255,.07);
+border-radius:20px;padding:16px 18px}
+.el-kk-title{font-size:11px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;color:#4d6080;margin-bottom:12px}
+.el-kk-row{display:flex;justify-content:space-between;align-items:center;
+padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.el-kk-row:last-child{border-bottom:none}
+.el-kk-lbl{font-size:13px;color:#8fa3c8}
+.el-kk-val{font-size:15px;font-weight:700;color:#f0f4ff}
+.el-kk-val.pos{color:#34c97a}
+.el-kk-val.neg{color:#ff6b6b}
+.el-kk-payments{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.el-kk-payment{display:flex;justify-content:space-between;align-items:center;
+background:#1c2d47;border-radius:10px;padding:8px 12px}
+.el-kk-payment-date{font-size:11px;color:#4d6080}
+.el-kk-payment-name{font-size:12px;color:#8fa3c8;flex:1;padding:0 8px;
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.el-kk-payment-amt{font-size:13px;font-weight:700;color:#8fa3c8;flex-shrink:0}
+
+/* Roční srovnání */
+.el-yr-grid{margin:0 14px;display:flex;flex-direction:column;gap:8px}
+.el-yr-row{background:#152035;border:1px solid rgba(255,255,255,.07);
+border-radius:16px;padding:14px 16px}
+.el-yr-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.el-yr-year{font-size:14px;font-weight:600;color:#f0f4ff}
+.el-yr-kwh{font-size:16px;font-weight:700;color:#a78bfa}
+.el-yr-bars{display:flex;gap:3px}
+.el-yr-seg{height:6px;border-radius:3px;min-width:3px}
+.el-yr-detail{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap}
+.el-yr-detail-item{font-size:11px;color:#4d6080}
+.el-yr-detail-item span{color:#8fa3c8;font-weight:600}
+
+/* Zima/léto */
+.el-season-grid{margin:0 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.el-season-card{background:#152035;border:1px solid rgba(255,255,255,.07);
+border-radius:16px;padding:14px}
+.el-season-icon{font-size:22px;margin-bottom:6px}
+.el-season-lbl{font-size:10px;font-weight:700;text-transform:uppercase;
+letter-spacing:.07em;color:#4d6080;margin-bottom:4px}
+.el-season-kwh{font-size:22px;font-weight:700;color:#f0f4ff}
+.el-season-sub{font-size:11px;color:#4d6080;margin-top:2px}
+
+/* Tarif */
+.el-tarif-list{margin:0 14px;display:flex;flex-direction:column;gap:6px}
+.el-tarif-item{background:#152035;border:1px solid rgba(255,255,255,.07);
+border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.el-tarif-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.el-tarif-info{flex:1}
+.el-tarif-from{font-size:12px;font-weight:600;color:#f0f4ff}
+.el-tarif-price{font-size:13px;color:#a78bfa;font-weight:700}
+.el-tarif-del{background:none;border:none;color:#4d6080;font-size:18px;cursor:pointer;padding:0}
+
+/* Vstup */
+.el-input-card{margin:0 14px;background:#152035;border:1px solid rgba(255,255,255,.12);
+border-radius:20px;padding:16px 18px}
+.el-input-title{font-size:11px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;color:#4d6080;margin-bottom:14px}
+.el-input-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.el-input-full{margin-bottom:14px}
+.el-input-lbl{font-size:10px;font-weight:700;text-transform:uppercase;
+letter-spacing:.07em;color:#4d6080;margin-bottom:5px;display:block}
+
+/* Export */
+.el-export-card{margin:0 14px;background:#152035;border:1px solid rgba(255,255,255,.07);
+border-radius:20px;padding:16px 18px}
+.el-export-title{font-size:11px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;color:#4d6080;margin-bottom:12px}
 </style>
 
 </head>
@@ -616,7 +726,7 @@ text-transform:uppercase;color:#4d6080;margin-bottom:12px}
         <div class="act-sub">Přidej první záznam v modulech</div></div>
     </div>
   </div>
-  <div class="ver-bar">MůjOS v5.2 · Kakeibo v1.3</div>
+  <div class="ver-bar">MůjOS v5.3 · Kakeibo v1.3</div>
 </div>
 
 <!-- ═══ KAKEIBO ═══ -->
@@ -750,16 +860,104 @@ text-transform:uppercase;color:#4d6080;margin-bottom:12px}
   </div>
 </div>
 <div class="module" id="mod-elektrina">
-  <div class="mod-wrap">
-    <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(167,139,250,.1)">⚡</div>
-      <div><div class="mod-title">Elektřina</div><div class="mod-sub">Odečty, spotřeba, tarify</div></div>
+  <div class="el-scroll">
+
+    <!-- HERO -->
+    <div class="el-hero">
+      <div class="el-hero-tag">Spotřeba — aktuální měsíc</div>
+      <div class="el-hero-val" id="el-hero-kwh">— kWh</div>
+      <div class="el-hero-sub" id="el-hero-sub">Přidej první odečet</div>
+      <div class="el-hero-pills">
+        <div class="el-hero-pill">
+          <div class="el-hero-pill-lbl">Odh. náklady</div>
+          <div class="el-hero-pill-val" id="el-hero-cost">—</div>
+        </div>
+        <div class="el-hero-pill">
+          <div class="el-hero-pill-lbl">Trend MoM</div>
+          <div class="el-hero-pill-val" id="el-hero-trend">—</div>
+        </div>
+        <div class="el-hero-pill">
+          <div class="el-hero-pill-lbl">Tarif</div>
+          <div class="el-hero-pill-val" id="el-hero-tarif">—</div>
+        </div>
+      </div>
     </div>
-    <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Připravuje se</div>
-      <div class="ph-text">Odečty elektroměru a sledování spotřeby.</div>
+
+    <!-- TREND GRAF 12 MĚSÍCŮ -->
+    <div class="el-sec">
+      <span class="el-sec-lbl">Spotřeba — posledních 12 měsíců</span>
     </div>
-    <div class="ver-bar">MůjOS v5.2</div>
+    <div class="el-chart-wrap">
+      <div class="el-bars" id="el-bars"></div>
+      <div class="el-chart-legend">
+        <div class="el-chart-legend-item">
+          <div class="el-legend-dot" style="background:#a78bfa"></div>kWh / měsíc
+        </div>
+        <div class="el-chart-legend-item">
+          <div class="el-legend-dot" style="background:#4da8ff"></div>aktuální měsíc
+        </div>
+      </div>
+    </div>
+
+    <!-- KAKEIBO PROPOJENÍ -->
+    <div class="el-sec">
+      <span class="el-sec-lbl">Platby — propojení s Kakeibo</span>
+    </div>
+    <div class="el-kk-card" id="el-kk-card">
+      <div style="font-size:12px;color:#4d6080">Načítám…</div>
+    </div>
+
+    <!-- ROČNÍ SROVNÁNÍ -->
+    <div class="el-sec">
+      <span class="el-sec-lbl">Roční srovnání</span>
+    </div>
+    <div class="el-yr-grid" id="el-yr-grid"></div>
+
+    <!-- ZIMA / LÉTO -->
+    <div class="el-sec">
+      <span class="el-sec-lbl">Sezónní průměr</span>
+    </div>
+    <div class="el-season-grid" id="el-season-grid"></div>
+
+    <!-- TARIFY -->
+    <div class="el-sec">
+      <span class="el-sec-lbl">Historie tarifů</span>
+      <button id="el-tarif-add-btn" style="background:none;border:none;color:#4da8ff;
+        font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">
+        ＋ Přidat tarif
+      </button>
+    </div>
+    <div class="el-tarif-list" id="el-tarif-list"></div>
+
+    <!-- PŘIDAT ODEČET -->
+    <div class="el-sec"><span class="el-sec-lbl">Nový odečet</span></div>
+    <div class="el-input-card">
+      <div class="el-input-grid">
+        <div>
+          <label class="el-input-lbl" for="el-date">Měsíc a rok</label>
+          <input class="f-input" id="el-date" type="month">
+        </div>
+        <div>
+          <label class="el-input-lbl" for="el-kwh">Spotřeba (kWh)</label>
+          <input class="f-input" id="el-kwh" type="number" inputmode="decimal"
+            placeholder="0" step="0.1">
+        </div>
+      </div>
+      <button class="kd-save-btn" id="el-save-btn">💾 Uložit odečet</button>
+    </div>
+
+    <!-- EXPORT / IMPORT -->
+    <div class="el-sec"><span class="el-sec-lbl">Export / Import</span></div>
+    <div class="el-export-card">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn-secondary" id="el-export-btn">📊 Exportovat do Excelu</button>
+        <input type="file" id="el-import-file" accept=".xlsx" style="display:none">
+        <button class="btn-secondary" id="el-import-btn">📥 Importovat z Excelu</button>
+        <div id="el-import-status" style="font-size:12px;color:#8fa3c8;line-height:1.7;display:none"></div>
+      </div>
+    </div>
+
+    <div class="ver-bar">MůjOS v5.2 · Elektřina v1.0</div>
   </div>
 </div>
 <div class="module" id="mod-kondice">
@@ -990,6 +1188,35 @@ text-transform:uppercase;color:#4d6080;margin-bottom:12px}
   </div>
 </div>
 
+<!-- MODAL: NOVÝ TARIF -->
+
+<div class="modal-bg" id="modal-tarif">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Nový tarif</div>
+    <div class="f-sec">
+      <label class="f-label" for="tarif-from">Platí od (měsíc)</label>
+      <input class="f-input" id="tarif-from" type="month">
+    </div>
+    <div class="f-sec">
+      <label class="f-label" for="tarif-price">Cena za kWh (Kč vč. DPH)</label>
+      <input class="f-input xl" id="tarif-price" type="number" inputmode="decimal"
+        placeholder="6.50" step="0.01">
+    </div>
+    <div class="f-sec" style="padding-bottom:4px">
+      <label class="f-label" for="tarif-note">Poznámka (dodavatel, tarif…)</label>
+      <input class="f-input" id="tarif-note" type="text" placeholder="ČEZ, vysoký tarif…">
+    </div>
+    <button class="btn-primary" id="tarif-save-btn">Uložit tarif</button>
+    <button class="btn-ghost" id="tarif-cancel-btn"
+      style="display:block;width:calc(100% - 40px);margin:8px 20px 0;padding:13px;
+      border-radius:16px;border:1px solid rgba(255,255,255,.07);background:none;
+      color:#8fa3c8;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer">
+      Zrušit
+    </button>
+  </div>
+</div>
+
 <div id="db-chip"><div class="dot"></div><span id="db-txt">DB</span></div>
 <div id="toast"></div>
 
@@ -1092,6 +1319,7 @@ function navTo(mod) {
   updateFAB();
   if (mod === 'dashboard') refreshDash();
   if (mod === 'kondice') kdRender();
+  if (mod === 'elektrina') elRender();
   if (mod === 'ucetnictvi') { kkRecs = null; kkRenderAll(); }
 }
 
@@ -1119,7 +1347,8 @@ async function refreshDash() {
     document.getElementById('stat-ucet').textContent = recs.length ? fmt(sum) : '—';
   } catch(e) {}
   try { kdRender(); } catch(e) {}
-  ['invest','auto','elektr'].forEach(k => {
+  try { elRender(); } catch(e) {}
+  ['invest','auto'].forEach(k => {
     try { document.getElementById('stat-'+k).textContent = '—'; } catch(e) {}
   });
   try { await refreshActList(); } catch(e) {}
@@ -1819,6 +2048,340 @@ async function init() {
   }
 }
 
+
+// ══════════════════════════════════════════════════════
+//  ELEKTŘINA — Spotřeba, trend, propojení s Kakeibo
+// ══════════════════════════════════════════════════════
+
+const EL_KK_KEYWORD = 'elektřina'; // hledá case-insensitive v description/name
+
+// Pomocné — YYYY-MM z Date
+const toYM  = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+const ymToD = ym => new Date(ym + '-01');
+const fmtYM = ym => ymToD(ym).toLocaleDateString('cs-CZ',{month:'short',year:'numeric'});
+const fmtKWh = v => v % 1 === 0 ? v + ' kWh' : v.toFixed(1) + ' kWh';
+
+// Najdi platný tarif pro dané YYYY-MM
+function elTarifFor(tarifs, ym) {
+  const sorted = [...tarifs].sort((a,b) => b.from.localeCompare(a.from));
+  return sorted.find(t => t.from <= ym) || null;
+}
+
+async function elRender() {
+  const readings = (await dbGetAll('elektrina')).sort((a,b) => a.ym.localeCompare(b.ym));
+  const tarifs   = (await dbGetAll('settings_el') || []);
+  // settings_el není samostatný store — tarifují se v 'settings' s prefixem 'el_tarif_'
+  const allSettings = await dbGetAll('settings');
+  const tarifRecs = allSettings.filter(s => s.key && s.key.startsWith('el_tarif_'))
+                               .map(s => s.value)
+                               .sort((a,b) => a.from.localeCompare(b.from));
+
+  const now = new Date();
+  const curYM = toYM(now);
+
+  // ── Hero ──
+  if (readings.length) {
+    const last = readings[readings.length-1];
+    const tarif = elTarifFor(tarifRecs, last.ym);
+    const cost = tarif ? Math.round(last.kwh * tarif.price) : null;
+
+    document.getElementById('el-hero-kwh').textContent = fmtKWh(last.kwh);
+    document.getElementById('el-hero-sub').textContent =
+      fmtYM(last.ym) + (last.ym === curYM ? ' · aktuální měsíc' : '');
+    document.getElementById('el-hero-cost').textContent = cost ? fmt(cost) : '—';
+    document.getElementById('el-hero-tarif').textContent =
+      tarif ? tarif.price.toFixed(2) + ' Kč/kWh' : 'Nenastaveno';
+
+    // Trend MoM
+    if (readings.length >= 2) {
+      const prev = readings[readings.length-2];
+      const delta = last.kwh - prev.kwh;
+      const pct = prev.kwh > 0 ? Math.round(delta/prev.kwh*100) : 0;
+      const sign = delta >= 0 ? '+' : '';
+      document.getElementById('el-hero-trend').textContent = sign + pct + '%';
+      document.getElementById('el-hero-trend').style.color = delta <= 0 ? '#34c97a' : '#ff9f43';
+    } else {
+      document.getElementById('el-hero-trend').textContent = '—';
+    }
+  } else {
+    document.getElementById('el-hero-kwh').textContent = '— kWh';
+    document.getElementById('el-hero-sub').textContent = 'Přidej první odečet níže';
+    document.getElementById('el-hero-cost').textContent = '—';
+    document.getElementById('el-hero-trend').textContent = '—';
+    document.getElementById('el-hero-tarif').textContent = tarifRecs.length ? tarifRecs[tarifRecs.length-1].price.toFixed(2) + ' Kč/kWh' : '—';
+  }
+
+  // ── Sloupcový graf — posledních 12 měsíců ──
+  const chart12 = [];
+  for (let i = 11; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
+    const ym = toYM(d);
+    const rec = readings.find(r => r.ym === ym);
+    chart12.push({ym, kwh: rec ? rec.kwh : null, label: d.toLocaleDateString('cs-CZ',{month:'short'})});
+  }
+  const maxKwh = Math.max(...chart12.map(b => b.kwh||0), 1);
+  const barsEl = document.getElementById('el-bars');
+  barsEl.innerHTML = chart12.map(b => {
+    const pct = b.kwh ? Math.round(b.kwh/maxKwh*100) : 0;
+    const isCur = b.ym === curYM;
+    const col = isCur ? '#4da8ff' : '#a78bfa';
+    return `<div class="el-bar-col">
+      <div class="el-bar-val">${b.kwh ? Math.round(b.kwh) : ''}</div>
+      <div class="el-bar-fill ${isCur?'current':''}"
+        style="height:${pct}%;background:${b.kwh?col:'rgba(255,255,255,.05)'}"></div>
+      <div class="el-bar-lbl">${b.label}</div>
+    </div>`;
+  }).join('');
+
+  // ── Kakeibo propojení ──
+  const kkRecs = await dbGetAll('ucetnictvi');
+  const elPayments = kkRecs.filter(r =>
+    (r.description||'').toLowerCase().includes(EL_KK_KEYWORD) ||
+    (r.note||'').toLowerCase().includes(EL_KK_KEYWORD)
+  ).sort((a,b) => b.date.localeCompare(a.date));
+
+  // Spočítej zaplaceno za každý rok
+  const paidByYear = {};
+  elPayments.forEach(r => {
+    const yr = r.date.slice(0,4);
+    paidByYear[yr] = (paidByYear[yr]||0) + r.amount;
+  });
+
+  // Odhadované náklady za každý rok z odečtů × tarif
+  const costByYear = {};
+  readings.forEach(r => {
+    const yr = r.ym.slice(0,4);
+    const tarif = elTarifFor(tarifRecs, r.ym);
+    if (tarif) costByYear[yr] = (costByYear[yr]||0) + Math.round(r.kwh * tarif.price);
+  });
+
+  // Celkem zaplaceno v aktuálním roce
+  const curYr = String(now.getFullYear());
+  const paidCurYr = paidByYear[curYr] || 0;
+  const costCurYr = costByYear[curYr] || 0;
+  const balance = paidCurYr - costCurYr;
+
+  const kkCard = document.getElementById('el-kk-card');
+  const recentPayments = elPayments.slice(0,5);
+  kkCard.innerHTML = `
+    <div class="el-kk-title">Elektřina v Kakeibo · ${curYr}</div>
+    <div class="el-kk-row">
+      <span class="el-kk-lbl">Zaplaceno zálohy</span>
+      <span class="el-kk-val">${fmt(paidCurYr)}</span>
+    </div>
+    <div class="el-kk-row">
+      <span class="el-kk-lbl">Odh. skutečná spotřeba</span>
+      <span class="el-kk-val">${costCurYr ? fmt(costCurYr) : '—'}</span>
+    </div>
+    <div class="el-kk-row">
+      <span class="el-kk-lbl">Rozdíl (zálohy − spotřeba)</span>
+      <span class="el-kk-val ${balance>0?'pos':balance<0?'neg':''}">${costCurYr ? fmt(balance) : '—'}</span>
+    </div>
+    ${recentPayments.length ? `
+    <div class="el-kk-payments">
+      <div style="font-size:10px;color:#4d6080;text-transform:uppercase;
+        letter-spacing:.07em;font-weight:700;margin-bottom:4px">Poslední platby</div>
+      ${recentPayments.map(r => `
+        <div class="el-kk-payment">
+          <span class="el-kk-payment-date">${fmtD(r.date)}</span>
+          <span class="el-kk-payment-name">${r.description||'Elektřina'}</span>
+          <span class="el-kk-payment-amt">${fmt(r.amount)}</span>
+        </div>`).join('')}
+    </div>` : '<div style="font-size:11px;color:#4d6080;margin-top:8px">Žádné platby s názvem "Elektřina" v Kakeibo</div>'}`;
+
+  // ── Roční srovnání ──
+  const years = [...new Set(readings.map(r => r.ym.slice(0,4)))].sort((a,b)=>b.localeCompare(a));
+  const MONTH_COLORS = ['#c0392b','#e67e22','#f1c40f','#2ecc71','#1abc9c','#3498db',
+                        '#2980b9','#8e44ad','#2c3e50','#16a085','#27ae60','#e74c3c'];
+  const yrGrid = document.getElementById('el-yr-grid');
+  if (!years.length) {
+    yrGrid.innerHTML = '<div style="font-size:12px;color:#4d6080;padding:8px 14px">Přidej odečty</div>';
+  } else {
+    yrGrid.innerHTML = years.map(yr => {
+      const yrRecs = readings.filter(r => r.ym.startsWith(yr));
+      const totalKwh = yrRecs.reduce((a,r) => a+r.kwh, 0);
+      const paidYr = paidByYear[yr] || 0;
+      const costYr = costByYear[yr] || 0;
+      const maxM = Math.max(...yrRecs.map(r=>r.kwh),1);
+      const bars = yrRecs.map(r => {
+        const mi = parseInt(r.ym.slice(5,7))-1;
+        const w = Math.round(r.kwh/maxM*100);
+        return `<div class="el-yr-seg" style="flex:${w};background:${MONTH_COLORS[mi]};opacity:.7"></div>`;
+      }).join('');
+      const avgM = yrRecs.length ? Math.round(totalKwh/yrRecs.length) : 0;
+      return `<div class="el-yr-row">
+        <div class="el-yr-top">
+          <span class="el-yr-year">⚡ ${yr}</span>
+          <span class="el-yr-kwh">${Math.round(totalKwh).toLocaleString('cs-CZ')} kWh</span>
+        </div>
+        <div class="el-yr-bars">${bars||'<div style="flex:1;height:6px;background:rgba(255,255,255,.05);border-radius:3px"></div>'}</div>
+        <div class="el-yr-detail">
+          <div class="el-yr-detail-item">Měs. průměr: <span>${avgM} kWh</span></div>
+          ${paidYr ? `<div class="el-yr-detail-item">Zaplaceno: <span>${fmt(paidYr)}</span></div>` : ''}
+          ${costYr ? `<div class="el-yr-detail-item">Odh. náklady: <span>${fmt(costYr)}</span></div>` : ''}
+          <div class="el-yr-detail-item">Měsíců: <span>${yrRecs.length}/12</span></div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ── Zima / Léto ──
+  // Zima: říjen–březen (10,11,12,1,2,3), Léto: duben–září (4–9)
+  const winterRecs = readings.filter(r => { const m=parseInt(r.ym.slice(5,7)); return m>=10||m<=3; });
+  const summerRecs = readings.filter(r => { const m=parseInt(r.ym.slice(5,7)); return m>=4&&m<=9; });
+  const avgWinter = winterRecs.length ? Math.round(winterRecs.reduce((a,r)=>a+r.kwh,0)/winterRecs.length) : null;
+  const avgSummer = summerRecs.length ? Math.round(summerRecs.reduce((a,r)=>a+r.kwh,0)/summerRecs.length) : null;
+  document.getElementById('el-season-grid').innerHTML = `
+    <div class="el-season-card">
+      <div class="el-season-icon">❄️</div>
+      <div class="el-season-lbl">Zima (říjen–březen)</div>
+      <div class="el-season-kwh">${avgWinter ? avgWinter+' kWh' : '—'}</div>
+      <div class="el-season-sub">průměr / měsíc · ${winterRecs.length} měs.</div>
+    </div>
+    <div class="el-season-card">
+      <div class="el-season-icon">☀️</div>
+      <div class="el-season-lbl">Léto (duben–září)</div>
+      <div class="el-season-kwh">${avgSummer ? avgSummer+' kWh' : '—'}</div>
+      <div class="el-season-sub">průměr / měsíc · ${summerRecs.length} měs.</div>
+    </div>`;
+
+  // ── Tarify ──
+  const tarifList = document.getElementById('el-tarif-list');
+  if (!tarifRecs.length) {
+    tarifList.innerHTML = '<div style="font-size:12px;color:#4d6080;padding:4px 14px">Žádný tarif — přidej aktuální cenu kWh</div>';
+  } else {
+    const sorted = [...tarifRecs].sort((a,b) => b.from.localeCompare(a.from));
+    tarifList.innerHTML = sorted.map((t,i) => `
+      <div class="el-tarif-item">
+        <div class="el-tarif-dot" style="background:${i===0?'#a78bfa':'#4d6080'}"></div>
+        <div class="el-tarif-info">
+          <div class="el-tarif-from">Od ${fmtYM(t.from)}${i===0?' · <span style="color:#a78bfa;font-size:10px">AKTUÁLNÍ</span>':''}</div>
+          <div class="el-tarif-price">${t.price.toFixed(2)} Kč/kWh ${t.note?'· '+t.note:''}</div>
+        </div>
+        <button class="el-tarif-del" data-tk="${t.from}">×</button>
+      </div>`).join('');
+    tarifList.querySelectorAll('.el-tarif-del').forEach(b => b.addEventListener('click', async () => {
+      await dbDel('settings', 'el_tarif_'+b.dataset.tk);
+      showToast('Tarif odstraněn'); elRender();
+    }));
+  }
+
+  // Dashboard stat update
+  try {
+    if (readings.length) {
+      const last = readings[readings.length-1];
+      document.getElementById('stat-elektr').textContent = fmtKWh(last.kwh);
+    }
+  } catch(e) {}
+}
+
+// ── ODEČET SAVE ──────────────────────────────────────
+document.getElementById('el-save-btn').addEventListener('click', async () => {
+  const ym  = document.getElementById('el-date').value;
+  const kwh = parseFloat(document.getElementById('el-kwh').value);
+  if (!ym || !kwh || kwh <= 0) { showToast('Vyplň měsíc a spotřebu'); return; }
+
+  // Zkontroluj duplicitu
+  const existing = await dbGetAll('elektrina');
+  const dup = existing.find(r => r.ym === ym);
+  if (dup) {
+    // Přepsat
+    await dbPut('elektrina', {...dup, kwh});
+    showToast('Odečet aktualizován ✓');
+  } else {
+    await dbAdd('elektrina', {ym, kwh});
+    await dbAdd('activity_log', {
+      modul:'elektrina', title:'Odečet elektřiny',
+      sub: fmtKWh(kwh) + ' · ' + fmtYM(ym),
+      _ts: new Date().toISOString()
+    });
+    showToast('Odečet uložen ✓');
+  }
+  document.getElementById('el-kwh').value = '';
+  elRender();
+});
+
+// ── TARIF ─────────────────────────────────────────────
+document.getElementById('el-tarif-add-btn').addEventListener('click', () => {
+  document.getElementById('tarif-from').value  = toYM(new Date());
+  document.getElementById('tarif-price').value = '';
+  document.getElementById('tarif-note').value  = '';
+  document.getElementById('modal-tarif').classList.add('open');
+});
+document.getElementById('tarif-cancel-btn').addEventListener('click', () => closeModal('modal-tarif'));
+document.getElementById('modal-tarif').addEventListener('click', e => {
+  if (e.target.id === 'modal-tarif') closeModal('modal-tarif');
+});
+document.getElementById('tarif-save-btn').addEventListener('click', async () => {
+  const from  = document.getElementById('tarif-from').value;
+  const price = parseFloat(document.getElementById('tarif-price').value);
+  const note  = document.getElementById('tarif-note').value.trim();
+  if (!from || !price || price <= 0) { showToast('Vyplň datum a cenu'); return; }
+  // Uložit do settings store s klíčem el_tarif_YYYY-MM
+  await dbPut('settings', {key: 'el_tarif_'+from, value: {from, price, note}});
+  closeModal('modal-tarif'); showToast('Tarif uložen ✓'); elRender();
+});
+
+// ── EXPORT ────────────────────────────────────────────
+document.getElementById('el-export-btn').addEventListener('click', async () => {
+  const readings = await dbGetAll('elektrina');
+  const allSettings = await dbGetAll('settings');
+  const tarifs = allSettings.filter(s => s.key?.startsWith('el_tarif_')).map(s => s.value);
+  const rows = readings.sort((a,b)=>a.ym.localeCompare(b.ym)).map(r => {
+    const t = elTarifFor(tarifs, r.ym);
+    return {ym:r.ym, kwh:r.kwh, price_per_kwh: t?t.price:'', cost_czk: t?Math.round(r.kwh*t.price):''};
+  });
+  await exportXLSX({
+    'Odečty': rows,
+    'Tarify': tarifs.map(t => ({from:t.from, price_per_kwh:t.price, note:t.note||''}))
+  }, 'Elektrina');
+  showToast('Excel se stahuje…');
+});
+
+// ── IMPORT ────────────────────────────────────────────
+document.getElementById('el-import-btn').addEventListener('click', () => {
+  document.getElementById('el-import-file').click();
+});
+document.getElementById('el-import-file').addEventListener('change', async e => {
+  const file = e.target.files[0]; if (!file) return;
+  e.target.value = '';
+  const status = document.getElementById('el-import-status');
+  status.style.display = 'block'; status.textContent = 'Načítám…';
+  try {
+    if (!window.XLSX) await new Promise((res,rej) => {
+      const s = document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      s.onload=res; s.onerror=rej; document.head.appendChild(s);
+    });
+    const wb = XLSX.read(await file.arrayBuffer(), {type:'array'});
+    let addedR=0, skippedR=0, addedT=0;
+
+    // List Odečty
+    if (wb.Sheets['Odečty']) {
+      const rows = XLSX.utils.sheet_to_json(wb.Sheets['Odečty']).filter(r=>r.ym&&r.kwh);
+      const existing = await dbGetAll('elektrina');
+      const keys = new Set(existing.map(r=>r.ym));
+      for (const r of rows) {
+        if (keys.has(r.ym)) { skippedR++; continue; }
+        await dbAdd('elektrina', {ym:r.ym, kwh:parseFloat(r.kwh)});
+        keys.add(r.ym); addedR++;
+      }
+    }
+    // List Tarify
+    if (wb.Sheets['Tarify']) {
+      const rows = XLSX.utils.sheet_to_json(wb.Sheets['Tarify']).filter(r=>r.from&&r.price_per_kwh);
+      for (const r of rows) {
+        await dbPut('settings', {key:'el_tarif_'+r.from,
+          value:{from:r.from, price:parseFloat(r.price_per_kwh), note:r.note||''}});
+        addedT++;
+      }
+    }
+    status.innerHTML = `✅ <b>Hotovo!</b> Odečty: přidáno <b>${addedR}</b>, přeskočeno <b>${skippedR}</b> · Tarify: <b>${addedT}</b>`;
+    showToast('Import OK ✓'); elRender();
+  } catch(err) {
+    status.textContent = '❌ Chyba: '+err.message;
+  }
+});
 
 // ══════════════════════════════════════════════════════
 //  KONDICE — Sledování cyklu a PMS predikce
