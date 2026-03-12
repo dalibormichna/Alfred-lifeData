@@ -524,115 +524,6 @@ html{background:#0b1120;color:#f0f4ff}html,body{height:100%;background:#0b1120;c
 .kd-export-title{font-size:11px;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;color:#4d6080;margin-bottom:12px}
 
-/* ══ ELEKTŘINA MODULE ═══════════════════════════════ */
-.el-scroll{overflow-y:auto;scrollbar-width:none;
-  padding-bottom:calc(108px + env(safe-area-inset-bottom,0px))}
-.el-scroll::-webkit-scrollbar{display:none}
-
-/* Hero karta */
-.el-hero{
-  margin:14px 14px 0;border-radius:24px;padding:22px;
-  background:linear-gradient(135deg,#1a1060,#0d1f4a);
-  border:1px solid rgba(167,139,250,.25);box-shadow:0 4px 24px rgba(0,0,0,.4);
-}
-.el-hero-tag{font-size:10px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:rgba(167,139,250,.7);margin-bottom:6px}
-.el-hero-val{font-size:36px;font-weight:700;letter-spacing:-.6px;
-  color:#f0f4ff;line-height:1;margin-bottom:4px}
-.el-hero-sub{font-size:13px;color:#8fa3c8;margin-bottom:16px}
-.el-hero-pills{display:flex;gap:10px}
-.el-hero-pill{flex:1;background:rgba(0,0,0,.25);border-radius:12px;padding:10px 12px}
-.el-hero-pill-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.07em;
-  font-weight:700;color:rgba(255,255,255,.45);margin-bottom:3px}
-.el-hero-pill-val{font-size:14px;font-weight:700;color:#f0f4ff}
-
-/* Sekce nadpis */
-.el-sec{padding:18px 14px 8px;display:flex;align-items:center;justify-content:space-between}
-.el-sec-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:#4d6080}
-
-/* Trend graf — sloupcový */
-.el-chart-wrap{margin:0 14px;background:#152035;border:1px solid rgba(255,255,255,.07);
-  border-radius:20px;padding:16px;overflow:hidden}
-.el-bars{display:flex;align-items:flex-end;gap:4px;height:90px;margin-bottom:6px}
-.el-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
-.el-bar-fill{width:100%;border-radius:4px 4px 0 0;transition:height .4s ease;min-height:3px;position:relative}
-.el-bar-fill.current{box-shadow:0 0 8px rgba(167,139,250,.6)}
-.el-bar-lbl{font-size:8px;color:#4d6080;text-align:center;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%}
-.el-bar-val{font-size:7px;color:#8fa3c8;text-align:center}
-.el-chart-legend{display:flex;gap:14px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)}
-.el-chart-legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:#4d6080}
-.el-legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
-
-/* Kakeibo propojení karta */
-.el-kk-card{margin:0 14px;background:#152035;border:1px solid rgba(255,255,255,.07);
-  border-radius:20px;padding:16px 18px}
-.el-kk-title{font-size:11px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:#4d6080;margin-bottom:12px}
-.el-kk-row{display:flex;justify-content:space-between;align-items:center;
-  padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)}
-.el-kk-row:last-child{border-bottom:none}
-.el-kk-lbl{font-size:13px;color:#8fa3c8}
-.el-kk-val{font-size:15px;font-weight:700;color:#f0f4ff}
-.el-kk-val.pos{color:#34c97a}
-.el-kk-val.neg{color:#ff6b6b}
-.el-kk-payments{margin-top:10px;display:flex;flex-direction:column;gap:5px}
-.el-kk-payment{display:flex;justify-content:space-between;align-items:center;
-  background:#1c2d47;border-radius:10px;padding:8px 12px}
-.el-kk-payment-date{font-size:11px;color:#4d6080}
-.el-kk-payment-name{font-size:12px;color:#8fa3c8;flex:1;padding:0 8px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.el-kk-payment-amt{font-size:13px;font-weight:700;color:#8fa3c8;flex-shrink:0}
-
-/* Roční srovnání */
-.el-yr-grid{margin:0 14px;display:flex;flex-direction:column;gap:8px}
-.el-yr-row{background:#152035;border:1px solid rgba(255,255,255,.07);
-  border-radius:16px;padding:14px 16px}
-.el-yr-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.el-yr-year{font-size:14px;font-weight:600;color:#f0f4ff}
-.el-yr-kwh{font-size:16px;font-weight:700;color:#a78bfa}
-.el-yr-bars{display:flex;gap:3px}
-.el-yr-seg{height:6px;border-radius:3px;min-width:3px}
-.el-yr-detail{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap}
-.el-yr-detail-item{font-size:11px;color:#4d6080}
-.el-yr-detail-item span{color:#8fa3c8;font-weight:600}
-
-/* Zima/léto */
-.el-season-grid{margin:0 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.el-season-card{background:#152035;border:1px solid rgba(255,255,255,.07);
-  border-radius:16px;padding:14px}
-.el-season-icon{font-size:22px;margin-bottom:6px}
-.el-season-lbl{font-size:10px;font-weight:700;text-transform:uppercase;
-  letter-spacing:.07em;color:#4d6080;margin-bottom:4px}
-.el-season-kwh{font-size:22px;font-weight:700;color:#f0f4ff}
-.el-season-sub{font-size:11px;color:#4d6080;margin-top:2px}
-
-/* Tarif */
-.el-tarif-list{margin:0 14px;display:flex;flex-direction:column;gap:6px}
-.el-tarif-item{background:#152035;border:1px solid rgba(255,255,255,.07);
-  border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px}
-.el-tarif-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.el-tarif-info{flex:1}
-.el-tarif-from{font-size:12px;font-weight:600;color:#f0f4ff}
-.el-tarif-price{font-size:13px;color:#a78bfa;font-weight:700}
-.el-tarif-del{background:none;border:none;color:#4d6080;font-size:18px;cursor:pointer;padding:0}
-
-/* Vstup */
-.el-input-card{margin:0 14px;background:#152035;border:1px solid rgba(255,255,255,.12);
-  border-radius:20px;padding:16px 18px}
-.el-input-title{font-size:11px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:#4d6080;margin-bottom:14px}
-.el-input-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.el-input-full{margin-bottom:14px}
-.el-input-lbl{font-size:10px;font-weight:700;text-transform:uppercase;
-  letter-spacing:.07em;color:#4d6080;margin-bottom:5px;display:block}
-
-/* Export */
-.el-export-card{margin:0 14px;background:#152035;border:1px solid rgba(255,255,255,.07);
-  border-radius:20px;padding:16px 18px}
-.el-export-title{font-size:11px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:#4d6080;margin-bottom:12px}
 </style>
 </head>
 <body>
@@ -722,7 +613,7 @@ html{background:#0b1120;color:#f0f4ff}html,body{height:100%;background:#0b1120;c
             <div class="act-sub">Přidej první záznam v modulech</div></div>
         </div>
       </div>
-      <div class="ver-bar">MůjOS v5.4 · Kakeibo v1.3</div>
+      <div class="ver-bar">MůjOS v5.2 · Kakeibo v1.3</div>
     </div>
 
     <!-- ═══ KAKEIBO ═══ -->
@@ -856,116 +747,16 @@ html{background:#0b1120;color:#f0f4ff}html,body{height:100%;background:#0b1120;c
       </div>
     </div>
     <div class="module" id="mod-elektrina">
-      <div class="el-scroll">
-
-        <!-- HERO -->
-        <div class="el-hero">
-          <div class="el-hero-tag">Spotřeba — aktuální měsíc</div>
-          <div class="el-hero-val" id="el-hero-kwh">— kWh</div>
-          <div class="el-hero-sub" id="el-hero-sub">Přidej první odečet</div>
-          <div class="el-hero-pills">
-            <div class="el-hero-pill">
-              <div class="el-hero-pill-lbl">Odh. náklady/měs.</div>
-              <div class="el-hero-pill-val" id="el-hero-cost">—</div>
-            </div>
-            <div class="el-hero-pill">
-              <div class="el-hero-pill-lbl">Trend MoM</div>
-              <div class="el-hero-pill-val" id="el-hero-trend">—</div>
-            </div>
-            <div class="el-hero-pill">
-              <div class="el-hero-pill-lbl">Tarif</div>
-              <div class="el-hero-pill-val" id="el-hero-tarif">—</div>
-            </div>
-          </div>
+      <div class="mod-wrap">
+        <div class="mod-header">
+          <div class="mod-badge" style="background:rgba(167,139,250,.1)">⚡</div>
+          <div><div class="mod-title">Elektřina</div><div class="mod-sub">Odečty, spotřeba, tarify</div></div>
         </div>
-
-        <!-- TREND GRAF 12 MĚSÍCŮ -->
-        <div class="el-sec">
-          <span class="el-sec-lbl">Spotřeba — posledních 12 měsíců</span>
+        <div class="ph-box"><div class="ph-icon">🔧</div>
+          <div class="ph-title">Připravuje se</div>
+          <div class="ph-text">Modul se brzy vrátí ve stabilní verzi.</div>
         </div>
-        <div class="el-chart-wrap">
-          <div class="el-bars" id="el-bars"></div>
-          <div class="el-chart-legend">
-            <div class="el-chart-legend-item">
-              <div class="el-legend-dot" style="background:#a78bfa"></div>kWh / měsíc
-            </div>
-            <div class="el-chart-legend-item">
-              <div class="el-legend-dot" style="background:#4da8ff"></div>aktuální měsíc
-            </div>
-          </div>
-        </div>
-
-        <!-- KAKEIBO PROPOJENÍ -->
-        <div class="el-sec">
-          <span class="el-sec-lbl">Platby — propojení s Kakeibo</span>
-        </div>
-        <div class="el-kk-card" id="el-kk-card">
-          <div style="font-size:12px;color:#4d6080">Načítám…</div>
-        </div>
-
-        <!-- ROČNÍ SROVNÁNÍ -->
-        <div class="el-sec">
-          <span class="el-sec-lbl">Roční srovnání</span>
-        </div>
-        <div class="el-yr-grid" id="el-yr-grid"></div>
-
-        <!-- ZIMA / LÉTO -->
-        <div class="el-sec">
-          <span class="el-sec-lbl">Sezónní průměr</span>
-        </div>
-        <div class="el-season-grid" id="el-season-grid"></div>
-
-        <!-- TARIFY -->
-        <div class="el-sec">
-          <span class="el-sec-lbl">Historie tarifů</span>
-          <button id="el-tarif-add-btn" style="background:none;border:none;color:#4da8ff;
-            font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">
-            ＋ Přidat tarif
-          </button>
-        </div>
-        <div class="el-tarif-list" id="el-tarif-list"></div>
-
-        <!-- PŘIDAT ODEČET -->
-        <div class="el-sec"><span class="el-sec-lbl">Nový odečet</span></div>
-        <div class="el-input-card">
-          <div class="el-input-grid">
-            <div>
-              <label class="el-input-lbl" for="el-date">Měsíc a rok</label>
-              <input class="f-input" id="el-date" type="month">
-            </div>
-            <div>
-              <label class="el-input-lbl" for="el-kwh">Spotřeba (kWh)</label>
-              <input class="f-input" id="el-kwh" type="number" inputmode="decimal"
-                placeholder="0" step="0.1">
-            </div>
-          </div>
-          <button class="kd-save-btn" id="el-save-btn">💾 Uložit odečet</button>
-        </div>
-
-        <!-- FIXNÍ POPLATEK -->
-        <div class="el-sec"><span class="el-sec-lbl">Fixní měsíční poplatek</span></div>
-        <div class="el-input-card">
-          <div style="font-size:12px;color:#8fa3c8;margin-bottom:12px;line-height:1.6">
-            Poplatek za odběrné místo, distribuci aj. — přičítá se ke každému měsíci při výpočtu nákladů.
-          </div>
-          <label class="el-input-lbl" for="el-fixed-fee">Poplatek / měsíc (Kč)</label>
-          <input class="f-input xl" id="el-fixed-fee" type="number" inputmode="numeric"
-            placeholder="0" style="margin-bottom:14px">
-          <button class="kd-save-btn" id="el-fixed-save">💾 Uložit poplatek</button>
-        </div>
-
-        <!-- EXPORT / IMPORT -->
-        <div class="el-sec"><span class="el-sec-lbl">Export / Import</span></div>
-        <div class="el-export-card">
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <button class="btn-secondary" id="el-export-btn">📊 Exportovat do Excelu</button>
-            <input type="file" id="el-import-file" accept=".xlsx" style="display:none">
-            <button class="btn-secondary" id="el-import-btn">📥 Importovat z Excelu</button>
-            <div id="el-import-status" style="font-size:12px;color:#8fa3c8;line-height:1.7;display:none"></div>
-          </div>
-        </div>
-
-        <div class="ver-bar">MůjOS v5.2 · Elektřina v1.0</div>
+        <div class="ver-bar">MůjOS v5.2</div>
       </div>
     </div>
     <div class="module" id="mod-kondice">
@@ -1191,10 +982,6 @@ html{background:#0b1120;color:#f0f4ff}html,body{height:100%;background:#0b1120;c
   </div>
 </div>
 
-<!-- MODAL: NOVÝ TARIF -->
-<div class="modal-bg" id="modal-tarif">
-  <div class="modal-sheet">
-    <div class="modal-handle"></div>
     <div class="modal-title">Nový tarif</div>
     <div class="f-sec">
       <label class="f-label" for="tarif-from">Platí od (měsíc)</label>
@@ -1229,7 +1016,7 @@ html{background:#0b1120;color:#f0f4ff}html,body{height:100%;background:#0b1120;c
 // ══════════════════════════════════════════════════════
 
 // ── DB ────────────────────────────────────────────────
-const DB_NAME = 'mojos_db', DB_VER = 5;
+const DB_NAME = 'mojos_db', DB_VER = 6;
 let db = null;
 
 function openDB() {
@@ -1321,7 +1108,6 @@ function navTo(mod) {
   updateFAB();
   if (mod === 'dashboard') refreshDash();
   if (mod === 'kondice') kdRender();
-  if (mod === 'elektrina') elRender();
   if (mod === 'ucetnictvi') { kkRecs = null; kkRenderAll(); }
 }
 
@@ -1349,8 +1135,7 @@ async function refreshDash() {
     document.getElementById('stat-ucet').textContent = recs.length ? fmt(sum) : '—';
   } catch(e) {}
   try { kdRender(); } catch(e) {}
-  try { elRender(); } catch(e) {}
-  ['invest','auto'].forEach(k => {
+  ['invest','auto','elektr'].forEach(k => {
     try { document.getElementById('stat-'+k).textContent = '—'; } catch(e) {}
   });
   try { await refreshActList(); } catch(e) {}
@@ -1505,3 +1290,218 @@ function kkRenderYear() {
       <div class="kk-month-top"><span class="kk-month-name">${n}</span>
         <span class="kk-month-bal ${bal>=0?'pos':'neg'}">${fmt(bal)}</span></div>
       <div class="kk-month-bars">${bars}</div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('.kk-month[data-mi]').forEach(el =>
+    el.addEventListener('click', () => {
+      kkDate = new Date(yr, parseInt(el.dataset.mi), 1);
+      kkSwitchView('mesic');
+    })
+  );
+}
+
+// ── HERO CARD ─────────────────────────────────────────
+function kkRenderHero(id, recs, word, showBudget) {
+  const inc = recs.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+  const exp = recs.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+  const saved = inc - exp;
+  const budget = showBudget ? getBudget() : 0;
+  const pct = budget>0 ? Math.min(Math.round(exp/budget*100),100) : 0;
+  const progCls = pct<70?'ok':pct<90?'warn':'over';
+  const balCls = saved>0?'pos':saved<0?'neg':'zero';
+  document.getElementById(id).innerHTML = `
+    <div class="kk-hero-lbl">Bilance ${word}</div>
+    <div class="kk-hero-bal ${balCls}">${fmt(saved)}</div>
+    <div class="kk-hero-sub">${saved>=0?'v plusu 👍':'výdaje převyšují příjmy ⚠️'}</div>
+    <div class="kk-hero-row">
+      <div class="kk-hero-pill">
+        <div class="kk-hero-pill-lbl">Příjmy</div>
+        <div class="kk-hero-pill-val inc">${fmt(inc)}</div>
+      </div>
+      <div class="kk-hero-pill">
+        <div class="kk-hero-pill-lbl">Výdaje</div>
+        <div class="kk-hero-pill-val exp">${fmt(exp)}</div>
+      </div>
+    </div>
+    ${budget>0 ? `
+    <div class="kk-prog-wrap">
+      <div class="kk-prog-labels"><span>Výdaje z limitu</span><span>${pct}% z ${fmt(budget)}</span></div>
+      <div class="kk-prog-track"><div class="kk-prog-bar ${progCls}" style="width:${pct}%"></div></div>
+    </div>` : ''}`;
+}
+
+// ── CATS ──────────────────────────────────────────────
+function kkRenderCats(id, recs) {
+  document.getElementById(id).innerHTML = EXP_CATS.map(cat => {
+    const cr = recs.filter(r=>r.category===cat), sum = cr.reduce((s,r)=>s+r.amount,0), c = CATS[cat];
+    return `<div class="kk-cat">
+      <div class="kk-cat-top">
+        <div class="kk-cat-icon">${c.icon}</div>
+        <div class="kk-cat-badge" style="background:${c.bg};color:${c.col}">${cr.length} pol.</div>
+      </div>
+      <div class="kk-cat-name">${c.label}</div>
+      <div class="kk-cat-amt" style="color:${c.col}">${fmt(sum)}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── TX RENDERS ────────────────────────────────────────
+function kkRenderTxFlat(id, recs) {
+  let f = [...recs];
+  if (kkFilter==='vydaje') f = f.filter(r=>EXP_CATS.includes(r.category));
+  if (kkFilter==='prijmy') f = f.filter(r=>INC_TYPES.includes(r.category));
+  f.sort((a,b)=>b.date.localeCompare(a.date));
+  const el = document.getElementById(id);
+  if (!f.length) {
+    el.innerHTML = `<div class="kk-empty"><div class="kk-empty-icon">📝</div>
+      <div class="kk-empty-title">Žádné záznamy</div>
+      <div class="kk-empty-sub">Klepni na bílé tlačítko<br>a přidej první záznam.</div></div>`;
+    return;
+  }
+  el.innerHTML = f.map(r => kkTxHTML(r)).join('');
+  el.querySelectorAll('.kk-tx').forEach(i => i.addEventListener('click', () => kkOpenDetail(parseInt(i.dataset.id))));
+}
+
+function kkRenderTxByWeek(id, recs) {
+  const el = document.getElementById(id);
+  if (!recs.length) {
+    el.innerHTML = `<div class="kk-empty"><div class="kk-empty-icon">📝</div><div class="kk-empty-title">Žádné záznamy</div></div>`;
+    return;
+  }
+  const sorted = [...recs].sort((a,b)=>b.date.localeCompare(a.date));
+  const weeks = {};
+  sorted.forEach(r => {
+    const ws = kkWeekStart(new Date(r.date)).toISOString().slice(0,10);
+    if (!weeks[ws]) weeks[ws] = [];
+    weeks[ws].push(r);
+  });
+  let html = '';
+  Object.entries(weeks).sort((a,b)=>b[0].localeCompare(a[0])).forEach(([ws,wr]) => {
+    const sum = wr.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+    html += `<div class="kk-wk-div">${kkWkLbl(new Date(ws))} · ${fmt(sum)}</div>`;
+    wr.forEach(r => html += kkTxHTML(r));
+  });
+  el.innerHTML = html;
+  el.querySelectorAll('.kk-tx').forEach(i => i.addEventListener('click', () => kkOpenDetail(parseInt(i.dataset.id))));
+}
+
+function kkTxHTML(r) {
+  const isInc = INC_TYPES.includes(r.category), c = CATS[r.category]||CATS.need;
+  return `<div class="kk-tx" data-id="${r.id}">
+    <div class="kk-tx-icon" style="background:${c.bg}">${c.icon}</div>
+    <div class="kk-tx-info">
+      <div class="kk-tx-desc">${r.description||c.label}</div>
+      <div class="kk-tx-meta">${c.label}${r.note?' · '+r.note:''}</div>
+    </div>
+    <div class="kk-tx-right">
+      <div class="kk-tx-amt ${isInc?'inc':'exp'}">${isInc?'+':'−'}${fmt(r.amount)}</div>
+      <div class="kk-tx-date">${fmtD(r.date)}</div>
+    </div>
+  </div>`;
+}
+
+// ── STATS ─────────────────────────────────────────────
+async function kkRenderStats() {
+  const recs    = kkRecs || [];
+  const expRecs = recs.filter(r=>EXP_CATS.includes(r.category));
+  const incRecs = recs.filter(r=>INC_TYPES.includes(r.category));
+  const now     = new Date();
+
+  // Průměr 12 týdnů
+  const weeks12 = Array.from({length:12},(_,i) => {
+    const ref = new Date(now.getTime()-i*7*86400000);
+    const ws = kkWeekStart(ref), we = kkWeekEnd(ref);
+    return expRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;})
+                  .reduce((a,r)=>a+r.amount,0);
+  });
+  const nonZero = weeks12.filter(v=>v>0);
+  const avgWeek = nonZero.length ? Math.round(nonZero.reduce((a,v)=>a+v,0)/nonZero.length) : 0;
+  let wPlus=0, wMinus=0;
+  for (let i=0;i<12;i++) {
+    const ref = new Date(now.getTime()-i*7*86400000);
+    const ws = kkWeekStart(ref), we = kkWeekEnd(ref);
+    const e = expRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;}).reduce((a,r)=>a+r.amount,0);
+    const ic = incRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;}).reduce((a,r)=>a+r.amount,0);
+    if (e>0||ic>0) { if(ic>=e) wPlus++; else wMinus++; }
+  }
+
+  // Kategorie
+  const totalExp = expRecs.reduce((a,r)=>a+r.amount,0);
+  const totalInc = incRecs.reduce((a,r)=>a+r.amount,0);
+  const catTotals = EXP_CATS.map(c=>({c, sum:expRecs.filter(r=>r.category===c).reduce((a,r)=>a+r.amount,0)}))
+                             .sort((a,b)=>b.sum-a.sum);
+
+  // Top 5
+  const top5 = [...expRecs].sort((a,b)=>b.amount-a.amount).slice(0,5);
+
+  // MoM 6 měsíců
+  const MN6 = ['Led','Úno','Bře','Dub','Kvě','Čvn','Čvc','Srp','Zář','Říj','Lis','Pro'];
+  const mom6 = Array.from({length:6},(_,i)=>{
+    const d = new Date(now.getFullYear(),now.getMonth()-5+i,1);
+    return {name:MN6[d.getMonth()], exp:expRecs.filter(r=>inMonth(r.date,d)).reduce((a,r)=>a+r.amount,0)};
+  });
+
+  // Donut
+  const ratio = totalInc>0 ? Math.min(Math.round(totalExp/totalInc*100),999) : 0;
+  const R=33, circ=2*Math.PI*R, dashOff = circ - circ*Math.min(ratio,100)/100;
+
+  // Půjčky
+  const allRecurs = await dbGetAll('recurring');
+  const loans = allRecurs.filter(r=>r.loan_balance>0);
+  let loansHtml = '';
+  if (loans.length) {
+    const totalDebt = loans.reduce((a,r)=>a+r.loan_balance,0);
+    const totalOrig = loans.reduce((a,r)=>a+(r.loan_original||r.loan_balance),0);
+    const totalPct  = totalOrig>0 ? Math.round((1-totalDebt/totalOrig)*100) : 0;
+    loansHtml = `<div class="st-card">
+      <div class="st-card-title">Přehled půjček</div>
+      <div class="st-big">
+        <div class="st-big-val" style="color:var(--orange)">${fmt(totalDebt)}</div>
+        <div class="st-big-sub">celkem zbývá splatit · splaceno ${totalPct}%</div>
+      </div>
+      ${loans.map(r => {
+        const pct = r.loan_original ? Math.round((1-r.loan_balance/r.loan_original)*100) : 0;
+        const mi  = r.loan_rate>0 ? Math.round(r.loan_balance*r.loan_rate/100/12) : 0;
+        return `<div class="st-loan-item">
+          <div class="st-loan-row">
+            <span class="st-loan-name">${r.name}</span>
+            <span class="st-loan-bal">${fmt(r.loan_balance)}</span>
+          </div>
+          <div class="loan-prog-track"><div class="loan-prog-fill" style="width:${pct}%"></div></div>
+          <div class="loan-prog-labels">
+            <span>Splaceno ${pct}% · ${fmt(r.amount)}/měs.</span>
+            ${mi>0 ? `<span>Úrok ~${fmt(mi)}/měs.</span>` : ''}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }
+
+  document.getElementById('st-content').innerHTML = `
+    <div class="st-card">
+      <div class="st-card-title">Průměr / týden (posl. 12 týdnů)</div>
+      <div class="st-big">
+        <div class="st-big-val" style="color:var(--red)">${fmt(avgWeek)}</div>
+        <div class="st-big-sub">průměrné týdenní výdaje</div>
+      </div>
+      <div class="st-2col">
+        <div class="st-half"><div class="st-half-lbl">✅ Týdny v plusu</div><div class="st-half-val" style="color:var(--green)">${wPlus}</div></div>
+        <div class="st-half"><div class="st-half-lbl">❌ Týdny v minusu</div><div class="st-half-val" style="color:var(--red)">${wMinus}</div></div>
+      </div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">Výdaje podle kategorie</div>
+      <div class="st-bars">
+        ${catTotals.map(({c,sum}) => {
+          const pct = totalExp>0 ? Math.round(sum/totalExp*100) : 0, ct = CATS[c];
+          return `<div class="st-bar-row">
+            <div class="st-bar-top">
+              <span class="st-bar-lbl">${ct.icon} ${ct.label}</span>
+              <span style="font-weight:600;color:${ct.col}">${fmt(sum)} <span style="color:var(--t3);font-weight:400">${pct}%</span></span>
+            </div>
+            <div class="st-bar-track"><div class="st-bar-fill" style="width:${pct}%;background:${ct.col}"></div></div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div class="st-card">
