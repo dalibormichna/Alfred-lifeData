@@ -1016,7 +1016,7 @@ html{background:#0b1120;color:#f0f4ff}html,body{height:100%;background:#0b1120;c
 // ══════════════════════════════════════════════════════
 
 // ── DB ────────────────────────────────────────────────
-const DB_NAME = 'mojos_db_v2', DB_VER = 1;
+const DB_NAME = 'mojos_db', DB_VER = 6;
 let db = null;
 
 function openDB() {
@@ -1505,3 +1505,645 @@ async function kkRenderStats() {
     </div>
     <div class="st-card">
       <div class="st-card-title">Poměr příjmy vs. výdaje</div>
+      <div class="st-ratio-wrap">
+        <div class="st-donut">
+          <svg viewBox="0 0 76 76">
+            <circle class="st-donut-track" cx="38" cy="38" r="${R}"/>
+            <circle class="st-donut-fill" cx="38" cy="38" r="${R}"
+              stroke="${ratio<=100?'var(--red)':'var(--unexp)'}"
+              stroke-dasharray="${circ}" stroke-dashoffset="${dashOff}"/>
+          </svg>
+          <div class="st-donut-lbl">${ratio}%</div>
+        </div>
+        <div class="st-ratio-legend">
+          <div class="st-ratio-item"><div class="st-ratio-dot" style="background:var(--green)"></div>Příjmy ${fmt(totalInc)}</div>
+          <div class="st-ratio-item"><div class="st-ratio-dot" style="background:var(--red)"></div>Výdaje ${fmt(totalExp)}</div>
+          <div class="st-ratio-item"><div class="st-ratio-dot" style="background:var(--accent)"></div>
+            <span style="color:${totalInc-totalExp>=0?'var(--green)':'var(--red)'}">Bilance ${fmt(totalInc-totalExp)}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">Výdaje měsíc po měsíci</div>
+      <div class="st-mom-grid">
+        ${mom6.map((m,i) => {
+          const prev = i>0 ? mom6[i-1].exp : null;
+          const delta = prev!==null&&prev>0 ? Math.round((m.exp-prev)/prev*100) : null;
+          const cls = delta===null?'':delta>0?'up':'down';
+          return `<div class="st-mom-cell">
+            <div class="st-mom-name">${m.name}</div>
+            <div class="st-mom-exp">${m.exp>0?fmt(m.exp):'—'}</div>
+            ${delta!==null ? `<div class="st-mom-delta ${cls}">${delta>0?'+':''}${delta}%</div>` : ''}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">Top 5 nejdražších položek</div>
+      <div class="st-top5">
+        ${top5.length===0
+          ? '<div style="color:var(--t3);font-size:12px;padding:4px 0">Žádné záznamy</div>'
+          : top5.map((r,i) => {
+              const c = CATS[r.category]||CATS.need;
+              return `<div class="st-top5-item">
+                <div class="st-top5-rank">${i+1}</div>
+                <div class="st-top5-icon" style="background:${c.bg}">${c.icon}</div>
+                <div class="st-top5-info">
+                  <div class="st-top5-name">${r.description||c.label}</div>
+                  <div class="st-top5-cat">${c.label} · ${fmtD(r.date)}</div>
+                </div>
+                <div class="st-top5-amt">${fmt(r.amount)}</div>
+              </div>`;
+            }).join('')}
+      </div>
+    </div>
+    ${loansHtml}
+    <div class="ver-bar">MůjOS v5.2 · Kakeibo v1.3</div>`;
+}
+
+// ── SETTINGS ──────────────────────────────────────────
+function kkRenderSettings() {
+  document.getElementById('budget-input').value = getBudget() || '';
+  kkRenderRecurList();
+}
+
+async function kkRenderRecurList() {
+  const recurs = await dbGetAll('recurring');
+  const el = document.getElementById('recur-list');
+  if (!recurs.length) {
+    el.innerHTML = '<div style="font-size:11px;color:var(--t3);padding:2px 0">Žádné pravidelné platby</div>';
+    return;
+  }
+  el.innerHTML = recurs.map(r => {
+    const isLoan = !!r.loan_balance;
+    const pct = isLoan&&r.loan_original ? Math.round((1-r.loan_balance/r.loan_original)*100) : 0;
+    const dotClr = isLoan ? 'var(--orange)' : (CATS[r.category]?.col||'var(--t3)');
+    return `<div class="recur-item">
+      <div class="recur-row">
+        <div class="recur-dot" style="background:${dotClr}"></div>
+        <div class="recur-info">
+          <div class="recur-name">${r.name}${isLoan?' <span style="font-size:9px;color:var(--orange);font-weight:700">PŮJČKA</span>':''}</div>
+          <div class="recur-meta">${CATS[r.category]?.label||r.category} · každý 1.${isLoan?' · '+r.loan_rate+'% p.a.':''}</div>
+        </div>
+        <div class="recur-amt">${fmt(r.amount)}</div>
+        <button class="recur-del" data-rid="${r.id}">×</button>
+      </div>
+      ${isLoan ? `
+      <div style="margin-top:6px">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t3);margin-bottom:4px">
+          <span>Zbývá splatit</span><span style="color:var(--orange);font-weight:700">${fmt(r.loan_balance)}</span>
+        </div>
+        <div class="loan-prog-track"><div class="loan-prog-fill" style="width:${pct}%"></div></div>
+        <div class="loan-prog-labels">
+          <span>Splaceno ${pct}%</span>
+          <button class="loan-update-btn" data-lid="${r.id}">Aktualizovat zůstatek</button>
+        </div>
+      </div>` : ''}
+    </div>`;
+  }).join('');
+
+  el.querySelectorAll('.recur-del').forEach(b => b.addEventListener('click', async () => {
+    await dbDel('recurring', parseInt(b.dataset.rid));
+    kkRenderRecurList(); showToast('Odebráno');
+  }));
+  el.querySelectorAll('.loan-update-btn').forEach(b => b.addEventListener('click', async () => {
+    const rec = await dbGet('recurring', parseInt(b.dataset.lid));
+    if (!rec) return;
+    const v = prompt(`Nový zůstatek půjčky (Kč)\nAktuálně: ${fmt(rec.loan_balance)}`);
+    if (v===null) return;
+    const val = parseFloat(v);
+    if (isNaN(val)||val<0) { showToast('Neplatná hodnota'); return; }
+    await dbPut('recurring', {...rec, loan_balance:val});
+    kkRenderRecurList(); showToast('Zůstatek aktualizován ✓');
+  }));
+}
+
+// ── VIEW SWITCH ───────────────────────────────────────
+function kkSwitchView(v) {
+  kkView = v;
+  document.querySelectorAll('.kk-tab').forEach(t => t.classList.toggle('active', t.dataset.kv===v));
+  document.querySelectorAll('.kk-view').forEach(el => el.classList.toggle('active', el.id==='kkv-'+v));
+  kkRenderAll();
+}
+document.querySelectorAll('.kk-tab').forEach(t => t.addEventListener('click', () => kkSwitchView(t.dataset.kv)));
+document.getElementById('kk-prev').addEventListener('click', () => kkNav(-1));
+document.getElementById('kk-next').addEventListener('click', () => kkNav(1));
+
+// ── FILTER ────────────────────────────────────────────
+document.getElementById('kk-chips').addEventListener('click', e => {
+  const c = e.target.closest('.kk-chip'); if (!c) return;
+  kkFilter = c.dataset.f;
+  document.querySelectorAll('.kk-chip').forEach(x => x.classList.toggle('active', x.dataset.f===kkFilter));
+  if (kkRecs) kkRenderTxFlat('kk-txs-week', kkRecs.filter(r=>inWeek(r.date,kkDate)));
+});
+
+// ── FAB ───────────────────────────────────────────────
+document.getElementById('kk-fab').addEventListener('click', openAddModal);
+
+function openAddModal() {
+  fMainType='expense'; fIncType='salary'; fExpCat='need';
+  document.getElementById('f-amount').value = '';
+  document.getElementById('f-desc').value   = '';
+  document.getElementById('f-note').value   = '';
+  document.getElementById('f-date').value   = new Date().toISOString().slice(0,10);
+  syncModalUI();
+  document.getElementById('modal-add').classList.add('open');
+  setTimeout(() => document.getElementById('f-amount').focus(), 250);
+}
+
+function syncModalUI() {
+  document.querySelectorAll('[data-mt]').forEach(b => b.classList.toggle('active', b.dataset.mt===fMainType));
+  document.getElementById('expense-cats').style.display  = fMainType==='expense' ? 'block' : 'none';
+  document.getElementById('income-types').style.display  = fMainType==='income'  ? 'block' : 'none';
+  document.querySelectorAll('[data-cat]').forEach(b => b.classList.toggle('active', b.dataset.cat===fExpCat));
+  document.querySelectorAll('[data-it]').forEach(b  => b.classList.toggle('active', b.dataset.it===fIncType));
+}
+
+document.querySelectorAll('[data-mt]').forEach(b => b.addEventListener('click', () => { fMainType=b.dataset.mt; syncModalUI(); }));
+document.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => { fExpCat=b.dataset.cat; syncModalUI(); }));
+document.querySelectorAll('[data-it]').forEach(b  => b.addEventListener('click', () => { fIncType=b.dataset.it; syncModalUI(); }));
+document.getElementById('modal-add').addEventListener('click', e => { if(e.target.id==='modal-add') closeModal('modal-add'); });
+
+document.getElementById('save-btn').addEventListener('click', async () => {
+  const amount = parseFloat(document.getElementById('f-amount').value);
+  const date   = document.getElementById('f-date').value;
+  if (!amount||amount<=0||!date) { showToast('Vyplň částku a datum'); return; }
+  const cat = fMainType==='income' ? fIncType : fExpCat;
+  const rec = {
+    type: fMainType, category: cat, amount,
+    description: document.getElementById('f-desc').value.trim(),
+    date, note: document.getElementById('f-note').value.trim()
+  };
+  await dbAdd('ucetnictvi', rec);
+  await dbAdd('activity_log', {
+    modul:'ucetnictvi',
+    title: rec.description || CATS[cat]?.label || 'Záznam',
+    sub: `${fMainType==='income'?'+':'−'}${fmt(amount)}`,
+    _ts: new Date().toISOString()
+  });
+  kkRecs = null; closeModal('modal-add'); kkRenderAll(); showToast('Uloženo ✓');
+});
+
+// ── DETAIL ────────────────────────────────────────────
+function kkOpenDetail(id) {
+  const r = kkRecs.find(x=>x.id===id); if (!r) return;
+  const c = CATS[r.category]||CATS.need, isInc = INC_TYPES.includes(r.category);
+  document.getElementById('detail-title').textContent = `${c.icon} ${r.description||c.label}`;
+  document.getElementById('detail-body').innerHTML =
+    `<b>Částka:</b> ${fmt(r.amount)}<br>
+     <b>Typ:</b> ${isInc?'Příjem':'Výdaj'} · ${c.label}<br>
+     ${r.note?`<b>Poznámka:</b> ${r.note}<br>`:''}
+     <b>Datum:</b> ${new Date(r.date).toLocaleDateString('cs-CZ',{day:'numeric',month:'long',year:'numeric'})}`;
+  kkDetailId = id;
+  document.getElementById('modal-detail').classList.add('open');
+}
+document.getElementById('btn-close-detail').addEventListener('click', () => closeModal('modal-detail'));
+document.getElementById('modal-detail').addEventListener('click', e => { if(e.target.id==='modal-detail') closeModal('modal-detail'); });
+document.getElementById('btn-delete').addEventListener('click', async () => {
+  if (!kkDetailId) return;
+  await dbDel('ucetnictvi', kkDetailId);
+  kkRecs=null; closeModal('modal-detail'); kkRenderAll(); showToast('Smazáno');
+});
+
+// ── RECURRING MODAL ───────────────────────────────────
+document.getElementById('recur-add-btn').addEventListener('click', () => {
+  kkRCat='need';
+  document.getElementById('recur-name').value   = '';
+  document.getElementById('recur-amount').value = '';
+  document.getElementById('recur-is-loan').checked = false;
+  document.getElementById('loan-balance').value = '';
+  document.getElementById('loan-rate').value    = '';
+  document.getElementById('loan-fields').style.display = 'none';
+  document.querySelectorAll('[data-rcat]').forEach(b => b.classList.toggle('active', b.dataset.rcat==='need'));
+  document.getElementById('modal-recur').classList.add('open');
+});
+document.getElementById('recur-is-loan').addEventListener('change', e => {
+  document.getElementById('loan-fields').style.display = e.target.checked ? 'block' : 'none';
+});
+document.querySelectorAll('[data-rcat]').forEach(b => b.addEventListener('click', () => {
+  kkRCat = b.dataset.rcat;
+  document.querySelectorAll('[data-rcat]').forEach(x => x.classList.toggle('active', x.dataset.rcat===kkRCat));
+}));
+document.getElementById('recur-cancel-btn').addEventListener('click', () => closeModal('modal-recur'));
+document.getElementById('modal-recur').addEventListener('click', e => { if(e.target.id==='modal-recur') closeModal('modal-recur'); });
+document.getElementById('recur-save-btn').addEventListener('click', async () => {
+  const name   = document.getElementById('recur-name').value.trim();
+  const amount = parseFloat(document.getElementById('recur-amount').value);
+  if (!name||!amount||amount<=0) { showToast('Vyplň název a částku'); return; }
+  const isLoan = document.getElementById('recur-is-loan').checked;
+  const rec = {name, amount, category:kkRCat};
+  if (isLoan) {
+    const bal  = parseFloat(document.getElementById('loan-balance').value);
+    const rate = parseFloat(document.getElementById('loan-rate').value)||0;
+    if (!bal||bal<=0) { showToast('Vyplň nesplacenou jistinu'); return; }
+    rec.loan_balance  = bal;
+    rec.loan_rate     = rate;
+    rec.loan_original = bal;
+  }
+  await dbAdd('recurring', rec);
+  closeModal('modal-recur'); kkRenderRecurList(); showToast('Platba přidána ✓');
+});
+
+// ── BUDGET ────────────────────────────────────────────
+document.getElementById('budget-save').addEventListener('click', () => {
+  const v = parseInt(document.getElementById('budget-input').value);
+  setBudget(isNaN(v)?0:v); showToast('Limit uložen ✓');
+});
+
+// ── EXPORT ────────────────────────────────────────────
+document.getElementById('kk-export-btn').addEventListener('click', async () => {
+  const recs   = await dbGetAll('ucetnictvi');
+  const recurs = await dbGetAll('recurring');
+  await exportXLSX({'Kakeibo':recs,'Pravidelné platby':recurs}, 'Kakeibo');
+  showToast('Excel se stahuje…');
+});
+
+// ── IMPORT ────────────────────────────────────────────
+document.getElementById('kk-import-btn').addEventListener('click', () => {
+  document.getElementById('kk-import-file').click();
+});
+
+document.getElementById('kk-import-file').addEventListener('change', async e => {
+  const file = e.target.files[0]; if (!file) return;
+  e.target.value = '';
+  const status = document.getElementById('import-status');
+  status.style.display = 'block'; status.textContent = 'Načítám soubor…';
+  try {
+    if (!window.XLSX) await new Promise((res,rej) => {
+      const s = document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      s.onload=res; s.onerror=rej; document.head.appendChild(s);
+    });
+    const wb = XLSX.read(await file.arrayBuffer(), {type:'array'});
+
+    // Transakce
+    const txSheet = wb.Sheets['Kakeibo'] || wb.Sheets[wb.SheetNames[0]];
+    const txRows  = XLSX.utils.sheet_to_json(txSheet).filter(r=>r.amount&&r.date&&r.category);
+    const existing = await dbGetAll('ucetnictvi');
+    const keys = new Set(existing.map(r=>`${r.date}|${r.category}|${r.amount}`));
+    let addedTx=0, skippedTx=0;
+    for (const r of txRows) {
+      const k = `${r.date}|${r.category}|${r.amount}`;
+      if (keys.has(k)) { skippedTx++; continue; }
+      await dbAdd('ucetnictvi', {
+        type: r.type||(INC_TYPES.includes(r.category)?'income':'expense'),
+        category:r.category, amount:parseFloat(r.amount),
+        description:r.description||'', date:r.date, note:r.note||''
+      });
+      keys.add(k); addedTx++;
+    }
+
+    // Pravidelné platby
+    let addedR=0;
+    if (wb.Sheets['Pravidelné platby']) {
+      const rRows = XLSX.utils.sheet_to_json(wb.Sheets['Pravidelné platby']).filter(r=>r.name&&r.amount);
+      const exR = await dbGetAll('recurring');
+      const rKeys = new Set(exR.map(r=>r.name+'|'+r.amount));
+      for (const r of rRows) {
+        const rk = r.name+'|'+r.amount; if (rKeys.has(rk)) continue;
+        await dbAdd('recurring', {
+          name:r.name, amount:parseFloat(r.amount), category:r.category||'need',
+          ...(r.loan_balance ? {loan_balance:parseFloat(r.loan_balance),
+            loan_rate:parseFloat(r.loan_rate||0), loan_original:parseFloat(r.loan_balance)} : {})
+        });
+        rKeys.add(rk); addedR++;
+      }
+    }
+
+    kkRecs=null; kkRenderAll(); kkRenderRecurList();
+    status.innerHTML = `✅ <b>Hotovo!</b><br>Transakce: přidáno <b>${addedTx}</b>, přeskočeno <b>${skippedTx}</b><br>Pravidelné platby: přidáno <b>${addedR}</b>`;
+    showToast('Import OK ✓');
+  } catch(err) {
+    console.error(err);
+    status.textContent = '❌ Chyba: '+err.message;
+  }
+});
+
+// ── INIT ──────────────────────────────────────────────
+// ══════════════════════════════════════════════════════
+//  KONDICE — Sledování cyklu a PMS predikce
+// ══════════════════════════════════════════════════════
+
+// Délky fází (dny) — počítáme od začátku menstruace
+// Menstruace: 1–5, Folikulární: 6–13, Ovulace: 14–16, Luteální: 17–(cyklen-7), PMS: posledních 7 dní
+const KD_SYMP_LABELS = {
+  fatigue:'Únava', headache:'Bolest hlavy', body:'Bolest těla',
+  touch:'Citlivost', irritab:'Podrážděnost', other:'Jiné'
+};
+const KD_SYMP_ICONS = {
+  fatigue:'😴', headache:'🤕', body:'💢', touch:'🫧', irritab:'😤', other:'➕'
+};
+
+let kdSelectedMood = 0;
+let kdSelectedSymps = new Set();
+
+function kdPhaseInfo(cycleDay, cycleLen) {
+  // Vrátí {name, cls, pmsInDays, description}
+  const pmsStart = cycleLen - 7;
+  if (cycleDay <= 5)          return {name:'Menstruace',       cls:'phase-mens',   desc:'Začátek nového cyklu', pmsIn: null};
+  if (cycleDay <= 13)         return {name:'Folikulární fáze', cls:'phase-folik',  desc:'Energie, dobrá nálada', pmsIn: pmsStart - cycleDay};
+  if (cycleDay <= 16)         return {name:'Ovulace',          cls:'phase-ovul',   desc:'Vrchol energie', pmsIn: pmsStart - cycleDay};
+  if (cycleDay < pmsStart)    return {name:'Luteální fáze',    cls:'phase-luteal', desc:'Přechod, pozor na únavu', pmsIn: pmsStart - cycleDay};
+  return                             {name:'PMS',              cls:'phase-pms',    desc:'Vrchol příznaků — buď opatrný', pmsIn: 0};
+}
+
+function kdGetCycleDay(startDate) {
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  const start = new Date(startDate);
+  start.setHours(0,0,0,0);
+  return Math.floor((now - start) / 86400000) + 1;
+}
+
+async function kdGetCycles() {
+  // Vrátí pole menstruačních záznamů seřazených od nejstaršího
+  const all = await dbGetAll('kondice');
+  return all.filter(r => r.mens).sort((a,b) => a.date.localeCompare(b.date));
+}
+
+async function kdGetAvgCycleLen() {
+  const mens = await kdGetCycles();
+  if (mens.length < 2) return 28; // default
+  const lens = [];
+  for (let i = 1; i < mens.length; i++) {
+    const d1 = new Date(mens[i-1].date), d2 = new Date(mens[i].date);
+    const len = Math.round((d2-d1)/86400000);
+    if (len >= 21 && len <= 45) lens.push(len); // ignoruj outliers
+  }
+  if (!lens.length) return 28;
+  return Math.round(lens.reduce((a,v)=>a+v,0)/lens.length);
+}
+
+async function kdRender() {
+  if (document.getElementById('mod-kondice').style.display === 'none') return;
+
+  const all = await dbGetAll('kondice');
+  const mens = all.filter(r=>r.mens).sort((a,b)=>b.date.localeCompare(a.date));
+  const avgLen = await kdGetAvgCycleLen();
+  const lastMens = mens[0] || null;
+
+  // ── Hero ──
+  const hero = document.getElementById('kd-hero');
+  if (lastMens) {
+    const cycleDay = kdGetCycleDay(lastMens.date);
+    const phase = kdPhaseInfo(cycleDay, avgLen);
+    hero.className = 'kd-hero ' + phase.cls;
+    document.getElementById('kd-phase-name').textContent = phase.name;
+    document.getElementById('kd-phase-day').textContent = phase.desc;
+    document.getElementById('kd-cycle-day').textContent = 'Den ' + cycleDay;
+    document.getElementById('kd-cycle-len').textContent = avgLen + ' dní';
+    if (phase.pmsIn !== null && phase.pmsIn > 0) {
+      document.getElementById('kd-pms-in').textContent = 'Za ' + phase.pmsIn + ' d';
+    } else if (phase.pmsIn === 0) {
+      document.getElementById('kd-pms-in').textContent = 'Právě teď';
+    } else {
+      document.getElementById('kd-pms-in').textContent = '—';
+    }
+
+    // Alert dot — zobraz při PMS nebo luteální pozdní
+    const showAlert = cycleDay >= (avgLen - 9);
+    document.getElementById('kd-alert-dot').classList.toggle('show', showAlert);
+
+    // ── Timeline ──
+    const tl = document.getElementById('kd-timeline');
+    const segments = [
+      {len:5, col:'#c0392b', label:'M'},
+      {len:8, col:'#1a6b3a', label:'F'},
+      {len:3, col:'#1a5276', label:'O'},
+      {len: Math.max(1, avgLen-23), col:'#7d6608', label:'L'},
+      {len:7, col:'#922b7a', label:'PMS'},
+    ];
+    const total = segments.reduce((a,s)=>a+s.len,0);
+    let dayCounter = 0;
+    tl.innerHTML = segments.map(s => {
+      const pct = Math.round(s.len/total*100);
+      const isActive = cycleDay > dayCounter && cycleDay <= dayCounter + s.len;
+      dayCounter += s.len;
+      return `<div class="kd-tl-seg" style="flex:${pct};background:${s.col};${isActive?'box-shadow:0 0 0 2px #fff':'opacity:.45'}"></div>`;
+    }).join('');
+    document.getElementById('kd-tl-mid').textContent = 'Den ' + Math.round(avgLen/2);
+    document.getElementById('kd-tl-end').textContent = 'Den ' + avgLen;
+
+    // Dashboard stat
+    const dsub = document.getElementById('kd-dash-sub');
+    if(dsub) dsub.textContent = phase.name + ' · den ' + cycleDay;
+    document.getElementById('stat-kondice').textContent = phase.name;
+
+  } else {
+    hero.className = 'kd-hero phase-unknown';
+    document.getElementById('kd-phase-name').textContent = 'Žádný záznam';
+    document.getElementById('kd-phase-day').textContent = 'Přidej první záznam začátku menstruace';
+    document.getElementById('kd-cycle-day').textContent = '—';
+    document.getElementById('kd-cycle-len').textContent = avgLen + ' dní';
+    document.getElementById('kd-pms-in').textContent = '—';
+    document.getElementById('kd-tl-mid').textContent = '';
+    document.getElementById('kd-tl-end').textContent = '';
+    document.getElementById('kd-timeline').innerHTML = `<div style="flex:1;background:rgba(255,255,255,.1);border-radius:5px"></div>`;
+    document.getElementById('stat-kondice').textContent = '—';
+  }
+
+  // ── Statistiky cyklu ──
+  document.getElementById('kd-avg-len').textContent = avgLen;
+  document.getElementById('kd-cycle-count').textContent = Math.max(0, mens.length - 1);
+
+  // Top symptomy v PMS fázi (posledních 7 dní cyklu)
+  const pmsRecs = all.filter(r => {
+    if (!r.symptoms || !lastMens) return false;
+    const cd = kdGetCycleDay(r.date) - (kdGetCycleDay(lastMens.date) - (avgLen - 7));
+    // Záznamy které padaly do PMS okna (posledních 7 dní cyklu)
+    // Zjednodušeně: všechny záznamy s příznaky v luteální/PMS fázi
+    return r.symptoms.length > 0;
+  });
+  const sympCount = {};
+  pmsRecs.forEach(r => r.symptoms.forEach(s => { sympCount[s] = (sympCount[s]||0)+1; }));
+  const topSymps = Object.entries(sympCount).sort((a,b)=>b[1]-a[1]).slice(0,4);
+  document.getElementById('kd-top-symp').innerHTML = topSymps.length
+    ? topSymps.map(([s,n]) => `<div style="background:#1c2d47;border-radius:10px;padding:5px 10px;font-size:11px;color:#8fa3c8">
+        ${KD_SYMP_ICONS[s]||'•'} ${KD_SYMP_LABELS[s]||s} <span style="color:#4da8ff;font-weight:700">${n}×</span>
+      </div>`).join('')
+    : '<div style="font-size:11px;color:#4d6080">Zatím nedost záznamů</div>';
+
+  // ── Historie ──
+  const sorted = [...all].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,30);
+  const histEl = document.getElementById('kd-hist-list');
+  if (!sorted.length) {
+    histEl.innerHTML = '<div style="font-size:12px;color:#4d6080;padding:8px 0">Žádné záznamy. Přidej první záznam výše.</div>';
+  } else {
+    const dotClr = {mens:'#ff6b6b', pms:'#a855c8', luteal:'#7d6608', folik:'#34c97a', ovul:'#4da8ff', default:'#4d6080'};
+    histEl.innerHTML = sorted.map(r => {
+      const cd = lastMens ? kdGetCycleDay(r.date) : 0;
+      const ph = lastMens && cd > 0 ? kdPhaseInfo(cd, avgLen) : null;
+      const dc = r.mens ? '#ff6b6b' : (ph ? ph.cls.replace('phase-','') : 'default');
+      const dcMap = {'mens':'#ff6b6b','folik':'#34c97a','ovul':'#4da8ff','luteal':'#7d6608','pms':'#a855c8','unknown':'#4d6080'};
+      const moodEmoji = r.mood ? ['','😞','😕','😐','🙂','😊'][r.mood] : '';
+      const sympStr = r.symptoms?.length ? r.symptoms.map(s=>KD_SYMP_ICONS[s]||s).join(' ') : '';
+      return `<div class="kd-hist-item">
+        <div class="kd-hist-dot" style="background:${r.mens?'#ff6b6b':dcMap[ph?.cls?.replace('phase-','')||'unknown']||'#4d6080'}"></div>
+        <div class="kd-hist-info">
+          <div class="kd-hist-date">${new Date(r.date).toLocaleDateString('cs-CZ',{day:'numeric',month:'short',year:'numeric'})}${r.mens?' 🔴 Menstruace':''}</div>
+          <div class="kd-hist-symp">${[sympStr, r.note].filter(Boolean).join(' · ')||'Bez příznaků'}</div>
+        </div>
+        <div class="kd-hist-moods">${moodEmoji}</div>
+        <button class="kd-hist-del" data-kid="${r.id}">×</button>
+      </div>`;
+    }).join('');
+    histEl.querySelectorAll('.kd-hist-del').forEach(b => b.addEventListener('click', async () => {
+      await dbDel('kondice', parseInt(b.dataset.kid));
+      showToast('Smazáno'); kdRender();
+    }));
+  }
+}
+
+// ── EVENT LISTENERS ────────────────────────────────
+document.getElementById('kd-mood-row').addEventListener('click', e => {
+  const btn = e.target.closest('.kd-mood-btn'); if (!btn) return;
+  kdSelectedMood = parseInt(btn.dataset.mood);
+  document.querySelectorAll('.kd-mood-btn').forEach(b => b.classList.toggle('sel', b.dataset.mood == kdSelectedMood));
+});
+
+document.getElementById('kd-symp-grid').addEventListener('click', e => {
+  const btn = e.target.closest('.kd-symp-btn'); if (!btn) return;
+  const s = btn.dataset.s;
+  if (kdSelectedSymps.has(s)) { kdSelectedSymps.delete(s); btn.classList.remove('sel'); }
+  else { kdSelectedSymps.add(s); btn.classList.add('sel'); }
+});
+
+document.getElementById('kd-mens-btn').addEventListener('click', async () => {
+  const today = new Date().toISOString().slice(0,10);
+  // Zkontroluj jestli už dnes není záznam menstruace
+  const all = await dbGetAll('kondice');
+  const todayMens = all.find(r => r.date === today && r.mens);
+  if (todayMens) { showToast('Menstruace dnes už zaznamenána'); return; }
+  await dbAdd('kondice', {
+    date: today, mens: true,
+    symptoms: [...kdSelectedSymps],
+    mood: kdSelectedMood || null,
+    note: document.getElementById('kd-note').value.trim()
+  });
+  await dbAdd('activity_log', {modul:'kondice', title:'Začátek menstruace 🔴', sub:'Nový cyklus', _ts:new Date().toISOString()});
+  kdSelectedSymps.clear(); kdSelectedMood = 0;
+  document.querySelectorAll('.kd-symp-btn').forEach(b=>b.classList.remove('sel'));
+  document.querySelectorAll('.kd-mood-btn').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('kd-note').value = '';
+  showToast('Menstruace zaznamenána ✓'); kdRender();
+});
+
+document.getElementById('kd-save-btn').addEventListener('click', async () => {
+  const today = new Date().toISOString().slice(0,10);
+  const note = document.getElementById('kd-note').value.trim();
+  if (!kdSelectedMood && !kdSelectedSymps.size && !note) {
+    showToast('Vyber náladu nebo příznak'); return;
+  }
+  const all = await dbGetAll('kondice');
+  const existing = all.find(r => r.date === today && !r.mens);
+  if (existing) {
+    // Aktualizuj existující záznam dne
+    await dbPut('kondice', {...existing,
+      symptoms: [...kdSelectedSymps],
+      mood: kdSelectedMood || existing.mood,
+      note: note || existing.note
+    });
+    showToast('Záznam aktualizován ✓');
+  } else {
+    await dbAdd('kondice', {
+      date: today, mens: false,
+      symptoms: [...kdSelectedSymps],
+      mood: kdSelectedMood || null,
+      note: note
+    });
+    showToast('Uloženo ✓');
+  }
+  kdSelectedSymps.clear(); kdSelectedMood = 0;
+  document.querySelectorAll('.kd-symp-btn').forEach(b=>b.classList.remove('sel'));
+  document.querySelectorAll('.kd-mood-btn').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('kd-note').value = '';
+  kdRender();
+});
+
+// ── EXPORT / IMPORT ────────────────────────────────
+document.getElementById('kd-export-btn').addEventListener('click', async () => {
+  const recs = await dbGetAll('kondice');
+  const rows = recs.map(r => ({
+    date: r.date,
+    mens: r.mens ? 1 : 0,
+    mood: r.mood || '',
+    symptoms: (r.symptoms||[]).join(', '),
+    note: r.note || ''
+  }));
+  await exportXLSX({'Kondice': rows}, 'Kondice');
+  showToast('Excel se stahuje…');
+});
+
+document.getElementById('kd-import-btn').addEventListener('click', () => {
+  document.getElementById('kd-import-file').click();
+});
+
+document.getElementById('kd-import-file').addEventListener('change', async e => {
+  const file = e.target.files[0]; if (!file) return;
+  e.target.value = '';
+  const status = document.getElementById('kd-import-status');
+  status.style.display = 'block'; status.textContent = 'Načítám…';
+  try {
+    if (!window.XLSX) await new Promise((res,rej) => {
+      const s = document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      s.onload=res; s.onerror=rej; document.head.appendChild(s);
+    });
+    const wb = XLSX.read(await file.arrayBuffer(), {type:'array'});
+    const rows = XLSX.utils.sheet_to_json(wb.Sheets['Kondice']||wb.Sheets[wb.SheetNames[0]]).filter(r=>r.date);
+    const existing = await dbGetAll('kondice');
+    const keys = new Set(existing.map(r=>r.date+'|'+(r.mens?1:0)));
+    let added=0, skipped=0;
+    for (const r of rows) {
+      const k = r.date+'|'+(r.mens?1:0);
+      if (keys.has(k)) { skipped++; continue; }
+      await dbAdd('kondice', {
+        date: r.date,
+        mens: r.mens == 1,
+        mood: r.mood ? parseInt(r.mood) : null,
+        symptoms: r.symptoms ? r.symptoms.split(',').map(s=>s.trim()).filter(Boolean) : [],
+        note: r.note || ''
+      });
+      keys.add(k); added++;
+    }
+    status.innerHTML = `✅ <b>Hotovo!</b> Přidáno: <b>${added}</b>, přeskočeno: <b>${skipped}</b>`;
+    showToast('Import OK ✓'); kdRender();
+  } catch(err) {
+    status.textContent = '❌ Chyba: '+err.message;
+  }
+});
+
+async function init() {
+  initShell();
+  try {
+    db = await openDB();
+    dbChip(true,'DB OK');
+    await processRecurring();
+    await refreshDash();
+  } catch(e) {
+    dbChip(false,'Chyba DB');
+    console.error(e);
+  }
+}
+
+
+async function init() {
+  initShell();
+  try {
+    db = await openDB();
+    dbChip(true,'DB OK');
+    await processRecurring();
+    await refreshDash();
+  } catch(e) {
+    dbChip(false,'Chyba DB');
+    console.error(e);
+  }
+}
+
+
+window.MojOS = {dbGetAll,dbAdd,dbPut,dbDel,dbGet,exportXLSX,navTo,relTime,curQ};
+init();
+</script>
+</body>
+</html>
