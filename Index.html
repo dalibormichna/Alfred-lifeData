@@ -1016,7 +1016,7 @@ html{background:#0b1120;color:#f0f4ff}html,body{height:100%;background:#0b1120;c
 // ══════════════════════════════════════════════════════
 
 // ── DB ────────────────────────────────────────────────
-const DB_NAME = 'mojos_db', DB_VER = 6;
+const DB_NAME = 'mojos_db_v2', DB_VER = 1;
 let db = null;
 
 function openDB() {
@@ -2113,20 +2113,6 @@ document.getElementById('kd-import-file').addEventListener('change', async e => 
     status.textContent = '❌ Chyba: '+err.message;
   }
 });
-
-async function init() {
-  initShell();
-  try {
-    db = await openDB();
-    dbChip(true,'DB OK');
-    await processRecurring();
-    await refreshDash();
-  } catch(e) {
-    dbChip(false,'Chyba DB');
-    console.error(e);
-  }
-}
-
 
 async function init() {
   initShell();
