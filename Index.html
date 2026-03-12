@@ -3,584 +3,402 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="MůjOS">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <title>MůjOS</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><circle cx="30" cy="30" r="19" stroke="%234da8ff" stroke-width="6" fill="none"/><circle cx="30" cy="30" r="7" fill="%234da8ff"/><path d="M49 30 L56 30" stroke="%234da8ff" stroke-width="3" stroke-linecap="round"/></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><circle cx="30" cy="30" r="19" stroke="%234da8ff" stroke-width="6" fill="none"/><circle cx="30" cy="30" r="7" fill="%234da8ff"/><path d="M49 30 L56 30" stroke="%234da8ff" stroke-width="3" stroke-linecap="round"/></svg>">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='19' stroke='%234da8ff' stroke-width='6' fill='none'/%3E%3Ccircle cx='30' cy='30' r='7' fill='%234da8ff'/%3E%3Cpath d='M49 30L56 30' stroke='%234da8ff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 
-:root {
-color-scheme: dark;
-
-/* George-inspired dark navy palette */
-–bg:        #0b1120;
-–bg2:       #0f1829;
-–card:      #152035;
-–card2:     #1c2d47;
-–card3:     #243657;
-–border:    rgba(255,255,255,.07);
-–border2:   rgba(255,255,255,.12);
-
-–text:      #f0f4ff;
-–text2:     #8fa3c8;
-–text3:     #4d6080;
-
-/* Accent — George uses bright teal/blue */
-–accent:    #4da8ff;
-–accent2:   #2684ff;
-–accent-bg: rgba(77,168,255,.1);
-
-/* Semantic */
-–green:     #34c97a;
-–green-bg:  rgba(52,201,122,.12);
-–red:       #ff6b6b;
-–red-bg:    rgba(255,107,107,.12);
-–amber:     #ffcf5c;
-–purple:    #a78bfa;
-
-/* Kakeibo cats */
-–need:      #34c97a;
-–want:      #ff9f43;
-–culture:   #4da8ff;
-–unexp:     #ff6b6b;
-–salary:    #34c97a;
-–bonus:     #a8e063;
-–passive:   #63d4c4;
-–need-bg:   rgba(52,201,122,.13);
-–want-bg:   rgba(255,159,67,.13);
-–cult-bg:   rgba(77,168,255,.13);
-–unexp-bg:  rgba(255,107,107,.13);
-–sal-bg:    rgba(52,201,122,.13);
-–bon-bg:    rgba(168,224,99,.13);
-–pas-bg:    rgba(99,212,196,.13);
-
-–r-sm: 12px;
-–r-md: 16px;
-–r-lg: 20px;
-–r-xl: 24px;
-
-–shadow-sm: 0 2px 12px rgba(0,0,0,.25);
-–shadow-md: 0 4px 24px rgba(0,0,0,.35);
-–shadow-lg: 0 8px 40px rgba(0,0,0,.5);
-
-–safe-top: env(safe-area-inset-top,0px);
-–safe-bot: env(safe-area-inset-bottom,0px);
+/* ── TOKENS ── */
+:root{
+color-scheme:dark;
+–bg:#0b1120; –card:#152035; –card2:#1c2d47; –card3:#243657;
+–b1:rgba(255,255,255,.07); –b2:rgba(255,255,255,.12);
+–t1:#f0f4ff; –t2:#8fa3c8; –t3:#4d6080;
+–accent:#4da8ff; –accent2:#2684ff;
+–green:#34c97a; –green-bg:rgba(52,201,122,.13);
+–red:#ff6b6b;   –red-bg:rgba(255,107,107,.13);
+–amber:#ffcf5c; –orange:#ff9f43; –orange-bg:rgba(255,159,67,.13);
+–purple:#a78bfa;
+–need:#34c97a;  –need-bg:rgba(52,201,122,.13);
+–want:#ff9f43;  –want-bg:rgba(255,159,67,.13);
+–cult:#4da8ff;  –cult-bg:rgba(77,168,255,.13);
+–unexp:#ff6b6b; –unexp-bg:rgba(255,107,107,.13);
+–sal-bg:rgba(52,201,122,.13);
+–bon-bg:rgba(168,224,99,.13);
+–pas-bg:rgba(99,212,196,.13);
+–r:16px; –rl:20px; –rxl:24px;
+–sh:0 2px 12px rgba(0,0,0,.3);
+–shm:0 4px 24px rgba(0,0,0,.4);
 }
 
-html{background:#0b1120;color:#f0f4ff;}
-html,body{height:100%;width:100%;background:#0b1120;color:#f0f4ff;
-font-family:‘DM Sans’,sans-serif;font-size:15px;overscroll-behavior:none;line-height:1.45;}
+/* ── BASE ── */
+html,body{height:100%;background:var(–bg);color:var(–t1);
+font-family:‘DM Sans’,sans-serif;font-size:15px;overscroll-behavior:none;line-height:1.45}
 
-/* ══════════════════════════
-SHELL
-══════════════════════════ */
-#app{display:flex;flex-direction:column;height:100dvh;}
+/* ── SHELL ── */
+#app{display:flex;flex-direction:column;height:100dvh}
 
-/* Header */
 #shell-header{
-background:#0b1120;
+background:var(–bg);flex-shrink:0;
 display:flex;align-items:center;justify-content:space-between;
-padding:calc(14px + env(safe-area-inset-top, 0px)) 20px 12px;
-border-bottom:1px solid rgba(255,255,255,.07);
-flex-shrink:0;
+padding:calc(14px + env(safe-area-inset-top,0px)) 20px 12px;
+border-bottom:1px solid var(–b1);
 }
-.logo{font-size:20px;font-weight:700;letter-spacing:-.5px;color:#f0f4ff;}
-.logo span{color:var(–accent);}
-.header-right{display:flex;align-items:center;gap:8px;}
-.date-pill{font-size:11px;color:#8fa3c8;background:#152035;
-padding:5px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.12);}
+.logo{display:flex;align-items:center;gap:8px;font-size:19px;font-weight:700;letter-spacing:-.4px}
+.logo span{color:var(–accent)}
+.date-pill{font-size:11px;color:var(–t2);background:var(–card);
+padding:5px 12px;border-radius:20px;border:1px solid var(–b2)}
 
-/* Bottom nav — George style tab bar */
+#content{flex:1;overflow-y:auto;scrollbar-width:none;background:var(–bg)}
+#content::-webkit-scrollbar{display:none}
+
+.module{display:none}
+.module.active{display:block;animation:fadeUp .2s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
 #bottom-nav{
-display:flex;align-items:center;
-background:#152035;
-border-top:1px solid rgba(255,255,255,.12);
-padding:10px 0 calc(10px + env(safe-area-inset-bottom, 0px));
-flex-shrink:0;
+display:flex;background:var(–card);flex-shrink:0;
+border-top:1px solid var(–b2);
+padding:10px 0 calc(18px + env(safe-area-inset-bottom,0px));
 }
 .bnav-tab{
 flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
-padding:4px 0;cursor:pointer;transition:color .15s;color:#4d6080;
-font-size:10px;font-weight:500;letter-spacing:.01em;user-select:none;
-border:none;background:none;
-}
-.bnav-tab .bicon{font-size:20px;line-height:1;}
-.bnav-tab.active{color:var(–accent);}
-.bnav-tab.active .bicon{filter:drop-shadow(0 0 6px rgba(77,168,255,.5));}
-
-/* Content */
-#content{flex:1;overflow-y:auto;scrollbar-width:none;background:#0b1120;}
-#content::-webkit-scrollbar{display:none;}
-.module{display:none;}
-.module.active{display:block;animation:fadeUp .22s ease both;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* ══════════════════════════
-DASHBOARD
-══════════════════════════ */
-.dash-wrap{padding:0 0 calc(24px + env(safe-area-inset-bottom, 0px));}
-
-/* Hero banner */
-.dash-hero{
-background:linear-gradient(145deg,#152d55 0%,#0f1e3a 60%,#0b1120 100%);
-padding:24px 20px 28px;
-position:relative;overflow:hidden;
-}
-.dash-hero::after{
-content:’’;position:absolute;top:-40px;right:-40px;
-width:180px;height:180px;border-radius:50%;
-background:radial-gradient(circle,rgba(77,168,255,.12) 0%,transparent 70%);
-}
-.dash-greeting-sm{font-size:12px;color:#8fa3c8;font-weight:400;margin-bottom:4px;}
-.dash-greeting{font-size:26px;font-weight:700;letter-spacing:-.4px;color:#f0f4ff;margin-bottom:2px;}
-.dash-period{font-size:12px;color:var(–accent);font-weight:500;margin-top:6px;}
-
-/* Section label */
-.dash-section{padding:20px 20px 10px;}
-.dash-section-lbl{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#4d6080;}
-
-/* Module tiles — velké, pod sebou */
-.dash-tiles{display:flex;flex-direction:column;gap:10px;padding:0 16px;}
-.dash-tile{
-background:#152035;
-border:1px solid rgba(255,255,255,.12);
-border-radius:var(–r-xl);
-padding:20px;
-cursor:pointer;
-display:flex;align-items:center;gap:16px;
-transition:background .15s,transform .12s;
-box-shadow:var(–shadow-sm);
-position:relative;overflow:hidden;
-}
-.dash-tile:active{transform:scale(.98);background:#1c2d47;}
-.dash-tile-left{flex:1;min-width:0;}
-.dash-tile-icon{
-width:48px;height:48px;border-radius:14px;
-display:flex;align-items:center;justify-content:center;
-font-size:22px;flex-shrink:0;
-}
-.dash-tile-name{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
-color:#8fa3c8;margin-bottom:4px;}
-.dash-tile-val{font-size:24px;font-weight:700;color:#f0f4ff;letter-spacing:-.4px;line-height:1.1;}
-.dash-tile-sub{font-size:11px;color:#8fa3c8;margin-top:3px;}
-.dash-tile-arrow{font-size:16px;color:#4d6080;flex-shrink:0;}
-
-/* Tile accent lines */
-.dash-tile[data-mod=“ucetnictvi”] .dash-tile-icon{background:var(–green-bg);}
-.dash-tile[data-mod=“investice”]  .dash-tile-icon{background:rgba(255,207,92,.1);}
-.dash-tile[data-mod=“auto”]       .dash-tile-icon{background:var(–cult-bg);}
-.dash-tile[data-mod=“elektrina”]  .dash-tile-icon{background:rgba(167,139,250,.1);}
-.dash-tile[data-mod=“kondice”]    .dash-tile-icon{background:rgba(99,212,196,.1);}
-
-/* Activity */
-.dash-activity{display:flex;flex-direction:column;gap:8px;padding:0 16px;}
-.act-tile{
-background:#152035;border:1px solid rgba(255,255,255,.07);border-radius:var(–r-lg);
-padding:14px 16px;display:flex;align-items:center;gap:12px;
-}
-.act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.act-info{flex:1;}
-.act-title{font-size:13px;font-weight:500;color:#f0f4ff;}
-.act-sub{font-size:11px;color:#8fa3c8;margin-top:2px;}
-.act-time{font-size:11px;color:#4d6080;}
-
-/* Version */
-.ver-bar{text-align:center;padding:24px 0 4px;font-size:10px;color:#4d6080;letter-spacing:.06em;}
-
-/* ══════════════════════════
-KAKEIBO MODULE
-══════════════════════════ */
-#mod-ucetnictvi{display:none;flex-direction:column;}
-#mod-ucetnictvi.active{display:flex;height:100%;}
-
-/* Kakeibo header */
-.kk-header{
-background:#0b1120;
-border-bottom:1px solid rgba(255,255,255,.07);
-padding:14px 16px 10px;
-flex-shrink:0;
-}
-.kk-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.kk-title{font-size:18px;font-weight:700;letter-spacing:-.3px;}
-.kk-title span{color:var(–accent);}
-.kk-period-nav{display:flex;align-items:center;gap:6px;}
-.kk-nav-btn{
-background:#1c2d47;border:1px solid rgba(255,255,255,.12);border-radius:9px;
-padding:5px 12px;font-size:16px;color:#8fa3c8;cursor:pointer;
-font-family:‘DM Sans’,sans-serif;line-height:1;
-}
-.kk-period-lbl{font-size:12px;font-weight:600;min-width:118px;text-align:center;color:#f0f4ff;}
-
-/* Kakeibo tab bar */
-.kk-tabs{display:flex;gap:4px;background:#152035;border-radius:var(–r-sm);padding:3px;}
-.kk-tab{
-flex:1;padding:7px 0;text-align:center;font-size:11px;font-weight:600;
-color:#4d6080;border-radius:9px;cursor:pointer;transition:all .15s;letter-spacing:.01em;
-}
-.kk-tab.active{background:#1c2d47;color:#f0f4ff;box-shadow:var(–shadow-sm);}
-
-/* Scroll area */
-.kk-scroll{flex:1;overflow-y:auto;padding-bottom:calc(90px + env(safe-area-inset-bottom, 0px));scrollbar-width:none;}
-.kk-scroll::-webkit-scrollbar{display:none;}
-.kk-view{display:none;}
-.kk-view.active{display:block;}
-
-/* ── Summary card (George-style hero card) ── */
-.kk-hero-card{
-background:linear-gradient(135deg,#1c2d47 0%,#152035 100%);
-border:1px solid rgba(255,255,255,.12);
-border-radius:var(–r-xl);
-margin:14px 14px 0;
-padding:20px;
-box-shadow:var(–shadow-md);
-}
-.kk-hero-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4d6080;margin-bottom:6px;}
-.kk-hero-bal{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1;}
-.kk-hero-bal.pos{color:var(–green);}
-.kk-hero-bal.neg{color:var(–red);}
-.kk-hero-bal.zero{color:#8fa3c8;}
-.kk-hero-sub{font-size:12px;color:#8fa3c8;margin-top:5px;}
-.kk-hero-row{display:flex;gap:12px;margin-top:16px;}
-.kk-hero-pill{
-flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
-border-radius:var(–r-md);padding:12px 14px;
-}
-.kk-hero-pill-lbl{font-size:10px;color:#4d6080;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;}
-.kk-hero-pill-val{font-size:18px;font-weight:700;}
-.kk-hero-pill-val.inc{color:var(–green);}
-.kk-hero-pill-val.exp{color:var(–red);}
-
-/* Progress bar */
-.kk-prog-wrap{margin-top:14px;}
-.kk-prog-labels{display:flex;justify-content:space-between;font-size:10px;color:#4d6080;margin-bottom:5px;}
-.kk-prog-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
-.kk-prog-bar{height:100%;border-radius:3px;transition:width .5s ease;}
-.kk-prog-bar.ok{background:var(–green);}
-.kk-prog-bar.warn{background:var(–amber);}
-.kk-prog-bar.over{background:var(–red);}
-
-/* ── Cat tiles ── */
-.kk-cats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 14px 0;}
-.kk-cat{
-background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(–r-lg);
-padding:14px;cursor:pointer;transition:background .12s;
-}
-.kk-cat:active{background:#1c2d47;}
-.kk-cat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.kk-cat-icon{font-size:18px;}
-.kk-cat-badge{
-font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:.04em;
-}
-.kk-cat-badge.need   {background:var(–need-bg);color:var(–need);}
-.kk-cat-badge.want   {background:var(–want-bg);color:var(–want);}
-.kk-cat-badge.culture{background:var(–cult-bg);color:var(–culture);}
-.kk-cat-badge.unexp  {background:var(–unexp-bg);color:var(–unexp);}
-.kk-cat-name{font-size:10px;color:#4d6080;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;}
-.kk-cat-amt{font-size:20px;font-weight:700;}
-.kk-cat-amt.need   {color:var(–need);}
-.kk-cat-amt.want   {color:var(–want);}
-.kk-cat-amt.culture{color:var(–culture);}
-.kk-cat-amt.unexp  {color:var(–unexp);}
-.kk-cat-cnt{font-size:10px;color:#4d6080;margin-top:2px;}
-
-/* ── Section header ── */
-.kk-sec{display:flex;justify-content:space-between;align-items:center;padding:18px 14px 8px;}
-.kk-sec-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4d6080;}
-.kk-chips{display:flex;gap:4px;}
-.kk-chip{
-font-size:10px;font-weight:600;padding:4px 10px;border-radius:12px;
-border:1px solid rgba(255,255,255,.12);background:none;color:#4d6080;
-cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:all .13s;
-}
-.kk-chip.active{background:var(–accent);color:#fff;border-color:var(–accent);}
-
-/* ── Transaction list ── */
-.kk-txs{padding:0 14px;display:flex;flex-direction:column;gap:6px;}
-.kk-tx{
-background:#152035;border:1px solid rgba(255,255,255,.07);border-radius:var(–r-lg);
-padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;
-transition:background .12s;box-shadow:var(–shadow-sm);
-}
-.kk-tx:active{background:#1c2d47;}
-.kk-tx-icon{
-width:40px;height:40px;border-radius:12px;display:flex;align-items:center;
-justify-content:center;font-size:17px;flex-shrink:0;
-}
-.kk-tx-icon.need   {background:var(–need-bg);}
-.kk-tx-icon.want   {background:var(–want-bg);}
-.kk-tx-icon.culture{background:var(–cult-bg);}
-.kk-tx-icon.unexp  {background:var(–unexp-bg);}
-.kk-tx-icon.salary {background:var(–sal-bg);}
-.kk-tx-icon.bonus  {background:var(–bon-bg);}
-.kk-tx-icon.passive{background:var(–pas-bg);}
-.kk-tx-info{flex:1;min-width:0;}
-.kk-tx-desc{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#f0f4ff;}
-.kk-tx-meta{font-size:11px;color:#4d6080;margin-top:2px;}
-.kk-tx-right{text-align:right;flex-shrink:0;}
-.kk-tx-amt{font-size:16px;font-weight:700;}
-.kk-tx-amt.exp{color:#f0f4ff;}
-.kk-tx-amt.inc{color:var(–green);}
-.kk-tx-date{font-size:10px;color:#4d6080;margin-top:2px;}
-
-/* Week divider */
-.kk-wk-div{
-font-size:10px;color:#4d6080;text-transform:uppercase;
-letter-spacing:.07em;padding:14px 4px 4px;font-weight:700;
-}
-
-/* Empty */
-.kk-empty{text-align:center;padding:48px 24px;}
-.kk-empty-icon{font-size:40px;margin-bottom:12px;}
-.kk-empty-title{font-size:15px;font-weight:600;margin-bottom:6px;}
-.kk-empty-sub{font-size:12px;color:#8fa3c8;line-height:1.7;}
-
-/* ── Year view ── */
-.kk-yr-card{
-background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(–r-xl);
-margin:14px 14px 0;overflow:hidden;box-shadow:var(–shadow-sm);
-}
-.kk-yt-row{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;}
-.kk-yt-row+.kk-yt-row{border-top:1px solid rgba(255,255,255,.07);}
-.kk-yt-l{font-size:13px;color:#8fa3c8;}
-.kk-yt-v{font-size:16px;font-weight:700;}
-.kk-months{padding:10px 14px 0;display:flex;flex-direction:column;gap:8px;}
-.kk-month{
-background:#152035;border:1px solid rgba(255,255,255,.07);border-radius:var(–r-lg);
-padding:14px 16px;cursor:pointer;transition:background .12s;
-}
-.kk-month:active{background:#1c2d47;}
-.kk-month-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.kk-month-name{font-size:14px;font-weight:500;}
-.kk-month-bal{font-size:14px;font-weight:700;}
-.kk-month-bal.pos{color:var(–green);}
-.kk-month-bal.neg{color:var(–red);}
-.kk-month-bars{display:flex;gap:2px;height:5px;border-radius:3px;overflow:hidden;}
-.kk-bar{height:100%;min-width:4px;}
-
-/* ── Settings view ── */
-.kk-settings{padding:14px;display:flex;flex-direction:column;gap:12px;}
-.kk-scard{
-background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(–r-xl);
-overflow:hidden;box-shadow:var(–shadow-sm);
-}
-.kk-scard-head{padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.07);}
-.kk-scard-title{font-size:14px;font-weight:700;margin-bottom:3px;color:#f0f4ff;}
-.kk-scard-desc{font-size:12px;color:#8fa3c8;line-height:1.6;}
-.kk-scard-body{padding:14px 18px;}
-
-/* Recurring list */
-.recur-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
-.recur-item{
-display:flex;align-items:center;gap:10px;background:#1c2d47;
-border:1px solid rgba(255,255,255,.07);border-radius:var(–r-md);padding:12px 14px;
-}
-.recur-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.recur-info{flex:1;min-width:0;}
-.recur-name{font-size:13px;font-weight:500;}
-.recur-meta{font-size:11px;color:#4d6080;margin-top:1px;}
-.recur-amt{font-size:14px;font-weight:700;color:#8fa3c8;flex-shrink:0;}
-.recur-del{background:none;border:none;color:#4d6080;font-size:20px;
-cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;}
-
-/* ── Statistics view ── */
-.st-wrap{padding:14px;display:flex;flex-direction:column;gap:12px;}
-.st-card{background:#152035;border:1px solid rgba(255,255,255,.12);border-radius:var(–r-xl);overflow:hidden;box-shadow:var(–shadow-sm);}
-.st-card-title{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#4d6080;padding:15px 18px 0;}
-.st-big{padding:8px 18px 16px;}
-.st-big-val{font-size:30px;font-weight:700;letter-spacing:-.5px;line-height:1.1;}
-.st-big-sub{font-size:11px;color:#8fa3c8;margin-top:4px;}
-.st-2col{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,.07);}
-.st-half{padding:14px 18px;}
-.st-half+.st-half{border-left:1px solid rgba(255,255,255,.07);}
-.st-half-lbl{font-size:10px;color:#4d6080;text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-bottom:5px;}
-.st-half-val{font-size:22px;font-weight:700;}
-.st-bars{padding:10px 18px 16px;display:flex;flex-direction:column;gap:11px;}
-.st-bar-row{display:flex;flex-direction:column;gap:4px;}
-.st-bar-top{display:flex;justify-content:space-between;font-size:12px;}
-.st-bar-lbl{color:#8fa3c8;}
-.st-bar-val{font-weight:600;}
-.st-bar-track{height:7px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;}
-.st-bar-fill{height:100%;border-radius:4px;transition:width .5s ease;}
-.st-mom-grid{padding:10px 18px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
-.st-mom-cell{background:#1c2d47;border-radius:var(–r-md);padding:10px 12px;}
-.st-mom-name{font-size:9px;color:#4d6080;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:5px;}
-.st-mom-exp{font-size:14px;font-weight:700;}
-.st-mom-delta{font-size:10px;margin-top:3px;}
-.st-mom-delta.up{color:var(–red);}
-.st-mom-delta.down{color:var(–green);}
-.st-mom-delta.flat{color:#4d6080;}
-.st-top5{padding:10px 18px 16px;display:flex;flex-direction:column;gap:10px;}
-.st-top5-item{display:flex;align-items:center;gap:10px;}
-.st-top5-rank{font-size:11px;color:#4d6080;font-weight:700;width:16px;text-align:right;flex-shrink:0;}
-.st-top5-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
-.st-top5-info{flex:1;min-width:0;}
-.st-top5-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.st-top5-cat{font-size:10px;color:#4d6080;margin-top:1px;}
-.st-top5-amt{font-size:13px;font-weight:700;flex-shrink:0;}
-.st-ratio-wrap{padding:10px 18px 16px;display:flex;align-items:center;gap:20px;}
-.st-donut{position:relative;width:76px;height:76px;flex-shrink:0;}
-.st-donut svg{width:76px;height:76px;transform:rotate(-90deg);}
-.st-donut-track{fill:none;stroke:rgba(255,255,255,.07);stroke-width:10;}
-.st-donut-fill{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .6s ease;}
-.st-donut-lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;}
-.st-ratio-legend{display:flex;flex-direction:column;gap:8px;}
-.st-ratio-item{display:flex;align-items:center;gap:8px;font-size:12px;color:#8fa3c8;}
-.st-ratio-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
-
-/* ══════════════════════════
-FAB
-══════════════════════════ */
-#kk-fab{
-position:fixed;
-bottom:calc(76px + env(safe-area-inset-bottom,0px));
-right:20px;
-height:56px;
-padding:0 26px;
-border-radius:28px;
-background:#ffffff;
-color:#0b1120;
-border:none;
-font-size:15px;
-font-weight:700;
+background:none;border:none;color:var(–t3);
+font-size:10px;font-weight:500;cursor:pointer;user-select:none;padding:4px 0;
 font-family:‘DM Sans’,sans-serif;
-display:none;
-align-items:center;
-gap:8px;
-cursor:pointer;
-box-shadow:0 6px 32px rgba(0,0,0,.8),0 2px 8px rgba(0,0,0,.4);
-z-index:9999;
-white-space:nowrap;
--webkit-tap-highlight-color:transparent;
 }
-#kk-fab.fab-visible{display:flex;}
-#kk-fab .fab-plus{font-size:22px;font-weight:300;line-height:1;}
-#kk-fab:active{opacity:.8;}
+.bnav-tab .bi{font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center}
+.bnav-tab.active{color:var(–accent)}
 
-/* ══════════════════════════
-MODALS
-══════════════════════════ */
-.modal-bg{
-position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;
-display:none;align-items:flex-end;backdrop-filter:blur(4px);
+/* ── FAB ── */
+#kk-fab{
+position:fixed;right:20px;
+bottom:calc(94px + env(safe-area-inset-bottom,0px));
+height:54px;padding:0 24px;border-radius:27px;
+background:#fff;color:#0b1120;border:none;
+font-size:15px;font-weight:700;font-family:‘DM Sans’,sans-serif;
+display:none;align-items:center;gap:8px;
+cursor:pointer;white-space:nowrap;z-index:999;
+box-shadow:0 6px 28px rgba(0,0,0,.7);
 }
-.modal-bg.open{display:flex;}
-.modal-sheet{
-background:#152035;border-radius:24px 24px 0 0;width:100%;
-padding-bottom:calc(16px + env(safe-area-inset-bottom, 0px));
-animation:sheetUp .24s cubic-bezier(.22,.68,0,1.2) both;
-max-height:92dvh;overflow-y:auto;
-}
-@keyframes sheetUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
-.modal-handle{width:38px;height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin:12px auto 14px;}
-.modal-title{font-size:20px;font-weight:700;letter-spacing:-.3px;padding:0 20px 14px;border-bottom:1px solid rgba(255,255,255,.07);}
+#kk-fab.show{display:flex}
+#kk-fab:active{opacity:.85}
+.fab-plus{font-size:22px;font-weight:300}
 
-/* Form */
-.f-sec{padding:14px 20px 0;}
-.f-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;
-color:#4d6080;margin-bottom:6px;display:block;}
-.f-input{
-width:100%;background:#1c2d47;border:1px solid rgba(255,255,255,.12);
-border-radius:var(–r-md);padding:12px 14px;font-size:15px;
-font-family:‘DM Sans’,sans-serif;color:#f0f4ff;outline:none;
+/* ── DASHBOARD ── */
+.dash-hero{
+background:linear-gradient(145deg,#152d55,#0f1e3a 60%,var(–bg));
+padding:24px 20px 28px;
 }
-.f-input:focus{border-color:var(–accent);}
-.f-input.xl{font-size:26px;font-weight:700;text-align:right;padding:12px 15px;letter-spacing:-.4px;}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 20px 0;}
+.dash-greeting-sm{font-size:12px;color:var(–t2);margin-bottom:4px}
+.dash-greeting{font-size:26px;font-weight:700;letter-spacing:-.4px;margin-bottom:6px}
+.dash-q{font-size:12px;color:var(–accent);font-weight:500}
+.dash-section{padding:18px 20px 8px;font-size:11px;font-weight:700;
+letter-spacing:.09em;text-transform:uppercase;color:var(–t3)}
+.dash-tiles{display:flex;flex-direction:column;gap:10px;padding:0 16px}
+.dash-tile{
+background:var(–card);border:1px solid var(–b2);border-radius:var(–rxl);
+padding:20px;display:flex;align-items:center;gap:16px;cursor:pointer;
+box-shadow:var(–sh);transition:background .15s,transform .12s;
+}
+.dash-tile:active{background:var(–card2);transform:scale(.98)}
+.dash-tile-icon{width:48px;height:48px;border-radius:14px;
+display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.dash-tile-left{flex:1;min-width:0}
+.dash-tile-name{font-size:11px;font-weight:700;text-transform:uppercase;
+letter-spacing:.06em;color:var(–t3);margin-bottom:4px}
+.dash-tile-val{font-size:24px;font-weight:700;letter-spacing:-.4px}
+.dash-tile-sub{font-size:11px;color:var(–t2);margin-top:3px}
+.dash-tile-arr{font-size:18px;color:var(–t3);flex-shrink:0}
+.act-tiles{display:flex;flex-direction:column;gap:8px;padding:0 16px}
+.act-tile{background:var(–card);border:1px solid var(–b1);border-radius:var(–rl);
+padding:14px 16px;display:flex;align-items:center;gap:12px}
+.act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.act-body{flex:1}
+.act-title{font-size:13px;font-weight:500}
+.act-sub{font-size:11px;color:var(–t2);margin-top:2px}
+.act-time{font-size:11px;color:var(–t3)}
+.ver-bar{text-align:center;padding:24px 0 4px;font-size:10px;color:var(–t3);letter-spacing:.06em}
 
-/* Type toggles */
-.f-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px 20px 0;}
-.f-type-btn{
-padding:11px 10px;border-radius:var(–r-md);border:1.5px solid rgba(255,255,255,.12);
-background:#1c2d47;font-size:13px;font-weight:600;cursor:pointer;
-text-align:center;transition:all .14s;font-family:‘DM Sans’,sans-serif;color:#8fa3c8;
-}
-.f-type-btn small{display:block;font-size:9px;color:#4d6080;margin-top:2px;font-weight:400;}
-.f-type-btn.active.t-expense{border-color:var(–red);background:var(–red-bg);color:var(–red);}
-.f-type-btn.active.t-income {border-color:var(–accent);background:var(–accent-bg);color:var(–accent);}
-.f-type-btn.active.t-salary {border-color:var(–green);background:var(–green-bg);color:var(–green);}
-.f-type-btn.active.t-bonus  {border-color:var(–bonus);background:var(–bon-bg);color:var(–bonus);}
-.f-type-btn.active.t-passive{border-color:var(–passive);background:var(–pas-bg);color:var(–passive);}
+/* ── KAKEIBO SHELL ── */
+#mod-ucetnictvi{display:none;flex-direction:column}
+#mod-ucetnictvi.active{display:flex;height:100%}
+.kk-header{background:var(–bg);border-bottom:1px solid var(–b1);padding:14px 16px 10px;flex-shrink:0}
+.kk-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.kk-title{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:700;letter-spacing:-.3px}
+.kk-title span{color:var(–accent)}
+.kk-period-nav{display:flex;align-items:center;gap:6px}
+.kk-nav-btn{background:var(–card2);border:1px solid var(–b2);border-radius:9px;
+padding:5px 12px;font-size:16px;color:var(–t2);cursor:pointer;font-family:‘DM Sans’,sans-serif}
+.kk-period-lbl{font-size:12px;font-weight:600;min-width:118px;text-align:center}
+.kk-tabs{display:flex;gap:4px;background:var(–card);border-radius:12px;padding:3px}
+.kk-tab{flex:1;padding:7px 0;text-align:center;font-size:11px;font-weight:600;
+color:var(–t3);border-radius:9px;cursor:pointer;transition:all .15s}
+.kk-tab.active{background:var(–card2);color:var(–t1);box-shadow:var(–sh)}
+.kk-scroll{flex:1;overflow-y:auto;scrollbar-width:none;
+padding-bottom:calc(108px + env(safe-area-inset-bottom,0px))}
+.kk-scroll::-webkit-scrollbar{display:none}
+.kk-view{display:none}
+.kk-view.active{display:block}
 
-/* Cat buttons */
-.f-cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:12px 20px 0;}
-.f-cat-btn{
-padding:10px 4px;border-radius:var(–r-md);border:1.5px solid rgba(255,255,255,.12);
-background:#1c2d47;font-size:9px;font-weight:700;cursor:pointer;text-align:center;
-transition:all .14s;font-family:‘DM Sans’,sans-serif;color:#4d6080;line-height:1.4;
-text-transform:uppercase;letter-spacing:.03em;
+/* ── KAKEIBO CARDS ── */
+.kk-hero{
+background:linear-gradient(135deg,var(–card2),var(–card));
+border:1px solid var(–b2);border-radius:var(–rxl);
+margin:14px 14px 0;padding:20px;box-shadow:var(–shm);
 }
-.f-cat-btn span{font-size:18px;display:block;margin-bottom:4px;}
-.f-cat-btn.active.c-need   {border-color:var(–need);   background:var(–need-bg); color:var(–need);}
-.f-cat-btn.active.c-want   {border-color:var(–want);   background:var(–want-bg); color:var(–want);}
-.f-cat-btn.active.c-culture{border-color:var(–culture);background:var(–cult-bg); color:var(–culture);}
-.f-cat-btn.active.c-unexp  {border-color:var(–unexp);  background:var(–unexp-bg);color:var(–unexp);}
+.kk-hero-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;
+text-transform:uppercase;color:var(–t3);margin-bottom:6px}
+.kk-hero-bal{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1}
+.kk-hero-bal.pos{color:var(–green)}
+.kk-hero-bal.neg{color:var(–red)}
+.kk-hero-bal.zero{color:var(–t2)}
+.kk-hero-sub{font-size:12px;color:var(–t2);margin-top:5px}
+.kk-hero-row{display:flex;gap:12px;margin-top:16px}
+.kk-hero-pill{flex:1;background:rgba(255,255,255,.05);border:1px solid var(–b2);
+border-radius:var(–r);padding:12px 14px}
+.kk-hero-pill-lbl{font-size:10px;color:var(–t3);font-weight:700;
+text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.kk-hero-pill-val{font-size:18px;font-weight:700}
+.kk-hero-pill-val.inc{color:var(–green)}
+.kk-hero-pill-val.exp{color:var(–red)}
+.kk-prog-wrap{margin-top:14px}
+.kk-prog-labels{display:flex;justify-content:space-between;
+font-size:10px;color:var(–t3);margin-bottom:5px}
+.kk-prog-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.kk-prog-bar{height:100%;border-radius:3px;transition:width .5s ease}
+.kk-prog-bar.ok{background:var(–green)}
+.kk-prog-bar.warn{background:var(–amber)}
+.kk-prog-bar.over{background:var(–red)}
 
-/* Buttons */
-.btn-primary{
-display:block;width:calc(100% - 40px);margin:16px 20px 0;
-background:var(–accent2);color:#fff;border:none;border-radius:var(–r-md);
-padding:15px;font-size:15px;font-weight:700;cursor:pointer;
-font-family:‘DM Sans’,sans-serif;box-shadow:0 2px 16px rgba(38,132,255,.3);
-}
-.btn-secondary{
-display:block;width:100%;background:#1c2d47;color:#8fa3c8;
-border:1px solid rgba(255,255,255,.12);border-radius:var(–r-md);
-padding:13px;font-size:13px;font-weight:600;cursor:pointer;font-family:‘DM Sans’,sans-serif;
-}
-.btn-danger{
-flex:1;padding:13px;border-radius:var(–r-md);border:1px solid rgba(255,255,255,.07);
+.kk-cats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 14px 0}
+.kk-cat{background:var(–card);border:1px solid var(–b2);border-radius:var(–rl);padding:14px;cursor:pointer}
+.kk-cat:active{background:var(–card2)}
+.kk-cat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.kk-cat-icon{font-size:18px}
+.kk-cat-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:.04em}
+.kk-cat-name{font-size:10px;color:var(–t3);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.kk-cat-amt{font-size:20px;font-weight:700}
+
+/* ── TX LIST ── */
+.kk-sec{display:flex;justify-content:space-between;align-items:center;padding:18px 14px 8px}
+.kk-sec-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(–t3)}
+.kk-chips{display:flex;gap:4px}
+.kk-chip{font-size:10px;font-weight:600;padding:4px 10px;border-radius:12px;
+border:1px solid var(–b2);background:none;color:var(–t3);cursor:pointer;font-family:‘DM Sans’,sans-serif}
+.kk-chip.active{background:var(–accent);color:#fff;border-color:var(–accent)}
+.kk-txs{padding:0 14px;display:flex;flex-direction:column;gap:6px}
+.kk-tx{background:var(–card);border:1px solid var(–b1);border-radius:var(–rl);
+padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:var(–sh)}
+.kk-tx:active{background:var(–card2)}
+.kk-tx-icon{width:40px;height:40px;border-radius:12px;
+display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.kk-tx-info{flex:1;min-width:0}
+.kk-tx-desc{font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kk-tx-meta{font-size:11px;color:var(–t3);margin-top:2px}
+.kk-tx-right{text-align:right;flex-shrink:0}
+.kk-tx-amt{font-size:16px;font-weight:700}
+.kk-tx-amt.exp{color:var(–t1)}
+.kk-tx-amt.inc{color:var(–green)}
+.kk-tx-date{font-size:10px;color:var(–t3);margin-top:2px}
+.kk-wk-div{font-size:10px;color:var(–t3);text-transform:uppercase;
+letter-spacing:.07em;padding:14px 4px 4px;font-weight:700}
+.kk-empty{text-align:center;padding:48px 24px}
+.kk-empty-icon{font-size:40px;margin-bottom:12px}
+.kk-empty-title{font-size:15px;font-weight:600;margin-bottom:6px}
+.kk-empty-sub{font-size:12px;color:var(–t2);line-height:1.7}
+
+/* ── YEAR VIEW ── */
+.kk-yr-card{background:var(–card);border:1px solid var(–b2);border-radius:var(–rxl);
+margin:14px 14px 0;overflow:hidden;box-shadow:var(–sh)}
+.kk-yt-row{display:flex;justify-content:space-between;align-items:center;padding:14px 18px}
+.kk-yt-row+.kk-yt-row{border-top:1px solid var(–b1)}
+.kk-yt-l{font-size:13px;color:var(–t2)}
+.kk-yt-v{font-size:16px;font-weight:700}
+.kk-months{padding:10px 14px 0;display:flex;flex-direction:column;gap:8px}
+.kk-month{background:var(–card);border:1px solid var(–b1);border-radius:var(–rl);
+padding:14px 16px;cursor:pointer}
+.kk-month:active{background:var(–card2)}
+.kk-month-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.kk-month-name{font-size:14px;font-weight:500}
+.kk-month-bal{font-size:14px;font-weight:700}
+.kk-month-bal.pos{color:var(–green)}
+.kk-month-bal.neg{color:var(–red)}
+.kk-month-bars{display:flex;gap:2px;height:5px;border-radius:3px;overflow:hidden}
+.kk-bar{height:100%;min-width:4px}
+
+/* ── SETTINGS ── */
+.kk-settings{padding:14px;display:flex;flex-direction:column;gap:12px}
+.scard{background:var(–card);border:1px solid var(–b2);border-radius:var(–rxl);overflow:hidden;box-shadow:var(–sh)}
+.scard-head{padding:16px 18px;border-bottom:1px solid var(–b1)}
+.scard-title{font-size:14px;font-weight:700;margin-bottom:3px}
+.scard-desc{font-size:12px;color:var(–t2);line-height:1.6}
+.scard-body{padding:14px 18px}
+.recur-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.recur-item{background:var(–card2);border:1px solid var(–b1);
+border-radius:var(–r);padding:12px 14px}
+.recur-row{display:flex;align-items:center;gap:10px}
+.recur-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.recur-info{flex:1;min-width:0}
+.recur-name{font-size:13px;font-weight:500}
+.recur-meta{font-size:11px;color:var(–t3);margin-top:1px}
+.recur-amt{font-size:14px;font-weight:700;color:var(–t2);flex-shrink:0}
+.recur-del{background:none;border:none;color:var(–t3);font-size:20px;cursor:pointer;padding:0 2px;line-height:1}
+.loan-prog-track{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-top:8px}
+.loan-prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(–green),var(–accent));transition:width .5s}
+.loan-prog-labels{display:flex;justify-content:space-between;font-size:10px;color:var(–t3);margin-top:4px}
+.loan-update-btn{background:none;border:none;color:var(–accent);font-size:10px;font-weight:600;
+cursor:pointer;font-family:‘DM Sans’,sans-serif;padding:0}
+
+/* ── STATS ── */
+.st-wrap{padding:14px;display:flex;flex-direction:column;gap:12px}
+.st-card{background:var(–card);border:1px solid var(–b2);border-radius:var(–rxl);overflow:hidden;box-shadow:var(–sh)}
+.st-card-title{font-size:10px;font-weight:700;letter-spacing:.09em;
+text-transform:uppercase;color:var(–t3);padding:15px 18px 0}
+.st-big{padding:8px 18px 16px}
+.st-big-val{font-size:30px;font-weight:700;letter-spacing:-.5px;line-height:1.1}
+.st-big-sub{font-size:11px;color:var(–t2);margin-top:4px}
+.st-2col{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(–b1)}
+.st-half{padding:14px 18px}
+.st-half+.st-half{border-left:1px solid var(–b1)}
+.st-half-lbl{font-size:10px;color:var(–t3);text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-bottom:5px}
+.st-half-val{font-size:22px;font-weight:700}
+.st-bars{padding:10px 18px 16px;display:flex;flex-direction:column;gap:11px}
+.st-bar-row{display:flex;flex-direction:column;gap:4px}
+.st-bar-top{display:flex;justify-content:space-between;font-size:12px}
+.st-bar-lbl{color:var(–t2)}
+.st-bar-track{height:7px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+.st-bar-fill{height:100%;border-radius:4px;transition:width .5s}
+.st-mom-grid{padding:10px 18px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.st-mom-cell{background:var(–card2);border-radius:var(–r);padding:10px 12px}
+.st-mom-name{font-size:9px;color:var(–t3);text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:5px}
+.st-mom-exp{font-size:14px;font-weight:700}
+.st-mom-delta{font-size:10px;margin-top:3px}
+.st-mom-delta.up{color:var(–red)}
+.st-mom-delta.down{color:var(–green)}
+.st-top5{padding:10px 18px 16px;display:flex;flex-direction:column;gap:10px}
+.st-top5-item{display:flex;align-items:center;gap:10px}
+.st-top5-rank{font-size:11px;color:var(–t3);font-weight:700;width:16px;text-align:right;flex-shrink:0}
+.st-top5-icon{width:36px;height:36px;border-radius:10px;
+display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.st-top5-info{flex:1;min-width:0}
+.st-top5-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.st-top5-cat{font-size:10px;color:var(–t3);margin-top:1px}
+.st-top5-amt{font-size:13px;font-weight:700;flex-shrink:0}
+.st-ratio-wrap{padding:10px 18px 16px;display:flex;align-items:center;gap:20px}
+.st-donut{position:relative;width:76px;height:76px;flex-shrink:0}
+.st-donut svg{width:76px;height:76px;transform:rotate(-90deg)}
+.st-donut-track{fill:none;stroke:rgba(255,255,255,.07);stroke-width:10}
+.st-donut-fill{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .6s}
+.st-donut-lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+font-size:14px;font-weight:700}
+.st-ratio-legend{display:flex;flex-direction:column;gap:8px}
+.st-ratio-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(–t2)}
+.st-ratio-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.st-loan-item{margin:0 18px 12px;padding:12px 14px;
+background:var(–card2);border-radius:var(–r)}
+.st-loan-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.st-loan-name{font-size:13px;font-weight:600}
+.st-loan-bal{font-size:15px;font-weight:700;color:var(–orange)}
+
+/* ── PLACEHOLDER MODULES ── */
+.mod-wrap{padding:20px 16px calc(36px + env(safe-area-inset-bottom,0px))}
+.mod-header{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.mod-badge{width:46px;height:46px;border-radius:14px;
+display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.mod-title{font-size:22px;font-weight:700;letter-spacing:-.3px}
+.mod-sub{font-size:12px;color:var(–t2);margin-top:3px}
+.ph-box{background:var(–card);border:1.5px dashed var(–b2);border-radius:var(–rxl);
+padding:36px 24px;text-align:center}
+.ph-icon{font-size:36px;margin-bottom:12px}
+.ph-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.ph-text{font-size:12px;color:var(–t2);line-height:1.7}
+
+/* ── FORMS ── */
+.f-sec{padding:14px 20px 0}
+.f-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+font-weight:700;color:var(–t3);margin-bottom:6px;display:block}
+.f-input{width:100%;background:var(–card2);border:1px solid var(–b2);
+border-radius:var(–r);padding:12px 14px;font-size:15px;
+font-family:‘DM Sans’,sans-serif;color:var(–t1);outline:none}
+.f-input:focus{border-color:var(–accent)}
+.f-input.xl{font-size:26px;font-weight:700;text-align:right;padding:12px 15px;letter-spacing:-.4px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 20px 0}
+.f-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px 20px 0}
+.f-type-btn{padding:11px 10px;border-radius:var(–r);border:1.5px solid var(–b2);
+background:var(–card2);font-size:13px;font-weight:600;cursor:pointer;
+text-align:center;font-family:‘DM Sans’,sans-serif;color:var(–t2)}
+.f-type-btn small{display:block;font-size:9px;color:var(–t3);margin-top:2px;font-weight:400}
+.f-type-btn.active.t-expense{border-color:var(–red);background:var(–red-bg);color:var(–red)}
+.f-type-btn.active.t-income{border-color:var(–accent);background:rgba(77,168,255,.1);color:var(–accent)}
+.f-type-btn.active.t-salary{border-color:var(–green);background:var(–green-bg);color:var(–green)}
+.f-type-btn.active.t-bonus{border-color:#a8e063;background:var(–bon-bg);color:#a8e063}
+.f-type-btn.active.t-passive{border-color:#63d4c4;background:var(–pas-bg);color:#63d4c4}
+.f-cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:12px 20px 0}
+.f-cat-btn{padding:10px 4px;border-radius:var(–r);border:1.5px solid var(–b2);
+background:var(–card2);font-size:9px;font-weight:700;cursor:pointer;text-align:center;
+font-family:‘DM Sans’,sans-serif;color:var(–t3);line-height:1.4;text-transform:uppercase}
+.f-cat-btn span{font-size:18px;display:block;margin-bottom:4px}
+.f-cat-btn.active.c-need{border-color:var(–need);background:var(–need-bg);color:var(–need)}
+.f-cat-btn.active.c-want{border-color:var(–want);background:var(–want-bg);color:var(–want)}
+.f-cat-btn.active.c-cult{border-color:var(–cult);background:var(–cult-bg);color:var(–cult)}
+.f-cat-btn.active.c-unexp{border-color:var(–unexp);background:var(–unexp-bg);color:var(–unexp)}
+.f-checkbox-row{display:flex;align-items:center;gap:10px;padding:14px 20px 0;
+font-size:13px;color:var(–t2);cursor:pointer}
+.f-checkbox-row input[type=checkbox]{width:18px;height:18px;accent-color:var(–orange);flex-shrink:0}
+.btn-primary{display:block;width:calc(100% - 40px);margin:16px 20px 0;
+background:var(–accent2);color:#fff;border:none;border-radius:var(–r);
+padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:‘DM Sans’,sans-serif}
+.btn-secondary{display:block;width:100%;background:var(–card2);color:var(–t2);
+border:1px solid var(–b2);border-radius:var(–r);padding:13px;
+font-size:13px;font-weight:600;cursor:pointer;font-family:‘DM Sans’,sans-serif}
+.btn-row{display:flex;gap:8px;padding:16px 20px 0}
+.btn-danger{flex:1;padding:13px;border-radius:var(–r);border:1px solid var(–b1);
 background:var(–red-bg);color:var(–red);font-size:14px;font-weight:700;
-cursor:pointer;font-family:‘DM Sans’,sans-serif;
-}
-.btn-neutral{
-flex:1;padding:13px;border-radius:var(–r-md);border:1px solid rgba(255,255,255,.07);
-background:#1c2d47;color:#8fa3c8;font-size:14px;font-weight:500;
-cursor:pointer;font-family:‘DM Sans’,sans-serif;
-}
-.btn-row{display:flex;gap:8px;padding:16px 20px 0;}
-.detail-info{padding:14px 20px 0;font-size:13px;color:#8fa3c8;line-height:2.2;}
+cursor:pointer;font-family:‘DM Sans’,sans-serif}
+.btn-ghost{flex:1;padding:13px;border-radius:var(–r);border:1px solid var(–b1);
+background:var(–card2);color:var(–t2);font-size:14px;font-weight:500;
+cursor:pointer;font-family:‘DM Sans’,sans-serif}
+.detail-info{padding:14px 20px 0;font-size:13px;color:var(–t2);line-height:2.2}
 
-/* ══════════════════════════
-PLACEHOLDERS
-══════════════════════════ */
-.mod-wrap{padding:20px 16px calc(36px + env(safe-area-inset-bottom, 0px));}
-.mod-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
-.mod-badge{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.mod-title{font-size:22px;font-weight:700;letter-spacing:-.3px;}
-.mod-sub{font-size:12px;color:#8fa3c8;margin-top:3px;}
-.ph-box{background:#152035;border:1.5px dashed rgba(255,255,255,.12);border-radius:var(–r-xl);padding:36px 24px;text-align:center;}
-.ph-icon{font-size:36px;margin-bottom:12px;}
-.ph-title{font-size:15px;font-weight:700;margin-bottom:6px;}
-.ph-text{font-size:12px;color:#8fa3c8;line-height:1.7;}
+/* ── MODALS ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;
+display:none;align-items:flex-end;backdrop-filter:blur(4px)}
+.modal-bg.open{display:flex}
+.modal-sheet{background:var(–card);border-radius:24px 24px 0 0;width:100%;
+padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));
+animation:sheetUp .22s cubic-bezier(.22,.68,0,1.2) both;
+max-height:92dvh;overflow-y:auto}
+@keyframes sheetUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
+.modal-handle{width:38px;height:3px;background:rgba(255,255,255,.15);
+border-radius:2px;margin:12px auto 14px}
+.modal-title{font-size:20px;font-weight:700;letter-spacing:-.3px;
+padding:0 20px 14px;border-bottom:1px solid var(–b1)}
 
-/* ══════════════════════════
-TOAST & DB
-══════════════════════════ */
-#toast{
-position:fixed;bottom:calc(96px + env(safe-area-inset-bottom, 0px));left:50%;transform:translateX(-50%);
-background:#243657;color:#f0f4ff;border:1px solid rgba(255,255,255,.12);
-padding:10px 20px;border-radius:22px;font-size:13px;font-weight:600;z-index:200;
-opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap;
-box-shadow:0 6px 24px rgba(0,0,0,.5);
-}
-#toast.show{opacity:1;}
-#db-chip{
-position:fixed;bottom:calc(14px + env(safe-area-inset-bottom, 0px));left:16px;
-background:#1c2d47;border:1px solid rgba(255,255,255,.07);border-radius:18px;
-padding:5px 11px;font-size:10px;color:#4d6080;display:flex;align-items:center;
-gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
-}
-#db-chip .dot{width:5px;height:5px;border-radius:50%;background:var(–green);}
-#db-chip.err .dot{background:var(–red);}
-#db-chip.hidden{opacity:0;}
+/* ── TOAST / CHIP ── */
+#toast{position:fixed;bottom:calc(104px + env(safe-area-inset-bottom,0px));
+left:50%;transform:translateX(-50%);
+background:var(–card3);color:var(–t1);border:1px solid var(–b2);
+padding:10px 20px;border-radius:22px;font-size:13px;font-weight:600;
+z-index:200;opacity:0;transition:opacity .2s;pointer-events:none;
+white-space:nowrap;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+#toast.show{opacity:1}
+#db-chip{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:16px;
+background:var(–card2);border:1px solid var(–b1);border-radius:18px;
+padding:5px 11px;font-size:10px;color:var(–t3);
+display:flex;align-items:center;gap:5px;z-index:80;
+opacity:1;transition:opacity .3s;pointer-events:none}
+#db-chip .dot{width:5px;height:5px;border-radius:50%;background:var(–green)}
+#db-chip.err .dot{background:var(–red)}
+#db-chip.hide{opacity:0}
+#import-status{font-size:12px;color:var(–t2);line-height:1.7;
+display:none;margin-top:10px}
 </style>
 
 </head>
@@ -590,106 +408,104 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
   <!-- HEADER -->
 
   <header id="shell-header">
-    <div class="logo" style="display:flex;align-items:center;gap:8px;">
-      <svg width="32" height="32" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="30" cy="30" r="19" stroke="#4da8ff" stroke-width="6"/>
-  <circle cx="30" cy="30" r="7" fill="#4da8ff"/>
-  <path d="M49 30 L56 30" stroke="#4da8ff" stroke-width="3" stroke-linecap="round"/>
-</svg>
-      <span style="font-size:19px;font-weight:700;letter-spacing:-.4px;color:#f0f4ff;">Můj<span style="color:#4da8ff;">OS</span></span>
+    <div class="logo">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="19" stroke="#4da8ff" stroke-width="6"/>
+        <circle cx="30" cy="30" r="7" fill="#4da8ff"/>
+        <path d="M49 30L56 30" stroke="#4da8ff" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>Můj<span>OS</span></span>
     </div>
-    <div class="header-right">
-      <div class="date-pill" id="date-chip"></div>
-    </div>
+    <div class="date-pill" id="date-chip"></div>
   </header>
-
-  <!-- CONTENT -->
 
   <div id="content">
 
 ```
 <!-- ═══ DASHBOARD ═══ -->
 <div class="module active" id="mod-dashboard">
-  <div class="dash-wrap">
-
-    <div class="dash-hero">
-      <div class="dash-greeting-sm" id="greet-sm">Přehled</div>
-      <div class="dash-greeting" id="greeting">Dobrý den</div>
-      <div class="dash-period" id="dash-period">—</div>
-    </div>
-
-    <div class="dash-section">
-      <div class="dash-section-lbl">Moduly</div>
-    </div>
-    <div class="dash-tiles">
-      <div class="dash-tile" data-mod="ucetnictvi">
-        <div class="dash-tile-icon"><svg width="28" height="28" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="19" stroke="#34c97a" stroke-width="6"/><circle cx="30" cy="30" r="7" fill="#34c97a"/><path d="M49 30 L56 30" stroke="#34c97a" stroke-width="3" stroke-linecap="round"/></svg></div>
-        <div class="dash-tile-left">
-          <div class="dash-tile-name">Kakeibo</div>
-          <div class="dash-tile-val" id="stat-ucet">—</div>
-          <div class="dash-tile-sub">výdaje tento týden</div>
-        </div>
-        <div class="dash-tile-arrow">›</div>
-      </div>
-      <div class="dash-tile" data-mod="investice">
-        <div class="dash-tile-icon">💰</div>
-        <div class="dash-tile-left">
-          <div class="dash-tile-name">Investice</div>
-          <div class="dash-tile-val" id="stat-investice">—</div>
-          <div class="dash-tile-sub">tento kvartál</div>
-        </div>
-        <div class="dash-tile-arrow">›</div>
-      </div>
-      <div class="dash-tile" data-mod="auto">
-        <div class="dash-tile-icon">🚗</div>
-        <div class="dash-tile-left">
-          <div class="dash-tile-name">Auto</div>
-          <div class="dash-tile-val" id="stat-auto">—</div>
-          <div class="dash-tile-sub">náklady tento měsíc</div>
-        </div>
-        <div class="dash-tile-arrow">›</div>
-      </div>
-      <div class="dash-tile" data-mod="elektrina">
-        <div class="dash-tile-icon">⚡</div>
-        <div class="dash-tile-left">
-          <div class="dash-tile-name">Elektřina</div>
-          <div class="dash-tile-val" id="stat-elektr">—</div>
-          <div class="dash-tile-sub">poslední odečet</div>
-        </div>
-        <div class="dash-tile-arrow">›</div>
-      </div>
-      <div class="dash-tile" data-mod="kondice">
-        <div class="dash-tile-icon">🧠</div>
-        <div class="dash-tile-left">
-          <div class="dash-tile-name">Kondice</div>
-          <div class="dash-tile-val" id="stat-kondice">—</div>
-          <div class="dash-tile-sub">poslední záznam</div>
-        </div>
-        <div class="dash-tile-arrow">›</div>
-      </div>
-    </div>
-
-    <div class="dash-section" style="margin-top:8px;">
-      <div class="dash-section-lbl">Poslední aktivita</div>
-    </div>
-    <div class="dash-activity" id="act-list">
-      <div class="act-tile">
-        <div class="act-dot" style="background:#4d6080"></div>
-        <div class="act-info">
-          <div class="act-title">Žádná aktivita</div>
-          <div class="act-sub">Začni přidávat záznamy v modulech</div>
-        </div>
-      </div>
-    </div>
-    <div class="ver-bar">MůjOS v4.5 · Kakeibo v1.2</div>
+  <div class="dash-hero">
+    <div class="dash-greeting-sm" id="greet-day"></div>
+    <div class="dash-greeting" id="greet-text">Dobrý den</div>
+    <div class="dash-q" id="greet-q"></div>
   </div>
+  <div class="dash-section">Moduly</div>
+  <div class="dash-tiles">
+    <div class="dash-tile" data-mod="ucetnictvi">
+      <div class="dash-tile-icon" style="background:var(--green-bg)">
+        <svg width="26" height="26" viewBox="0 0 60 60" fill="none">
+          <circle cx="30" cy="30" r="19" stroke="#34c97a" stroke-width="6"/>
+          <circle cx="30" cy="30" r="7" fill="#34c97a"/>
+          <path d="M49 30L56 30" stroke="#34c97a" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="dash-tile-left">
+        <div class="dash-tile-name">Kakeibo</div>
+        <div class="dash-tile-val" id="stat-ucet">—</div>
+        <div class="dash-tile-sub">výdaje tento týden</div>
+      </div>
+      <div class="dash-tile-arr">›</div>
+    </div>
+    <div class="dash-tile" data-mod="investice">
+      <div class="dash-tile-icon" style="background:rgba(255,207,92,.1)">💰</div>
+      <div class="dash-tile-left">
+        <div class="dash-tile-name">Investice</div>
+        <div class="dash-tile-val" id="stat-invest">—</div>
+        <div class="dash-tile-sub">tento kvartál</div>
+      </div>
+      <div class="dash-tile-arr">›</div>
+    </div>
+    <div class="dash-tile" data-mod="auto">
+      <div class="dash-tile-icon" style="background:var(--cult-bg)">🚗</div>
+      <div class="dash-tile-left">
+        <div class="dash-tile-name">Auto</div>
+        <div class="dash-tile-val" id="stat-auto">—</div>
+        <div class="dash-tile-sub">náklady tento měsíc</div>
+      </div>
+      <div class="dash-tile-arr">›</div>
+    </div>
+    <div class="dash-tile" data-mod="elektrina">
+      <div class="dash-tile-icon" style="background:rgba(167,139,250,.1)">⚡</div>
+      <div class="dash-tile-left">
+        <div class="dash-tile-name">Elektřina</div>
+        <div class="dash-tile-val" id="stat-elektr">—</div>
+        <div class="dash-tile-sub">poslední odečet</div>
+      </div>
+      <div class="dash-tile-arr">›</div>
+    </div>
+    <div class="dash-tile" data-mod="kondice">
+      <div class="dash-tile-icon" style="background:rgba(99,212,196,.1)">🧠</div>
+      <div class="dash-tile-left">
+        <div class="dash-tile-name">Kondice</div>
+        <div class="dash-tile-val" id="stat-kondice">—</div>
+        <div class="dash-tile-sub">poslední záznam</div>
+      </div>
+      <div class="dash-tile-arr">›</div>
+    </div>
+  </div>
+  <div class="dash-section" style="margin-top:8px">Poslední aktivita</div>
+  <div class="act-tiles" id="act-list">
+    <div class="act-tile">
+      <div class="act-dot" style="background:var(--t3)"></div>
+      <div class="act-body"><div class="act-title">Žádná aktivita</div>
+        <div class="act-sub">Přidej první záznam v modulech</div></div>
+    </div>
+  </div>
+  <div class="ver-bar">MůjOS v5.0 · Kakeibo v1.3</div>
 </div>
 
 <!-- ═══ KAKEIBO ═══ -->
 <div class="module" id="mod-ucetnictvi">
   <div class="kk-header">
     <div class="kk-header-top">
-      <div class="kk-title" style="display:flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="19" stroke="#4da8ff" stroke-width="6"/><circle cx="30" cy="30" r="7" fill="#4da8ff"/><path d="M49 30 L56 30" stroke="#4da8ff" stroke-width="3" stroke-linecap="round"/></svg> <span>Kakeibo</span></div>
+      <div class="kk-title">
+        <svg width="18" height="18" viewBox="0 0 60 60" fill="none">
+          <circle cx="30" cy="30" r="19" stroke="#4da8ff" stroke-width="6"/>
+          <circle cx="30" cy="30" r="7" fill="#4da8ff"/>
+          <path d="M49 30L56 30" stroke="#4da8ff" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <span>Kakeibo</span>
+      </div>
       <div class="kk-period-nav">
         <button class="kk-nav-btn" id="kk-prev">‹</button>
         <div class="kk-period-lbl" id="kk-period">—</div>
@@ -704,13 +520,11 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       <div class="kk-tab" data-kv="nastaveni">⚙</div>
     </div>
   </div>
-
   <div class="kk-scroll">
-
     <!-- TÝDEN -->
     <div class="kk-view active" id="kkv-tyden">
-      <div class="kk-hero-card" id="kk-sum-week"></div>
-      <div class="kk-cats" id="kk-cats-week"></div>
+      <div id="kk-sum-week" class="kk-hero"></div>
+      <div id="kk-cats-week" class="kk-cats"></div>
       <div class="kk-sec">
         <span class="kk-sec-lbl">Záznamy</span>
         <div class="kk-chips" id="kk-chips">
@@ -721,82 +535,69 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       </div>
       <div class="kk-txs" id="kk-txs-week"></div>
     </div>
-
     <!-- MĚSÍC -->
     <div class="kk-view" id="kkv-mesic">
-      <div class="kk-hero-card" id="kk-sum-month"></div>
-      <div class="kk-cats" id="kk-cats-month"></div>
+      <div id="kk-sum-month" class="kk-hero"></div>
+      <div id="kk-cats-month" class="kk-cats"></div>
       <div class="kk-sec"><span class="kk-sec-lbl">Záznamy měsíce</span></div>
       <div class="kk-txs" id="kk-txs-month"></div>
     </div>
-
     <!-- ROK -->
     <div class="kk-view" id="kkv-rok">
-      <div class="kk-yr-card" id="kk-yr-totals"></div>
+      <div id="kk-yr-totals" class="kk-yr-card"></div>
       <div class="kk-sec"><span class="kk-sec-lbl">Přehled po měsících</span></div>
-      <div class="kk-months" id="kk-months"></div>
-      <div class="ver-bar">MůjOS v4.5 · Kakeibo v1.2</div>
+      <div id="kk-months" class="kk-months"></div>
+      <div class="ver-bar">MůjOS v5.0 · Kakeibo v1.3</div>
     </div>
-
     <!-- STATISTIKY -->
     <div class="kk-view" id="kkv-statistiky">
       <div class="st-wrap" id="st-content">
-        <div style="text-align:center;padding:48px 0;color:#4d6080;font-size:13px">Načítám…</div>
+        <div style="text-align:center;padding:48px 0;color:var(--t3);font-size:13px">Načítám…</div>
       </div>
     </div>
-
     <!-- NASTAVENÍ -->
     <div class="kk-view" id="kkv-nastaveni">
       <div class="kk-settings">
-        <div class="kk-scard">
-          <div class="kk-scard-head">
-            <div class="kk-scard-title">Týdenní výdajový limit</div>
-            <div class="kk-scard-desc">Progress bar v přehledu ukazuje, kolik z limitu jsi využil/a.</div>
+        <div class="scard">
+          <div class="scard-head">
+            <div class="scard-title">Týdenní výdajový limit</div>
+            <div class="scard-desc">Progress bar ukazuje využití limitu.</div>
           </div>
-          <div class="kk-scard-body">
-            <label class="f-label">Limit výdajů / týden (Kč)</label>
+          <div class="scard-body">
+            <label class="f-label" for="budget-input">Limit / týden (Kč)</label>
             <input class="f-input xl" id="budget-input" type="number" inputmode="numeric" placeholder="5 000" style="margin-bottom:12px">
-            <button class="btn-primary" id="budget-save" style="margin:0;width:100%">Uložit limit</button>
+            <button class="btn-secondary" id="budget-save">Uložit limit</button>
           </div>
         </div>
-        <div class="kk-scard">
-          <div class="kk-scard-head">
-            <div class="kk-scard-title">Pravidelné platby</div>
-            <div class="kk-scard-desc">Nájem, předplatné aj. Přidají se automaticky 1. každého měsíce.</div>
+        <div class="scard">
+          <div class="scard-head">
+            <div class="scard-title">Pravidelné platby</div>
+            <div class="scard-desc">Nájem, předplatné aj. Přidají se automaticky 1. každého měsíce.</div>
           </div>
-          <div class="kk-scard-body">
+          <div class="scard-body">
             <div class="recur-list" id="recur-list"></div>
             <button class="btn-secondary" id="recur-add-btn">＋ Přidat pravidelnou platbu</button>
           </div>
         </div>
-        <div class="kk-scard">
-          <div class="kk-scard-head">
-            <div class="kk-scard-title">Export dat</div>
-            <div class="kk-scard-desc">Stáhni všechna Kakeibo data jako Excel.</div>
+        <div class="scard">
+          <div class="scard-head">
+            <div class="scard-title">Export / Import dat</div>
+            <div class="scard-desc">Export stáhne Excel se dvěma listy: transakce + pravidelné platby. Import ze stejného formátu přidá záznamy bez duplikátů.</div>
           </div>
-          <div class="kk-scard-body">
+          <div class="scard-body" style="display:flex;flex-direction:column;gap:10px">
             <button class="btn-secondary" id="kk-export-btn">📊 Exportovat do Excelu</button>
-          </div>
-        </div>
-        <div class="kk-scard">
-          <div class="kk-scard-head">
-            <div class="kk-scard-title">Import dat</div>
-            <div class="kk-scard-desc">Nahraj Excel (.xlsx) z předchozího exportu. Záznamy se přidají k existujícím — duplicity jsou přeskočeny podle data a částky.</div>
-          </div>
-          <div class="kk-scard-body">
             <input type="file" id="kk-import-file" accept=".xlsx" style="display:none">
-            <button class="btn-secondary" id="kk-import-btn" style="margin-bottom:10px">📥 Importovat z Excelu</button>
-            <div id="import-status" style="font-size:12px;color:#8fa3c8;line-height:1.7;display:none"></div>
+            <button class="btn-secondary" id="kk-import-btn">📥 Importovat z Excelu</button>
+            <div id="import-status"></div>
           </div>
         </div>
-        <div class="ver-bar">MůjOS v4.5 · Kakeibo v1.2</div>
+        <div class="ver-bar">MůjOS v5.0 · Kakeibo v1.3</div>
       </div>
     </div>
+  </div>
+</div>
 
-  </div><!-- /kk-scroll -->
-</div><!-- /mod-ucetnictvi -->
-
-<!-- ═══ INVESTICE ═══ -->
+<!-- ═══ PLACEHOLDER MODULY ═══ -->
 <div class="module" id="mod-investice">
   <div class="mod-wrap">
     <div class="mod-header">
@@ -804,29 +605,25 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       <div><div class="mod-title">Investice</div><div class="mod-sub">Sledování investičních objemů</div></div>
     </div>
     <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul se připravuje</div>
-      <div class="ph-text">Sem přijde kód investiční appky.<br>DB store <code>investice</code> je připraven.</div>
+      <div class="ph-title">Připravuje se</div>
+      <div class="ph-text">DB store <code>investice</code> je připraven.</div>
     </div>
-    <div class="ver-bar">MůjOS v4.5</div>
+    <div class="ver-bar">MůjOS v5.0</div>
   </div>
 </div>
-
-<!-- ═══ AUTO ═══ -->
 <div class="module" id="mod-auto">
   <div class="mod-wrap">
     <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(77,168,255,.1)">🚗</div>
+      <div class="mod-badge" style="background:var(--cult-bg)">🚗</div>
       <div><div class="mod-title">Auto</div><div class="mod-sub">Tankování, náklady, STK</div></div>
     </div>
     <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul se připravuje</div>
-      <div class="ph-text">Evidence nákladů na auto, spotřeba, servisní záznamy.</div>
+      <div class="ph-title">Připravuje se</div>
+      <div class="ph-text">Evidence nákladů, spotřeba, servis.</div>
     </div>
-    <div class="ver-bar">MůjOS v4.5</div>
+    <div class="ver-bar">MůjOS v5.0</div>
   </div>
 </div>
-
-<!-- ═══ ELEKTŘINA ═══ -->
 <div class="module" id="mod-elektrina">
   <div class="mod-wrap">
     <div class="mod-header">
@@ -834,14 +631,12 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       <div><div class="mod-title">Elektřina</div><div class="mod-sub">Odečty, spotřeba, tarify</div></div>
     </div>
     <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul se připravuje</div>
-      <div class="ph-text">Odečty elektroměru, sledování spotřeby a fakturace.</div>
+      <div class="ph-title">Připravuje se</div>
+      <div class="ph-text">Odečty elektroměru a sledování spotřeby.</div>
     </div>
-    <div class="ver-bar">MůjOS v4.5</div>
+    <div class="ver-bar">MůjOS v5.0</div>
   </div>
 </div>
-
-<!-- ═══ KONDICE ═══ -->
 <div class="module" id="mod-kondice">
   <div class="mod-wrap">
     <div class="mod-header">
@@ -849,34 +644,30 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       <div><div class="mod-title">Kondice</div><div class="mod-sub">Sledování psychické pohody</div></div>
     </div>
     <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Modul se připravuje</div>
-      <div class="ph-text">Denní záznamy nálady, kondice a trend v čase.</div>
+      <div class="ph-title">Připravuje se</div>
+      <div class="ph-text">Denní záznamy nálady a kondice.</div>
     </div>
-    <div class="ver-bar">MůjOS v4.5</div>
+    <div class="ver-bar">MůjOS v5.0</div>
   </div>
 </div>
 ```
 
   </div><!-- /content -->
 
-  <!-- BOTTOM NAV — George style -->
-
   <nav id="bottom-nav">
-    <button class="bnav-tab active" data-mod="dashboard">
-      <span class="bicon">🏠</span>Přehled
-    </button>
+    <button class="bnav-tab active" data-mod="dashboard"><span class="bi">🏠</span>Přehled</button>
     <button class="bnav-tab" data-mod="ucetnictvi">
-      <span class="bicon" style="display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="19" stroke="currentColor" stroke-width="6"/><circle cx="30" cy="30" r="7" fill="currentColor"/><path d="M49 30 L56 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span>Kakeibo
+      <span class="bi">
+        <svg width="22" height="22" viewBox="0 0 60 60" fill="none">
+          <circle cx="30" cy="30" r="19" stroke="currentColor" stroke-width="6"/>
+          <circle cx="30" cy="30" r="7" fill="currentColor"/>
+          <path d="M49 30L56 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>Kakeibo
     </button>
-    <button class="bnav-tab" data-mod="investice">
-      <span class="bicon">💰</span>Investice
-    </button>
-    <button class="bnav-tab" data-mod="auto">
-      <span class="bicon">🚗</span>Auto
-    </button>
-    <button class="bnav-tab" data-mod="kondice">
-      <span class="bicon">🧠</span>Kondice
-    </button>
+    <button class="bnav-tab" data-mod="investice"><span class="bi">💰</span>Investice</button>
+    <button class="bnav-tab" data-mod="auto"><span class="bi">🚗</span>Auto</button>
+    <button class="bnav-tab" data-mod="kondice"><span class="bi">🧠</span>Kondice</button>
   </nav>
 
 </div><!-- /app -->
@@ -885,13 +676,13 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
 
 <button id="kk-fab"><span class="fab-plus">＋</span>Přidat záznam</button>
 
-<!-- MODAL: PŘIDAT ZÁZNAM -->
+<!-- MODAL: NOVÝ ZÁZNAM -->
 
 <div class="modal-bg" id="modal-add">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
     <div class="modal-title">Nový záznam</div>
-    <div class="f-type-grid" id="main-type-grid">
+    <div class="f-type-grid">
       <div class="f-type-btn t-expense active" data-mt="expense">💸 Výdaj</div>
       <div class="f-type-btn t-income" data-mt="income">💚 Příjem</div>
     </div>
@@ -899,32 +690,32 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       <div class="f-cat-grid">
         <div class="f-cat-btn c-need active" data-cat="need"><span>🏠</span>Potřeby</div>
         <div class="f-cat-btn c-want" data-cat="want"><span>✨</span>Přání</div>
-        <div class="f-cat-btn c-culture" data-cat="culture"><span>📚</span>Kultura</div>
+        <div class="f-cat-btn c-cult" data-cat="culture"><span>📚</span>Kultura</div>
         <div class="f-cat-btn c-unexp" data-cat="unexp"><span>⚡</span>Nečekané</div>
       </div>
     </div>
     <div id="income-types" style="display:none">
       <div class="f-type-grid" style="grid-template-columns:1fr 1fr 1fr">
         <div class="f-type-btn t-salary active" data-it="salary">💼 Výplata</div>
-        <div class="f-type-btn t-bonus" data-it="bonus">🎯 Mimořádný<small>bonus, odměna</small></div>
-        <div class="f-type-btn t-passive" data-it="passive">📈 Pasivní<small>nájem, dividendy</small></div>
+        <div class="f-type-btn t-bonus" data-it="bonus">🎯 Bonus<small>odměna</small></div>
+        <div class="f-type-btn t-passive" data-it="passive">📈 Pasivní<small>nájem, div.</small></div>
       </div>
     </div>
     <div class="f-sec">
-      <label class="f-label">Částka (Kč)</label>
+      <label class="f-label" for="f-amount">Částka (Kč)</label>
       <input class="f-input xl" id="f-amount" type="number" inputmode="numeric" placeholder="0">
     </div>
     <div class="f-sec">
-      <label class="f-label">Popis</label>
+      <label class="f-label" for="f-desc">Popis</label>
       <input class="f-input" id="f-desc" type="text" placeholder="Co to bylo?">
     </div>
     <div class="f-row">
       <div>
-        <label class="f-label">Datum</label>
+        <label class="f-label" for="f-date">Datum</label>
         <input class="f-input" id="f-date" type="date">
       </div>
       <div>
-        <label class="f-label">Poznámka</label>
+        <label class="f-label" for="f-note">Poznámka</label>
         <input class="f-input" id="f-note" type="text" placeholder="volitelné">
       </div>
     </div>
@@ -940,8 +731,8 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
     <div class="modal-title" id="detail-title">Detail</div>
     <div class="detail-info" id="detail-body"></div>
     <div class="btn-row">
-      <button class="btn-danger"  id="btn-delete">🗑 Smazat</button>
-      <button class="btn-neutral" id="btn-close-detail">Zavřít</button>
+      <button class="btn-danger" id="btn-delete">🗑 Smazat</button>
+      <button class="btn-ghost" id="btn-close-detail">Zavřít</button>
     </div>
   </div>
 </div>
@@ -953,22 +744,35 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
     <div class="modal-handle"></div>
     <div class="modal-title">Nová pravidelná platba</div>
     <div class="f-sec">
-      <label class="f-label">Název platby</label>
+      <label class="f-label" for="recur-name">Název</label>
       <input class="f-input" id="recur-name" type="text" placeholder="Nájem, Netflix, …">
     </div>
     <div class="f-sec">
-      <label class="f-label">Částka (Kč)</label>
+      <label class="f-label" for="recur-amount">Částka (Kč)</label>
       <input class="f-input xl" id="recur-amount" type="number" inputmode="numeric" placeholder="0">
     </div>
-    <div class="f-cat-grid" style="padding:12px 20px 0">
+    <div class="f-cat-grid">
       <div class="f-cat-btn c-need active" data-rcat="need"><span>🏠</span>Potřeby</div>
       <div class="f-cat-btn c-want" data-rcat="want"><span>✨</span>Přání</div>
-      <div class="f-cat-btn c-culture" data-rcat="culture"><span>📚</span>Kultura</div>
+      <div class="f-cat-btn c-cult" data-rcat="culture"><span>📚</span>Kultura</div>
       <div class="f-cat-btn c-unexp" data-rcat="unexp"><span>⚡</span>Nečekané</div>
     </div>
+    <label class="f-checkbox-row">
+      <input type="checkbox" id="recur-is-loan"> Jde o splátku půjčky
+    </label>
+    <div id="loan-fields" style="display:none">
+      <div class="f-sec">
+        <label class="f-label" for="loan-balance">Nesplacená jistina (Kč)</label>
+        <input class="f-input xl" id="loan-balance" type="number" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="f-sec">
+        <label class="f-label" for="loan-rate">Úroková sazba (% p.a.)</label>
+        <input class="f-input" id="loan-rate" type="number" inputmode="decimal" placeholder="4.5" step="0.1">
+      </div>
+    </div>
     <button class="btn-primary" id="recur-save-btn">Uložit platbu</button>
-    <button class="btn-neutral" id="recur-cancel-btn"
-      style="display:block;width:calc(100% - 40px);margin:8px 20px 0;padding:13px;border-radius:var(--r-md);border:1px solid rgba(255,255,255,.07);background:none;color:#8fa3c8;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer">
+    <button class="btn-ghost" id="recur-cancel-btn"
+      style="display:block;width:calc(100% - 40px);margin:8px 20px 0;padding:13px;border-radius:var(--r);border:1px solid var(--b1);background:none;color:var(--t2);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer">
       Zrušit
     </button>
   </div>
@@ -978,236 +782,306 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
 <div id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  MůjOS v4.5 + Kakeibo v1.2
-// ═══════════════════════════════════════════════════════
+'use strict';
+// ══════════════════════════════════════════════════════
+//  MůjOS v5.0  ·  Kakeibo v1.3
+// ══════════════════════════════════════════════════════
 
-// ── INDEXED DB ────────────────────────────────────────
-const DB_NAME='mojos_db', DB_VER=3;
-let db=null;
+// ── DB ────────────────────────────────────────────────
+const DB_NAME = 'mojos_db', DB_VER = 4;
+let db = null;
 
-function openDB(){
-  return new Promise((res,rej)=>{
-    const req=indexedDB.open(DB_NAME,DB_VER);
-    req.onupgradeneeded=e=>{
-      const d=e.target.result;
-      ['investice','ucetnictvi','auto','elektrina','kondice','activity_log','settings','recurring']
-        .forEach(s=>{ if(!d.objectStoreNames.contains(s)) d.createObjectStore(s,s==='settings'?{keyPath:'key'}:{keyPath:'id',autoIncrement:true}); });
+function openDB() {
+  return new Promise((res, rej) => {
+    const req = indexedDB.open(DB_NAME, DB_VER);
+    req.onupgradeneeded = e => {
+      const d = e.target.result;
+      ['investice','ucetnictvi','auto','elektrina','kondice',
+       'activity_log','settings','recurring','loans'].forEach(s => {
+        if (!d.objectStoreNames.contains(s))
+          d.createObjectStore(s, s === 'settings'
+            ? {keyPath:'key'}
+            : {keyPath:'id', autoIncrement:true});
+      });
     };
-    req.onsuccess=e=>res(e.target.result);
-    req.onerror=e=>rej(e.target.error);
+    req.onsuccess = e => res(e.target.result);
+    req.onerror   = e => rej(e.target.error);
   });
 }
-const dbGetAll=(s)=>new Promise((res,rej)=>{ const tx=db.transaction(s,'readonly'),r=tx.objectStore(s).getAll(); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); });
-const dbAdd=(s,d)=>new Promise((res,rej)=>{ const tx=db.transaction(s,'readwrite'),r=tx.objectStore(s).add({...d,_ts:new Date().toISOString()}); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); });
-const dbPut=(s,d)=>new Promise((res,rej)=>{ const tx=db.transaction(s,'readwrite'),r=tx.objectStore(s).put({...d,_upd:new Date().toISOString()}); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); });
-const dbDel=(s,id)=>new Promise((res,rej)=>{ const tx=db.transaction(s,'readwrite'),r=tx.objectStore(s).delete(id); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error); });
-const dbGet=(s,k)=>new Promise((res,rej)=>{ const tx=db.transaction(s,'readonly'),r=tx.objectStore(s).get(k); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); });
+
+const dbGetAll = s => new Promise((res,rej) => {
+  const r = db.transaction(s,'readonly').objectStore(s).getAll();
+  r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+});
+const dbAdd = (s,d) => new Promise((res,rej) => {
+  const r = db.transaction(s,'readwrite').objectStore(s).add({...d,_ts:new Date().toISOString()});
+  r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+});
+const dbPut = (s,d) => new Promise((res,rej) => {
+  const r = db.transaction(s,'readwrite').objectStore(s).put({...d,_upd:new Date().toISOString()});
+  r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+});
+const dbDel = (s,id) => new Promise((res,rej) => {
+  const r = db.transaction(s,'readwrite').objectStore(s).delete(id);
+  r.onsuccess = () => res(); r.onerror = () => rej(r.error);
+});
+const dbGet = (s,k) => new Promise((res,rej) => {
+  const r = db.transaction(s,'readonly').objectStore(s).get(k);
+  r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+});
 
 // ── UTILS ─────────────────────────────────────────────
-const fmt=n=>new Intl.NumberFormat('cs-CZ',{style:'currency',currency:'CZK',maximumFractionDigits:0}).format(n);
-const fmtD=iso=>new Date(iso).toLocaleDateString('cs-CZ',{day:'numeric',month:'short'});
-const relTime=iso=>{const m=Math.floor((Date.now()-new Date(iso))/60000);if(m<1)return'právě teď';if(m<60)return`před ${m} min`;const h=Math.floor(m/60);if(h<24)return`před ${h} h`;return`před ${Math.floor(h/24)} d`;};
-const curQ=()=>{const n=new Date(),m=n.getMonth()+1,q=Math.ceil(m/3);return{year:n.getFullYear(),q,label:`Q${q}/${n.getFullYear()}`};};
-const greet=()=>{const h=new Date().getHours();if(h<5)return'Dobrou noc';if(h<10)return'Dobré ráno';if(h<13)return'Dobré dopoledne';if(h<18)return'Dobrý den';if(h<22)return'Dobrý večer';return'Dobrou noc';};
-const closeModal=id=>document.getElementById(id).classList.remove('open');
+const fmt  = n => new Intl.NumberFormat('cs-CZ',{style:'currency',currency:'CZK',maximumFractionDigits:0}).format(n);
+const fmtD = iso => new Date(iso).toLocaleDateString('cs-CZ',{day:'numeric',month:'short'});
+const relTime = iso => {
+  const m = Math.floor((Date.now()-new Date(iso))/60000);
+  if (m < 1) return 'právě teď';
+  if (m < 60) return `před ${m} min`;
+  const h = Math.floor(m/60);
+  if (h < 24) return `před ${h} h`;
+  return `před ${Math.floor(h/24)} d`;
+};
+const curQ = () => {
+  const n = new Date(), q = Math.ceil((n.getMonth()+1)/3);
+  return {year:n.getFullYear(), q, label:`Q${q}/${n.getFullYear()}`};
+};
+const greet = () => {
+  const h = new Date().getHours();
+  if (h < 5)  return 'Dobrou noc';
+  if (h < 10) return 'Dobré ráno';
+  if (h < 13) return 'Dobré dopoledne';
+  if (h < 18) return 'Dobrý den';
+  if (h < 22) return 'Dobrý večer';
+  return 'Dobrou noc';
+};
+const closeModal = id => document.getElementById(id).classList.remove('open');
 
 // ── TOAST ─────────────────────────────────────────────
-let toastT;
-function showToast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg;el.classList.add('show');
-  clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2400);
+let _toastT;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(_toastT); _toastT = setTimeout(() => el.classList.remove('show'), 2400);
 }
-function dbChip(ok,txt){
-  const el=document.getElementById('db-chip');
-  el.classList.toggle('err',!ok);el.classList.remove('hidden');
-  document.getElementById('db-txt').textContent=txt;
-  setTimeout(()=>el.classList.add('hidden'),2800);
+function dbChip(ok, txt) {
+  const el = document.getElementById('db-chip');
+  el.classList.toggle('err', !ok); el.classList.remove('hide');
+  document.getElementById('db-txt').textContent = txt;
+  setTimeout(() => el.classList.add('hide'), 2800);
 }
 
-// ── SHELL ─────────────────────────────────────────────
-let curMod='dashboard';
+// ── SHELL / NAV ───────────────────────────────────────
+let curMod = 'dashboard';
 
-function navTo(mod){
-  curMod=mod;
-  document.querySelectorAll('.bnav-tab').forEach(t=>t.classList.toggle('active',t.dataset.mod===mod));
-  document.querySelectorAll('.module').forEach(m=>m.classList.toggle('active',m.id==='mod-'+mod));
+function navTo(mod) {
+  curMod = mod;
+  document.querySelectorAll('.bnav-tab').forEach(t => t.classList.toggle('active', t.dataset.mod === mod));
+  document.querySelectorAll('.module').forEach(m => m.classList.toggle('active', m.id === 'mod-'+mod));
   updateFAB();
-  if(mod==='dashboard') refreshDash();
-  if(mod==='ucetnictvi'){kkRecs=null;kkRenderAll();}
+  if (mod === 'dashboard') refreshDash();
+  if (mod === 'ucetnictvi') { kkRecs = null; kkRenderAll(); }
 }
 
-function updateFAB(){
-  const show=curMod==='ucetnictvi'&&kkView!=='nastaveni'&&kkView!=='rok'&&kkView!=='statistiky';
-  const fab=document.getElementById('kk-fab');
-  fab.classList.toggle('fab-visible',show);
+function updateFAB() {
+  const show = curMod === 'ucetnictvi' && kkView !== 'nastaveni' && kkView !== 'rok' && kkView !== 'statistiky';
+  document.getElementById('kk-fab').classList.toggle('show', show);
 }
 
-document.querySelectorAll('.bnav-tab').forEach(t=>t.addEventListener('click',()=>navTo(t.dataset.mod)));
-document.querySelectorAll('.dash-tile').forEach(c=>c.addEventListener('click',()=>navTo(c.dataset.mod)));
-
-function initShell(){
-  document.getElementById('date-chip').textContent=new Date().toLocaleDateString('cs-CZ',{day:'numeric',month:'long',year:'numeric'});
-  const q=curQ();
-  document.getElementById('greet-sm').textContent=new Date().toLocaleDateString('cs-CZ',{weekday:'long'});
-  document.getElementById('greeting').textContent=greet();
-  document.getElementById('dash-period').textContent=q.label;
+function initShell() {
+  const now = new Date(), q = curQ();
+  document.getElementById('date-chip').textContent =
+    now.toLocaleDateString('cs-CZ',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('greet-day').textContent =
+    now.toLocaleDateString('cs-CZ',{weekday:'long'});
+  document.getElementById('greet-text').textContent = greet();
+  document.getElementById('greet-q').textContent = q.label;
 }
 
-async function refreshDash(){
-  try{
-    const recs=await dbGetAll('ucetnictvi');
-    const ws=kkWeekStart(new Date()),we=kkWeekEnd(new Date());
-    const sum=recs.filter(r=>EXP_CATS.includes(r.category)&&new Date(r.date)>=ws&&new Date(r.date)<=we).reduce((s,r)=>s+r.amount,0);
-    document.getElementById('stat-ucet').textContent=recs.length?fmt(sum):'—';
-  }catch(e){}
-  try{
-    const inv=await dbGetAll('investice');
-    const q=curQ();
-    const n=inv.filter(r=>r._ts&&r._ts.startsWith(q.year+'-')).length;
-    document.getElementById('stat-investice').textContent=n?`${n} záznamů`:'—';
-  }catch(e){}
-  ['auto','elektr','kondice'].forEach(k=>{try{document.getElementById('stat-'+k).textContent='—';}catch(e){}});
-  await refreshActList();
+async function refreshDash() {
+  try {
+    const recs = await dbGetAll('ucetnictvi');
+    const ws = kkWeekStart(new Date()), we = kkWeekEnd(new Date());
+    const sum = recs.filter(r => EXP_CATS.includes(r.category) && new Date(r.date)>=ws && new Date(r.date)<=we)
+                    .reduce((s,r) => s+r.amount, 0);
+    document.getElementById('stat-ucet').textContent = recs.length ? fmt(sum) : '—';
+  } catch(e) {}
+  ['invest','auto','elektr','kondice'].forEach(k => {
+    try { document.getElementById('stat-'+k).textContent = '—'; } catch(e) {}
+  });
+  try { await refreshActList(); } catch(e) {}
 }
 
-async function refreshActList(){
-  const all=await dbGetAll('activity_log');
-  const sorted=all.sort((a,b)=>b._ts.localeCompare(a._ts)).slice(0,6);
-  if(!sorted.length)return;
-  const colors={ucetnictvi:'var(--green)',investice:'var(--amber)',auto:'var(--accent)',elektrina:'var(--purple)',kondice:'var(--passive)'};
-  document.getElementById('act-list').innerHTML=sorted.map(a=>`
+async function refreshActList() {
+  const all = await dbGetAll('activity_log');
+  const sorted = all.sort((a,b) => b._ts.localeCompare(a._ts)).slice(0,6);
+  if (!sorted.length) return;
+  const clr = {ucetnictvi:'var(--green)',investice:'var(--amber)',auto:'var(--accent)'};
+  document.getElementById('act-list').innerHTML = sorted.map(a => `
     <div class="act-tile">
-      <div class="act-dot" style="background:${colors[a.modul]||'#4d6080'}"></div>
-      <div class="act-info"><div class="act-title">${a.title}</div>${a.sub?`<div class="act-sub">${a.sub}</div>`:''}</div>
+      <div class="act-dot" style="background:${clr[a.modul]||'var(--t3)'}"></div>
+      <div class="act-body">
+        <div class="act-title">${a.title}</div>
+        ${a.sub ? `<div class="act-sub">${a.sub}</div>` : ''}
+      </div>
       <div class="act-time">${relTime(a._ts)}</div>
     </div>`).join('');
 }
 
-async function exportXLSX(data,name){
-  if(!window.XLSX) await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
-  const wb=XLSX.utils.book_new();
-  Object.entries(data).forEach(([sh,rows])=>{if(!rows.length)return;const clean=rows.map(r=>{const o={};Object.keys(r).filter(k=>!k.startsWith('_')).forEach(k=>o[k]=r[k]);return o;});XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(clean),sh.slice(0,31));});
-  XLSX.writeFile(wb,`${name}_${new Date().toISOString().slice(0,10)}.xlsx`);
+async function exportXLSX(data, name) {
+  if (!window.XLSX) await new Promise((res,rej) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    s.onload = res; s.onerror = rej; document.head.appendChild(s);
+  });
+  const wb = XLSX.utils.book_new();
+  Object.entries(data).forEach(([sh, rows]) => {
+    if (!rows.length) return;
+    const clean = rows.map(r => Object.fromEntries(Object.entries(r).filter(([k]) => !k.startsWith('_'))));
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(clean), sh.slice(0,31));
+  });
+  XLSX.writeFile(wb, `${name}_${new Date().toISOString().slice(0,10)}.xlsx`);
 }
 
-// ═══════════════════════════════════════════════════════
+// Registrace kliků
+document.querySelectorAll('.bnav-tab').forEach(t => t.addEventListener('click', () => navTo(t.dataset.mod)));
+document.querySelectorAll('.dash-tile').forEach(c => c.addEventListener('click', () => navTo(c.dataset.mod)));
+
+// ══════════════════════════════════════════════════════
 //  KAKEIBO
-// ═══════════════════════════════════════════════════════
-const CATS={
-  need:    {label:'Potřeby',   icon:'🏠',dot:'need'},
-  want:    {label:'Přání',     icon:'✨',dot:'want'},
-  culture: {label:'Kultura',   icon:'📚',dot:'culture'},
-  unexp:   {label:'Nečekané',  icon:'⚡',dot:'unexp'},
-  salary:  {label:'Výplata',   icon:'💼',dot:'salary'},
-  bonus:   {label:'Mimořádný', icon:'🎯',dot:'bonus'},
-  passive: {label:'Pasivní',   icon:'📈',dot:'passive'},
+// ══════════════════════════════════════════════════════
+const CATS = {
+  need:    {label:'Potřeby',   icon:'🏠', bg:'var(--need-bg)', col:'var(--need)'},
+  want:    {label:'Přání',     icon:'✨', bg:'var(--want-bg)', col:'var(--want)'},
+  culture: {label:'Kultura',   icon:'📚', bg:'var(--cult-bg)', col:'var(--cult)'},
+  unexp:   {label:'Nečekané',  icon:'⚡', bg:'var(--unexp-bg)',col:'var(--unexp)'},
+  salary:  {label:'Výplata',   icon:'💼', bg:'var(--sal-bg)',  col:'var(--green)'},
+  bonus:   {label:'Mimořádný', icon:'🎯', bg:'var(--bon-bg)',  col:'#a8e063'},
+  passive: {label:'Pasivní',   icon:'📈', bg:'var(--pas-bg)',  col:'#63d4c4'},
 };
-const INC_TYPES=['salary','bonus','passive'];
-const EXP_CATS=['need','want','culture','unexp'];
+const INC_TYPES = ['salary','bonus','passive'];
+const EXP_CATS  = ['need','want','culture','unexp'];
 
-let kkRecs=null,kkView='tyden',kkFilter='vse',kkDate=new Date(),kkDetailId=null,kkRCat='need';
-let fMainType='expense',fIncType='salary',fExpCat='need';
+let kkRecs = null, kkView = 'tyden', kkFilter = 'vse';
+let kkDate = new Date(), kkDetailId = null, kkRCat = 'need';
+let fMainType = 'expense', fIncType = 'salary', fExpCat = 'need';
 
-const kkWeekStart=d=>{const dt=new Date(d),day=dt.getDay()||7;dt.setDate(dt.getDate()-day+1);dt.setHours(0,0,0,0);return dt;};
-const kkWeekEnd=d=>{const we=new Date(kkWeekStart(d));we.setDate(we.getDate()+6);we.setHours(23,59,59,999);return we;};
-const kkWkLbl=d=>{const ws=kkWeekStart(d),we=kkWeekEnd(d);return`${ws.getDate()}.${ws.getMonth()+1}. – ${we.getDate()}.${we.getMonth()+1}.`;};
-const kkMoLbl=d=>new Date(d).toLocaleDateString('cs-CZ',{month:'long',year:'numeric'});
-const inWeek=(s,r)=>{const d=new Date(s);return d>=kkWeekStart(r)&&d<=kkWeekEnd(r);};
-const inMonth=(s,r)=>{const d=new Date(s);return d.getFullYear()===r.getFullYear()&&d.getMonth()===r.getMonth();};
-const inYear=(s,r)=>new Date(s).getFullYear()===r.getFullYear();
-const getBudget=()=>parseInt(localStorage.getItem('mojos_budget')||'0');
-const setBudget=v=>localStorage.setItem('mojos_budget',v);
+const kkWeekStart = d => { const dt=new Date(d),day=dt.getDay()||7; dt.setDate(dt.getDate()-day+1); dt.setHours(0,0,0,0); return dt; };
+const kkWeekEnd   = d => { const we=new Date(kkWeekStart(d)); we.setDate(we.getDate()+6); we.setHours(23,59,59,999); return we; };
+const kkWkLbl  = d => { const ws=kkWeekStart(d),we=kkWeekEnd(d); return `${ws.getDate()}.${ws.getMonth()+1}. – ${we.getDate()}.${we.getMonth()+1}.`; };
+const kkMoLbl  = d => new Date(d).toLocaleDateString('cs-CZ',{month:'long',year:'numeric'});
+const inWeek   = (s,r) => { const d=new Date(s); return d>=kkWeekStart(r)&&d<=kkWeekEnd(r); };
+const inMonth  = (s,r) => { const d=new Date(s); return d.getFullYear()===r.getFullYear()&&d.getMonth()===r.getMonth(); };
+const inYear   = (s,r) => new Date(s).getFullYear()===r.getFullYear();
+const getBudget = () => parseInt(localStorage.getItem('mojos_budget')||'0');
+const setBudget = v  => localStorage.setItem('mojos_budget', v);
 
-async function processRecurring(){
-  const key=`mojos_recur_${new Date().getFullYear()}_${new Date().getMonth()}`;
-  if(localStorage.getItem(key))return;
-  const recurs=await dbGetAll('recurring');
-  if(!recurs.length){localStorage.setItem(key,'1');return;}
-  const today=new Date().toISOString().slice(0,10);
-  for(const r of recurs){
-    await dbAdd('ucetnictvi',{type:'expense',category:r.category,amount:r.amount,description:r.name,date:today,note:'Automaticky přidáno'});
-    await dbAdd('activity_log',{modul:'ucetnictvi',title:r.name,sub:`Pravidelná platba · ${fmt(r.amount)}`,_ts:new Date().toISOString()});
+// ── RECURRING AUTO-ADD ────────────────────────────────
+async function processRecurring() {
+  const key = `mojos_recur_${new Date().getFullYear()}_${new Date().getMonth()}`;
+  if (localStorage.getItem(key)) return;
+  const recurs = await dbGetAll('recurring');
+  if (!recurs.length) { localStorage.setItem(key,'1'); return; }
+  const today = new Date().toISOString().slice(0,10);
+  for (const r of recurs) {
+    await dbAdd('ucetnictvi', {type:'expense',category:r.category,
+      amount:r.amount,description:r.name,date:today,note:'Automaticky přidáno'});
   }
   localStorage.setItem(key,'1');
   showToast(`${recurs.length} pravidelných plateb přidáno ✓`);
 }
 
-function kkNav(dir){
-  if(kkView==='tyden')kkDate=new Date(kkDate.getTime()+dir*7*86400000);
-  else if(kkView==='mesic')kkDate=new Date(kkDate.getFullYear(),kkDate.getMonth()+dir,1);
-  else if(kkView==='rok')kkDate=new Date(kkDate.getFullYear()+dir,0,1);
+// ── NAVIGATION ────────────────────────────────────────
+function kkNav(dir) {
+  if (kkView==='tyden') kkDate = new Date(kkDate.getTime()+dir*7*86400000);
+  else if (kkView==='mesic') kkDate = new Date(kkDate.getFullYear(), kkDate.getMonth()+dir, 1);
+  else if (kkView==='rok') kkDate = new Date(kkDate.getFullYear()+dir, 0, 1);
   kkRenderAll();
 }
-function kkUpdatePeriod(){
-  const el=document.getElementById('kk-period');
-  if(kkView==='tyden')el.textContent=kkWkLbl(kkDate);
-  else if(kkView==='mesic')el.textContent=kkMoLbl(kkDate);
-  else if(kkView==='rok')el.textContent=kkDate.getFullYear().toString();
-  else el.textContent='—';
-  const nav=kkView!=='nastaveni'&&kkView!=='statistiky';
-  document.getElementById('kk-prev').style.visibility=nav?'visible':'hidden';
-  document.getElementById('kk-next').style.visibility=nav?'visible':'hidden';
+function kkUpdatePeriod() {
+  const lbl = document.getElementById('kk-period');
+  if (kkView==='tyden')  lbl.textContent = kkWkLbl(kkDate);
+  else if (kkView==='mesic') lbl.textContent = kkMoLbl(kkDate);
+  else if (kkView==='rok')   lbl.textContent = kkDate.getFullYear().toString();
+  else lbl.textContent = '—';
+  const nav = !['nastaveni','statistiky'].includes(kkView);
+  document.getElementById('kk-prev').style.visibility = nav ? 'visible' : 'hidden';
+  document.getElementById('kk-next').style.visibility = nav ? 'visible' : 'hidden';
 }
 
-async function kkRenderAll(){
-  if(!kkRecs)kkRecs=await dbGetAll('ucetnictvi');
-  kkUpdatePeriod();updateFAB();
-  if(kkView==='tyden')kkRenderWeek();
-  else if(kkView==='mesic')kkRenderMonth();
-  else if(kkView==='rok')kkRenderYear();
-  else if(kkView==='statistiky')kkRenderStats();
-  else kkRenderSettings();
+async function kkRenderAll() {
+  if (!kkRecs) kkRecs = await dbGetAll('ucetnictvi');
+  kkUpdatePeriod(); updateFAB();
+  if      (kkView==='tyden')     kkRenderWeek();
+  else if (kkView==='mesic')     kkRenderMonth();
+  else if (kkView==='rok')       kkRenderYear();
+  else if (kkView==='statistiky') await kkRenderStats();
+  else                            kkRenderSettings();
 }
 
-function kkRenderWeek(){
-  const recs=kkRecs.filter(r=>inWeek(r.date,kkDate));
-  kkRenderSummary('kk-sum-week',recs,'týden',true);
-  kkRenderCats('kk-cats-week',recs);
-  kkRenderTxFlat('kk-txs-week',recs);
+// ── WEEK ──────────────────────────────────────────────
+function kkRenderWeek() {
+  const recs = kkRecs.filter(r => inWeek(r.date, kkDate));
+  kkRenderHero('kk-sum-week', recs, 'týden', true);
+  kkRenderCats('kk-cats-week', recs);
+  kkRenderTxFlat('kk-txs-week', recs);
 }
-function kkRenderMonth(){
-  const recs=kkRecs.filter(r=>inMonth(r.date,kkDate));
-  kkRenderSummary('kk-sum-month',recs,'měsíc',false);
-  kkRenderCats('kk-cats-month',recs);
-  kkRenderTxByWeek('kk-txs-month',recs);
+// ── MONTH ─────────────────────────────────────────────
+function kkRenderMonth() {
+  const recs = kkRecs.filter(r => inMonth(r.date, kkDate));
+  kkRenderHero('kk-sum-month', recs, 'měsíc', false);
+  kkRenderCats('kk-cats-month', recs);
+  kkRenderTxByWeek('kk-txs-month', recs);
 }
-function kkRenderYear(){
-  const recs=kkRecs.filter(r=>inYear(r.date,kkDate)),yr=kkDate.getFullYear();
-  const inc=recs.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
-  const exp=recs.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
-  const saved=inc-exp;
-  document.getElementById('kk-yr-totals').innerHTML=
+// ── YEAR ──────────────────────────────────────────────
+function kkRenderYear() {
+  const recs = kkRecs.filter(r => inYear(r.date, kkDate)), yr = kkDate.getFullYear();
+  const inc = recs.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+  const exp = recs.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+  const saved = inc - exp;
+  document.getElementById('kk-yr-totals').innerHTML =
     `<div class="kk-yt-row"><span class="kk-yt-l">Příjmy ${yr}</span><span class="kk-yt-v" style="color:var(--green)">${fmt(inc)}</span></div>
      <div class="kk-yt-row"><span class="kk-yt-l">Výdaje ${yr}</span><span class="kk-yt-v" style="color:var(--red)">${fmt(exp)}</span></div>
-     <div class="kk-yt-row"><span class="kk-yt-l">Uspořeno ${yr}</span><span class="kk-yt-v" style="color:${saved>=0?'var(--green)':'var(--red)'}">${fmt(saved)}</span></div>`;
-  const months=['Leden','Únor','Březen','Duben','Květen','Červen','Červenec','Srpen','Září','Říjen','Listopad','Prosinec'];
-  const bc={need:'var(--need)',want:'var(--want)',culture:'var(--culture)',unexp:'var(--unexp)'};
-  document.getElementById('kk-months').innerHTML=months.map((n,mi)=>{
-    const mr=recs.filter(r=>new Date(r.date).getMonth()===mi);
-    if(!mr.length)return`<div class="kk-month"><div class="kk-month-top"><span class="kk-month-name">${n}</span><span class="kk-month-bal" style="color:#4d6080">—</span></div></div>`;
-    const mi2=mr.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
-    const me=mr.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
-    const bal=mi2-me;
-    const bars=EXP_CATS.map(c=>{const sv=mr.filter(r=>r.category===c).reduce((a,r)=>a+r.amount,0);const p=me>0?Math.round(sv/me*100):0;return p>0?`<div class="kk-bar" style="flex:${p};background:${bc[c]}"></div>`:''}).join('');
-    return`<div class="kk-month" data-mi="${mi}"><div class="kk-month-top"><span class="kk-month-name">${n}</span><span class="kk-month-bal ${bal>=0?'pos':'neg'}">${fmt(bal)}</span></div><div class="kk-month-bars">${bars}</div></div>`;
+     <div class="kk-yt-row"><span class="kk-yt-l">Bilance ${yr}</span><span class="kk-yt-v" style="color:${saved>=0?'var(--green)':'var(--red)'}">${fmt(saved)}</span></div>`;
+  const MN = ['Leden','Únor','Březen','Duben','Květen','Červen','Červenec','Srpen','Září','Říjen','Listopad','Prosinec'];
+  const bc = {need:'var(--need)',want:'var(--want)',culture:'var(--cult)',unexp:'var(--unexp)'};
+  document.getElementById('kk-months').innerHTML = MN.map((n,mi) => {
+    const mr = recs.filter(r => new Date(r.date).getMonth()===mi);
+    if (!mr.length) return `<div class="kk-month"><div class="kk-month-top"><span class="kk-month-name">${n}</span><span style="color:var(--t3)">—</span></div></div>`;
+    const mi2 = mr.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+    const me  = mr.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+    const bal = mi2 - me;
+    const bars = EXP_CATS.map(c => {
+      const sv = mr.filter(r=>r.category===c).reduce((a,r)=>a+r.amount,0);
+      const p = me>0 ? Math.round(sv/me*100) : 0;
+      return p>0 ? `<div class="kk-bar" style="flex:${p};background:${bc[c]}"></div>` : '';
+    }).join('');
+    return `<div class="kk-month" data-mi="${mi}">
+      <div class="kk-month-top"><span class="kk-month-name">${n}</span>
+        <span class="kk-month-bal ${bal>=0?'pos':'neg'}">${fmt(bal)}</span></div>
+      <div class="kk-month-bars">${bars}</div>
+    </div>`;
   }).join('');
-  document.querySelectorAll('.kk-month[data-mi]').forEach(el=>el.addEventListener('click',()=>{kkDate=new Date(yr,parseInt(el.dataset.mi),1);kkSwitchView('mesic');}));
+  document.querySelectorAll('.kk-month[data-mi]').forEach(el =>
+    el.addEventListener('click', () => {
+      kkDate = new Date(yr, parseInt(el.dataset.mi), 1);
+      kkSwitchView('mesic');
+    })
+  );
 }
 
-function kkRenderSummary(elId,recs,word,showBudget){
-  const inc=recs.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
-  const exp=recs.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
-  const saved=inc-exp;
-  const budget=showBudget?getBudget():0;
-  const pct=budget>0?Math.min(Math.round(exp/budget*100),100):0;
-  const cls=pct<70?'ok':pct<90?'warn':'over';
-  const balCls=saved>0?'pos':saved<0?'neg':'zero';
-  document.getElementById(elId).innerHTML=`
-    <div class="kk-hero-label">Bilance ${word}</div>
+// ── HERO CARD ─────────────────────────────────────────
+function kkRenderHero(id, recs, word, showBudget) {
+  const inc = recs.filter(r=>INC_TYPES.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+  const exp = recs.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+  const saved = inc - exp;
+  const budget = showBudget ? getBudget() : 0;
+  const pct = budget>0 ? Math.min(Math.round(exp/budget*100),100) : 0;
+  const progCls = pct<70?'ok':pct<90?'warn':'over';
+  const balCls = saved>0?'pos':saved<0?'neg':'zero';
+  document.getElementById(id).innerHTML = `
+    <div class="kk-hero-lbl">Bilance ${word}</div>
     <div class="kk-hero-bal ${balCls}">${fmt(saved)}</div>
-    <div class="kk-hero-sub">${saved>=0?'jsi v plusu 👍':'pozor, výdaje převyšují příjmy'}</div>
+    <div class="kk-hero-sub">${saved>=0?'v plusu 👍':'výdaje převyšují příjmy ⚠️'}</div>
     <div class="kk-hero-row">
       <div class="kk-hero-pill">
         <div class="kk-hero-pill-lbl">Příjmy</div>
@@ -1218,55 +1092,72 @@ function kkRenderSummary(elId,recs,word,showBudget){
         <div class="kk-hero-pill-val exp">${fmt(exp)}</div>
       </div>
     </div>
-    ${budget>0?`<div class="kk-prog-wrap"><div class="kk-prog-labels"><span>Výdaje z limitu</span><span>${pct}% z ${fmt(budget)}</span></div><div class="kk-prog-track"><div class="kk-prog-bar ${cls}" style="width:${pct}%"></div></div></div>`:''}`;
+    ${budget>0 ? `
+    <div class="kk-prog-wrap">
+      <div class="kk-prog-labels"><span>Výdaje z limitu</span><span>${pct}% z ${fmt(budget)}</span></div>
+      <div class="kk-prog-track"><div class="kk-prog-bar ${progCls}" style="width:${pct}%"></div></div>
+    </div>` : ''}`;
 }
 
-function kkRenderCats(elId,recs){
-  const catBg={need:'var(--need-bg)',want:'var(--want-bg)',culture:'var(--cult-bg)',unexp:'var(--unexp-bg)'};
-  document.getElementById(elId).innerHTML=EXP_CATS.map(cat=>{
-    const cr=recs.filter(r=>r.category===cat),sum=cr.reduce((s,r)=>s+r.amount,0),c=CATS[cat];
-    return`<div class="kk-cat">
+// ── CATS ──────────────────────────────────────────────
+function kkRenderCats(id, recs) {
+  document.getElementById(id).innerHTML = EXP_CATS.map(cat => {
+    const cr = recs.filter(r=>r.category===cat), sum = cr.reduce((s,r)=>s+r.amount,0), c = CATS[cat];
+    return `<div class="kk-cat">
       <div class="kk-cat-top">
         <div class="kk-cat-icon">${c.icon}</div>
-        <div class="kk-cat-badge ${cat}">${cr.length} pol.</div>
+        <div class="kk-cat-badge" style="background:${c.bg};color:${c.col}">${cr.length} pol.</div>
       </div>
       <div class="kk-cat-name">${c.label}</div>
-      <div class="kk-cat-amt ${cat}">${fmt(sum)}</div>
+      <div class="kk-cat-amt" style="color:${c.col}">${fmt(sum)}</div>
     </div>`;
   }).join('');
 }
 
-function kkRenderTxFlat(elId,recs){
-  let f=[...recs];
-  if(kkFilter==='vydaje')f=f.filter(r=>EXP_CATS.includes(r.category));
-  if(kkFilter==='prijmy')f=f.filter(r=>INC_TYPES.includes(r.category));
+// ── TX RENDERS ────────────────────────────────────────
+function kkRenderTxFlat(id, recs) {
+  let f = [...recs];
+  if (kkFilter==='vydaje') f = f.filter(r=>EXP_CATS.includes(r.category));
+  if (kkFilter==='prijmy') f = f.filter(r=>INC_TYPES.includes(r.category));
   f.sort((a,b)=>b.date.localeCompare(a.date));
-  const el=document.getElementById(elId);
-  if(!f.length){el.innerHTML=`<div class="kk-empty"><div class="kk-empty-icon">📝</div><div class="kk-empty-title">Žádné záznamy</div><div class="kk-empty-sub">Klepni na bílé tlačítko<br>a přidej první záznam.</div></div>`;return;}
-  el.innerHTML=f.map(r=>kkTxHTML(r)).join('');
-  el.querySelectorAll('.kk-tx').forEach(i=>i.addEventListener('click',()=>kkOpenDetail(parseInt(i.dataset.id))));
+  const el = document.getElementById(id);
+  if (!f.length) {
+    el.innerHTML = `<div class="kk-empty"><div class="kk-empty-icon">📝</div>
+      <div class="kk-empty-title">Žádné záznamy</div>
+      <div class="kk-empty-sub">Klepni na bílé tlačítko<br>a přidej první záznam.</div></div>`;
+    return;
+  }
+  el.innerHTML = f.map(r => kkTxHTML(r)).join('');
+  el.querySelectorAll('.kk-tx').forEach(i => i.addEventListener('click', () => kkOpenDetail(parseInt(i.dataset.id))));
 }
 
-function kkRenderTxByWeek(elId,recs){
-  const el=document.getElementById(elId);
-  if(!recs.length){el.innerHTML=`<div class="kk-empty"><div class="kk-empty-icon">📝</div><div class="kk-empty-title">Žádné záznamy</div></div>`;return;}
-  const sorted=[...recs].sort((a,b)=>b.date.localeCompare(a.date));
-  const weeks={};
-  sorted.forEach(r=>{const ws=kkWeekStart(new Date(r.date)).toISOString().slice(0,10);if(!weeks[ws])weeks[ws]=[];weeks[ws].push(r);});
-  let html='';
-  Object.entries(weeks).sort((a,b)=>b[0].localeCompare(a[0])).forEach(([ws,wr])=>{
-    const sum=wr.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
-    html+=`<div class="kk-wk-div">${kkWkLbl(new Date(ws))} · výdaje ${fmt(sum)}</div>`;
-    wr.forEach(r=>html+=kkTxHTML(r));
+function kkRenderTxByWeek(id, recs) {
+  const el = document.getElementById(id);
+  if (!recs.length) {
+    el.innerHTML = `<div class="kk-empty"><div class="kk-empty-icon">📝</div><div class="kk-empty-title">Žádné záznamy</div></div>`;
+    return;
+  }
+  const sorted = [...recs].sort((a,b)=>b.date.localeCompare(a.date));
+  const weeks = {};
+  sorted.forEach(r => {
+    const ws = kkWeekStart(new Date(r.date)).toISOString().slice(0,10);
+    if (!weeks[ws]) weeks[ws] = [];
+    weeks[ws].push(r);
   });
-  el.innerHTML=html;
-  el.querySelectorAll('.kk-tx').forEach(i=>i.addEventListener('click',()=>kkOpenDetail(parseInt(i.dataset.id))));
+  let html = '';
+  Object.entries(weeks).sort((a,b)=>b[0].localeCompare(a[0])).forEach(([ws,wr]) => {
+    const sum = wr.filter(r=>EXP_CATS.includes(r.category)).reduce((s,r)=>s+r.amount,0);
+    html += `<div class="kk-wk-div">${kkWkLbl(new Date(ws))} · ${fmt(sum)}</div>`;
+    wr.forEach(r => html += kkTxHTML(r));
+  });
+  el.innerHTML = html;
+  el.querySelectorAll('.kk-tx').forEach(i => i.addEventListener('click', () => kkOpenDetail(parseInt(i.dataset.id))));
 }
 
-function kkTxHTML(r){
-  const isInc=INC_TYPES.includes(r.category),c=CATS[r.category]||CATS.need;
-  return`<div class="kk-tx" data-id="${r.id}">
-    <div class="kk-tx-icon ${c.dot}">${c.icon}</div>
+function kkTxHTML(r) {
+  const isInc = INC_TYPES.includes(r.category), c = CATS[r.category]||CATS.need;
+  return `<div class="kk-tx" data-id="${r.id}">
+    <div class="kk-tx-icon" style="background:${c.bg}">${c.icon}</div>
     <div class="kk-tx-info">
       <div class="kk-tx-desc">${r.description||c.label}</div>
       <div class="kk-tx-meta">${c.label}${r.note?' · '+r.note:''}</div>
@@ -1278,91 +1169,142 @@ function kkTxHTML(r){
   </div>`;
 }
 
-// Stats
-function kkRenderStats(){
-  const recs=kkRecs||[];
-  const now=new Date();
-  const expRecs=recs.filter(r=>EXP_CATS.includes(r.category));
-  const incRecs=recs.filter(r=>INC_TYPES.includes(r.category));
-  const weeks12=[];
-  for(let i=0;i<12;i++){
-    const ref=new Date(now.getTime()-i*7*86400000);
-    const ws=kkWeekStart(ref),we=kkWeekEnd(ref);
-    weeks12.push(expRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;}).reduce((a,r)=>a+r.amount,0));
-  }
-  const nonZero=weeks12.filter(v=>v>0);
-  const avgWeek=nonZero.length?Math.round(nonZero.reduce((a,v)=>a+v,0)/nonZero.length):0;
-  let wPlus=0,wMinus=0;
-  for(let i=0;i<12;i++){
-    const ref=new Date(now.getTime()-i*7*86400000);
-    const ws=kkWeekStart(ref),we=kkWeekEnd(ref);
-    const exp=expRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;}).reduce((a,r)=>a+r.amount,0);
-    const inc=incRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;}).reduce((a,r)=>a+r.amount,0);
-    if(inc>0||exp>0){if(inc>=exp)wPlus++;else wMinus++;}
-  }
-  const catTotals=EXP_CATS.map(c=>({cat:c,sum:expRecs.filter(r=>r.category===c).reduce((a,r)=>a+r.amount,0)}));
-  catTotals.sort((a,b)=>b.sum-a.sum);
-  const totalExp=expRecs.reduce((a,r)=>a+r.amount,0);
-  const totalInc=incRecs.reduce((a,r)=>a+r.amount,0);
-  const top5=[...expRecs].sort((a,b)=>b.amount-a.amount).slice(0,5);
-  const MN=['Led','Úno','Bře','Dub','Kvě','Čvn','Čvc','Srp','Zář','Říj','Lis','Pro'];
-  const mom6=[];
-  for(let i=5;i>=0;i--){
-    const d=new Date(now.getFullYear(),now.getMonth()-i,1);
-    mom6.push({name:MN[d.getMonth()],exp:expRecs.filter(r=>inMonth(r.date,d)).reduce((a,r)=>a+r.amount,0)});
-  }
-  const ratio=totalInc>0?Math.round(totalExp/totalInc*100):0;
-  const R=33,circ=2*Math.PI*R,dashOff=circ-circ*Math.min(ratio,100)/100;
-  const catColor={need:'var(--need)',want:'var(--want)',culture:'var(--culture)',unexp:'var(--unexp)'};
-  const catBg={need:'var(--need-bg)',want:'var(--want-bg)',culture:'var(--cult-bg)',unexp:'var(--unexp-bg)'};
+// ── STATS ─────────────────────────────────────────────
+async function kkRenderStats() {
+  const recs    = kkRecs || [];
+  const expRecs = recs.filter(r=>EXP_CATS.includes(r.category));
+  const incRecs = recs.filter(r=>INC_TYPES.includes(r.category));
+  const now     = new Date();
 
-  document.getElementById('st-content').innerHTML=`
+  // Průměr 12 týdnů
+  const weeks12 = Array.from({length:12},(_,i) => {
+    const ref = new Date(now.getTime()-i*7*86400000);
+    const ws = kkWeekStart(ref), we = kkWeekEnd(ref);
+    return expRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;})
+                  .reduce((a,r)=>a+r.amount,0);
+  });
+  const nonZero = weeks12.filter(v=>v>0);
+  const avgWeek = nonZero.length ? Math.round(nonZero.reduce((a,v)=>a+v,0)/nonZero.length) : 0;
+  let wPlus=0, wMinus=0;
+  for (let i=0;i<12;i++) {
+    const ref = new Date(now.getTime()-i*7*86400000);
+    const ws = kkWeekStart(ref), we = kkWeekEnd(ref);
+    const e = expRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;}).reduce((a,r)=>a+r.amount,0);
+    const ic = incRecs.filter(r=>{const d=new Date(r.date);return d>=ws&&d<=we;}).reduce((a,r)=>a+r.amount,0);
+    if (e>0||ic>0) { if(ic>=e) wPlus++; else wMinus++; }
+  }
+
+  // Kategorie
+  const totalExp = expRecs.reduce((a,r)=>a+r.amount,0);
+  const totalInc = incRecs.reduce((a,r)=>a+r.amount,0);
+  const catTotals = EXP_CATS.map(c=>({c, sum:expRecs.filter(r=>r.category===c).reduce((a,r)=>a+r.amount,0)}))
+                             .sort((a,b)=>b.sum-a.sum);
+
+  // Top 5
+  const top5 = [...expRecs].sort((a,b)=>b.amount-a.amount).slice(0,5);
+
+  // MoM 6 měsíců
+  const MN6 = ['Led','Úno','Bře','Dub','Kvě','Čvn','Čvc','Srp','Zář','Říj','Lis','Pro'];
+  const mom6 = Array.from({length:6},(_,i)=>{
+    const d = new Date(now.getFullYear(),now.getMonth()-5+i,1);
+    return {name:MN6[d.getMonth()], exp:expRecs.filter(r=>inMonth(r.date,d)).reduce((a,r)=>a+r.amount,0)};
+  });
+
+  // Donut
+  const ratio = totalInc>0 ? Math.min(Math.round(totalExp/totalInc*100),999) : 0;
+  const R=33, circ=2*Math.PI*R, dashOff = circ - circ*Math.min(ratio,100)/100;
+
+  // Půjčky
+  const allRecurs = await dbGetAll('recurring');
+  const loans = allRecurs.filter(r=>r.loan_balance>0);
+  let loansHtml = '';
+  if (loans.length) {
+    const totalDebt = loans.reduce((a,r)=>a+r.loan_balance,0);
+    const totalOrig = loans.reduce((a,r)=>a+(r.loan_original||r.loan_balance),0);
+    const totalPct  = totalOrig>0 ? Math.round((1-totalDebt/totalOrig)*100) : 0;
+    loansHtml = `<div class="st-card">
+      <div class="st-card-title">Přehled půjček</div>
+      <div class="st-big">
+        <div class="st-big-val" style="color:var(--orange)">${fmt(totalDebt)}</div>
+        <div class="st-big-sub">celkem zbývá splatit · splaceno ${totalPct}%</div>
+      </div>
+      ${loans.map(r => {
+        const pct = r.loan_original ? Math.round((1-r.loan_balance/r.loan_original)*100) : 0;
+        const mi  = r.loan_rate>0 ? Math.round(r.loan_balance*r.loan_rate/100/12) : 0;
+        return `<div class="st-loan-item">
+          <div class="st-loan-row">
+            <span class="st-loan-name">${r.name}</span>
+            <span class="st-loan-bal">${fmt(r.loan_balance)}</span>
+          </div>
+          <div class="loan-prog-track"><div class="loan-prog-fill" style="width:${pct}%"></div></div>
+          <div class="loan-prog-labels">
+            <span>Splaceno ${pct}% · ${fmt(r.amount)}/měs.</span>
+            ${mi>0 ? `<span>Úrok ~${fmt(mi)}/měs.</span>` : ''}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }
+
+  document.getElementById('st-content').innerHTML = `
     <div class="st-card">
-      <div class="st-card-title">Průměr za týden (posl. 12 týdnů)</div>
-      <div class="st-big"><div class="st-big-val" style="color:var(--red)">${fmt(avgWeek)}</div><div class="st-big-sub">průměrné výdaje za týden</div></div>
+      <div class="st-card-title">Průměr / týden (posl. 12 týdnů)</div>
+      <div class="st-big">
+        <div class="st-big-val" style="color:var(--red)">${fmt(avgWeek)}</div>
+        <div class="st-big-sub">průměrné týdenní výdaje</div>
+      </div>
       <div class="st-2col">
         <div class="st-half"><div class="st-half-lbl">✅ Týdny v plusu</div><div class="st-half-val" style="color:var(--green)">${wPlus}</div></div>
         <div class="st-half"><div class="st-half-lbl">❌ Týdny v minusu</div><div class="st-half-val" style="color:var(--red)">${wMinus}</div></div>
       </div>
     </div>
     <div class="st-card">
-      <div class="st-card-title">Výdaje podle kategorie (celkem)</div>
+      <div class="st-card-title">Výdaje podle kategorie</div>
       <div class="st-bars">
-        ${catTotals.map(({cat,sum})=>{
-          const pct=totalExp>0?Math.round(sum/totalExp*100):0,c=CATS[cat];
-          return`<div class="st-bar-row">
-            <div class="st-bar-top"><span class="st-bar-lbl">${c.icon} ${c.label}</span>
-              <span class="st-bar-val" style="color:${catColor[cat]}">${fmt(sum)} <span style="color:#4d6080;font-weight:400">${pct}%</span></span></div>
-            <div class="st-bar-track"><div class="st-bar-fill" style="width:${pct}%;background:${catColor[cat]}"></div></div>
+        ${catTotals.map(({c,sum}) => {
+          const pct = totalExp>0 ? Math.round(sum/totalExp*100) : 0, ct = CATS[c];
+          return `<div class="st-bar-row">
+            <div class="st-bar-top">
+              <span class="st-bar-lbl">${ct.icon} ${ct.label}</span>
+              <span style="font-weight:600;color:${ct.col}">${fmt(sum)} <span style="color:var(--t3);font-weight:400">${pct}%</span></span>
+            </div>
+            <div class="st-bar-track"><div class="st-bar-fill" style="width:${pct}%;background:${ct.col}"></div></div>
           </div>`;
         }).join('')}
       </div>
     </div>
     <div class="st-card">
-      <div class="st-card-title">Poměr příjmy vs. výdaje (celkem)</div>
+      <div class="st-card-title">Poměr příjmy vs. výdaje</div>
       <div class="st-ratio-wrap">
         <div class="st-donut">
-          <svg viewBox="0 0 76 76"><circle class="st-donut-track" cx="38" cy="38" r="${R}"/>
-          <circle class="st-donut-fill" cx="38" cy="38" r="${R}" stroke="${ratio<=100?'var(--red)':'var(--unexp)'}" stroke-dasharray="${circ}" stroke-dashoffset="${dashOff}"/></svg>
+          <svg viewBox="0 0 76 76">
+            <circle class="st-donut-track" cx="38" cy="38" r="${R}"/>
+            <circle class="st-donut-fill" cx="38" cy="38" r="${R}"
+              stroke="${ratio<=100?'var(--red)':'var(--unexp)'}"
+              stroke-dasharray="${circ}" stroke-dashoffset="${dashOff}"/>
+          </svg>
           <div class="st-donut-lbl">${ratio}%</div>
         </div>
         <div class="st-ratio-legend">
           <div class="st-ratio-item"><div class="st-ratio-dot" style="background:var(--green)"></div>Příjmy ${fmt(totalInc)}</div>
           <div class="st-ratio-item"><div class="st-ratio-dot" style="background:var(--red)"></div>Výdaje ${fmt(totalExp)}</div>
-          <div class="st-ratio-item"><div class="st-ratio-dot" style="background:var(--accent)"></div><span style="color:${totalInc-totalExp>=0?'var(--green)':'var(--red)'}">Bilance ${fmt(totalInc-totalExp)}</span></div>
+          <div class="st-ratio-item"><div class="st-ratio-dot" style="background:var(--accent)"></div>
+            <span style="color:${totalInc-totalExp>=0?'var(--green)':'var(--red)'}">Bilance ${fmt(totalInc-totalExp)}</span>
+          </div>
         </div>
       </div>
     </div>
     <div class="st-card">
-      <div class="st-card-title">Výdaje měsíc/měsíc</div>
+      <div class="st-card-title">Výdaje měsíc po měsíci</div>
       <div class="st-mom-grid">
-        ${mom6.map((m,i)=>{
-          const prev=i>0?mom6[i-1].exp:null;
-          const delta=prev!==null&&prev>0?Math.round((m.exp-prev)/prev*100):null;
-          const cls=delta===null?'flat':delta>0?'up':'down';
-          return`<div class="st-mom-cell"><div class="st-mom-name">${m.name}</div>
+        ${mom6.map((m,i) => {
+          const prev = i>0 ? mom6[i-1].exp : null;
+          const delta = prev!==null&&prev>0 ? Math.round((m.exp-prev)/prev*100) : null;
+          const cls = delta===null?'':delta>0?'up':'down';
+          return `<div class="st-mom-cell">
+            <div class="st-mom-name">${m.name}</div>
             <div class="st-mom-exp">${m.exp>0?fmt(m.exp):'—'}</div>
-            ${delta!==null?`<div class="st-mom-delta ${cls}">${delta>0?'+':''}${delta}%</div>`:''}
+            ${delta!==null ? `<div class="st-mom-delta ${cls}">${delta>0?'+':''}${delta}%</div>` : ''}
           </div>`;
         }).join('')}
       </div>
@@ -1370,243 +1312,299 @@ function kkRenderStats(){
     <div class="st-card">
       <div class="st-card-title">Top 5 nejdražších položek</div>
       <div class="st-top5">
-        ${top5.length===0?'<div style="color:#4d6080;font-size:12px;padding:4px 0">Žádné záznamy</div>':
-          top5.map((r,i)=>{
-            const c=CATS[r.category]||CATS.need;
-            return`<div class="st-top5-item">
-              <div class="st-top5-rank">${i+1}</div>
-              <div class="st-top5-icon" style="background:${catBg[r.category]||'rgba(255,255,255,.05)'}">${c.icon}</div>
-              <div class="st-top5-info"><div class="st-top5-name">${r.description||c.label}</div><div class="st-top5-cat">${c.label} · ${fmtD(r.date)}</div></div>
-              <div class="st-top5-amt">${fmt(r.amount)}</div>
-            </div>`;
-          }).join('')}
+        ${top5.length===0
+          ? '<div style="color:var(--t3);font-size:12px;padding:4px 0">Žádné záznamy</div>'
+          : top5.map((r,i) => {
+              const c = CATS[r.category]||CATS.need;
+              return `<div class="st-top5-item">
+                <div class="st-top5-rank">${i+1}</div>
+                <div class="st-top5-icon" style="background:${c.bg}">${c.icon}</div>
+                <div class="st-top5-info">
+                  <div class="st-top5-name">${r.description||c.label}</div>
+                  <div class="st-top5-cat">${c.label} · ${fmtD(r.date)}</div>
+                </div>
+                <div class="st-top5-amt">${fmt(r.amount)}</div>
+              </div>`;
+            }).join('')}
       </div>
     </div>
-    <div class="ver-bar">MůjOS v4.5 · Kakeibo v1.2</div>`;
+    ${loansHtml}
+    <div class="ver-bar">MůjOS v5.0 · Kakeibo v1.3</div>`;
 }
 
-function kkRenderSettings(){
-  document.getElementById('budget-input').value=getBudget()||'';
+// ── SETTINGS ──────────────────────────────────────────
+function kkRenderSettings() {
+  document.getElementById('budget-input').value = getBudget() || '';
   kkRenderRecurList();
 }
-async function kkRenderRecurList(){
-  const recurs=await dbGetAll('recurring');
-  const el=document.getElementById('recur-list');
-  if(!recurs.length){el.innerHTML='<div style="font-size:11px;color:#4d6080;padding:2px 0">Žádné pravidelné platby</div>';return;}
-  const dotC={need:'var(--need)',want:'var(--want)',culture:'var(--culture)',unexp:'var(--unexp)'};
-  el.innerHTML=recurs.map(r=>`
-    <div class="recur-item">
-      <div class="recur-dot" style="background:${dotC[r.category]||'#4d6080'}"></div>
-      <div class="recur-info"><div class="recur-name">${r.name}</div><div class="recur-meta">${CATS[r.category]?.label||r.category} · každý 1.</div></div>
-      <div class="recur-amt">${fmt(r.amount)}</div>
-      <button class="recur-del" data-rid="${r.id}">×</button>
-    </div>`).join('');
-  el.querySelectorAll('.recur-del').forEach(b=>b.addEventListener('click',async()=>{
-    await dbDel('recurring',parseInt(b.dataset.rid));kkRenderRecurList();showToast('Odebráno');
+
+async function kkRenderRecurList() {
+  const recurs = await dbGetAll('recurring');
+  const el = document.getElementById('recur-list');
+  if (!recurs.length) {
+    el.innerHTML = '<div style="font-size:11px;color:var(--t3);padding:2px 0">Žádné pravidelné platby</div>';
+    return;
+  }
+  el.innerHTML = recurs.map(r => {
+    const isLoan = !!r.loan_balance;
+    const pct = isLoan&&r.loan_original ? Math.round((1-r.loan_balance/r.loan_original)*100) : 0;
+    const dotClr = isLoan ? 'var(--orange)' : (CATS[r.category]?.col||'var(--t3)');
+    return `<div class="recur-item">
+      <div class="recur-row">
+        <div class="recur-dot" style="background:${dotClr}"></div>
+        <div class="recur-info">
+          <div class="recur-name">${r.name}${isLoan?' <span style="font-size:9px;color:var(--orange);font-weight:700">PŮJČKA</span>':''}</div>
+          <div class="recur-meta">${CATS[r.category]?.label||r.category} · každý 1.${isLoan?' · '+r.loan_rate+'% p.a.':''}</div>
+        </div>
+        <div class="recur-amt">${fmt(r.amount)}</div>
+        <button class="recur-del" data-rid="${r.id}">×</button>
+      </div>
+      ${isLoan ? `
+      <div style="margin-top:6px">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t3);margin-bottom:4px">
+          <span>Zbývá splatit</span><span style="color:var(--orange);font-weight:700">${fmt(r.loan_balance)}</span>
+        </div>
+        <div class="loan-prog-track"><div class="loan-prog-fill" style="width:${pct}%"></div></div>
+        <div class="loan-prog-labels">
+          <span>Splaceno ${pct}%</span>
+          <button class="loan-update-btn" data-lid="${r.id}">Aktualizovat zůstatek</button>
+        </div>
+      </div>` : ''}
+    </div>`;
+  }).join('');
+
+  el.querySelectorAll('.recur-del').forEach(b => b.addEventListener('click', async () => {
+    await dbDel('recurring', parseInt(b.dataset.rid));
+    kkRenderRecurList(); showToast('Odebráno');
+  }));
+  el.querySelectorAll('.loan-update-btn').forEach(b => b.addEventListener('click', async () => {
+    const rec = await dbGet('recurring', parseInt(b.dataset.lid));
+    if (!rec) return;
+    const v = prompt(`Nový zůstatek půjčky (Kč)\nAktuálně: ${fmt(rec.loan_balance)}`);
+    if (v===null) return;
+    const val = parseFloat(v);
+    if (isNaN(val)||val<0) { showToast('Neplatná hodnota'); return; }
+    await dbPut('recurring', {...rec, loan_balance:val});
+    kkRenderRecurList(); showToast('Zůstatek aktualizován ✓');
   }));
 }
 
-// View switching
-function kkSwitchView(v){
-  kkView=v;
-  document.querySelectorAll('.kk-tab').forEach(t=>t.classList.toggle('active',t.dataset.kv===v));
-  document.querySelectorAll('.kk-view').forEach(el=>el.classList.toggle('active',el.id==='kkv-'+v));
+// ── VIEW SWITCH ───────────────────────────────────────
+function kkSwitchView(v) {
+  kkView = v;
+  document.querySelectorAll('.kk-tab').forEach(t => t.classList.toggle('active', t.dataset.kv===v));
+  document.querySelectorAll('.kk-view').forEach(el => el.classList.toggle('active', el.id==='kkv-'+v));
   kkRenderAll();
 }
-document.querySelectorAll('.kk-tab').forEach(t=>t.addEventListener('click',()=>kkSwitchView(t.dataset.kv)));
-document.getElementById('kk-prev').addEventListener('click',()=>kkNav(-1));
-document.getElementById('kk-next').addEventListener('click',()=>kkNav(1));
+document.querySelectorAll('.kk-tab').forEach(t => t.addEventListener('click', () => kkSwitchView(t.dataset.kv)));
+document.getElementById('kk-prev').addEventListener('click', () => kkNav(-1));
+document.getElementById('kk-next').addEventListener('click', () => kkNav(1));
 
-document.getElementById('kk-chips').addEventListener('click',e=>{
-  const c=e.target.closest('.kk-chip');if(!c)return;
-  kkFilter=c.dataset.f;
-  document.querySelectorAll('.kk-chip').forEach(x=>x.classList.toggle('active',x.dataset.f===kkFilter));
-  if(kkRecs)kkRenderTxFlat('kk-txs-week',kkRecs.filter(r=>inWeek(r.date,kkDate)));
+// ── FILTER ────────────────────────────────────────────
+document.getElementById('kk-chips').addEventListener('click', e => {
+  const c = e.target.closest('.kk-chip'); if (!c) return;
+  kkFilter = c.dataset.f;
+  document.querySelectorAll('.kk-chip').forEach(x => x.classList.toggle('active', x.dataset.f===kkFilter));
+  if (kkRecs) kkRenderTxFlat('kk-txs-week', kkRecs.filter(r=>inWeek(r.date,kkDate)));
 });
 
-document.getElementById('kk-fab').addEventListener('click',openAddModal);
+// ── FAB ───────────────────────────────────────────────
+document.getElementById('kk-fab').addEventListener('click', openAddModal);
 
-function openAddModal(){
-  fMainType='expense';fIncType='salary';fExpCat='need';
-  document.getElementById('f-amount').value='';
-  document.getElementById('f-desc').value='';
-  document.getElementById('f-note').value='';
-  document.getElementById('f-date').value=new Date().toISOString().slice(0,10);
-  syncAddModalUI();
+function openAddModal() {
+  fMainType='expense'; fIncType='salary'; fExpCat='need';
+  document.getElementById('f-amount').value = '';
+  document.getElementById('f-desc').value   = '';
+  document.getElementById('f-note').value   = '';
+  document.getElementById('f-date').value   = new Date().toISOString().slice(0,10);
+  syncModalUI();
   document.getElementById('modal-add').classList.add('open');
-  setTimeout(()=>document.getElementById('f-amount').focus(),250);
+  setTimeout(() => document.getElementById('f-amount').focus(), 250);
 }
-function syncAddModalUI(){
-  document.querySelectorAll('[data-mt]').forEach(b=>b.classList.toggle('active',b.dataset.mt===fMainType));
-  document.getElementById('expense-cats').style.display=fMainType==='expense'?'block':'none';
-  document.getElementById('income-types').style.display=fMainType==='income'?'block':'none';
-  document.querySelectorAll('[data-cat]').forEach(b=>b.classList.toggle('active',b.dataset.cat===fExpCat));
-  document.querySelectorAll('[data-it]').forEach(b=>b.classList.toggle('active',b.dataset.it===fIncType));
-}
-document.querySelectorAll('[data-mt]').forEach(b=>b.addEventListener('click',()=>{fMainType=b.dataset.mt;syncAddModalUI();}));
-document.querySelectorAll('[data-cat]').forEach(b=>b.addEventListener('click',()=>{fExpCat=b.dataset.cat;syncAddModalUI();}));
-document.querySelectorAll('[data-it]').forEach(b=>b.addEventListener('click',()=>{fIncType=b.dataset.it;syncAddModalUI();}));
-document.getElementById('modal-add').addEventListener('click',e=>{if(e.target.id==='modal-add')closeModal('modal-add');});
 
-document.getElementById('save-btn').addEventListener('click',async()=>{
-  const amount=parseFloat(document.getElementById('f-amount').value);
-  const date=document.getElementById('f-date').value;
-  if(!amount||amount<=0||!date){showToast('Vyplň částku a datum');return;}
-  const cat=fMainType==='income'?fIncType:fExpCat;
-  const rec={type:fMainType,category:cat,amount,
-    description:document.getElementById('f-desc').value.trim(),
-    date,note:document.getElementById('f-note').value.trim()};
-  await dbAdd('ucetnictvi',rec);
-  await dbAdd('activity_log',{modul:'ucetnictvi',
-    title:rec.description||CATS[cat]?.label||'Záznam',
-    sub:`${fMainType==='income'?'+':'−'}${fmt(amount)}`,
-    _ts:new Date().toISOString()});
-  kkRecs=null;closeModal('modal-add');kkRenderAll();showToast('Uloženo ✓');
+function syncModalUI() {
+  document.querySelectorAll('[data-mt]').forEach(b => b.classList.toggle('active', b.dataset.mt===fMainType));
+  document.getElementById('expense-cats').style.display  = fMainType==='expense' ? 'block' : 'none';
+  document.getElementById('income-types').style.display  = fMainType==='income'  ? 'block' : 'none';
+  document.querySelectorAll('[data-cat]').forEach(b => b.classList.toggle('active', b.dataset.cat===fExpCat));
+  document.querySelectorAll('[data-it]').forEach(b  => b.classList.toggle('active', b.dataset.it===fIncType));
+}
+
+document.querySelectorAll('[data-mt]').forEach(b => b.addEventListener('click', () => { fMainType=b.dataset.mt; syncModalUI(); }));
+document.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => { fExpCat=b.dataset.cat; syncModalUI(); }));
+document.querySelectorAll('[data-it]').forEach(b  => b.addEventListener('click', () => { fIncType=b.dataset.it; syncModalUI(); }));
+document.getElementById('modal-add').addEventListener('click', e => { if(e.target.id==='modal-add') closeModal('modal-add'); });
+
+document.getElementById('save-btn').addEventListener('click', async () => {
+  const amount = parseFloat(document.getElementById('f-amount').value);
+  const date   = document.getElementById('f-date').value;
+  if (!amount||amount<=0||!date) { showToast('Vyplň částku a datum'); return; }
+  const cat = fMainType==='income' ? fIncType : fExpCat;
+  const rec = {
+    type: fMainType, category: cat, amount,
+    description: document.getElementById('f-desc').value.trim(),
+    date, note: document.getElementById('f-note').value.trim()
+  };
+  await dbAdd('ucetnictvi', rec);
+  await dbAdd('activity_log', {
+    modul:'ucetnictvi',
+    title: rec.description || CATS[cat]?.label || 'Záznam',
+    sub: `${fMainType==='income'?'+':'−'}${fmt(amount)}`,
+    _ts: new Date().toISOString()
+  });
+  kkRecs = null; closeModal('modal-add'); kkRenderAll(); showToast('Uloženo ✓');
 });
 
-function kkOpenDetail(id){
-  const r=kkRecs.find(x=>x.id===id);if(!r)return;
-  const c=CATS[r.category]||CATS.need,isInc=INC_TYPES.includes(r.category);
-  document.getElementById('detail-title').textContent=`${c.icon} ${r.description||c.label}`;
-  document.getElementById('detail-body').innerHTML=
+// ── DETAIL ────────────────────────────────────────────
+function kkOpenDetail(id) {
+  const r = kkRecs.find(x=>x.id===id); if (!r) return;
+  const c = CATS[r.category]||CATS.need, isInc = INC_TYPES.includes(r.category);
+  document.getElementById('detail-title').textContent = `${c.icon} ${r.description||c.label}`;
+  document.getElementById('detail-body').innerHTML =
     `<b>Částka:</b> ${fmt(r.amount)}<br>
      <b>Typ:</b> ${isInc?'Příjem':'Výdaj'} · ${c.label}<br>
      ${r.note?`<b>Poznámka:</b> ${r.note}<br>`:''}
      <b>Datum:</b> ${new Date(r.date).toLocaleDateString('cs-CZ',{day:'numeric',month:'long',year:'numeric'})}`;
-  kkDetailId=id;
+  kkDetailId = id;
   document.getElementById('modal-detail').classList.add('open');
 }
-document.getElementById('btn-close-detail').addEventListener('click',()=>closeModal('modal-detail'));
-document.getElementById('modal-detail').addEventListener('click',e=>{if(e.target.id==='modal-detail')closeModal('modal-detail');});
-document.getElementById('btn-delete').addEventListener('click',async()=>{
-  if(!kkDetailId)return;
-  await dbDel('ucetnictvi',kkDetailId);
-  kkRecs=null;closeModal('modal-detail');kkRenderAll();showToast('Smazáno');
+document.getElementById('btn-close-detail').addEventListener('click', () => closeModal('modal-detail'));
+document.getElementById('modal-detail').addEventListener('click', e => { if(e.target.id==='modal-detail') closeModal('modal-detail'); });
+document.getElementById('btn-delete').addEventListener('click', async () => {
+  if (!kkDetailId) return;
+  await dbDel('ucetnictvi', kkDetailId);
+  kkRecs=null; closeModal('modal-detail'); kkRenderAll(); showToast('Smazáno');
 });
 
-document.getElementById('recur-add-btn').addEventListener('click',()=>{
+// ── RECURRING MODAL ───────────────────────────────────
+document.getElementById('recur-add-btn').addEventListener('click', () => {
   kkRCat='need';
-  document.getElementById('recur-name').value='';
-  document.getElementById('recur-amount').value='';
-  document.querySelectorAll('[data-rcat]').forEach(b=>b.classList.toggle('active',b.dataset.rcat==='need'));
+  document.getElementById('recur-name').value   = '';
+  document.getElementById('recur-amount').value = '';
+  document.getElementById('recur-is-loan').checked = false;
+  document.getElementById('loan-balance').value = '';
+  document.getElementById('loan-rate').value    = '';
+  document.getElementById('loan-fields').style.display = 'none';
+  document.querySelectorAll('[data-rcat]').forEach(b => b.classList.toggle('active', b.dataset.rcat==='need'));
   document.getElementById('modal-recur').classList.add('open');
 });
-document.querySelectorAll('[data-rcat]').forEach(b=>b.addEventListener('click',()=>{
-  kkRCat=b.dataset.rcat;
-  document.querySelectorAll('[data-rcat]').forEach(x=>x.classList.toggle('active',x.dataset.rcat===kkRCat));
+document.getElementById('recur-is-loan').addEventListener('change', e => {
+  document.getElementById('loan-fields').style.display = e.target.checked ? 'block' : 'none';
+});
+document.querySelectorAll('[data-rcat]').forEach(b => b.addEventListener('click', () => {
+  kkRCat = b.dataset.rcat;
+  document.querySelectorAll('[data-rcat]').forEach(x => x.classList.toggle('active', x.dataset.rcat===kkRCat));
 }));
-document.getElementById('recur-cancel-btn').addEventListener('click',()=>closeModal('modal-recur'));
-document.getElementById('modal-recur').addEventListener('click',e=>{if(e.target.id==='modal-recur')closeModal('modal-recur');});
-document.getElementById('recur-save-btn').addEventListener('click',async()=>{
-  const name=document.getElementById('recur-name').value.trim();
-  const amount=parseFloat(document.getElementById('recur-amount').value);
-  if(!name||!amount||amount<=0){showToast('Vyplň název a částku');return;}
-  await dbAdd('recurring',{name,amount,category:kkRCat});
-  closeModal('modal-recur');kkRenderRecurList();showToast('Platba přidána ✓');
-});
-
-document.getElementById('budget-save').addEventListener('click',()=>{
-  const v=parseInt(document.getElementById('budget-input').value);
-  setBudget(isNaN(v)?0:v);showToast('Limit uložen ✓');
-});
-// ── IMPORT ────────────────────────────────────────────
-document.getElementById('kk-import-btn').addEventListener('click',()=>{
-  document.getElementById('kk-import-file').click();
-});
-
-document.getElementById('kk-import-file').addEventListener('change', async(e)=>{
-  const file = e.target.files[0];
-  if(!file) return;
-  e.target.value = ''; // reset pro opakovaný výběr
-
-  const status = document.getElementById('import-status');
-  status.style.display = 'block';
-  status.textContent = 'Načítám soubor…';
-
-  try {
-    // Načti SheetJS pokud ještě není
-    if(!window.XLSX) await new Promise((res,rej)=>{
-      const s=document.createElement('script');
-      s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-      s.onload=res; s.onerror=rej; document.head.appendChild(s);
-    });
-
-    const buf = await file.arrayBuffer();
-    const wb = XLSX.read(buf, {type:'array'});
-    const sheetName = wb.SheetNames[0];
-    const rows = XLSX.utils.sheet_to_json(wb.Sheets[sheetName]);
-
-    if(!rows.length){ status.textContent = '⚠️ Soubor je prázdný nebo má neznámý formát.'; return; }
-
-    // Validace — potřebujeme aspoň: amount, date, category
-    const validRows = rows.filter(r => r.amount && r.date && r.category);
-    if(!validRows.length){ status.textContent = '⚠️ Žádné platné záznamy (chybí amount/date/category).'; return; }
-
-    status.textContent = `Zpracovávám ${validRows.length} záznamů…`;
-
-    // Načti existující záznamy pro deduplikaci
-    const existing = await dbGetAll('ucetnictvi');
-    // Klíč pro porovnání: date + category + amount
-    const existingKeys = new Set(existing.map(r => `${r.date}|${r.category}|${r.amount}`));
-
-    let imported = 0, skipped = 0;
-    for(const r of validRows) {
-      const key = `${r.date}|${r.category}|${r.amount}`;
-      if(existingKeys.has(key)){ skipped++; continue; }
-
-      const rec = {
-        type:        r.type        || ((['salary','bonus','passive'].includes(r.category)) ? 'income' : 'expense'),
-        category:    r.category,
-        amount:      parseFloat(r.amount),
-        description: r.description || '',
-        date:        r.date,
-        note:        r.note        || '',
-      };
-      await dbAdd('ucetnictvi', rec);
-      existingKeys.add(key); // aby se i v rámci importu nepřidávaly duplikáty
-      imported++;
-    }
-
-    await dbAdd('activity_log',{
-      modul:'ucetnictvi',
-      title:`Import z Excelu`,
-      sub:`${imported} přidáno, ${skipped} přeskočeno`,
-      _ts:new Date().toISOString()
-    });
-
-    kkRecs = null;
-    kkRenderAll();
-    status.innerHTML = `✅ <b>Hotovo!</b> Přidáno: <b>${imported}</b> záznamů, přeskočeno (duplicity): <b>${skipped}</b>.`;
-    showToast(`Import OK — ${imported} záznamů ✓`);
-
-  } catch(err) {
-    console.error(err);
-    status.textContent = '❌ Chyba při čtení souboru: ' + err.message;
+document.getElementById('recur-cancel-btn').addEventListener('click', () => closeModal('modal-recur'));
+document.getElementById('modal-recur').addEventListener('click', e => { if(e.target.id==='modal-recur') closeModal('modal-recur'); });
+document.getElementById('recur-save-btn').addEventListener('click', async () => {
+  const name   = document.getElementById('recur-name').value.trim();
+  const amount = parseFloat(document.getElementById('recur-amount').value);
+  if (!name||!amount||amount<=0) { showToast('Vyplň název a částku'); return; }
+  const isLoan = document.getElementById('recur-is-loan').checked;
+  const rec = {name, amount, category:kkRCat};
+  if (isLoan) {
+    const bal  = parseFloat(document.getElementById('loan-balance').value);
+    const rate = parseFloat(document.getElementById('loan-rate').value)||0;
+    if (!bal||bal<=0) { showToast('Vyplň nesplacenou jistinu'); return; }
+    rec.loan_balance  = bal;
+    rec.loan_rate     = rate;
+    rec.loan_original = bal;
   }
+  await dbAdd('recurring', rec);
+  closeModal('modal-recur'); kkRenderRecurList(); showToast('Platba přidána ✓');
 });
 
-document.getElementById('kk-export-btn').addEventListener('click',async()=>{
-  const recs=await dbGetAll('ucetnictvi');
-  const recurs=await dbGetAll('recurring');
-  await exportXLSX({
-    'Kakeibo': recs,
-    'Pravidelné platby': recurs
-  },'Kakeibo');
+// ── BUDGET ────────────────────────────────────────────
+document.getElementById('budget-save').addEventListener('click', () => {
+  const v = parseInt(document.getElementById('budget-input').value);
+  setBudget(isNaN(v)?0:v); showToast('Limit uložen ✓');
+});
+
+// ── EXPORT ────────────────────────────────────────────
+document.getElementById('kk-export-btn').addEventListener('click', async () => {
+  const recs   = await dbGetAll('ucetnictvi');
+  const recurs = await dbGetAll('recurring');
+  await exportXLSX({'Kakeibo':recs,'Pravidelné platby':recurs}, 'Kakeibo');
   showToast('Excel se stahuje…');
 });
 
-async function init(){
+// ── IMPORT ────────────────────────────────────────────
+document.getElementById('kk-import-btn').addEventListener('click', () => {
+  document.getElementById('kk-import-file').click();
+});
+
+document.getElementById('kk-import-file').addEventListener('change', async e => {
+  const file = e.target.files[0]; if (!file) return;
+  e.target.value = '';
+  const status = document.getElementById('import-status');
+  status.style.display = 'block'; status.textContent = 'Načítám soubor…';
+  try {
+    if (!window.XLSX) await new Promise((res,rej) => {
+      const s = document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      s.onload=res; s.onerror=rej; document.head.appendChild(s);
+    });
+    const wb = XLSX.read(await file.arrayBuffer(), {type:'array'});
+
+    // Transakce
+    const txSheet = wb.Sheets['Kakeibo'] || wb.Sheets[wb.SheetNames[0]];
+    const txRows  = XLSX.utils.sheet_to_json(txSheet).filter(r=>r.amount&&r.date&&r.category);
+    const existing = await dbGetAll('ucetnictvi');
+    const keys = new Set(existing.map(r=>`${r.date}|${r.category}|${r.amount}`));
+    let addedTx=0, skippedTx=0;
+    for (const r of txRows) {
+      const k = `${r.date}|${r.category}|${r.amount}`;
+      if (keys.has(k)) { skippedTx++; continue; }
+      await dbAdd('ucetnictvi', {
+        type: r.type||(INC_TYPES.includes(r.category)?'income':'expense'),
+        category:r.category, amount:parseFloat(r.amount),
+        description:r.description||'', date:r.date, note:r.note||''
+      });
+      keys.add(k); addedTx++;
+    }
+
+    // Pravidelné platby
+    let addedR=0;
+    if (wb.Sheets['Pravidelné platby']) {
+      const rRows = XLSX.utils.sheet_to_json(wb.Sheets['Pravidelné platby']).filter(r=>r.name&&r.amount);
+      const exR = await dbGetAll('recurring');
+      const rKeys = new Set(exR.map(r=>r.name+'|'+r.amount));
+      for (const r of rRows) {
+        const rk = r.name+'|'+r.amount; if (rKeys.has(rk)) continue;
+        await dbAdd('recurring', {
+          name:r.name, amount:parseFloat(r.amount), category:r.category||'need',
+          ...(r.loan_balance ? {loan_balance:parseFloat(r.loan_balance),
+            loan_rate:parseFloat(r.loan_rate||0), loan_original:parseFloat(r.loan_balance)} : {})
+        });
+        rKeys.add(rk); addedR++;
+      }
+    }
+
+    kkRecs=null; kkRenderAll(); kkRenderRecurList();
+    status.innerHTML = `✅ <b>Hotovo!</b><br>Transakce: přidáno <b>${addedTx}</b>, přeskočeno <b>${skippedTx}</b><br>Pravidelné platby: přidáno <b>${addedR}</b>`;
+    showToast('Import OK ✓');
+  } catch(err) {
+    console.error(err);
+    status.textContent = '❌ Chyba: '+err.message;
+  }
+});
+
+// ── INIT ──────────────────────────────────────────────
+async function init() {
   initShell();
-  try{
-    db=await openDB();dbChip(true,'DB OK');
+  try {
+    db = await openDB();
+    dbChip(true,'DB OK');
     await processRecurring();
     await refreshDash();
-  }catch(e){
-    dbChip(false,'Chyba DB');console.error(e);
+  } catch(e) {
+    dbChip(false,'Chyba DB');
+    console.error(e);
   }
 }
 
-window.MojOS={dbGetAll,dbAdd,dbPut,dbDel,dbGet,exportXLSX,navTo,relTime,curQ};
+window.MojOS = {dbGetAll,dbAdd,dbPut,dbDel,dbGet,exportXLSX,navTo,relTime,curQ};
 init();
 </script>
 
