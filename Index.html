@@ -1134,7 +1134,6 @@ async function refreshDash() {
                     .reduce((s,r) => s+r.amount, 0);
     document.getElementById('stat-ucet').textContent = recs.length ? fmt(sum) : '—';
   } catch(e) {}
-  try { kdRender(); } catch(e) {}
   ['invest','auto','elektr'].forEach(k => {
     try { document.getElementById('stat-'+k).textContent = '—'; } catch(e) {}
   });
@@ -1505,3 +1504,4 @@ async function kkRenderStats() {
       </div>
     </div>
     <div class="st-card">
+      <div class="st-card-title">Poměr příjmy vs. výdaje</div>
