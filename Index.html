@@ -38,7 +38,7 @@ color-scheme:dark;
 }
 
 /* ── BASE ── */
-html,body{height:100%;background:var(–bg);color:var(–t1);
+html{background:#0b1120;color:#f0f4ff}html,body{height:100%;background:#0b1120;color:#f0f4ff;
 font-family:‘DM Sans’,sans-serif;font-size:15px;overscroll-behavior:none;line-height:1.45}
 
 /* ── SHELL ── */
@@ -399,6 +399,131 @@ opacity:1;transition:opacity .3s;pointer-events:none}
 #db-chip.hide{opacity:0}
 #import-status{font-size:12px;color:var(–t2);line-height:1.7;
 display:none;margin-top:10px}
+
+/* ══ KONDICE MODULE ══════════════════════════════════ */
+#mod-kondice{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+
+/* Alert badge na tab buttonu */
+.bnav-alert{position:relative}
+.bnav-alert-dot{
+position:absolute;top:2px;right:calc(50% - 14px);
+width:8px;height:8px;border-radius:50%;
+background:#ff6b6b;border:2px solid #0b1120;
+display:none;
+}
+.bnav-alert-dot.show{display:block}
+
+/* Fáze hero karta */
+.kd-hero{
+margin:14px 14px 0;border-radius:24px;padding:22px;
+box-shadow:0 4px 24px rgba(0,0,0,.4);position:relative;overflow:hidden;
+}
+.kd-hero::before{
+content:’’;position:absolute;top:-30px;right:-30px;
+width:120px;height:120px;border-radius:50%;
+background:rgba(255,255,255,.06);
+}
+.kd-hero-tag{font-size:10px;font-weight:700;letter-spacing:.1em;
+text-transform:uppercase;opacity:.75;margin-bottom:6px}
+.kd-hero-phase{font-size:26px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px}
+.kd-hero-day{font-size:13px;opacity:.8;margin-bottom:16px}
+.kd-hero-row{display:flex;gap:10px}
+.kd-hero-pill{flex:1;background:rgba(0,0,0,.2);border-radius:12px;padding:10px 12px}
+.kd-hero-pill-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.07em;
+font-weight:700;opacity:.65;margin-bottom:3px}
+.kd-hero-pill-val{font-size:14px;font-weight:700}
+
+/* Fáze barvy */
+.phase-mens  {background:linear-gradient(135deg,#c0392b,#922b21)}
+.phase-folik {background:linear-gradient(135deg,#1a6b3a,#145a32)}
+.phase-ovul  {background:linear-gradient(135deg,#1a5276,#0d3b6e)}
+.phase-luteal{background:linear-gradient(135deg,#7d6608,#6e5c00)}
+.phase-pms   {background:linear-gradient(135deg,#922b7a,#7b1f6a)}
+.phase-unknown{background:linear-gradient(135deg,#1c2d47,#243657)}
+
+/* Timeline cyklu */
+.kd-timeline-wrap{margin:12px 14px 0}
+.kd-timeline-title{font-size:11px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;color:#4d6080;margin-bottom:8px}
+.kd-timeline{display:flex;height:10px;border-radius:5px;overflow:hidden;gap:2px}
+.kd-tl-seg{height:100%;border-radius:3px;position:relative;cursor:default}
+.kd-timeline-labels{display:flex;justify-content:space-between;
+font-size:9px;color:#4d6080;margin-top:4px}
+
+/* Příznaky rychlý vstup */
+.kd-quick{margin:14px 14px 0;background:#152035;border:1px solid rgba(255,255,255,.12);
+border-radius:20px;padding:16px}
+.kd-quick-title{font-size:12px;font-weight:700;color:#8fa3c8;margin-bottom:12px;
+text-transform:uppercase;letter-spacing:.07em}
+.kd-symp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px}
+.kd-symp-btn{
+padding:10px 6px;border-radius:12px;border:1.5px solid rgba(255,255,255,.1);
+background:#1c2d47;font-size:11px;font-weight:600;cursor:pointer;
+text-align:center;font-family:‘DM Sans’,sans-serif;color:#8fa3c8;
+transition:all .15s;line-height:1.4;
+}
+.kd-symp-btn span{font-size:16px;display:block;margin-bottom:3px}
+.kd-symp-btn.sel{border-color:currentColor;background:rgba(255,255,255,.08)}
+.symp-mood   {color:#a78bfa}
+.symp-fatigue{color:#ffcf5c}
+.symp-headache{color:#ff6b6b}
+.symp-body   {color:#ff9f43}
+.symp-touch  {color:#ff6b8a}
+.symp-irritab{color:#e74c3c}
+.kd-mood-row{display:flex;gap:6px;margin-bottom:14px}
+.kd-mood-btn{flex:1;padding:9px 4px;border-radius:12px;
+border:1.5px solid rgba(255,255,255,.1);background:#1c2d47;
+font-size:18px;cursor:pointer;text-align:center;transition:all .15s}
+.kd-mood-btn.sel{background:rgba(167,139,250,.2);border-color:#a78bfa}
+.kd-quick-note{width:100%;background:#243657;border:1px solid rgba(255,255,255,.1);
+border-radius:12px;padding:10px 12px;font-size:13px;font-family:‘DM Sans’,sans-serif;
+color:#f0f4ff;outline:none;resize:none;margin-bottom:14px;display:block}
+.kd-quick-note::placeholder{color:#4d6080}
+.kd-mens-btn{
+display:flex;align-items:center;justify-content:center;gap:8px;
+width:100%;padding:13px;border-radius:14px;
+border:1.5px solid rgba(255,107,107,.4);background:rgba(255,107,107,.1);
+color:#ff6b6b;font-size:14px;font-weight:700;cursor:pointer;
+font-family:‘DM Sans’,sans-serif;margin-bottom:10px;
+}
+.kd-save-btn{
+display:flex;align-items:center;justify-content:center;
+width:100%;padding:13px;border-radius:14px;
+border:none;background:#2684ff;
+color:#fff;font-size:14px;font-weight:700;cursor:pointer;
+font-family:‘DM Sans’,sans-serif;
+}
+
+/* Historie */
+.kd-hist-wrap{margin:14px 14px 0}
+.kd-hist-title{font-size:11px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;color:#4d6080;margin-bottom:8px}
+.kd-hist-list{display:flex;flex-direction:column;gap:6px}
+.kd-hist-item{background:#152035;border:1px solid rgba(255,255,255,.07);
+border-radius:16px;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.kd-hist-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.kd-hist-info{flex:1;min-width:0}
+.kd-hist-date{font-size:12px;font-weight:600;color:#f0f4ff}
+.kd-hist-symp{font-size:11px;color:#4d6080;margin-top:2px;overflow:hidden;
+text-overflow:ellipsis;white-space:nowrap}
+.kd-hist-del{background:none;border:none;color:#4d6080;font-size:18px;cursor:pointer;padding:0 2px}
+.kd-hist-moods{display:flex;gap:3px;flex-shrink:0;font-size:14px}
+
+/* Cyklus statistiky */
+.kd-stats-wrap{margin:12px 14px 0;display:flex;flex-direction:column;gap:10px}
+.kd-stat-card{background:#152035;border:1px solid rgba(255,255,255,.12);
+border-radius:20px;padding:16px 18px}
+.kd-stat-label{font-size:10px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;color:#4d6080;margin-bottom:4px}
+.kd-stat-val{font-size:22px;font-weight:700;color:#f0f4ff}
+.kd-stat-sub{font-size:11px;color:#8fa3c8;margin-top:3px}
+.kd-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* Export karta */
+.kd-export-card{margin:12px 14px 0;background:#152035;
+border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:16px 18px}
+.kd-export-title{font-size:11px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;color:#4d6080;margin-bottom:12px}
 </style>
 
 </head>
@@ -478,7 +603,7 @@ display:none;margin-top:10px}
       <div class="dash-tile-left">
         <div class="dash-tile-name">Kondice</div>
         <div class="dash-tile-val" id="stat-kondice">—</div>
-        <div class="dash-tile-sub">poslední záznam</div>
+        <div class="dash-tile-sub" id="kd-dash-sub">sledování cyklu</div>
       </div>
       <div class="dash-tile-arr">›</div>
     </div>
@@ -491,7 +616,7 @@ display:none;margin-top:10px}
         <div class="act-sub">Přidej první záznam v modulech</div></div>
     </div>
   </div>
-  <div class="ver-bar">MůjOS v5.0 · Kakeibo v1.3</div>
+  <div class="ver-bar">MůjOS v5.2 · Kakeibo v1.3</div>
 </div>
 
 <!-- ═══ KAKEIBO ═══ -->
@@ -547,7 +672,7 @@ display:none;margin-top:10px}
       <div id="kk-yr-totals" class="kk-yr-card"></div>
       <div class="kk-sec"><span class="kk-sec-lbl">Přehled po měsících</span></div>
       <div id="kk-months" class="kk-months"></div>
-      <div class="ver-bar">MůjOS v5.0 · Kakeibo v1.3</div>
+      <div class="ver-bar">MůjOS v5.2 · Kakeibo v1.3</div>
     </div>
     <!-- STATISTIKY -->
     <div class="kk-view" id="kkv-statistiky">
@@ -591,7 +716,7 @@ display:none;margin-top:10px}
             <div id="import-status"></div>
           </div>
         </div>
-        <div class="ver-bar">MůjOS v5.0 · Kakeibo v1.3</div>
+        <div class="ver-bar">MůjOS v5.2 · Kakeibo v1.3</div>
       </div>
     </div>
   </div>
@@ -608,7 +733,7 @@ display:none;margin-top:10px}
       <div class="ph-title">Připravuje se</div>
       <div class="ph-text">DB store <code>investice</code> je připraven.</div>
     </div>
-    <div class="ver-bar">MůjOS v5.0</div>
+    <div class="ver-bar">MůjOS v5.2</div>
   </div>
 </div>
 <div class="module" id="mod-auto">
@@ -621,7 +746,7 @@ display:none;margin-top:10px}
       <div class="ph-title">Připravuje se</div>
       <div class="ph-text">Evidence nákladů, spotřeba, servis.</div>
     </div>
-    <div class="ver-bar">MůjOS v5.0</div>
+    <div class="ver-bar">MůjOS v5.2</div>
   </div>
 </div>
 <div class="module" id="mod-elektrina">
@@ -634,21 +759,108 @@ display:none;margin-top:10px}
       <div class="ph-title">Připravuje se</div>
       <div class="ph-text">Odečty elektroměru a sledování spotřeby.</div>
     </div>
-    <div class="ver-bar">MůjOS v5.0</div>
+    <div class="ver-bar">MůjOS v5.2</div>
   </div>
 </div>
 <div class="module" id="mod-kondice">
-  <div class="mod-wrap">
-    <div class="mod-header">
-      <div class="mod-badge" style="background:rgba(99,212,196,.1)">🧠</div>
-      <div><div class="mod-title">Kondice</div><div class="mod-sub">Sledování psychické pohody</div></div>
+  <!-- HERO FÁZE -->
+  <div id="kd-hero" class="kd-hero phase-unknown">
+    <div class="kd-hero-tag">Aktuální fáze cyklu</div>
+    <div class="kd-hero-phase" id="kd-phase-name">Načítám…</div>
+    <div class="kd-hero-day" id="kd-phase-day"></div>
+    <div class="kd-hero-row">
+      <div class="kd-hero-pill">
+        <div class="kd-hero-pill-lbl">Den cyklu</div>
+        <div class="kd-hero-pill-val" id="kd-cycle-day">—</div>
+      </div>
+      <div class="kd-hero-pill">
+        <div class="kd-hero-pill-lbl">Délka cyklu</div>
+        <div class="kd-hero-pill-val" id="kd-cycle-len">—</div>
+      </div>
+      <div class="kd-hero-pill">
+        <div class="kd-hero-pill-lbl">PMS za</div>
+        <div class="kd-hero-pill-val" id="kd-pms-in">—</div>
+      </div>
     </div>
-    <div class="ph-box"><div class="ph-icon">🔧</div>
-      <div class="ph-title">Připravuje se</div>
-      <div class="ph-text">Denní záznamy nálady a kondice.</div>
-    </div>
-    <div class="ver-bar">MůjOS v5.0</div>
   </div>
+
+  <!-- TIMELINE -->
+  <div class="kd-timeline-wrap">
+    <div class="kd-timeline-title">Průběh cyklu</div>
+    <div class="kd-timeline" id="kd-timeline"></div>
+    <div class="kd-timeline-labels">
+      <span>Den 1</span><span id="kd-tl-mid"></span><span id="kd-tl-end"></span>
+    </div>
+  </div>
+
+  <!-- RYCHLÝ VSTUP -->
+  <div class="kd-quick">
+    <div class="kd-quick-title">Záznam dne</div>
+    <!-- Nálada -->
+    <div style="font-size:11px;color:#8fa3c8;font-weight:600;margin-bottom:6px">Nálada</div>
+    <div class="kd-mood-row" id="kd-mood-row">
+      <div class="kd-mood-btn" data-mood="1">😞</div>
+      <div class="kd-mood-btn" data-mood="2">😕</div>
+      <div class="kd-mood-btn" data-mood="3">😐</div>
+      <div class="kd-mood-btn" data-mood="4">🙂</div>
+      <div class="kd-mood-btn" data-mood="5">😊</div>
+    </div>
+    <!-- Příznaky -->
+    <div style="font-size:11px;color:#8fa3c8;font-weight:600;margin-bottom:6px">Příznaky</div>
+    <div class="kd-symp-grid" id="kd-symp-grid">
+      <div class="kd-symp-btn symp-fatigue" data-s="fatigue"><span>😴</span>Únava</div>
+      <div class="kd-symp-btn symp-headache" data-s="headache"><span>🤕</span>Bolest hlavy</div>
+      <div class="kd-symp-btn symp-body" data-s="body"><span>💢</span>Bolest těla</div>
+      <div class="kd-symp-btn symp-touch" data-s="touch"><span>🫧</span>Citlivost</div>
+      <div class="kd-symp-btn symp-irritab" data-s="irritab"><span>😤</span>Podrážděnost</div>
+      <div class="kd-symp-btn" data-s="other" style="color:#8fa3c8"><span>➕</span>Jiné</div>
+    </div>
+    <!-- Poznámka -->
+    <textarea class="kd-quick-note" id="kd-note" rows="2" placeholder="Poznámka (volitelně)…"></textarea>
+    <!-- Menstruace tlačítko -->
+    <button class="kd-mens-btn" id="kd-mens-btn">🔴 Začala menstruace (nový cyklus)</button>
+    <!-- Uložit -->
+    <button class="kd-save-btn" id="kd-save-btn">💾 Uložit záznam</button>
+  </div>
+
+  <!-- STATISTIKY CYKLU -->
+  <div class="kd-stats-wrap">
+    <div class="kd-stat-grid">
+      <div class="kd-stat-card">
+        <div class="kd-stat-label">Průměr. délka</div>
+        <div class="kd-stat-val" id="kd-avg-len">—</div>
+        <div class="kd-stat-sub">dní / cyklus</div>
+      </div>
+      <div class="kd-stat-card">
+        <div class="kd-stat-label">Zaznam. cyklů</div>
+        <div class="kd-stat-val" id="kd-cycle-count">—</div>
+        <div class="kd-stat-sub">historických</div>
+      </div>
+    </div>
+    <div class="kd-stat-card">
+      <div class="kd-stat-label">Nejčastější příznaky PMS fáze</div>
+      <div id="kd-top-symp" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"></div>
+    </div>
+  </div>
+
+  <!-- HISTORIE ZÁZNAMŮ -->
+  <div class="kd-hist-wrap">
+    <div class="kd-hist-title">Posledních 30 záznamů</div>
+    <div class="kd-hist-list" id="kd-hist-list"></div>
+  </div>
+
+  <!-- EXPORT / IMPORT -->
+  <div class="kd-export-card">
+    <div class="kd-export-title">Export / Import</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button class="btn-secondary" id="kd-export-btn">📊 Exportovat do Excelu</button>
+      <input type="file" id="kd-import-file" accept=".xlsx" style="display:none">
+      <button class="btn-secondary" id="kd-import-btn">📥 Importovat z Excelu</button>
+      <div id="kd-import-status" style="font-size:12px;color:#8fa3c8;line-height:1.7;display:none"></div>
+    </div>
+  </div>
+
+  <div class="ver-bar">MůjOS v5.2 · Kondice v1.0</div>
 </div>
 ```
 
@@ -667,7 +879,7 @@ display:none;margin-top:10px}
     </button>
     <button class="bnav-tab" data-mod="investice"><span class="bi">💰</span>Investice</button>
     <button class="bnav-tab" data-mod="auto"><span class="bi">🚗</span>Auto</button>
-    <button class="bnav-tab" data-mod="kondice"><span class="bi">🧠</span>Kondice</button>
+    <button class="bnav-tab bnav-alert" data-mod="kondice"><span class="bi">🧠</span><div class="bnav-alert-dot" id="kd-alert-dot"></div>Kondice</button>
   </nav>
 
 </div><!-- /app -->
@@ -784,7 +996,7 @@ display:none;margin-top:10px}
 <script>
 'use strict';
 // ══════════════════════════════════════════════════════
-//  MůjOS v5.0  ·  Kakeibo v1.3
+//  MůjOS v5.2  ·  Kakeibo v1.3
 // ══════════════════════════════════════════════════════
 
 // ── DB ────────────────────────────────────────────────
@@ -879,6 +1091,7 @@ function navTo(mod) {
   document.querySelectorAll('.module').forEach(m => m.classList.toggle('active', m.id === 'mod-'+mod));
   updateFAB();
   if (mod === 'dashboard') refreshDash();
+  if (mod === 'kondice') kdRender();
   if (mod === 'ucetnictvi') { kkRecs = null; kkRenderAll(); }
 }
 
@@ -905,10 +1118,12 @@ async function refreshDash() {
                     .reduce((s,r) => s+r.amount, 0);
     document.getElementById('stat-ucet').textContent = recs.length ? fmt(sum) : '—';
   } catch(e) {}
-  ['invest','auto','elektr','kondice'].forEach(k => {
+  try { kdRender(); } catch(e) {}
+  ['invest','auto','elektr'].forEach(k => {
     try { document.getElementById('stat-'+k).textContent = '—'; } catch(e) {}
   });
   try { await refreshActList(); } catch(e) {}
+  // kdRender done above
 }
 
 async function refreshActList() {
@@ -950,13 +1165,13 @@ document.querySelectorAll('.dash-tile').forEach(c => c.addEventListener('click',
 //  KAKEIBO
 // ══════════════════════════════════════════════════════
 const CATS = {
-  need:    {label:'Potřeby',   icon:'🏠', bg:'var(--need-bg)', col:'var(--need)'},
-  want:    {label:'Přání',     icon:'✨', bg:'var(--want-bg)', col:'var(--want)'},
-  culture: {label:'Kultura',   icon:'📚', bg:'var(--cult-bg)', col:'var(--cult)'},
-  unexp:   {label:'Nečekané',  icon:'⚡', bg:'var(--unexp-bg)',col:'var(--unexp)'},
-  salary:  {label:'Výplata',   icon:'💼', bg:'var(--sal-bg)',  col:'var(--green)'},
-  bonus:   {label:'Mimořádný', icon:'🎯', bg:'var(--bon-bg)',  col:'#a8e063'},
-  passive: {label:'Pasivní',   icon:'📈', bg:'var(--pas-bg)',  col:'#63d4c4'},
+  need:    {label:'Potřeby',   icon:'🏠', bg:'rgba(52,201,122,.13)',  col:'#34c97a'},
+  want:    {label:'Přání',     icon:'✨', bg:'rgba(255,159,67,.13)',  col:'#ff9f43'},
+  culture: {label:'Kultura',   icon:'📚', bg:'rgba(77,168,255,.13)',  col:'#4da8ff'},
+  unexp:   {label:'Nečekané',  icon:'⚡', bg:'rgba(255,107,107,.13)', col:'#ff6b6b'},
+  salary:  {label:'Výplata',   icon:'💼', bg:'rgba(52,201,122,.13)',  col:'#34c97a'},
+  bonus:   {label:'Mimořádný', icon:'🎯', bg:'rgba(168,224,99,.13)',  col:'#a8e063'},
+  passive: {label:'Pasivní',   icon:'📈', bg:'rgba(99,212,196,.13)',  col:'#63d4c4'},
 };
 const INC_TYPES = ['salary','bonus','passive'];
 const EXP_CATS  = ['need','want','culture','unexp'];
@@ -1329,7 +1544,7 @@ async function kkRenderStats() {
       </div>
     </div>
     ${loansHtml}
-    <div class="ver-bar">MůjOS v5.0 · Kakeibo v1.3</div>`;
+    <div class="ver-bar">MůjOS v5.2 · Kakeibo v1.3</div>`;
 }
 
 // ── SETTINGS ──────────────────────────────────────────
@@ -1603,6 +1818,300 @@ async function init() {
     console.error(e);
   }
 }
+
+
+// ══════════════════════════════════════════════════════
+//  KONDICE — Sledování cyklu a PMS predikce
+// ══════════════════════════════════════════════════════
+
+// Délky fází (dny) — počítáme od začátku menstruace
+// Menstruace: 1–5, Folikulární: 6–13, Ovulace: 14–16, Luteální: 17–(cyklen-7), PMS: posledních 7 dní
+const KD_SYMP_LABELS = {
+  fatigue:'Únava', headache:'Bolest hlavy', body:'Bolest těla',
+  touch:'Citlivost', irritab:'Podrážděnost', other:'Jiné'
+};
+const KD_SYMP_ICONS = {
+  fatigue:'😴', headache:'🤕', body:'💢', touch:'🫧', irritab:'😤', other:'➕'
+};
+
+let kdSelectedMood = 0;
+let kdSelectedSymps = new Set();
+
+function kdPhaseInfo(cycleDay, cycleLen) {
+  // Vrátí {name, cls, pmsInDays, description}
+  const pmsStart = cycleLen - 7;
+  if (cycleDay <= 5)          return {name:'Menstruace',       cls:'phase-mens',   desc:'Začátek nového cyklu', pmsIn: null};
+  if (cycleDay <= 13)         return {name:'Folikulární fáze', cls:'phase-folik',  desc:'Energie, dobrá nálada', pmsIn: pmsStart - cycleDay};
+  if (cycleDay <= 16)         return {name:'Ovulace',          cls:'phase-ovul',   desc:'Vrchol energie', pmsIn: pmsStart - cycleDay};
+  if (cycleDay < pmsStart)    return {name:'Luteální fáze',    cls:'phase-luteal', desc:'Přechod, pozor na únavu', pmsIn: pmsStart - cycleDay};
+  return                             {name:'PMS',              cls:'phase-pms',    desc:'Vrchol příznaků — buď opatrný', pmsIn: 0};
+}
+
+function kdGetCycleDay(startDate) {
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  const start = new Date(startDate);
+  start.setHours(0,0,0,0);
+  return Math.floor((now - start) / 86400000) + 1;
+}
+
+async function kdGetCycles() {
+  // Vrátí pole menstruačních záznamů seřazených od nejstaršího
+  const all = await dbGetAll('kondice');
+  return all.filter(r => r.mens).sort((a,b) => a.date.localeCompare(b.date));
+}
+
+async function kdGetAvgCycleLen() {
+  const mens = await kdGetCycles();
+  if (mens.length < 2) return 28; // default
+  const lens = [];
+  for (let i = 1; i < mens.length; i++) {
+    const d1 = new Date(mens[i-1].date), d2 = new Date(mens[i].date);
+    const len = Math.round((d2-d1)/86400000);
+    if (len >= 21 && len <= 45) lens.push(len); // ignoruj outliers
+  }
+  if (!lens.length) return 28;
+  return Math.round(lens.reduce((a,v)=>a+v,0)/lens.length);
+}
+
+async function kdRender() {
+  if (document.getElementById('mod-kondice').style.display === 'none') return;
+
+  const all = await dbGetAll('kondice');
+  const mens = all.filter(r=>r.mens).sort((a,b)=>b.date.localeCompare(a.date));
+  const avgLen = await kdGetAvgCycleLen();
+  const lastMens = mens[0] || null;
+
+  // ── Hero ──
+  const hero = document.getElementById('kd-hero');
+  if (lastMens) {
+    const cycleDay = kdGetCycleDay(lastMens.date);
+    const phase = kdPhaseInfo(cycleDay, avgLen);
+    hero.className = 'kd-hero ' + phase.cls;
+    document.getElementById('kd-phase-name').textContent = phase.name;
+    document.getElementById('kd-phase-day').textContent = phase.desc;
+    document.getElementById('kd-cycle-day').textContent = 'Den ' + cycleDay;
+    document.getElementById('kd-cycle-len').textContent = avgLen + ' dní';
+    if (phase.pmsIn !== null && phase.pmsIn > 0) {
+      document.getElementById('kd-pms-in').textContent = 'Za ' + phase.pmsIn + ' d';
+    } else if (phase.pmsIn === 0) {
+      document.getElementById('kd-pms-in').textContent = 'Právě teď';
+    } else {
+      document.getElementById('kd-pms-in').textContent = '—';
+    }
+
+    // Alert dot — zobraz při PMS nebo luteální pozdní
+    const showAlert = cycleDay >= (avgLen - 9);
+    document.getElementById('kd-alert-dot').classList.toggle('show', showAlert);
+
+    // ── Timeline ──
+    const tl = document.getElementById('kd-timeline');
+    const segments = [
+      {len:5, col:'#c0392b', label:'M'},
+      {len:8, col:'#1a6b3a', label:'F'},
+      {len:3, col:'#1a5276', label:'O'},
+      {len: Math.max(1, avgLen-23), col:'#7d6608', label:'L'},
+      {len:7, col:'#922b7a', label:'PMS'},
+    ];
+    const total = segments.reduce((a,s)=>a+s.len,0);
+    let dayCounter = 0;
+    tl.innerHTML = segments.map(s => {
+      const pct = Math.round(s.len/total*100);
+      const isActive = cycleDay > dayCounter && cycleDay <= dayCounter + s.len;
+      dayCounter += s.len;
+      return `<div class="kd-tl-seg" style="flex:${pct};background:${s.col};${isActive?'box-shadow:0 0 0 2px #fff':'opacity:.45'}"></div>`;
+    }).join('');
+    document.getElementById('kd-tl-mid').textContent = 'Den ' + Math.round(avgLen/2);
+    document.getElementById('kd-tl-end').textContent = 'Den ' + avgLen;
+
+    // Dashboard stat
+    const dsub = document.getElementById('kd-dash-sub');
+    if(dsub) dsub.textContent = phase.name + ' · den ' + cycleDay;
+    document.getElementById('stat-kondice').textContent = phase.name;
+
+  } else {
+    hero.className = 'kd-hero phase-unknown';
+    document.getElementById('kd-phase-name').textContent = 'Žádný záznam';
+    document.getElementById('kd-phase-day').textContent = 'Přidej první záznam začátku menstruace';
+    document.getElementById('kd-cycle-day').textContent = '—';
+    document.getElementById('kd-cycle-len').textContent = avgLen + ' dní';
+    document.getElementById('kd-pms-in').textContent = '—';
+    document.getElementById('kd-tl-mid').textContent = '';
+    document.getElementById('kd-tl-end').textContent = '';
+    document.getElementById('kd-timeline').innerHTML = `<div style="flex:1;background:rgba(255,255,255,.1);border-radius:5px"></div>`;
+    document.getElementById('stat-kondice').textContent = '—';
+  }
+
+  // ── Statistiky cyklu ──
+  document.getElementById('kd-avg-len').textContent = avgLen;
+  document.getElementById('kd-cycle-count').textContent = Math.max(0, mens.length - 1);
+
+  // Top symptomy v PMS fázi (posledních 7 dní cyklu)
+  const pmsRecs = all.filter(r => {
+    if (!r.symptoms || !lastMens) return false;
+    const cd = kdGetCycleDay(r.date) - (kdGetCycleDay(lastMens.date) - (avgLen - 7));
+    // Záznamy které padaly do PMS okna (posledních 7 dní cyklu)
+    // Zjednodušeně: všechny záznamy s příznaky v luteální/PMS fázi
+    return r.symptoms.length > 0;
+  });
+  const sympCount = {};
+  pmsRecs.forEach(r => r.symptoms.forEach(s => { sympCount[s] = (sympCount[s]||0)+1; }));
+  const topSymps = Object.entries(sympCount).sort((a,b)=>b[1]-a[1]).slice(0,4);
+  document.getElementById('kd-top-symp').innerHTML = topSymps.length
+    ? topSymps.map(([s,n]) => `<div style="background:#1c2d47;border-radius:10px;padding:5px 10px;font-size:11px;color:#8fa3c8">
+        ${KD_SYMP_ICONS[s]||'•'} ${KD_SYMP_LABELS[s]||s} <span style="color:#4da8ff;font-weight:700">${n}×</span>
+      </div>`).join('')
+    : '<div style="font-size:11px;color:#4d6080">Zatím nedost záznamů</div>';
+
+  // ── Historie ──
+  const sorted = [...all].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,30);
+  const histEl = document.getElementById('kd-hist-list');
+  if (!sorted.length) {
+    histEl.innerHTML = '<div style="font-size:12px;color:#4d6080;padding:8px 0">Žádné záznamy. Přidej první záznam výše.</div>';
+  } else {
+    const dotClr = {mens:'#ff6b6b', pms:'#a855c8', luteal:'#7d6608', folik:'#34c97a', ovul:'#4da8ff', default:'#4d6080'};
+    histEl.innerHTML = sorted.map(r => {
+      const cd = lastMens ? kdGetCycleDay(r.date) : 0;
+      const ph = lastMens && cd > 0 ? kdPhaseInfo(cd, avgLen) : null;
+      const dc = r.mens ? '#ff6b6b' : (ph ? ph.cls.replace('phase-','') : 'default');
+      const dcMap = {'mens':'#ff6b6b','folik':'#34c97a','ovul':'#4da8ff','luteal':'#7d6608','pms':'#a855c8','unknown':'#4d6080'};
+      const moodEmoji = r.mood ? ['','😞','😕','😐','🙂','😊'][r.mood] : '';
+      const sympStr = r.symptoms?.length ? r.symptoms.map(s=>KD_SYMP_ICONS[s]||s).join(' ') : '';
+      return `<div class="kd-hist-item">
+        <div class="kd-hist-dot" style="background:${r.mens?'#ff6b6b':dcMap[ph?.cls?.replace('phase-','')||'unknown']||'#4d6080'}"></div>
+        <div class="kd-hist-info">
+          <div class="kd-hist-date">${new Date(r.date).toLocaleDateString('cs-CZ',{day:'numeric',month:'short',year:'numeric'})}${r.mens?' 🔴 Menstruace':''}</div>
+          <div class="kd-hist-symp">${[sympStr, r.note].filter(Boolean).join(' · ')||'Bez příznaků'}</div>
+        </div>
+        <div class="kd-hist-moods">${moodEmoji}</div>
+        <button class="kd-hist-del" data-kid="${r.id}">×</button>
+      </div>`;
+    }).join('');
+    histEl.querySelectorAll('.kd-hist-del').forEach(b => b.addEventListener('click', async () => {
+      await dbDel('kondice', parseInt(b.dataset.kid));
+      showToast('Smazáno'); kdRender();
+    }));
+  }
+}
+
+// ── EVENT LISTENERS ────────────────────────────────
+document.getElementById('kd-mood-row').addEventListener('click', e => {
+  const btn = e.target.closest('.kd-mood-btn'); if (!btn) return;
+  kdSelectedMood = parseInt(btn.dataset.mood);
+  document.querySelectorAll('.kd-mood-btn').forEach(b => b.classList.toggle('sel', b.dataset.mood == kdSelectedMood));
+});
+
+document.getElementById('kd-symp-grid').addEventListener('click', e => {
+  const btn = e.target.closest('.kd-symp-btn'); if (!btn) return;
+  const s = btn.dataset.s;
+  if (kdSelectedSymps.has(s)) { kdSelectedSymps.delete(s); btn.classList.remove('sel'); }
+  else { kdSelectedSymps.add(s); btn.classList.add('sel'); }
+});
+
+document.getElementById('kd-mens-btn').addEventListener('click', async () => {
+  const today = new Date().toISOString().slice(0,10);
+  // Zkontroluj jestli už dnes není záznam menstruace
+  const all = await dbGetAll('kondice');
+  const todayMens = all.find(r => r.date === today && r.mens);
+  if (todayMens) { showToast('Menstruace dnes už zaznamenána'); return; }
+  await dbAdd('kondice', {
+    date: today, mens: true,
+    symptoms: [...kdSelectedSymps],
+    mood: kdSelectedMood || null,
+    note: document.getElementById('kd-note').value.trim()
+  });
+  await dbAdd('activity_log', {modul:'kondice', title:'Začátek menstruace 🔴', sub:'Nový cyklus', _ts:new Date().toISOString()});
+  kdSelectedSymps.clear(); kdSelectedMood = 0;
+  document.querySelectorAll('.kd-symp-btn').forEach(b=>b.classList.remove('sel'));
+  document.querySelectorAll('.kd-mood-btn').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('kd-note').value = '';
+  showToast('Menstruace zaznamenána ✓'); kdRender();
+});
+
+document.getElementById('kd-save-btn').addEventListener('click', async () => {
+  const today = new Date().toISOString().slice(0,10);
+  const note = document.getElementById('kd-note').value.trim();
+  if (!kdSelectedMood && !kdSelectedSymps.size && !note) {
+    showToast('Vyber náladu nebo příznak'); return;
+  }
+  const all = await dbGetAll('kondice');
+  const existing = all.find(r => r.date === today && !r.mens);
+  if (existing) {
+    // Aktualizuj existující záznam dne
+    await dbPut('kondice', {...existing,
+      symptoms: [...kdSelectedSymps],
+      mood: kdSelectedMood || existing.mood,
+      note: note || existing.note
+    });
+    showToast('Záznam aktualizován ✓');
+  } else {
+    await dbAdd('kondice', {
+      date: today, mens: false,
+      symptoms: [...kdSelectedSymps],
+      mood: kdSelectedMood || null,
+      note: note
+    });
+    showToast('Uloženo ✓');
+  }
+  kdSelectedSymps.clear(); kdSelectedMood = 0;
+  document.querySelectorAll('.kd-symp-btn').forEach(b=>b.classList.remove('sel'));
+  document.querySelectorAll('.kd-mood-btn').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('kd-note').value = '';
+  kdRender();
+});
+
+// ── EXPORT / IMPORT ────────────────────────────────
+document.getElementById('kd-export-btn').addEventListener('click', async () => {
+  const recs = await dbGetAll('kondice');
+  const rows = recs.map(r => ({
+    date: r.date,
+    mens: r.mens ? 1 : 0,
+    mood: r.mood || '',
+    symptoms: (r.symptoms||[]).join(', '),
+    note: r.note || ''
+  }));
+  await exportXLSX({'Kondice': rows}, 'Kondice');
+  showToast('Excel se stahuje…');
+});
+
+document.getElementById('kd-import-btn').addEventListener('click', () => {
+  document.getElementById('kd-import-file').click();
+});
+
+document.getElementById('kd-import-file').addEventListener('change', async e => {
+  const file = e.target.files[0]; if (!file) return;
+  e.target.value = '';
+  const status = document.getElementById('kd-import-status');
+  status.style.display = 'block'; status.textContent = 'Načítám…';
+  try {
+    if (!window.XLSX) await new Promise((res,rej) => {
+      const s = document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      s.onload=res; s.onerror=rej; document.head.appendChild(s);
+    });
+    const wb = XLSX.read(await file.arrayBuffer(), {type:'array'});
+    const rows = XLSX.utils.sheet_to_json(wb.Sheets['Kondice']||wb.Sheets[wb.SheetNames[0]]).filter(r=>r.date);
+    const existing = await dbGetAll('kondice');
+    const keys = new Set(existing.map(r=>r.date+'|'+(r.mens?1:0)));
+    let added=0, skipped=0;
+    for (const r of rows) {
+      const k = r.date+'|'+(r.mens?1:0);
+      if (keys.has(k)) { skipped++; continue; }
+      await dbAdd('kondice', {
+        date: r.date,
+        mens: r.mens == 1,
+        mood: r.mood ? parseInt(r.mood) : null,
+        symptoms: r.symptoms ? r.symptoms.split(',').map(s=>s.trim()).filter(Boolean) : [],
+        note: r.note || ''
+      });
+      keys.add(k); added++;
+    }
+    status.innerHTML = `✅ <b>Hotovo!</b> Přidáno: <b>${added}</b>, přeskočeno: <b>${skipped}</b>`;
+    showToast('Import OK ✓'); kdRender();
+  } catch(err) {
+    status.textContent = '❌ Chyba: '+err.message;
+  }
+});
 
 window.MojOS = {dbGetAll,dbAdd,dbPut,dbDel,dbGet,exportXLSX,navTo,relTime,curQ};
 init();
