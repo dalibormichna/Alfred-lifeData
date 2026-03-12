@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="MůjOS">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -82,13 +82,13 @@ font-family:‘DM Sans’,sans-serif;font-size:15px;overscroll-behavior:none;lin
 /* ══════════════════════════
 SHELL
 ══════════════════════════ */
-#app{display:flex;flex-direction:column;height:100dvh;padding-top:var(–safe-top);}
+#app{display:flex;flex-direction:column;height:100dvh;}
 
 /* Header */
 #shell-header{
 background:#0b1120;
 display:flex;align-items:center;justify-content:space-between;
-padding:14px 20px 12px;
+padding:calc(14px + env(safe-area-inset-top, 0px)) 20px 12px;
 border-bottom:1px solid rgba(255,255,255,.07);
 flex-shrink:0;
 }
@@ -103,7 +103,7 @@ padding:5px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.12);}
 display:flex;align-items:center;
 background:#152035;
 border-top:1px solid rgba(255,255,255,.12);
-padding:8px 0 calc(8px + var(–safe-bot));
+padding:10px 0 calc(10px + env(safe-area-inset-bottom, 0px));
 flex-shrink:0;
 }
 .bnav-tab{
@@ -126,7 +126,7 @@ border:none;background:none;
 /* ══════════════════════════
 DASHBOARD
 ══════════════════════════ */
-.dash-wrap{padding:0 0 calc(20px + var(–safe-bot));}
+.dash-wrap{padding:0 0 calc(24px + env(safe-area-inset-bottom, 0px));}
 
 /* Hero banner */
 .dash-hero{
@@ -228,7 +228,7 @@ color:#4d6080;border-radius:9px;cursor:pointer;transition:all .15s;letter-spacin
 .kk-tab.active{background:#1c2d47;color:#f0f4ff;box-shadow:var(–shadow-sm);}
 
 /* Scroll area */
-.kk-scroll{flex:1;overflow-y:auto;padding-bottom:calc(80px + var(–safe-bot));scrollbar-width:none;}
+.kk-scroll{flex:1;overflow-y:auto;padding-bottom:calc(90px + env(safe-area-inset-bottom, 0px));scrollbar-width:none;}
 .kk-scroll::-webkit-scrollbar{display:none;}
 .kk-view{display:none;}
 .kk-view.active{display:block;}
@@ -474,7 +474,7 @@ display:none;align-items:flex-end;backdrop-filter:blur(4px);
 .modal-bg.open{display:flex;}
 .modal-sheet{
 background:#152035;border-radius:24px 24px 0 0;width:100%;
-padding-bottom:calc(16px + var(–safe-bot));
+padding-bottom:calc(16px + env(safe-area-inset-bottom, 0px));
 animation:sheetUp .24s cubic-bezier(.22,.68,0,1.2) both;
 max-height:92dvh;overflow-y:auto;
 }
@@ -551,7 +551,7 @@ cursor:pointer;font-family:‘DM Sans’,sans-serif;
 /* ══════════════════════════
 PLACEHOLDERS
 ══════════════════════════ */
-.mod-wrap{padding:20px 16px calc(32px + var(–safe-bot));}
+.mod-wrap{padding:20px 16px calc(36px + env(safe-area-inset-bottom, 0px));}
 .mod-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
 .mod-badge{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
 .mod-title{font-size:22px;font-weight:700;letter-spacing:-.3px;}
@@ -565,7 +565,7 @@ PLACEHOLDERS
 TOAST & DB
 ══════════════════════════ */
 #toast{
-position:fixed;bottom:calc(90px + var(–safe-bot));left:50%;transform:translateX(-50%);
+position:fixed;bottom:calc(96px + env(safe-area-inset-bottom, 0px));left:50%;transform:translateX(-50%);
 background:#243657;color:#f0f4ff;border:1px solid rgba(255,255,255,.12);
 padding:10px 20px;border-radius:22px;font-size:13px;font-weight:600;z-index:200;
 opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap;
@@ -573,7 +573,7 @@ box-shadow:0 6px 24px rgba(0,0,0,.5);
 }
 #toast.show{opacity:1;}
 #db-chip{
-position:fixed;bottom:calc(14px + var(–safe-bot));left:16px;
+position:fixed;bottom:calc(14px + env(safe-area-inset-bottom, 0px));left:16px;
 background:#1c2d47;border:1px solid rgba(255,255,255,.07);border-radius:18px;
 padding:5px 11px;font-size:10px;color:#4d6080;display:flex;align-items:center;
 gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
@@ -681,7 +681,7 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
         </div>
       </div>
     </div>
-    <div class="ver-bar">MůjOS v4.4 · Kakeibo v1.2</div>
+    <div class="ver-bar">MůjOS v4.5 · Kakeibo v1.2</div>
   </div>
 </div>
 
@@ -735,7 +735,7 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       <div class="kk-yr-card" id="kk-yr-totals"></div>
       <div class="kk-sec"><span class="kk-sec-lbl">Přehled po měsících</span></div>
       <div class="kk-months" id="kk-months"></div>
-      <div class="ver-bar">MůjOS v4.4 · Kakeibo v1.2</div>
+      <div class="ver-bar">MůjOS v4.5 · Kakeibo v1.2</div>
     </div>
 
     <!-- STATISTIKY -->
@@ -789,7 +789,7 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
             <div id="import-status" style="font-size:12px;color:#8fa3c8;line-height:1.7;display:none"></div>
           </div>
         </div>
-        <div class="ver-bar">MůjOS v4.4 · Kakeibo v1.2</div>
+        <div class="ver-bar">MůjOS v4.5 · Kakeibo v1.2</div>
       </div>
     </div>
 
@@ -807,7 +807,7 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       <div class="ph-title">Modul se připravuje</div>
       <div class="ph-text">Sem přijde kód investiční appky.<br>DB store <code>investice</code> je připraven.</div>
     </div>
-    <div class="ver-bar">MůjOS v4.4</div>
+    <div class="ver-bar">MůjOS v4.5</div>
   </div>
 </div>
 
@@ -822,7 +822,7 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       <div class="ph-title">Modul se připravuje</div>
       <div class="ph-text">Evidence nákladů na auto, spotřeba, servisní záznamy.</div>
     </div>
-    <div class="ver-bar">MůjOS v4.4</div>
+    <div class="ver-bar">MůjOS v4.5</div>
   </div>
 </div>
 
@@ -837,7 +837,7 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       <div class="ph-title">Modul se připravuje</div>
       <div class="ph-text">Odečty elektroměru, sledování spotřeby a fakturace.</div>
     </div>
-    <div class="ver-bar">MůjOS v4.4</div>
+    <div class="ver-bar">MůjOS v4.5</div>
   </div>
 </div>
 
@@ -852,7 +852,7 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
       <div class="ph-title">Modul se připravuje</div>
       <div class="ph-text">Denní záznamy nálady, kondice a trend v čase.</div>
     </div>
-    <div class="ver-bar">MůjOS v4.4</div>
+    <div class="ver-bar">MůjOS v4.5</div>
   </div>
 </div>
 ```
@@ -979,7 +979,7 @@ gap:5px;z-index:80;transition:opacity .3s;pointer-events:none;
 
 <script>
 // ═══════════════════════════════════════════════════════
-//  MůjOS v4.4 + Kakeibo v1.2
+//  MůjOS v4.5 + Kakeibo v1.2
 // ═══════════════════════════════════════════════════════
 
 // ── INDEXED DB ────────────────────────────────────────
@@ -1382,7 +1382,7 @@ function kkRenderStats(){
           }).join('')}
       </div>
     </div>
-    <div class="ver-bar">MůjOS v4.4 · Kakeibo v1.2</div>`;
+    <div class="ver-bar">MůjOS v4.5 · Kakeibo v1.2</div>`;
 }
 
 function kkRenderSettings(){
@@ -1587,7 +1587,12 @@ document.getElementById('kk-import-file').addEventListener('change', async(e)=>{
 
 document.getElementById('kk-export-btn').addEventListener('click',async()=>{
   const recs=await dbGetAll('ucetnictvi');
-  await exportXLSX({'Kakeibo':recs},'Kakeibo');showToast('Excel se stahuje…');
+  const recurs=await dbGetAll('recurring');
+  await exportXLSX({
+    'Kakeibo': recs,
+    'Pravidelné platby': recurs
+  },'Kakeibo');
+  showToast('Excel se stahuje…');
 });
 
 async function init(){
