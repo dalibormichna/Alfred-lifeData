@@ -1,0 +1,35 @@
+# Editorové soubory
+*.swp
+*~
+.idea/
+.vscode/
+
+# Node.js a npm
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Překladatele a buildy
+/build/
+/dist/
+/out/
+
+# Systémové soubory
+.DS_Store
+Thumbs.db
+
+# Logy
+*.log
+
+# Soukromé klíče a konfigurace
+.env
+config/private/*
+!.env.example
+
+# Ostatní přechodné soubory
+*.bak
+*.tmp
+*.temp
+
+# Webpack a další build nástroje
+webpack-stats.json
